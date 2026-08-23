@@ -34,4 +34,27 @@ Este repositório contém apontamentos das aulas, exercícios e testes da discip
 - [Funcionamento da disciplina](Funcionamento_da_Disciplina/): método de avaliação e cálculo da nota final.
 - [Formulários](Formularios/): resumo de fórmulas das duas partes da disciplina.
 
+## Correspondência aproximada com o livro-texto
+
+O programa segue de perto a organização de Halliday, Resnick e Walker, **Fundamentos de Física**, 10.ª edição, mas não pretende cobrir integralmente todas as secções dos capítulos indicados.
+
+| Parte da disciplina | Correspondência aproximada no livro |
+| --- | --- |
+| Semanas 1 a 5 | Volume 1, capítulos 1 a 4: medição, movimento retilíneo, vetores e movimento em duas dimensões. |
+| Semanas 8 e 9 | Volume 1, capítulos 5 e 6: leis de Newton, forças, atrito e movimento circular. |
+| Semanas 10 e 11 | Volume 1, capítulos 7 e 8: trabalho, energia cinética, energia potencial e conservação da energia. |
+| Semana 12 | Volume 1, capítulo 9: centro de massa, momento linear, impulso e colisões. |
+| Avaliações das Semanas 14 e 15 | Parte do Volume 1, capítulo 10, sobretudo variáveis angulares, aceleração angular constante e relações entre grandezas lineares e angulares. |
+| Semana 13 | Volume 3, capítulos 24 e 25: introdução ao potencial elétrico e estudo de condensadores e das suas associações. |
+
+Em resumo, o curso percorre o núcleo dos **capítulos 1 a 9**, parte do **capítulo 10** e uma introdução aos **capítulos 24 e 25**. Isto corresponde, de forma aproximada, a nove dos onze capítulos do Volume 1 - Mecânica, mais uma parte de rotação e uma breve unidade de eletromagnetismo.
+
+## Referências arquivadas do livro
+
+- **Inglês:** Halliday, Resnick e Walker, *Fundamentals of Physics, Extended*, 10th edition - [página da Wiley arquivada na Wayback Machine](https://web.archive.org/web/20220705114023/https://bcs.wiley.com/he-bcs/Books?action=index&bcsId=8262&itemId=1118230728).
+- **Português, Volume 1:** Halliday, Resnick e Walker, *Fundamentos de Física - Mecânica*, 10.ª edição, LTC, 2016, ISBN 978-85-216-3035-7 - [página do Grupo GEN arquivada na Wayback Machine](https://web.archive.org/web/20191017011240/https://www.grupogen.com.br/fundamentos-de-fisica-mecanica-volume-1).
+- **Português, Volume 3:** Halliday, Resnick e Walker, *Fundamentos de Física - Eletromagnetismo*, 10.ª edição, LTC, 2016, ISBN 978-85-216-3037-1 - [página do Grupo GEN arquivada na Wayback Machine](https://web.archive.org/web/20190920074159/https://www.grupogen.com.br/fundamentos-de-fisica-eletromagnetismo-volume-3).
+
+As ligações da Wayback Machine são referências editoriais e bibliográficas; não alojam neste repositório uma cópia do livro.
+
 O repositório contém apenas materiais académicos. Ficheiros com presenças, classificações ou outros dados pessoais de estudantes não são incluídos.
