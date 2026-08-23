@@ -44,7 +44,6 @@ O programa segue de perto a organização de Halliday, Resnick e Walker, **Funda
 | Semanas 8 e 9 | Volume 1, capítulos 5 e 6: leis de Newton, forças, atrito e movimento circular. |
 | Semanas 10 e 11 | Volume 1, capítulos 7 e 8: trabalho, energia cinética, energia potencial e conservação da energia. |
 | Semana 12 | Volume 1, capítulo 9: centro de massa, momento linear, impulso e colisões. |
-| Avaliações das Semanas 14 e 15 | Parte do Volume 1, capítulo 10, sobretudo variáveis angulares, aceleração angular constante e relações entre grandezas lineares e angulares. |
 | Semana 13 | Volume 3, capítulos 24 e 25: introdução ao potencial elétrico e estudo de condensadores e das suas associações. |
 
 Em resumo, o curso percorre o núcleo dos **capítulos 1 a 9**, parte do **capítulo 10** e uma introdução aos **capítulos 24 e 25**. Isto corresponde, de forma aproximada, a nove dos onze capítulos do Volume 1 - Mecânica, mais uma parte de rotação e uma breve unidade de eletromagnetismo.
