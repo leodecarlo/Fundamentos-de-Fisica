@@ -1,6 +1,6 @@
 # Fundamentos de Física
 
-Este repositório contém apontamentos das aulas, exercícios e testes da disciplina **Fundamentos de Física**, lecionada por mim na **Universidade Lusófona**, no **II semestre de 2026**.
+Este repositório contém apontamentos das aulas, exercícios e testes da disciplina **Fundamentos de Física**, integrada na **Licenciatura em Engenharia Informática do DEISI** e lecionada por mim na **Universidade Lusófona**, no **II semestre de 2026**.
 
 ## Conteúdo
 
