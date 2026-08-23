@@ -25,9 +25,9 @@ Este repositório contém apontamentos das aulas, exercícios e testes da discip
 | [Semana 10](Semana_10/) | Energia cinética, trabalho de uma força e teorema do trabalho-energia. |
 | [Semana 11](Semana_11/) | Energia potencial, forças conservativas e não conservativas e conservação da energia mecânica. |
 | [Semana 12](Semana_12/) | Sistemas de partículas: centro de massa, momento linear, impulso e colisões. |
-| [Semana 13](Semana_13/) | Carga e potencial elétricos, condensadores, capacitância e associações em série, em paralelo e mistas. |
-| [Semana 14](Semana_14/) | Preparação e realização do segundo teste, com problemas de vetores, cinemática, dinâmica, movimento circular, trabalho e colisões. |
-| [Semana 15](Semana_15/) | Testes e soluções de revisão global: vetores, cinemática, dinâmica, energia e outros conteúdos do semestre. |
+| [Semana 13](Semana_13/) | Carga e potencial elétricos, condensadores, capacitância e associações em série, em paralelo e mistas, bem como instruções para o projeto computacional. |
+| [Semana 14](Semana_14/) | Testes da Parte 2 e teste final global, com problemas sobre energia potencial, conservação da energia e outros conteúdos do semestre. |
+| [Semana 15](Semana_15/) | Teste da Parte 2 e teste final global, ambos acompanhados das respetivas soluções. |
 
 ## Outros materiais
 
