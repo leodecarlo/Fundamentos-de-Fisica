@@ -46,7 +46,6 @@ O programa segue de perto a organização de Halliday, Resnick e Walker, **Funda
 | Semana 12 | Volume 1, capítulo 9: centro de massa, momento linear, impulso e colisões. |
 | Semana 13 | Volume 3, capítulos 24 e 25: introdução ao potencial elétrico e estudo de condensadores e das suas associações. |
 
-Em resumo, o curso percorre o núcleo dos capítulos 1 a 9, parte do capítulo 10 e uma introdução aos capítulos 24 e 25. Isto corresponde, de forma aproximada, a nove dos onze capítulos do Volume 1 - Mecânica, mais uma parte de rotação e uma breve unidade de eletromagnetismo.
 
 ## Referências arquivadas do livro
 
