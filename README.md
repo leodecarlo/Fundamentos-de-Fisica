@@ -55,4 +55,3 @@ O programa segue de perto a organização de Halliday, Resnick e Walker, **Funda
 
 As ligações da Wayback Machine são referências editoriais e bibliográficas; não alojam neste repositório uma cópia do livro.
 
-O repositório contém apenas materiais académicos. Ficheiros com presenças, classificações ou outros dados pessoais de estudantes não são incluídos.
