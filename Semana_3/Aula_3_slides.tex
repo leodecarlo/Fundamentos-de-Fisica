@@ -1,0 +1,776 @@
+\documentclass{beamer}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[portuguese]{babel}
+\usepackage{amsmath}
+\usepackage{tikz}
+% A linha abaixo foi corrigida com "decorations.pathreplacing"
+\usetikzlibrary{shapes.geometric, arrows.meta, 3d, calc, decorations.pathreplacing}
+
+% Configuração do Tema
+\usetheme{Madrid}
+\usecolortheme{default}
+
+% Informações do Título
+\title{Aula 3: Teoria e Prática}
+\subtitle{Vetores em dues dimensoes}
+\date{28 Fevereiro 2026}
+
+\begin{document}
+	
+	\frame{\titlepage}
+	
+	% PAGE 1
+	\begin{frame}{Um vetor bidimensional}
+		\small
+		Um vetor bidimensional é uma grandeza vetorial (ou seja, tem módulo, direção e orientação) que "vive" no plano bidimensional. Então é um vetor como no caso mono-dimensional, mas as possíveis direções são infinitas:
+		\begin{columns}[T]
+			% Coluna Esquerda: Vetor 1-d
+			\begin{column}{0.4\textwidth}
+				\centering
+				\textcolor{red}{Vetor 1-d} \\
+				\vspace{0.1cm}
+				\begin{tikzpicture}[scale=0.8]
+					\draw[thick] (0,0) -- (3,1.5);
+					\draw[thick, red, ->] (0,0) -- (2,1);
+					\draw[red, <-] (2,0.3) to[out=270,in=90] (2.2, -0.3) node[below, black, align=center] {\scriptsize Uma direção \\ \scriptsize possível};
+				\end{tikzpicture}
+			\end{column}
+			
+			% Coluna Central: VS
+			\begin{column}{0.1\textwidth}
+				\centering
+				\vspace{1cm}
+				\textcolor{red}{\Large VS}
+			\end{column}
+			
+			% Coluna Direita: Vetor 2-d
+			\begin{column}{0.5\textwidth}
+				\centering
+				\textcolor{red}{Vetor 2-d} \\
+				\vspace{0.1cm}
+				\begin{tikzpicture}[scale=0.55]
+					% Linhas pretas (representando as direções infinitas)
+					\draw[thick] (-2.5,0) -- (2.5,0);          % Horizontal
+					\draw[thick] (0,-2.5) -- (0,2.5);          % Vertical
+					\draw[thick] (-2,-2) -- (2,2);             % Diagonal 1
+					\draw[thick] (-2,1.5) -- (2,-1.5);         % Diagonal 2
+					\draw[thick] (-1.2,2.2) -- (1.5,-2.8);     % Diagonal 3 (mais inclinada)
+					
+					% Circulo
+					\draw[yellow!80!orange, thick] (0,0) circle (1.2cm);
+					
+					% Vetores vermelhos sobre as retas
+					\draw[thick, red, ->] (0,0) -- (0,1.5);             % Cima
+					\draw[thick, red, ->] (0,0) -- (-1,0);              % Esquerda
+					\draw[thick, red, ->] (0,0) -- (1.8,1.8);           % Cima-direita
+					\draw[thick, red, ->] (0,0) -- (-0.8,-0.8);         % Baixo-esquerda
+					\draw[thick, red, ->] (0,0) -- (-1.6,1.2);          % Cima-esquerda
+					\draw[thick, red, ->] (0,0) -- (1,-1.86);           % Baixo-direita
+					
+					% Apontador de texto
+					\draw[red, <-] (2.3,-1.2) to[out=0,in=180] (2.8, -0.5) node[right, black, align=left] {\scriptsize Infinidade \\ \scriptsize de direções \\ \scriptsize possíveis};
+				\end{tikzpicture}
+			\end{column}
+		\end{columns}
+		
+		\vspace{0.2cm}
+		Definimos um vetor 1-d como:
+		$\overline{v} = v_x \overline{i}$ \quad \parbox[t]{0.75\textwidth}{onde $|v_x|$ é a magnitude de $\overline{v}$ e  $\overline{i}$ o vetor unitário ($|\overline{i}|=1$) que indica a direção  positiva da reta onde $\overline{v}$ "vive". $v_x$ é também a componente 'x' de $\overline{v}$ no eixo x.}
+		
+		\vspace{0.2cm}
+		\begin{columns}[c]
+			\begin{column}{0.65\textwidth}
+				A posição da origem '0' é arbitrária. Defino ela como 'início' do vetor $\overline{v}$.
+			\end{column}
+			\begin{column}{0.35\textwidth}
+				\begin{tikzpicture}[scale=0.9]
+					\draw[thick, ->] (0,0) -- (3,0) node[right] {$x$};
+					\filldraw (1,0) circle (1pt) node[below] {$0$};
+					\draw[thick, red, ->] (1,0) -- (2.5,0) node[midway, below] {\scriptsize $v_x$};
+				\end{tikzpicture}
+			\end{column}
+		\end{columns}
+	\end{frame}
+	
+	
+	% PAGE 2
+	\begin{frame}{Vetores Bidimensionais}
+		\scriptsize
+		\textcolor{red}{Questão:} como definimos os vetores em 2-d?
+		
+		\vspace{0.1cm}
+		Agora $\overline{v}$ é definido de duas componente $v_x$ e $v_y$. $v_x$ é a componente no eixo x e $v_y$ no eixo y:
+		
+		\begin{columns}[T]
+			\begin{column}{0.2\textwidth}
+				$\overline{v} = v_x \overline{i} + v_y \overline{j}$
+			\end{column}
+			\begin{column}{0.35\textwidth}
+				\begin{tikzpicture}[scale=0.75]
+					% Eixos
+					\draw[thick, ->] (-0.5,0) -- (2.5,0) node[right] {$x$};
+					\draw[thick, ->] (0,-0.5) -- (0,2.5) node[above] {$y$};
+					% Vetor v
+					\draw[thick, ->] (0,0) -- (2,1.5) node[near end, above left] {$\overline{v}$};
+					% Projeções
+					\draw[dashed] (2,0) node[below] {$v_x$} -- (2,1.5) -- (0,1.5) node[left] {$v_y$};
+					% Unitários
+					\draw[thick, red, ->] (0,0) -- (0.8,0) node[below] {$\overline{i}$};
+					\draw[thick, red, ->] (0,0) -- (0,0.8) node[left] {$\overline{j}$};
+					% Ângulos (raios diferentes para as setas não colidirem no vetor v)
+					\draw[->] (0.6,0) arc (0:36.8:0.6) node[midway, right] {$\theta$};
+					\draw[->] (0,0.7) arc (90:36.8:0.7) node[midway, above] {$\varphi$};
+				\end{tikzpicture}
+			\end{column}
+			\begin{column}{0.45\textwidth}
+				$0 \le \theta \le \frac{\pi}{2} \quad , \quad 0 \le \varphi = \frac{\pi}{2} - \theta \le \frac{\pi}{2}$
+				
+				\vspace{0.2cm}
+				$\overline{i}$ e $\overline{j}$ são os vetores unitários ($|\overline{i}|=| \overline{j}|=1$)\\
+				que definem os sentidos positivos eixos 'x' e 'y'.
+			\end{column}
+		\end{columns}
+		
+		\vspace{0.1cm}
+		Indicamos os vetores também com a notação: $\overline{v} = (v_x, v_y)$
+		
+		\vspace{0.1cm}
+		O tamanho de $\overline{v}$, indicada com $v$, 	
+		representa a sua magnitude calculada com o modelo:\\
+		$v = |\overline{v}| = (v_x^2 + v_y^2)^{1/2} = \sqrt{v_x^2 + v_y^2}$.
+		
+		\vspace{0.2cm}
+		\textcolor{red}{Observação}
+		
+		\begin{columns}[c]
+			\begin{column}{0.65\textwidth}
+				O triângulo aqui é retângulo $\Rightarrow v_x = v \cos \theta \quad , \quad v_y = v \sin \theta$\\
+				\vspace{0.2cm}
+				Também o triângulo ``cabeça para baixo'' é retângulo $\Rightarrow v_x = v \sin \varphi \quad , \quad v_y = v \cos \varphi$
+			\end{column}
+			\begin{column}{0.35\textwidth}
+				\begin{tikzpicture}[scale=0.7]
+					% Triângulo Base e Retângulo Tracejado
+					\draw[dashed] (0,0) rectangle (2.5,1.5);
+					\draw[thick, ->] (0,0) -- (2.5,1.5) node[midway, below right] {$\overline{v}$};
+					\node[below] at (2.5,0) {$v_x$};
+					\node[left] at (0,1.5) {$v_y$};
+					
+					% Ângulos
+					\draw (0.8,0) arc (0:31:0.8) node[midway, right] {$\theta$};
+					\draw (0,0.8) arc (90:31:0.8) node[midway, above] {$\varphi$};
+					
+					% Marcações de ângulo reto
+					\draw (2.3,0) -- (2.3,0.2) -- (2.5,0.2);
+					\draw (0,1.3) -- (0.2,1.3) -- (0.2,1.5);
+					
+					% Setas Curvas Coloridas (cruzam da esquerda para apontar para o triângulo correto)
+					\draw[yellow!80!orange, thick, ->] (-1.2, 1.2) to[out=0,in=160] (1.2, 0.3); % Seta amarela para triângulo de baixo
+					\draw[green!60!black, thick, ->] (-1.2, 0.3) to[out=0,in=180] (1, 1.2); % Seta verde para triângulo complementar de cima
+				\end{tikzpicture}
+			\end{column}
+		\end{columns}
+	\end{frame}
+	
+	
+% PAGE 3
+\begin{frame}{Calculo dos cateto com seno e coseno 2}
+	\scriptsize
+	Já vimos que em um triangulo retangulo
+	
+	\begin{columns}[c]
+		\begin{column}{0.75\textwidth}
+			$a = c \cos \theta \quad , \quad b = c \sin \theta \quad , \quad \frac{b}{a} = \frac{c \sin \theta}{c \cos \theta} = \frac{\sin \theta}{\cos \theta} = tg \theta$
+			
+			\vspace{0.3cm}
+			$\leadsto tg \theta = \frac{b}{a} \leadsto \theta = arctg \frac{b}{a} \quad , \quad arctg \text{ é a função inversa } tg^{-1} \text{ de } tg$
+		\end{column}
+		\begin{column}{0.3\textwidth}
+			\begin{tikzpicture}[scale=0.9]
+				\draw[thick] (0,0) -- (3,0) node[midway, below] {$a$};
+				\draw[thick] (3,0) -- (3,1.2) node[midway, right] {$b$};
+				\draw[thick] (0,0) -- (3,1.2);
+				\draw (0.8,0) arc (0:21.8:0.8) node[midway, right] {$\theta$};
+			\end{tikzpicture}
+		\end{column}
+	\end{columns}
+	
+	\vspace{0.4cm}
+	Se definimos um sistema cartesiano orientado (com direções positivas e negativas) e temos a hipotenusa 'v' representar o modulo de um vetor $\overline{v}$, no calculo das componentes $v_x$ e $v_y$, é necessario considerar se as componentes são positiva o negativa.
+	
+	\vspace{0.2cm}
+	\begin{columns}[T]
+		\begin{column}{0.45\textwidth}
+			\vspace{0.5cm}
+			\begin{itemize}
+				\item \underline{positivas}: quando estão na parte positiva do eixo;
+				\item \underline{negativas}: quando estão na parte negativa do eixo;
+			\end{itemize}
+		\end{column}
+		\begin{column}{0.55\textwidth}
+			\begin{tikzpicture}[scale=0.85]
+				% Eixos
+				\draw[thick, ->] (-2.5,0) -- (2.5,0) node[below] {$x$};
+				\draw[thick, ->] (0,-1.5) -- (0,2) node[left] {$y$};
+				
+				% Vetor e linhas do triângulo
+				\draw[thick, ->] (0,0) -- (-2,1.5) node[midway, above right] {$v$};
+				\draw[thick] (-2,0) -- (-2,1.5);
+				\draw[thick] (-2,0) -- (0,0);
+				
+				% Chaves (Braces) com a configuração feita linha a linha
+				\draw[decorate, decoration={brace, amplitude=5pt, mirror}] (-2,-0.1) -- (0,-0.1) node[midway,below=6pt] {$v_x$};
+				\draw[decorate, decoration={brace, amplitude=5pt}] (-2.1,0) -- (-2.1,1.5) node[midway,left=6pt] {$v_y$};
+				
+				% Ângulos
+				\draw[->] (0.5,0) arc (0:143.1:0.5) node[near end, above right] {$\theta$};
+				\draw[->] (-0.8,0) arc (180:143.1:0.8) node[midway, right] {$\varphi$};
+				
+				% Textos e setas a vermelho
+				\node[text width=3.5cm, align=left, font=\scriptsize] (t1) at (2.5, -0.6) {$\theta$ é o angulo \\ antihorario a partir \\ do eixo 'x'.};
+				\draw[red, ->] (t1.west) to[out=180,in=0] (0.6, 0.4);
+				
+				\node[text width=3.5cm, align=left, font=\scriptsize] (t2) at (2.5, -2) {$\varphi$ é o angulo horario \\ a partir do eixo 'x'.};
+				\draw[red, ->] (t2.west) to[out=180,in=270] (-0.5,-1) to[out=90,in=290] (-0.8,0.1);
+			\end{tikzpicture}
+		\end{column}
+	\end{columns}
+\end{frame}
+	
+	
+% PAGE 4
+\begin{frame}{Componentes e Ângulos}
+	\small
+	componentes $v_x$ e $v_y$, com $\theta$ e $\varphi$ como na figura anterior, \\
+	são calculadas como:
+	
+	\vspace{0.4cm}
+	$v_x = v \cos \theta = v(-\cos \varphi)$, \quad `-' porque a componente $v_x$ é negativa
+	
+	\vspace{0.4cm}
+	$v_y = v \text{sen} \theta = v \text{sen} \varphi$, \quad \ \ `+' porque $v_y$ é componente positiva
+	
+	\vspace{0.8cm}
+	'$\cos \theta$' é uma função par: $\cos \theta = \cos(-\theta)$, '$\text{sen} \theta$' é impar: $\text{sen} \theta = -\text{sen}(-\theta)$
+	
+	\vspace{0.3cm}
+	\begin{tikzpicture}[scale=0.9]
+		% Eixos
+		\draw[thick, ->] (-1.5,0) -- (2.5,0) node[right] {$x$};
+		\draw[thick, ->] (0,-1.5) -- (0,2) node[left] {$y$};
+		
+		% Retas
+		\draw[thick] (0,0) -- (2, 1.2);
+		\draw[thick] (0,0) -- (2, -1.2);
+		
+		% Ângulos
+		\draw[->] (0.8,0) arc (0:31:0.8) node[midway, right] {$\theta$};
+		\draw[->] (0.8,0) arc (0:-31:0.8) node[midway, right] {$-\theta$};
+	\end{tikzpicture}
+\end{frame}
+	
+% PAGE 5
+\begin{frame}{Exemplos}
+	\scriptsize
+	
+	% --- EXEMPLO 1 ---
+	\begin{columns}[T]
+		\begin{column}{0.05\textwidth}
+			\tikz[baseline=-0.5ex]\node[circle,draw,inner sep=1pt] {1};
+		\end{column}
+		\begin{column}{0.35\textwidth}
+			\begin{tikzpicture}[scale=0.7]
+				\draw[thick, ->] (-1,0) -- (3,0);
+				\draw[thick, ->] (0,-1) -- (0,2);
+				\draw[thick, ->] (0,0) -- (2,1) node[midway, below right] {$\overline{v}$};
+				\draw[dashed] (2,0) -- (2,1) -- (0,1);
+				\draw[->] (0.8,0) arc (0:26.5:0.8) node[midway, right] {$\theta$};
+			\end{tikzpicture}
+		\end{column}
+		\begin{column}{0.25\textwidth}
+			\vspace{0.2cm}
+			$\overline{v} = 4\overline{i} + 2\overline{j}$
+		\end{column}
+		\begin{column}{0.35\textwidth}
+			A) Escrever $(v_x, v_y)$ ; \\
+			\vspace{0.15cm}
+			B) Calcular $v = |\overline{v}|$ ; \\
+			\vspace{0.15cm}
+			C) Calcular o $tg\theta$ ; \\
+			\vspace{0.15cm}
+			D) Calcular $\theta$
+		\end{column}
+	\end{columns}
+	
+	\vspace{0.2cm}
+	A) $(v_x, v_y) = (4,2)$ \\
+	\vspace{0.15cm}
+	B) $v = (v_x^2 + v_y^2)^{1/2} = (16+4)^{1/2} = 4,47$ \\
+	\vspace{0.15cm}
+	C) $tg \theta = \frac{v_y}{v_x} = \frac{2}{4} = \frac{1}{2}$ \\
+	\vspace{0.15cm}
+	D) $\theta = arctg \frac{1}{2} = 26,56^\circ$
+	
+	\vspace{0.4cm}
+	% --- EXEMPLO 2 ---
+	\begin{columns}[T]
+		\begin{column}{0.05\textwidth}
+			\tikz[baseline=-0.5ex]\node[circle,draw,inner sep=1pt] {2};
+		\end{column}
+		\begin{column}{0.35\textwidth}
+			\begin{tikzpicture}[scale=0.7]
+				\draw[thick, ->] (-1,0) -- (2.5,0);
+				\draw[thick, ->] (0,-1) -- (0,1.5);
+				\draw[thick, ->] (0,0) -- (1.5,0.8) node[midway, above left] {$\overline{v}$};
+				\draw[dashed] (1.5,0) -- (1.5,0.8) -- (0,0.8);
+				\draw[->] (0.8,0) arc (0:30:0.8) node[midway, right] {$\theta$};
+			\end{tikzpicture}
+		\end{column}
+		\begin{column}{0.6\textwidth}
+			\vspace{0.1cm}
+			$\theta = 30^\circ$, $|\overline{v}| = v = 1$ \\
+			\vspace{0.3cm}
+			A) Calcular $\overline{v} = v_x \overline{i} + v_y \overline{j}$
+		\end{column}
+	\end{columns}
+	
+	\vspace{0.1cm}
+	\begin{columns}[T]
+		\begin{column}{0.05\textwidth}
+			A)
+		\end{column}
+		\begin{column}{0.95\textwidth}
+			$v_x = v \cos \theta = 1 \cdot \cos 30^\circ = \frac{\sqrt{3}}{2} \approx 0,86$ \\
+			\vspace{0.3cm}
+			$v_y = v \text{sen} \theta = 1 \cdot \text{sen} 30^\circ = \frac{1}{2} = 0,5$
+		\end{column}
+	\end{columns}
+	
+\end{frame}
+	
+% PAGE 6
+\begin{frame}{Exercícios}
+	\scriptsize
+	
+	\begin{columns}[T]
+		% Coluna 1: Dados
+		\begin{column}{0.2\textwidth}
+			\vspace{0.5cm}
+			\tikz[baseline=-0.5ex]\node[circle,draw,inner sep=1pt, blue] {1}; 
+			$|\overline{v}| = 5 = v$ \\
+			\vspace{0.2cm}
+			$\theta = 120^\circ$
+		\end{column}
+		
+		% Coluna 2: Figura
+		\begin{column}{0.35\textwidth}
+			\begin{tikzpicture}[scale=0.7]
+				% Eixos
+				\draw[thick, ->] (-3,0) -- (2,0);
+				\draw[thick, ->] (0,-1) -- (0,2);
+				
+				% Vetor v
+				\draw[thick, ->] (0,0) -- (-2,1.5) node[midway, above left] {$\overline{v}$};
+				
+				% Projeções tracejadas
+				\draw[dashed] (-2,0) -- (-2,1.5) -- (0,1.5);
+				
+				% Vetores Unitários (vermelho)
+				\draw[thick, red, ->] (0,0) -- (0.8,0) node[below] {$\overline{i}$};
+				\draw[thick, red, ->] (0,0) -- (0,0.8) node[right] {$\overline{j}$};
+				
+				% Ângulos
+				\draw[->] (0.5,0) arc (0:143.1:0.5) node[near end, above right] {$\quad\theta$};
+				\draw[->] (-0.8,0) arc (180:143.1:0.8) node[midway, left] {$\varphi$};
+			\end{tikzpicture}
+		\end{column}
+		
+		% Coluna 3: Perguntas
+		\begin{column}{0.45\textwidth}
+			\vspace{0.3cm}
+			A) Calcular $v_x$ e $v_y$ ; \\
+			\vspace{0.2cm}
+			B) escrever $\overline{v}$ na forma com $v_x$ e $v_y$ \\
+			\vspace{0.2cm}
+			C) Qual é significado dos sinais das componentes?
+		\end{column}
+	\end{columns}
+	
+	\vspace{0.2cm}
+	\textcolor{blue}{Sol.} \quad $\varphi = 180^\circ - 120^\circ = 60^\circ$
+	
+	\vspace{0.2cm}
+	A) \hspace{0.2cm} $v_x = v \cos 120^\circ = 5 \cdot (-0,5) = -2,5$ \\
+	\hspace{0.85cm} \raisebox{0.1cm}{$\big\vert$} $= v(-\cos 60^\circ)$ 
+	
+	\vspace{0.2cm}
+	\hspace{0.6cm} $v_y = v \text{sen} 120^\circ = 5 \cdot \frac{\sqrt{3}}{2}$ \\
+	\hspace{0.85cm} \raisebox{0.1cm}{$\big\vert$} $= v \text{sen} 60$
+	
+	\vspace{0.3cm}
+	B) \quad $\overline{v} = v_x \overline{i} + v_y \overline{j} = (-2,5)\overline{i} + \left(\frac{5\sqrt{3}}{2}\right)\overline{j} = (2,5)(-\overline{i}) + \left(\frac{5\sqrt{3}}{2}\right)\overline{j}$
+	
+	\vspace{0.3cm}
+	C) \quad O vetor $\overline{v}$ é ``para cima'' e ``para esquerda''. ``Para cima'' é representado \\
+	\hspace{0.65cm} do o sinal positivo de $v_y$ e ``para esquerda'' é representado do o sinal negativo de $v_x$. \\
+	\hspace{0.65cm} De fato, o vetor $\overline{v}$ é na direção $(-\overline{i})$ respeito o eixo x e $(\overline{j})$ respeito o eixo y.
+	
+\end{frame}
+
+
+% PAGE 7
+\begin{frame}{Exercício 2}
+	\scriptsize
+	
+	\begin{columns}[T]
+		\begin{column}{0.05\textwidth}
+			\tikz[baseline=-0.5ex]\node[circle,draw,inner sep=1pt, blue] {2};
+		\end{column}
+		\begin{column}{0.25\textwidth}
+			Seja $\overline{v} = (3,-4)$
+		\end{column}
+		\begin{column}{0.7\textwidth}
+			A) Desenhar $\overline{v}$ com os eixos 'x' e 'y'; (eixos cartesianos) \\
+			\vspace{0.1cm}
+			B) Encontrar $\theta$ e $\varphi$?
+		\end{column}
+	\end{columns}
+	
+	\vspace{0.4cm}
+	\textcolor{blue}{Sol.} A) \quad $\overline{v} = v_x \overline{i} + v_y \overline{j} = 3\overline{i} + (-4)\overline{j} = 3\overline{i} + 4(-\overline{j})$
+	
+	\vspace{0.3cm}
+	\begin{columns}[T]
+		% Coluna do Desenvolvimento (Alínea B)
+		\begin{column}{0.65\textwidth}
+			B) \hspace{0.1cm} $\bullet \quad \displaystyle tg \theta = \frac{v_x}{v_y} = -\frac{3}{4} \leadsto \theta = \text{arctg}\left(-\frac{3}{4}\right) = -36,87^\circ$ \\
+			\vspace{0.1cm}
+			\hspace{0.8cm} $\leftarrow$ '-' porque $\theta$ é horario
+			
+			\vspace{0.4cm}
+			\hspace{0.5cm} $\bullet \quad \displaystyle tg \varphi = \frac{v_y}{v_x} = -\frac{4}{3} \leadsto \varphi = \text{arctg}\left(-\frac{4}{3}\right) = -53,13^\circ$ \\
+			\vspace{0.1cm}
+			\hspace{0.8cm} $\leftarrow$ '-' porque $\varphi$ é horario
+			
+			\vspace{0.4cm}
+			Também \quad $\displaystyle \varphi = -\frac{\pi}{2} - (\theta) = -\frac{\pi}{2} - (-36,87^\circ) = -53,13^\circ$
+		\end{column}
+		
+		% Coluna do Gráfico Principal (Alínea A)
+		\begin{column}{0.35\textwidth}
+			\begin{center}
+				\begin{tikzpicture}[scale=0.6]
+					% Eixos
+					\draw[thick, ->] (-1.5,0) -- (4,0);
+					\draw[thick, ->] (0,-4.5) -- (0,2);
+					
+					% Vetor
+					\draw[thick, ->] (0,0) -- (3,-4) node[midway, below right] {$\overline{v}$};
+					\draw[dashed] (3,0) -- (3,-4) -- (0,-4);
+					
+					% Chaves e valores
+					\draw[decorate, decoration={brace, amplitude=5pt}] (0,0.1) -- (3,0.1) node[midway, above=4pt] {$v_x$};
+					\node[above right] at (3,0) {$3$};
+					
+					\draw[decorate, decoration={brace, amplitude=5pt}] (-0.1,-4) -- (-0.1,0) node[midway, left=4pt] {$v_y$};
+					\node[below left] at (0,-4) {$-4$};
+					
+					% Ângulos
+					\draw[->] (1.5,0) arc (0:-53.1:1.5) node[midway, right] {$\varphi$};
+					\draw[->] (0,-2) arc (-90:-53.1:2) node[midway, below left] {$\theta$};
+				\end{tikzpicture}
+			\end{center}
+		\end{column}
+	\end{columns}
+\end{frame}
+
+
+
+	
+% PAGE 8
+\begin{frame}{Soma entre vetores bi-dimensionais}
+	\scriptsize
+	
+	Indicamos com $\overline{v}$ e $\overline{w}$ os vetores de dois deslocamentos. $\overline{v} = v_x \overline{i} + v_y \overline{j} \quad , \quad \overline{w} = w_x \overline{i} + w_y \overline{j}$
+	
+	\vspace{0.2cm}
+	O vetor soma \quad $\overline{u} = \overline{v} + \overline{w}$ \quad é: 
+	$\overline{u} = u_x \overline{i} + u_y \overline{j} = v_x \overline{i} + v_y \overline{j} + w_x \overline{i} + w_y \overline{j}$ $= (v_x + w_x)\overline{i} + (v_y + w_y)\overline{j}$
+	
+	\vspace{0.1cm}
+	$\leadsto \quad u_x = v_x + w_x \quad , \quad u_y = v_y + w_y$
+	
+	\vspace{0.3cm}
+	\begin{columns}[c]
+		\begin{column}{0.25\textwidth}
+			Graficamente
+			\begin{center}
+				\begin{tikzpicture}[scale=0.55]
+					\draw[thick, ->] (0,0) -- (1.5,1) node[midway, above left] {$\overline{v}$};
+					\draw[thick, ->] (1.5,1) -- (3,0) node[midway, above right] {$\overline{w}$};
+					\draw[thick, red, ->] (0,0) -- (3,0) node[midway, below] {$\overline{u}$};
+				\end{tikzpicture}
+			\end{center}
+		\end{column}
+		\begin{column}{0.75\textwidth}
+			\begin{block}{}
+				Mais, representamos graficamente a soma $\vec{u} = \vec{v} + \vec{w}$:\\
+				\tikz[baseline=-0.5ex]\node[circle,fill=blue!70!black,text=white,inner sep=1pt] {1}; Decidir a origem de $\vec{v}$ (início);\\
+				\tikz[baseline=-0.5ex]\node[circle,fill=blue!70!black,text=white,inner sep=1pt] {2}; Fazer coincidir a \textbf{extremidade} de $\vec{v}$ com a \textbf{origem} de $\vec{w}$;\\
+				\tikz[baseline=-0.5ex]\node[circle,fill=blue!70!black,text=white,inner sep=1pt] {3}; Para obter $\vec{u}$, ligue a \textbf{origem} de $\vec{v}$ com a \textbf{extremidade} de $\vec{w}$.
+			\end{block}
+		\end{column}
+	\end{columns}
+	
+	\vspace{0.1cm}
+	Vetor diferencia \quad $\overline{u} = \overline{v} - \overline{w} \ \ :$ \quad
+	\begin{tikzpicture}[baseline=-0.5ex, scale=0.5]
+		\draw[thick, ->] (0,0) -- (1,1) node[near end, above left] {$\overline{v}$};
+	\end{tikzpicture}
+	\quad
+	\begin{tikzpicture}[baseline=-0.5ex, scale=0.5]
+		\draw[thick, ->] (0,1) -- (1.5,0) node[near start, above right] {$\overline{w}$};
+	\end{tikzpicture}
+	
+	\vspace{0.1cm}
+	\begin{columns}[c]
+		\begin{column}{0.65\textwidth}
+			$-\overline{w}$ é \quad
+			\begin{tikzpicture}[baseline=-0.5ex, scale=0.5]
+				\draw[thick, ->] (2,0) -- (0,1) node[midway, above right] {$-\overline{w}$};
+			\end{tikzpicture}
+			\quad $\leadsto$ \parbox[c]{4cm}{usando a regra grafica de soma\\$\overline{u} = \overline{v} + (-\overline{w})$}
+		\end{column}
+		\begin{column}{0.35\textwidth}
+			\begin{tikzpicture}[scale=0.55]
+				% Triângulo da diferença de vetores (como na nota)
+				\draw[thick, ->] (1,0) -- (2.5,1.5) node[midway, below right] {$\overline{v}$};
+				\draw[thick, ->] (2.5,1.5) -- (0.5,2.5) node[midway, above right] {$-\overline{w}$};
+				\draw[thick, ->] (1,0) -- (0.5,2.5) node[midway, left] {$\overline{u}$};
+			\end{tikzpicture}
+		\end{column}
+	\end{columns}
+	
+\end{frame}
+	
+% PAGE 9
+\begin{frame}{Propriedades dos vetores}
+	\scriptsize
+	
+	\textcolor{blue}{Propriedades dos vetores}
+	\vspace{0.1cm}
+	\begin{itemize}
+		\item[a)] $\overline{v} + \overline{w} = \overline{w} + \overline{v} \quad \text{(pr. comutativa)}$
+		\item[b)] $\alpha \overline{v} \text{ , } \alpha \text{ escalar , é } \quad \alpha \overline{v} = \alpha (v_x, v_y) = (\alpha v_x, \alpha v_y)$
+		\item[c)] $\overline{v} + (\overline{w} + \overline{u}) = (\overline{v} + \overline{w}) + \overline{u} \quad \text{(pr. associativa)}$
+	\end{itemize}
+	
+	\vspace{0.2cm}
+	\textcolor{blue}{Exercício:} \quad $\overline{v} = (2,0) \quad , \quad \overline{w} = (-2,1)$ .
+	
+
+	\begin{columns}[T]
+		% Coluna Esquerda: Soluções e Gráficos
+		\begin{column}{0.45\textwidth}
+			\textcolor{blue}{Sol.} \\
+			A) $(u_x, u_y) = (v_x + w_x, v_y + w_y)$ \\
+			\hspace*{0.4cm} $= (2-2, 0+1) = (0,1)$
+			
+			\vspace{0.2cm}
+			B) \hspace{0.1cm}
+			\begin{tikzpicture}[baseline=(current bounding box.center), scale=0.55]
+				\draw[thick, ->] (-1,0) -- (3,0);
+				\draw[thick, ->] (0,-1) -- (0,2);
+				\draw[thick, red, ->] (0,0) -- (2,0) node[midway, below] {$\overline{v}$};
+				\draw[thick, red, ->] (2,0) -- (0,1) node[midway, above right] {$\overline{w}$};
+				\draw[thick, green!60!black, ->] (0,0) -- (0,1) node[midway, left] {$\overline{u}$};
+			\end{tikzpicture}
+			
+
+			\hspace*{0.4cm}
+			\begin{tikzpicture}[baseline=(current bounding box.center), scale=0.55]
+				\draw[thick, ->] (-3,0) -- (5,0);
+				\draw[thick, ->] (0,-2) -- (0,2);
+				\draw[thick, red, ->] (0,0) -- (-2,1) node[midway, above left] {$\overline{w}$};
+				\draw[thick, red, ->] (0,0) -- (2,0) node[midway, above] {$\overline{v}$};
+				\draw[thick, red, ->] (2,0) -- (4,-1)node[midway, above ] {-$\overline{w}$};;
+				\draw[thick, green!60!black, ->] (0,0) -- (4,-1) node[midway, below right] {$\overline{u}$};
+			\end{tikzpicture}
+			
+\vspace{0.2cm}
+
+
+		\end{column}
+		
+		% Coluna Direita: Perguntas do Exercício
+		\begin{column}{0.55\textwidth}
+			A) Calcular $\overline{u} = \overline{v} + \overline{w}$ ;
+			
+			\vspace{0.1cm}
+			B) Representar graficamente o vetor soma $\overline{u} = \overline{v} + \overline{w}$ e o vetor diferencia $\overline{u} = \overline{v} - \overline{w}$ ;
+			
+			\vspace{0.3cm}
+			C) Calcular o modulo de $\overline{u}$.
+			
+			\vspace{0.3cm}
+			D) Desenhar $-\overline{u}$.
+			
+			\vspace{0.3cm}
+			E) Calcular o angulo antihorario $\theta$ e o angulo horario $\varphi$. Onde $\theta$ e $\varphi$ são os angulos associados a o vetor $\overline{u}$ e que comecam do eixo 'x'.
+		\end{column}
+	\end{columns}
+	
+\textcolor{red}{$-\overline{w} = -(-2,1) = (2,-1)$}, $\textcolor{green!60!black}{	\overline{u} = \overline{v} - \overline{w} = \overline{v} + (-\overline{w})=(2+2,-1)= (4,-1) }$
+	
+\vspace{0.2cm}	
+\end{frame}
+
+
+% PAGE 10
+\begin{frame}{}
+	\scriptsize
+	
+	C) \quad $|\overline{u}| = \sqrt{0+1} = 1 \quad , \quad |\overline{u}| = \sqrt{16+1} = \sqrt{17}$
+	
+	\vspace{0.3cm}
+	D)
+	\begin{center}
+		\begin{tikzpicture}[scale=0.6]
+			\draw[thick, ->] (-2.5,0) -- (2.5,0);
+			\draw[thick, ->] (0,-2) -- (0,2);
+			\draw[thick, green!60!black, ->] (0,0) -- (0,-1.5) node[right] {$-\overline{u}$};
+		\end{tikzpicture}
+		\hspace{1.5cm}
+		\begin{tikzpicture}[scale=0.6]
+			\draw[thick, ->] (-2.5,0) -- (2.5,0);
+			\draw[thick, ->] (0,-2) -- (0,2);
+			\draw[thick, green!60!black, ->] (0,0) -- (-2, 0.5) node[above right] {$-\overline{u}$};
+		\end{tikzpicture}
+	\end{center}
+	
+	\vspace{0.3cm}
+	E)
+	\begin{columns}[c]
+		% E - Left Graph (Primeiro Vetor)
+		\begin{column}{0.35\textwidth}
+			\begin{center}
+				\begin{tikzpicture}[scale=0.65]
+					\draw[thick, ->] (-2,0) -- (2.5,0);
+					\draw[thick, ->] (0,-2.5) -- (0,2.5);
+					\draw[thick, green!60!black, ->] (0,0) -- (0,1.5) node[below left] {$\overline{u}$};
+					
+					% Arco laranja (theta) e texto posicionado manualmente
+					\draw[->, orange, thick] (0.5,0) arc (0:90:0.5);
+					\node[orange, right] at (0.4, 0.6) {$\theta = \frac{\pi}{2}$};
+					
+					% Arco amarelo (phi) e texto posicionado manualmente
+					\draw[->, purple!80!orange, thick] (0.8,0) arc (0:-270:0.8);
+					\node[purple!80!orange, left] at (-0.8, 1) {$-\frac{3}{2}\pi = \varphi$};
+				\end{tikzpicture}
+			\end{center}
+		\end{column}
+		
+		% E - Right Graph & Equations (Segundo Vetor)
+		\begin{column}{0.65\textwidth}
+			\begin{columns}[c]
+				\begin{column}{0.45\textwidth}
+					\begin{center}
+						\begin{tikzpicture}[scale=0.65]
+							\draw[thick, ->] (-2,0) -- (2.5,0);
+							\draw[thick, ->] (0,-2.5) -- (0,2);
+							\draw[thick, green!60!black, ->] (0,0) -- (2,-0.5) node[below] {$\overline{u}$};
+							
+							% Arco amarelo (phi) com raio maior para não colidir
+							\draw[->, purple!80!orange, thick] (1.4,0) arc (0:-14:1.4) node[right] {$\varphi$};
+							
+							% Arco laranja (theta) centrado à esquerda
+							\draw[->, orange, thick] (0.7,0) arc (0:346:0.7) node[midway, left] {$\theta$};
+						\end{tikzpicture}
+					\end{center}
+				\end{column}
+				\begin{column}{0.55\textwidth}
+					$\overline{u} = (4,-1)$ \\
+					\vspace{0.2cm}
+					$\displaystyle tg \varphi = -\frac{1}{4}$ \\
+					\vspace{0.2cm}
+					$\begin{aligned}
+						\varphi &= \text{arctg}\left(-\frac{1}{4}\right) \\
+						&\approx -14^\circ
+					\end{aligned}$ \\
+					\vspace{0.2cm}
+					$\leadsto \theta \approx 360^\circ - 14^\circ = 346^\circ$
+				\end{column}
+			\end{columns}
+		\end{column}
+	\end{columns}
+	
+\end{frame}
+
+
+% PAGE 11
+\begin{frame}{Normalização de vetores}
+	\scriptsize
+	
+	Se tenho um vetor $\overline{v} = v_x \overline{i} + v_y \overline{j}$ , como faço a encontrar o vetor unitário $\overline{e}_v$ na orientação de $\overline{v}$? Ou seja o vetor $\overline{e}_v$ $\underset{\textcolor{violet}{a)}}{\underline{\text{na mesma orientação}}}$ de $\overline{v}$ e tal que $\underset{\textcolor{violet}{b)}}{\underline{|\overline{e}_v| = 1}}$.
+	
+	\vspace{0.2cm}
+	$\overline{e}_v = (e_{v,x} , e_{v,y}) \quad , \quad e_{v,x} = \frac{v_x}{|\overline{v}|} \quad , \quad e_{v,y} = \frac{v_y}{|\overline{v}|}$
+	
+	\vspace{0.3cm}
+	Verificamos a suas propriedades \textcolor{violet}{a)} e \textcolor{violet}{b)} :
+	
+	\vspace{0.2cm}
+	\textcolor{violet}{a)} \quad $\displaystyle \overline{e}_v = \left( \frac{v_x}{|\overline{v}|} , \frac{v_y}{|\overline{v}|} \right) \tikz[baseline=(eq.base)]{\node[inner sep=0pt] (eq) {$=$}; \draw[<-, shorten <=2pt] (eq.south) -- ++(0,-0.4) node[below, font=\tiny, align=center] {$|\overline{v}|$ é um escalar positivo \\ $\Rightarrow$ não muda a orientação \\ respeito a $\overline{v}$};} \frac{1}{|\overline{v}|} (v_x, v_y) = \left( \frac{1}{|\overline{v}|} \right) \overline{v}$
+	
+	\vspace{0.6cm}
+	\begin{columns}[T]
+		% Cálculos da propriedade b)
+		\begin{column}{0.65\textwidth}
+			\textcolor{violet}{b)} \quad $\displaystyle |\overline{e}_v| = \sqrt{e_{v,x}^2 + e_{v,y}^2} = \sqrt{\frac{v_x^2}{|\overline{v}|^2} + \frac{v_y^2}{|\overline{v}|^2}} = \sqrt{\frac{1}{|\overline{v}|^2} (v_x^2 + v_y^2)}$
+			
+			\vspace{0.3cm}
+			\hspace{0.5cm} $\displaystyle = \frac{1}{|\overline{v}|} \sqrt{v_x^2 + v_y^2} = \frac{|\overline{v}|}{|\overline{v}|} = 1$
+		\end{column}
+		
+		% Gráfico
+		\begin{column}{0.35\textwidth}
+			\vspace{-0.5cm}
+			\begin{center}
+				\begin{tikzpicture}[scale=0.7]
+					\draw[thick, ->] (-1.5,0) -- (2.5,0);
+					\draw[thick, ->] (0,-2.5) -- (0,1.5);
+					\draw[thick, ->] (0,0) -- (2,-2) node[midway, below left] {$\overline{v}$};
+					\draw[thick, red, ->] (0,0) -- (0.8,-0.8) node[midway, right] {$\overline{e}_v$};
+				\end{tikzpicture}
+			\end{center}
+		\end{column}
+	\end{columns}
+	
+
+	\textcolor{red}{ Chamamos $\overline{e}_v$ o vetor normalizado / vetor unitário associado a $\overline{v}$}
+\end{frame}
+
+	
+% PAGE 12
+\begin{frame}{Exercício Prático}
+	\scriptsize
+	
+	\textcolor{blue}{\underline{Exercício}} \hspace{0.5cm} Seja $\overline{v} = \left(\frac{3}{2} , -\frac{1}{2}\right)$ , Calcule o vetor unitário $\overline{e}_v$.
+	
+	\vspace{0.6cm}
+	\textcolor{blue}{Sol.} \hspace{0.5cm} $\displaystyle |\overline{v}| = \sqrt{\left(\frac{3}{2}\right)^2 + \left(-\frac{1}{2}\right)^2} = \sqrt{\frac{9}{4} + \frac{1}{4}} = \sqrt{\frac{10}{4}} = \frac{\sqrt{10}}{\sqrt{4}} = \frac{\sqrt{10}}{2}$
+	
+	\vspace{0.7cm}
+	$\displaystyle e_{v,x} = \frac{\frac{3}{2}}{\frac{\sqrt{10}}{2}} = \frac{3}{2} \cdot \frac{2}{\sqrt{10}} = \frac{3}{\sqrt{10}} \quad , \quad e_{v,y} = \frac{-\frac{1}{2}}{\frac{\sqrt{10}}{2}} = -\frac{1}{2} \cdot \frac{2}{\sqrt{10}} = -\frac{1}{\sqrt{10}}$
+	
+	\vspace{0.7cm}
+	$\displaystyle \overline{e}_v = e_{v,x} \overline{i} + e_{v,y} \overline{j} = \frac{3}{\sqrt{10}} \overline{i} + \left(-\frac{1}{\sqrt{10}}\right) \overline{j} = \frac{3}{\sqrt{10}} \overline{i} + \frac{1}{\sqrt{10}} (-\overline{j})$
+	
+	\vspace{0.8cm}
+	\textcolor{blue}{\underline{Exercício para casa}:} estudar propriedade de seno e coseno, e seus valores, \\
+	(Pode usar Wikipedia ou um modelo de AI com `thinking mode' $\leftarrow$ modalidade pensamento).
+\end{frame}
+
+	
+\end{document}

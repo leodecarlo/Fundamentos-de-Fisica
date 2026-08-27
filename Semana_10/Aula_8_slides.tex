@@ -1,0 +1,636 @@
+\documentclass{beamer}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[portuguese]{babel}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric, arrows.meta, calc, decorations.pathreplacing, patterns}
+
+% Configuração do Tema
+\usetheme{Madrid}
+\usecolortheme{default}
+\beamertemplatenavigationsymbolsempty
+
+% Comando para o círculo vermelho
+\providecommand{\circled}[1]{\mbox{\tikz[baseline=(char.base)]{\node[shape=circle,draw=red,thick,inner sep=0.5pt,text=red,font=\tiny\bfseries] (char) {#1};}}}
+
+% Convenções visuais
+\tikzset{
+	eixo/.style={->, thick},
+	vetorf/.style={->, thick, orange!90!black},
+	vetord/.style={->, thick, blue!75!black},
+	vetorv/.style={->, thick, magenta!80!black},
+	vetorg/.style={->, thick, red!80!black},
+	vetors/.style={->, thick, green!60!black},
+	ponto/.style={circle, fill=black, inner sep=1.5pt}
+}
+
+% Informações do Título
+\title{Aula 8: Teoria e Prática}
+\subtitle{Energia Cinética e Trabalho}
+\date{4 Maio 2026}
+
+\begin{document}
+	
+	% SLIDE 1
+	\frame{\titlepage}
+	
+	% SLIDE 2
+	\begin{frame}{Energia e movimento: a ideia principal}
+		\scriptsize
+		
+		\textcolor{blue}{\textbf{O que é energia?}}
+		
+		Em física, a energia é uma \textbf{grandeza escalar} associada ao estado de um ou mais objetos. A ideia é associar um valor ao estado de movimento ou ao estado de interação; por isso, definiremos várias formas de energia.
+		
+		\vspace{0.15cm}
+		
+		Se uma força atua sobre um objeto e altera o seu movimento, essa grandeza pode mudar:
+		\[
+		\text{força aplicada} \quad \Longrightarrow \quad
+		\text{mudança do movimento} \quad \Longrightarrow \quad
+		\text{mudança da energia}.
+		\]
+		
+		\begin{columns}[T]
+			\begin{column}{0.58\textwidth}
+				\textcolor{blue}{\textbf{Ligação com o movimento}}
+				
+				Quando um objeto se move, associamos ao seu movimento uma energia chamada
+				\textbf{energia cinética} 
+				\[
+				\textcolor{red}{K=\frac{1}{2}mv^2}.
+				\]
+				
+				\begin{itemize}
+					\item se o objeto está em repouso, \(v=0\), então \(K=0\);
+					\item quanto maior é a rapidez \(v\), maior é \(K\); \(K\) depende de \(v^2\), portanto não depende do sentido do movimento; \(K\) também depende da massa \(m\).
+				\end{itemize}
+				
+			
+			\end{column}
+			
+			\begin{column}{0.42\textwidth}
+				\centering
+				\begin{tikzpicture}[scale=0.8,>=stealth]
+					
+					\draw[thick] (-0.5,0.1) -- (3.5,0.1);
+					\draw[fill=cyan!25, draw=blue!70!black, thick] (0.4,0.1) circle (0.18);
+					\draw[vetorv] (0.65,0.1) -- (2.5,0.1) node[midway, above] {$\vec v$};
+					\node[right] at (2.65,0.5) {\scriptsize \(K>0\)};
+					
+					\begin{scope}[shift={(0,-2.35)}]
+						\draw[eixo] (0,0) -- (3.3,0) node[right] {$v$};
+						\draw[eixo] (0,0) -- (0,2.2) node[above] {$K$};
+						\draw[domain=0:3.0, smooth, variable=\x, thick, red!80!black]
+						plot ({\x},{0.22*\x*\x});
+						\node[font=\scriptsize, red!80!black] at (1.7,1.35) {$K\propto v^2$};
+					\end{scope}
+				\end{tikzpicture}
+			\end{column}
+		\end{columns}
+		
+		\vspace{0.1cm}
+		A unidade de medida da energia é o Joule:
+		$
+		1\,\text{J}=1\,\text{kg}\frac{\text{m}^2}{\text{s}^2}=1\,\text{N}\cdot\text{m}.
+		$
+		Queremos estudar como as forças transferem energia para um objeto ou retiram energia, alterando a sua energia cinética. 
+		
+		\end{frame}
+	
+	
+	% SLIDE 3
+	\begin{frame}{Trabalho de uma força constante}
+		\scriptsize
+		
+		Quando uma força constante \(\vec F=(F_x,F_y)\) atua sobre uma partícula durante um deslocamento \(\vec d=(d_x,d_y)\), o trabalho é
+		
+		\[
+		\textcolor{red}{W=Fd\cos\phi=\vec F\cdot\vec d=F_xd_x+F_yd_y}
+		\]
+		
+		com
+		\[
+		F_x=F_\parallel=F\cos\phi
+		\qquad \Rightarrow \qquad
+		W=F_\parallel d.
+		\]
+		
+		em que \(\phi\) é o ângulo entre a força e o deslocamento. A operação \(\vec v\cdot\vec w\) é o \textbf{produto escalar} entre dois vetores \(\vec v\) e \(\vec w\), isto é,
+		\[
+		\vec v\cdot\vec w = vw\cos\phi.
+		\]
+		Interpretamos essa operação como o módulo de um vetor multiplicado pela projeção do outro sobre ele.
+		
+		\begin{columns}[T]
+			\begin{column}{0.45\textwidth}
+				\textcolor{blue}{\textbf{Interpretação:}}
+				\begin{itemize}
+					\item só a componente da força paralela ao deslocamento realiza trabalho;
+					\item a componente perpendicular \(F_\perp=F\sin\phi\) não realiza trabalho;
+					\item se \(\vec F\) tem o mesmo sentido geral do movimento \((0^\circ\le \phi<90^\circ)\), então \(W>0\);
+					\item se \(\vec F\) se opõe ao movimento \((90^\circ<\phi\le 180^\circ)\), então \(W<0\).
+				\end{itemize}
+			\end{column}
+			
+			\begin{column}{0.6\textwidth}
+				\centering
+				
+				\begin{minipage}{0.48\linewidth}
+					\centering
+					\begin{tikzpicture}[scale=0.52,>=stealth]
+						\coordinate (A) at (0,0);
+						\coordinate (B) at (3.2,0);
+						\draw[vetord] (A) -- (B) node[midway, below] {$\vec d$};
+						
+						\draw[vetorf] (A) -- ++(35:2.4) node[above right] {$\vec F$};
+						\draw[->, thick, gray!80] (0.75,0) arc[start angle=0,end angle=35,radius=0.75];
+						\node at (1.05,0.28) {$\phi$};
+						
+						\draw[dashed, orange!90!black] (35:2.4) -- ++({-2.4*cos(35)},0);
+						\draw[->, thick, orange!90!black] (0,-0.9) -- (1.95,-0.9)
+						node[midway, below] {$F\cos\phi$};
+						
+						\node[align=center, font=\scriptsize] at (1.65,-2.2)
+						{a componente perpendicular\\ \(F_\perp=F\sin\phi\) não realiza trabalho};
+					\end{tikzpicture}
+				\end{minipage}
+				\hfill
+				\begin{minipage}{0.48\linewidth}
+					\centering
+					\begin{tikzpicture}[scale=0.52,>=stealth]
+						\draw[eixo] (-0.2,0) -- (3.8,0);
+						\draw[eixo] (0,-0.2) -- (0,2.8);
+						
+						\draw[->, thick, blue!75!black] (0,0) -- (3.0,0.4) node[right] {$\vec v$};
+						\draw[->, thick, green!60!black] (0,0) -- (1.8,2.0) node[above] {$\vec w$};
+						
+						\draw[->, thick, gray!80] (0.8,0.1) arc[start angle=8,end angle=48,radius=0.8];
+						\node at (1.05,0.55) {$\phi$};
+						
+						\coordinate (P) at (1.99,0.27);
+						\draw[dashed, green!60!black] (1.8,2.0) -- (P);
+						\node[font=\scriptsize] at (2.2,1.2) {projeção};
+						\node[font=\scriptsize] at (2.2,0.95) {de \(\vec w\)};
+						
+						\node[align=center,font=\scriptsize,red!80!black] at (1.9,-0.7)
+						{\(\vec v\cdot\vec w=vw\cos\phi\)};
+					\end{tikzpicture}
+				\end{minipage}
+			\end{column}
+		\end{columns}
+		
+	\end{frame}
+	
+	
+	% SLIDE 4
+	\begin{frame}{Teorema do trabalho e energia cinética}
+		\scriptsize
+		
+		Para uma partícula, a variação da energia cinética, causada pelas forças externas, é igual ao trabalho total realizado sobre ela:
+		
+		\[
+		\textcolor{red}{\Delta K=K_f-K_i=W_{\text{tot}}}
+		\]
+		
+		\begin{columns}[T]
+			\begin{column}{0.4\textwidth}
+				\textcolor{blue}{\textbf{Como usar em problemas:}}
+				\begin{enumerate}
+					\item identificar a partícula ou o objeto que se comporta como partícula e desenhar as forças;
+					\item calcular o trabalho de cada força;
+					\item somar os trabalhos:
+					\[
+					W_{\text{tot}}=\sum W_i;
+					\]
+					\item aplicar:
+					\[
+					K_f-K_i=W_{\text{tot}}.
+					\]
+				\end{enumerate}
+				
+				\vspace{0.1cm}
+				Se \(W_{\text{tot}}>0\), então \(K_f>K_i\).  
+				
+				Se \(W_{\text{tot}}<0\), então \(K_f<K_i\).
+			\end{column}
+			
+			\begin{column}{0.6\textwidth}
+				\textcolor{blue}{\textbf{Dedução para \(W\)}}
+				
+				\[
+				F_x=ma_x
+				\]
+				
+				\[
+				v^2=v_0^2+2a_xd
+				\]
+				
+				\[
+				a_x=\frac{v^2-v_0^2}{2d}
+				\]
+				
+				\[
+				F_xd=ma_xd
+				=\frac12mv^2-\frac12mv_0^2
+				\]
+				
+				\[
+				\textcolor{red}{K_f-K_i=F_xd}
+				\qquad \Rightarrow \qquad
+				\textcolor{red}{W=F_xd}
+				\]
+				
+				\vspace{0.05cm}
+				\textcolor{red}{\textbf{Conclusão:}} trabalho positivo aumenta a energia cinética; trabalho negativo reduz a energia cinética.
+			\end{column}
+		\end{columns}
+		
+	\end{frame}
+	
+	% SLIDE 5
+	\begin{frame}{Exemplo: trabalho com vetores unitários}
+		\scriptsize
+		
+		Um caixote sofre o deslocamento
+		\[
+		\vec d=(-3{,}0\,\text{m})\vec i
+		\]
+		sob a ação da força
+		\[
+		\vec F=(2{,}0\,\text{N})\vec i-(6{,}0\,\text{N})\vec j.
+		\]
+		
+		\begin{columns}[T]
+			\begin{column}{0.58\textwidth}
+				O trabalho é calculado pelo produto escalar:
+				\[
+				W=\vec F\cdot \vec d.
+				\]
+				
+				\[
+				W=\left[(2{,}0)\vec i+(-6{,}0)\vec j\right]\cdot
+				\left[(-3{,}0)\vec i\right].
+				\]
+				
+				\[
+				W=(2{,}0)(-3{,}0)+(-6{,}0)(0)
+				=-6{,}0\,\text{J}.
+				\]
+				
+				\vspace{0.15cm}
+				Se \(K_i=10\,\text{J}\), então
+				\[
+				K_f=K_i+W=10\,\text{J}-6\,\text{J}
+				=\textcolor{red}{4\,\text{J}}.
+				\]
+				
+				\textcolor{red}{\textbf{Interpretação:}} a força retira energia cinética do caixote.
+			\end{column}
+			
+			\begin{column}{0.42\textwidth}
+				\centering
+				\begin{tikzpicture}[scale=0.85,>=stealth]
+					\draw[eixo] (-2.8,0) -- (2.2,0) node[right] {$x$};
+					\draw[eixo] (0,-2.4) -- (0,1.4) node[above] {$y$};
+					
+					\draw[fill=gray!20, draw=black] (-0.35,-0.25) rectangle (0.35,0.25);
+					\node at (0,0) {};
+					
+					\draw[vetord] (0,0) -- (-2.1,0) node[midway, above] {$\vec d$};
+					\draw[vetorf] (0,0) -- (1.1,-1.7) node[right] {$\vec F$};
+					
+					\draw[dashed, orange!90!black] (1.1,-1.7) -- (1.1,0);
+					\draw[->, thick, orange!90!black] (0,-0.6) -- (1.1,-0.6) node[right, below] {$\,\,F_x>0$};
+					
+					\node[align=center, font=\scriptsize, red!80!black] at (-0.3,-2.25)
+					{\(F_x\) é oposto a \(\vec d\)\\ \(\Rightarrow W<0\)};
+				\end{tikzpicture}
+			\end{column}
+		\end{columns}
+		
+	\end{frame}
+	
+	% SLIDE 6
+	\begin{frame}{Exemplo: duas forças constantes no mesmo deslocamento}
+		\scriptsize
+		
+		Dois agentes deslocam um cofre de massa \(m=225\,\text{kg}\), inicialmente em repouso, ao longo de \(d=8{,}50\,\text{m}\). 
+		\(F_1=12{,}0\,\text{N},\, \phi_1=30{,}0^\circ,\,
+		F_2=10{,}0\,\text{N},\, \phi_2=40{,}0^\circ.\)
+		
+		\begin{columns}[T]
+			\begin{column}{0.58\textwidth}
+				\[
+				W_1=F_1d\cos\phi_1
+				=(12{,}0)(8{,}50)\cos30^\circ
+				=88{,}3\,\text{J}.
+				\]
+				
+				\[
+				W_2=F_2d\cos\phi_2
+				=(10{,}0)(8{,}50)\cos40^\circ
+				=65{,}1\,\text{J}.
+				\]
+				
+				\[
+				W_{\text{tot}}=W_1+W_2
+				=\textcolor{red}{153\,\text{J}}.
+				\]
+				
+				Como \(K_i=0\),
+				\[
+				K_f=W_{\text{tot}},
+				\qquad
+				v_f=\sqrt{\frac{2K_f}{m}}
+				=\sqrt{\frac{2(153)}{225}}
+				\approx \textcolor{red}{1{,}17\,\text{m/s}}.
+				\]
+			\end{column}
+			
+			\begin{column}{0.42\textwidth}
+				\centering
+				\begin{tikzpicture}[scale=0.78,>=stealth]
+					\draw[] (-1.4,-0.75) -- (3.7,-0.75);
+					
+					\draw[fill=gray!25, draw=black, ] (0,-0.75) rectangle (1.3,0.10);
+					\node at (0.65,-0.32) {};
+					
+					\draw[vetord] (0.2,-1.20) -- (3.0,-1.20) node[midway, below] {$\vec d$};
+					
+					\draw[vetorf] (0.25,-0.05) -- ++(30:1.8) node[right] {$\vec F_2$};
+					\draw[vetorf] (0.25,-0.35) -- ++(-30:1.9) node[right] {$\vec F_1$};
+					
+					\draw[->, thick, red!70!black] (0.95,0.10) -- ++(0,1.05) node[above] {$\vec F_N$};
+					\draw[->, thick, red!70!black] (0.95,-0.30) -- ++(0,-1.0) node[below] {$m\vec g$};
+					
+					\node[align=center, font=\scriptsize] at (1.75,-3.0)
+					{\(\vec F_N\) e \(m\vec g\) são\\ perpendiculares a \(\vec d\):\\ \(W_N=W_g=0\)};
+				\end{tikzpicture}
+			\end{column}
+		\end{columns}
+		
+	\end{frame}
+	
+	% SLIDE 7
+	\begin{frame}{Trabalho da força gravitacional}
+		\scriptsize
+		
+		Para um objeto de massa \(m\) que sofre um deslocamento \(\vec d\), o trabalho da força gravitacional é
+		\[
+		\textcolor{red}{W_g=mgd\cos\phi} \text{ (em que \(\phi\) é o ângulo entre \(m\vec g\) e \(\vec d\).)}
+		\]
+		
+		\begin{columns}[T]
+			\begin{column}{0.6\textwidth}
+				
+				\[
+				\phi=180^\circ
+				\Rightarrow 
+				W_g=-mgd
+				\qquad \text{(subida)}
+				\]
+				
+				\[
+				\phi=0^\circ
+				\Rightarrow 
+				W_g=+mgd
+				\qquad \text{(descida)}
+				\]
+				
+				\vspace{0.15cm}
+				
+				Se uma força aplicada \(\vec F_a\) levanta ou abaixa um objeto, há pelo menos duas contribuições para o trabalho:
+				$
+				W_a  \text{ e } W_g.
+				$
+				Pelo teorema trabalho--energia:
+				\[
+				\textcolor{red}{\Delta K=K_f-K_i=W_a+W_g.}
+				\]
+				
+				Se o objeto começa e termina em repouso:
+				\[
+				K_i=K_f=0
+				\Rightarrow 
+				\Delta K=0 \quad + \quad
+				0=W_a+W_g
+				\Rightarrow 
+				\textcolor{red}{W_a=-W_g.}
+				\]
+				
+				Então, se um livro de massa \(m\) é levantado lentamente de uma altura \(d\): \(W_g=-mgd,\qquad W_a=+mgd.\)
+			\end{column}
+			
+			\begin{column}{0.44\textwidth}
+				\centering
+				
+				\begin{minipage}{0.48\linewidth}
+					\centering
+					\begin{tikzpicture}[scale=0.58,>=stealth]
+						\draw[eixo] (0,-1.1) -- (0,1.2) node[above] {$y$};
+						\draw[fill=red!35] (0,0) circle (0.15);
+						\draw[vetord] (0.3,-0.7) -- (0.3,0.8) node[midway, right] {$\vec d$};
+						\draw[vetorg] (-0.3,0.7) -- (-0.3,-0.75) node[midway, left] {$m\vec g$};
+						\node[font=\scriptsize, red!80!black] at (1.9,0) {$W_g<0$};
+						\node[font=\tiny, align=center] at (0,-1.42)
+						{subida\\ bola para cima};
+					\end{tikzpicture}
+				\end{minipage}
+				\hfill
+				\begin{minipage}{0.48\linewidth}
+					\centering
+					\begin{tikzpicture}[scale=0.58,>=stealth]
+						\draw[eixo] (0,-1.1) -- (0,1.2) node[above] {$y$};
+						\draw[fill=red!35] (0,0) circle (0.15);
+						\draw[vetord] (0.3,0.8) -- (0.3,-0.75) node[midway, right] {$\vec d$};
+						\draw[vetorg] (-0.3,0.7) -- (-0.3,-0.75) node[midway, left] {$m\vec g$};
+						\node[font=\scriptsize, red!80!black] at (1.9,0) {$W_g>0$};
+						\node[font=\tiny, align=center] at (0,-1.42)
+						{descida\\ bola a cair};
+					\end{tikzpicture}
+				\end{minipage}
+				
+				\vspace{0.35cm}
+				
+				\begin{tikzpicture}[scale=0.78,>=stealth]
+					\draw[thick] (-1.2,-1.2) -- (1.2,-1.2);
+					\draw[fill=brown!25, draw=black, thick] (-0.45,-0.2) rectangle (0.45,0.35);
+					\node at (0,0.08) {\tiny livro};
+					
+					\draw[vetorf] (0,0.35) -- (0,1.55) node[above] {$\vec F_a$};
+					\draw[vetorg] (0,-0.2) -- (0,-1.0) node[midway, right] {$m\vec g$};
+					\draw[vetord] (0.9,-0.2) -- (0.9,1.15) node[midway, right] {$\vec d$};
+					
+					\node[align=center, font=\scriptsize] at (0,-1.8)
+					{\tiny se a rapidez inicial e final\\ \tiny são iguais (nesse caso, \(0\)), então \(\Delta K=0\)};
+				\end{tikzpicture}
+			\end{column}
+		\end{columns}
+		
+	\end{frame}
+	
+	% SLIDE 8
+	\begin{frame}{Força elástica: lei de Hooke}
+		\tiny
+		
+		Uma mola no estado relaxado não está nem comprimida nem alongada. Se a extremidade livre se desloca de \(\vec{x}\), a mola exerce uma força restauradora, quer esteja alongada, quer esteja comprimida.
+		\[
+		\textcolor{red}{\vec{F}_k=-k\vec{x}} 
+		\text{ : o sentido de \(\vec{F}_k\) é sempre oposto ao sentido de \(\vec{x}\); em módulo, \(F_k=k|x|\).}
+		\]
+		
+		\begin{columns}[T]
+			\begin{column}{0.6\textwidth}
+				\begin{itemize}
+					\item A força elástica tem sempre sentido contrário ao deslocamento \(\vec{x}\);
+					\item \(\vec{x}\): deslocamento em relação ao estado relaxado;
+					\item \(k\): constante elástica da mola; unidade de \(k\) no SI: \(\text{N/m}\);
+					\item Demonstra-se que o trabalho desta força entre \(x_i\) e \(x_f\) é 
+					
+					\[W_k=\frac12kx_i^2-\frac12kx_f^2 = \frac{1}{2}k (x_i^2 - x_f ^2) \].
+				\end{itemize}
+			\end{column}
+			
+			\begin{column}{0.4\textwidth}
+				\centering
+				\begin{tikzpicture}[scale=0.62,>=stealth]
+					
+					\draw[eixo] (-2.4,-2.45) -- (2.8,-2.45) node[right] {$x$};
+					\draw[dashed] (0,-2.65) -- (0,1.75);
+					\node[below] at (0,-2.65) {$x=0$};
+					
+					\draw[pattern=north east lines] (-2.2,1.65) rectangle (-1.9,-2.10);
+					
+					\begin{scope}[shift={(0,0.30)}]
+						\draw[thick] (-1.9,0.95) -- (-1.65,0.95)
+						-- (-1.55,1.15) -- (-1.35,0.75) -- (-1.15,1.15) -- (-0.95,0.75)
+						-- (-0.75,1.15) -- (-0.55,0.75) -- (-0.35,1.15) -- (-0.15,0.75)
+						-- (0,0.95);
+						\draw[fill=gray!20] (0,0.65) rectangle (0.55,1.25);
+						\node[right] at (0.6,0.95) {\tiny relaxada};
+					\end{scope}
+					
+					\begin{scope}[shift={(0,-0.20)}]
+						\draw[thick] (-1.9,-0.1) -- (-1.55,-0.1)
+						-- (-1.4,0.1) -- (-1.1,-0.3) -- (-0.8,0.1) -- (-0.5,-0.3)
+						-- (-0.2,0.1) -- (0.1,-0.3) -- (0.4,0.1) -- (0.7,-0.3)
+						-- (1.0,-0.1);
+						\draw[fill=gray!20] (1.0,-0.4) rectangle (1.55,0.2);
+						
+						\draw[->, thick, blue!75!black] (0,-0.62) -- (1.0,-0.62)
+						node[right, below] {$\vec{x}$};
+						\draw[vetors] (1.0,-0.1) -- (0.25,-0.1) node[midway, above] {$\vec F_k$};
+						\node[right] at (1.6,-0.1) {\tiny alongada};
+					\end{scope}
+					
+					\begin{scope}[shift={(0,-0.60)}]
+						\draw[thick] (-1.9,-1.15) -- (-1.7,-1.15)
+						-- (-1.6,-0.95) -- (-1.45,-1.35) -- (-1.3,-0.95)
+						-- (-1.15,-1.35) -- (-1.0,-0.95) -- (-0.85,-1.35)
+						-- (-0.7,-1.15);
+						\draw[fill=gray!20] (-0.7,-1.45) rectangle (-0.15,-0.85);
+						
+						\draw[->, thick, blue!75!black] (0,-1.72) -- (-0.7,-1.72)
+						node[midway, below] {$\vec{x}$};
+						\draw[vetors] (-0.15,-1.15) -- (0.75,-1.15) node[midway, above] {$\vec F_k$};
+						\node[right] at (0.9,-1.15) {\tiny comprimida};
+					\end{scope}
+					
+				\end{tikzpicture}
+			\end{column}
+		\end{columns}
+		
+		\textcolor{blue}{\textbf{Exemplo:}} um objeto de massa \(m=0{,}40\,\text{kg}\) move-se para a direita com velocidade \(v=0{,}50\,\text{m/s}\) e puxa a extremidade livre de uma mola inicialmente relaxada. A mola tem \(k=750\,\text{N/m}\). O objeto alonga a mola até parar momentaneamente. Qual é o alongamento máximo \(d\)?
+		
+		\vspace{0.2cm}
+		No ponto de alongamento máximo, o objeto está momentaneamente parado:
+		$
+		\Rightarrow K_i=\frac12mv^2,\qquad K_f=0.
+		$
+				\vspace{0.2cm}
+
+		A energia cinética inicial foi retirada pelo trabalho da força elástica:
+		$
+		K_f-K_i=W_k.
+		$
+		
+		\vspace{0.2cm}
+				
+		Como a mola parte do estado relaxado \((x_i=0)\) e termina alongada de uma distância \(d\), temos
+		\[
+		W_k=-\frac12kd^2, \text{ logo }
+		0-\frac12mv^2=-\frac12kd^2
+		\qquad \Rightarrow \qquad
+		d=v\sqrt{\frac{m}{k}} \Rightarrow
+		d=(0{,}50)\sqrt{\frac{0{,}40}{750}}
+		\approx \textcolor{red}{1{,}2\,\text{cm}}.
+		\]
+		
+	\end{frame}
+	
+	% SLIDE FINAL
+	\begin{frame}{Resumo: equações úteis}
+		\scriptsize
+		
+		\begin{columns}[T]
+			\begin{column}{0.5\textwidth}
+				\textcolor{blue}{\textbf{Energia cinética}}
+				\[
+				\textcolor{red}{K=\frac12mv^2}
+				\]
+				
+				\textcolor{blue}{\textbf{Trabalho de uma força constante}}
+				\[
+				\textcolor{red}{W=Fd\cos\phi=\vec F\cdot\vec d}
+				\]
+				\[
+				\vec F\cdot\vec d=F_xd_x+F_yd_y
+				\]
+				
+				\textcolor{blue}{\textbf{Teorema trabalho--energia}}
+				\[
+				\textcolor{red}{K_f-K_i=W_{\text{tot}}}
+				\]
+				\[
+				W_{\text{tot}}=\sum_i W_i
+				\]
+			\end{column}
+			
+			\begin{column}{0.5\textwidth}
+				\textcolor{blue}{\textbf{Força gravitacional}}
+				\[
+				\textcolor{red}{W_g=mgd\cos\phi}
+				\]
+				\[
+				\text{subida: } W_g=-mgd,
+				\qquad
+				\text{descida: } W_g=+mgd.
+				\]
+				
+				\textcolor{blue}{\textbf{Força elástica}}
+				\[
+				\textcolor{red}{\vec F_k=-k\vec x}
+				\]
+				\[
+				\textcolor{red}{W_k=\frac12kx_i^2-\frac12kx_f^2}
+				\]
+				
+				Se a mola parte do estado relaxado:
+				\[
+				x_i=0,\quad x_f=d
+				\qquad \Rightarrow \qquad
+				\textcolor{red}{W_k=-\frac12kd^2.}
+				\]
+			\end{column}
+		\end{columns}
+		
+		\vspace{0.15cm}
+		\centering
+		\textcolor{red}{\textbf{Ideia central:}} o trabalho total mede a energia transferida para o objeto ou retirada dele.
+		
+	\end{frame}
+	
+\end{document}

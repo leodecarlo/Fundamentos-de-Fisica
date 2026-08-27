@@ -1,0 +1,178 @@
+
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[portuguese]{babel}
+\usepackage{amsmath}
+\usepackage{siunitx}
+\usepackage{graphicx}
+\usepackage{geometry}
+\usepackage{parskip}
+\usepackage{enumitem}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,calc,decorations.pathmorphing}
+
+\geometry{a4paper, left=1cm, right=1.5cm, top=1cm, bottom=1.5cm}
+
+\newcommand{\cabecalho}{
+    \hfill
+    \begin{minipage}[t]{0.7\textwidth}
+        \raggedleft
+        \textbf{Teste Final, Fundamentos de Física}
+    \end{minipage}
+    \vspace{0.35cm}
+}
+
+\newcommand{\pontos}[1]{\hfill\textbf{(#1 valores)}}
+
+\setlength{\parindent}{0pt}
+\setlist[enumerate]{itemsep=4pt, topsep=4pt}
+
+\begin{document}
+
+\cabecalho
+
+\textbf{Nome:} \rule{10cm}{0.4pt}
+\hfill
+\textbf{Data:} \rule{2.5cm}{0.4pt}
+
+\vspace{0.2cm}
+
+\textbf{Indicação:} Sempre que necessário, considere $g = 10\,\text{m/s}^2$.
+Antes de efetuar os cálculos, converta as grandezas para unidades do SI.
+
+\vspace{0.25cm}
+
+\textbf{Exercício 1}. Considere o vetor $\vec{v}=(v_x,v_y)$ de módulo $4$ e
+orientação definida pelo ângulo $\theta=150^\circ$, medido a partir do semieixo positivo
+de $x$.
+
+\begin{enumerate}[label=\textbf{\alph*)}]
+    \item Calcule as componentes de $\vec{v}$ e escreva o vetor usando os vetores
+    unitários $\vec{i}$ e $\vec{j}$. \pontos{1,0}
+    \item Calcule o vetor unitário com a mesma orientação do vetor $(v_x,-v_y)$. \pontos{1,0}
+    \item Considere o vetor $\vec{w}=(3,\,3\sqrt{3})$. Determine $|\vec{w}|$ e o
+    ângulo $\phi$, tais que $w_x=|\vec{w}|\cos\phi$ e
+    $w_y=|\vec{w}|\sin\phi$. \pontos{1,0}
+    \item Um vetor $\vec{u}$ tem módulo $6$ e forma um ângulo de $60^\circ$ com
+    $\vec{v}$. Calcule o produto escalar $\vec{v}\cdot\vec{u}$ e explique o significado
+    geométrico do produto escalar entre dois vetores. \pontos{1,0}
+\end{enumerate}
+
+\vspace{0.25cm}
+
+\textbf{Exercício 2}. Uma moeda é lançada do solo na direção vertical, com
+rapidez inicial de $10\,\text{m/s}$. Desprezando a resistência do ar, determine:
+
+\begin{enumerate}[label=\textbf{\alph*)}]
+    \item Qual é o instante em que a moeda atinge a altura máxima e qual é a sua velocidade
+    nesse ponto? \pontos{1,5}
+    \item Qual é a velocidade da moeda no instante em que atinge o solo? \pontos{1,0}
+    \item A que distância horizontal do ponto de lançamento a moeda atinge o solo? \pontos{1,0}
+\end{enumerate}
+
+\vspace{0.25cm}
+
+\textbf{Exercício 3}. Dois blocos estão ligados por uma corda ideal e sobem, sem atrito,
+um plano inclinado que forma um ângulo de $30^\circ$ com a horizontal. Uma força de módulo
+$140\,\text{N}$, paralela ao plano inclinado e dirigida para cima, puxa o bloco $m_1$.
+As massas são:
+\[
+m_1=12\,\text{kg}, \qquad m_2=8000\,\text{g}.
+\]
+
+\begin{center}
+	\begin{tikzpicture}[scale=0.95, >=Latex]
+		\coordinate (A) at (0,0);
+		\coordinate (B) at (8,0);
+		\coordinate (C) at (8,4.62);
+		\draw[thick] (A) -- (B) -- (C) -- cycle;
+		\begin{scope}[shift={(2.8,1.62)}, rotate=30]
+			\draw[fill=white, thick] (0,0) rectangle (1.6,0.95);
+			\node at (0.8,0.48) {$m_2$};
+			\draw[thick] (1.6,0.48) -- (3.2,0.48);
+			\node[above] at (2.4,0.48) {$T$};
+			\draw[fill=white, thick] (3.2,0) rectangle (4.8,0.95);
+			\node at (4.0,0.48) {$m_1$};
+			\draw[->, very thick] (4.8,0.48) -- (6.4,0.48) node[right] {$\vec{F}$};
+		\end{scope}
+		\draw (1.1,0) arc[start angle=0,end angle=30,radius=1.1];
+		\node at (1.45,0.32) {$30^\circ$};
+	\end{tikzpicture}
+\end{center}
+
+\begin{enumerate}[label=\textbf{\alph*)}]
+	\item Desenhe o diagrama de corpo livre de cada bloco, indicando as forças paralelas
+	e perpendiculares ao plano inclinado. \pontos{1,0}
+	\item Calcule a aceleração do sistema. \pontos{1,5}
+	\item Calcule a tensão $T$ na corda. \pontos{1,0}
+	\item Considerando como sistema os dois blocos e a corda, indique as forças externas
+	aplicadas ao sistema e as forças internas. Por qual princípio, na equação do sistema
+	completo, as forças internas se cancelam? Explique. \pontos{1,0}
+\end{enumerate}
+
+
+
+
+\cabecalho
+
+\textbf{Exercício 4}. Uma roldana gira inicialmente a $28\,\text{rev/s}$ e reduz
+uniformemente a sua velocidade angular para $16\,\text{rev/s}$ durante um intervalo
+de tempo total de $6,0\,\text{s}$.
+
+\begin{enumerate}[label=\textbf{\alph*)}]
+	\item Calcule a aceleração angular da roldana. \pontos{1,0}
+	\item Calcule o número de revoluções completadas durante a primeira metade do
+	intervalo de tempo total. \pontos{1,0}
+	\item Calcule o ângulo total percorrido durante todo o intervalo de tempo. \pontos{1,0}
+	\item Considere agora uma partícula que descreve uma circunferência com rapidez
+	constante. Explique por que existe aceleração, apesar de a rapidez ser constante.
+	Indique a direção e o sentido dessa aceleração. \pontos{1,0}
+\end{enumerate}
+
+
+
+\vspace{0.25cm}
+
+\textbf{Exercício 5}. Uma esfera de massa $m=400\,\text{g}$ move-se horizontalmente
+com rapidez inicial $v=15\,\text{m/s}$ e colide com um bloco de massa
+$M=1600\,\text{g}$, inicialmente em repouso sobre uma superfície horizontal sem atrito.
+O bloco está ligado a uma mola ideal de constante elástica $k=288\,\text{N/m}$ e
+encontra-se inicialmente na posição de equilíbrio da mola, com $x=0$. A esfera fica
+incrustada no bloco. Após o impacto, o conjunto bloco--esfera desloca-se para a direita,
+alongando a mola.
+
+\begin{center}
+	\begin{tikzpicture}[scale=0.9, >=Latex]
+		% Superfície e parede à esquerda
+		\draw[thick] (-0.1,0) -- (11.0,0);
+		\draw[thick] (0.5,0) -- (0.5,2.2);
+		\foreach \y in {0.2,0.5,...,2.0}{
+			\draw[thin] (0.5,\y) -- (0.2,\y+0.2);
+		}
+		% Mola abaixo da trajetória da esfera: ao mover-se para a direita, o bloco alonga a mola
+		\draw[thick,decorate,decoration={zigzag,segment length=7pt,amplitude=4pt}]
+		(0.5,0.30) -- (7.1,0.30);
+		% Bloco
+		\draw[fill=white, thick] (7.1,0) rectangle (8.6,1.1);
+		\node at (7.85,0.62) {$M$};
+		\node[above] at (3.8,0.52) {$k$};
+		% Esfera incidente, acima da mola
+		\draw[fill=white, thick] (4.9,0.82) circle (0.20);
+		\node[below] at (4.9,1.57) {$m$};
+		\draw[->, very thick] (5.15,0.82) -- (6.7,0.82) node[midway, above] {$\vec{v}$};
+		\node at (5.8,-0.42) {};
+	\end{tikzpicture}
+\end{center}
+
+\begin{enumerate}[label=\textbf{\alph*)}]
+	\item Classifique a colisão. Indique as formas de energia envolvidas. Após o impacto,
+	de que forma de energia para que forma de energia ocorre a transformação e porquê? \pontos{1,5}
+	\item Calcule a rapidez do conjunto bloco--esfera imediatamente após o impacto. \pontos{1,5}
+	\item Qual é a rapidez do conjunto no ponto de alongamento máximo da mola? \pontos{1,0}
+	\item Calcule o alongamento máximo da mola e o trabalho realizado pela força elástica
+	desde a posição de equilíbrio até ao ponto de alongamento máximo. \pontos{2,0}
+\end{enumerate}
+
+
+\end{document}

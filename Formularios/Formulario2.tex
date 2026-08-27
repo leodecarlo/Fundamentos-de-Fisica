@@ -1,0 +1,282 @@
+\documentclass[10pt,a4paper,landscape]{article}
+\usepackage[portuguese]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[a4paper,landscape,margin=0.34cm]{geometry}
+\usepackage{amsmath,amssymb}
+\pagestyle{empty}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0pt}
+\setlength{\abovedisplayskip}{0.45pt}
+\setlength{\belowdisplayskip}{0.45pt}
+\setlength{\abovedisplayshortskip}{0.2pt}
+\setlength{\belowdisplayshortskip}{0.2pt}
+\newcommand{\secao}[1]{\vspace{0.8mm}\textbf{\normalsize #1}\par}
+\newcommand{\subsecao}[1]{\vspace{0.35mm}\textit{#1}\par}
+\newcommand{\colstart}{\begin{minipage}[t]{0.244\textwidth}\vspace{0pt}\fontsize{8.1}{8.55}\selectfont}
+\newcommand{\colend}{\end{minipage}}
+\begin{document}
+\fontsize{10.5}{11}\selectfont
+\textbf{Formulário -- Segunda Parte}\par
+\vspace{0.45mm}
+\noindent
+\colstart
+\secao{Forças e Leis de Newton}
+\[
+\vec F_{\mathrm{res}}=\sum_{i=1}^{n}\vec F_i
+=\vec F_1+\vec F_2+\cdots+\vec F_n
+\]
+\[
+\vec F_{\mathrm{res}}=m\vec a,\qquad
+F_{\mathrm{res},x}=ma_x,\quad F_{\mathrm{res},y}=ma_y
+\]
+\[
+1\,\mathrm{N}=1\,\mathrm{kg}\cdot \mathrm{m/s^2}
+\]
+\subsecao{Força gravítica e peso}
+\[
+\vec F_g=m\vec g,\qquad P=|\vec F_g|=mg
+\]
+\subsecao{Atrito}
+\[
+|\vec f|=\mu F_N
+\]
+
+\secao{Movimento Circular}
+\subsecao{Descrição angular}
+\[
+\theta=\frac{s}{r},\qquad
+\Delta\theta=\theta_2-\theta_1=\frac{\Delta s}{r}
+\]
+\[
+1\ \text{volta}=2\pi\ \mathrm{rad}=360^\circ
+\]
+\[
+x(t)=r\cos\theta(t),\qquad y(t)=r\sin\theta(t)
+\]
+\[
+\omega_{\text{méd}}=\frac{\Delta\theta}{\Delta t},
+\qquad \omega=\frac{d\theta}{dt}
+\]
+\[
+\alpha_{\text{méd}}=\frac{\Delta\omega}{\Delta t},
+\qquad
+\alpha=\frac{d\omega}{dt}=\frac{d^2\theta}{dt^2}
+\]
+\subsecao{Relações lineares e angulares}
+\[
+s=r\theta,\qquad v=r\omega
+\]
+\[
+a_t=r\alpha,\qquad a_r=\frac{v^2}{r}=\omega^2r
+\]
+\[
+\sum F_r=ma_r=m\frac{v^2}{r}=m\omega^2r
+\]
+\subsecao{MCU}
+\[
+\omega=\text{constante},\qquad \alpha=0
+\]
+\[
+T=\frac{2\pi}{\omega}=\frac{2\pi r}{v},
+\qquad f=\frac{1}{T}
+\]
+\[
+\omega=\frac{2\pi}{T}=2\pi f,\qquad
+a_c=\frac{v^2}{r}=\omega^2r
+\]
+\colend\hfill
+\colstart
+\subsecao{MCUV: $\alpha$ constante}
+\[
+\omega(t)=\omega(0)+\alpha t
+\]
+\[
+\theta(t)=\theta(0)+\omega(0)t+\frac{1}{2}\alpha t^2
+\]
+\[
+\omega^2(t)=\omega^2(0)+2\alpha[\theta(t)-\theta(0)]
+\]
+\[
+\theta(t)=\theta(0)+\frac{1}{2}[\omega(0)+\omega(t)]t
+\]
+\[
+\omega_{\text{méd}}=\frac{1}{2}[\omega(0)+\omega(t)]
+\]
+
+\secao{Energia Cinética e Trabalho}
+\subsecao{Energia cinética}
+\[
+K=\frac{1}{2}mv^2
+\]
+\[
+1\,\mathrm{J}=1\,\mathrm{kg}\,\frac{\mathrm{m^2}}{\mathrm{s^2}}
+=1\,\mathrm{N}\cdot\mathrm{m}
+\]
+\subsecao{Trabalho de uma força constante}
+\[
+W=Fd\cos\phi=\vec F\cdot\vec d=F_xd_x+F_yd_y
+\]
+\[
+F_{\parallel}=F\cos\phi,\qquad W=F_{\parallel}d
+\]
+\[
+\vec v\cdot\vec w=vw\cos\phi
+\]
+\[
+F_\perp=F\sin\phi\quad\Longrightarrow\quad W_\perp=0
+\]
+\[
+0^\circ\leq\phi<90^\circ\Rightarrow W>0
+\]
+\[
+90^\circ<\phi\leq180^\circ\Rightarrow W<0
+\]
+\subsecao{Teorema trabalho--energia}
+\[
+\Delta K=K_f-K_i=W_{\mathrm{tot}}
+\]
+\subsecao{Força elástica: lei de Hooke}
+\[
+\vec F_k=-k\vec x,\qquad F_k=k|x|
+\]
+\[
+W_k=\frac{1}{2}kx_i^2-\frac{1}{2}kx_f^2
+\]
+Se $x_i=0$ e $x_f=d$:
+\[
+W_k=-\frac{1}{2}kd^2
+\]
+\colend\hfill
+\colstart
+\secao{Energia Potencial e Conservação}
+\subsecao{Separação do trabalho}
+\[
+W_{\mathrm{tot}}=W_{\mathrm{cons}}+W_{\mathrm{ncons}}
+\]
+\[
+\Delta U=U_f-U_i=-W_{\mathrm{cons}}
+\]
+\[
+\Delta K+\Delta U=W_{\mathrm{ncons}}
+\]
+\subsecao{Energia potencial gravitacional}
+\[
+\Delta U_g=mg(y_f-y_i)=mg\Delta y
+\]
+Escolhendo $U=0$ em $y=0$:
+\[
+U_g=mgy
+\]
+\subsecao{Energia potencial elástica}
+\[
+U_k=\frac{1}{2}kx^2
+\]
+\[
+\Delta U_k=\frac{1}{2}kx_f^2-\frac{1}{2}kx_i^2
+\]
+\subsecao{Energia mecânica}
+\[
+E_{\mathrm{mec}}=K+U
+\]
+Se $W_{\mathrm{ncons}}=0$:
+\[
+\Delta E_{\mathrm{mec}}=\Delta K+\Delta U=0
+\]
+\[
+K_i+U_i=K_f+U_f
+\]
+Se $W_{\mathrm{ncons}}\neq0$:
+\[
+W_{\mathrm{ncons}}=\Delta E_{\mathrm{mec}}
+=\Delta K+\Delta U
+\]
+\subsecao{Expressões úteis}
+\[
+K=\frac{1}{2}mv^2,\qquad U_g=mgy,\qquad U_k=\frac{1}{2}kx^2
+\]
+
+\secao{Centro de Massa}
+Para $M=m_1+m_2+\cdots+m_n$:
+\[
+\vec r_{\mathrm{cm}}
+=
+\frac{m_1\vec r_1+m_2\vec r_2+\cdots+m_n\vec r_n}{M}
+\]
+\subsecao{Movimento do centro de massa}
+\[
+\vec v_{\mathrm{cm}}
+=
+\frac{d\vec r_{\mathrm{cm}}}{dt}
+=
+\frac{m_1\vec v_1+\cdots+m_n\vec v_n}{M}
+\]
+\[
+\vec a_{\mathrm{cm}}
+=
+\frac{d\vec v_{\mathrm{cm}}}{dt}
+=
+\frac{m_1\vec a_1+\cdots+m_n\vec a_n}{M}
+\]
+\[
+M\vec a_{\mathrm{cm}}=\vec F_{\mathrm{ext}}
+\]
+\colend\hfill
+\colstart
+\secao{Momento Linear e Impulso}
+\subsecao{Partícula}
+\[
+\vec p=m\vec v,\qquad [\vec p]=\mathrm{kg}\,\mathrm{m/s}
+\]
+\subsecao{Sistema de partículas}
+\[
+\vec P=\vec p_1+\vec p_2+\cdots+\vec p_n
+\]
+\[
+\vec P=m_1\vec v_1+m_2\vec v_2+\cdots+m_n\vec v_n
+\]
+\[
+\vec P=M\vec v_{\mathrm{cm}}
+\]
+\subsecao{Segunda lei para um sistema}
+\[
+\frac{d\vec P}{dt}=\vec F_{\mathrm{ext}}
+\]
+\subsecao{Conservação do momento linear}
+Se $\vec F_{\mathrm{ext}}=\vec 0$:
+\[
+\vec P=\text{constante}\quad\Longrightarrow\quad \vec P_i=\vec P_f
+\]
+\subsecao{Impulso}
+\[
+\Delta\vec p=\vec p_f-\vec p_i,\qquad \vec J=\Delta\vec p
+\]
+\[
+F=\frac{\Delta p}{\Delta t},\qquad \Delta p=|\Delta\vec p|
+\]
+
+\secao{Colisões}
+\subsecao{Sistema fechado e isolado}
+\[
+\vec P_i=\vec P_f
+\]
+
+\subsecao{Colisão elástica}
+\[
+K_i=K_f
+\]
+\subsecao{Colisão inelástica}
+\[
+\vec P_i=\vec P_f,\qquad K_i\neq K_f
+\]
+Normalmente:
+\[
+K_f<K_i
+\]
+\subsecao{Perfeitamente inelástica}
+\[
+\vec P_i=\vec P_f,\qquad K_f<K_i
+\]
+Os corpos ficam juntos depois da colisão.
+\colend
+\end{document}

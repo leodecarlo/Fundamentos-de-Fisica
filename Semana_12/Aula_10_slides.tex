@@ -1,0 +1,1190 @@
+\documentclass{beamer}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[portuguese]{babel}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric, arrows.meta, calc, decorations.pathreplacing, patterns}
+
+% Configuração do Tema
+\usetheme{Madrid}
+\usecolortheme{default}
+\beamertemplatenavigationsymbolsempty
+
+% Comando para o círculo vermelho
+\providecommand{\circled}[1]{\mbox{\tikz[baseline=(char.base)]{\node[shape=circle,draw=red,thick,inner sep=0.5pt,text=red,font=\tiny\bfseries] (char) {#1};}}}
+
+% Convenções visuais
+\tikzset{
+	eixo/.style={->, thick},
+	vetorf/.style={->, thick, orange!90!black},
+	vetord/.style={->, thick, blue!75!black},
+	vetorv/.style={->, thick, magenta!80!black},
+	vetorg/.style={->, thick, red!80!black},
+	vetors/.style={->, thick, green!60!black},
+	ponto/.style={circle, fill=black, inner sep=1.5pt}
+}
+
+% Informações do Título
+\title{Aula: Teoria e Prática}
+\subtitle{Sistemas de Partículas: Centro de Massa, Momento Linear e Colisões}
+\date{}
+
+\begin{document}
+	
+	% SLIDE 1
+	\frame{\titlepage}
+	
+	
+	% SLIDE 2
+	\begin{frame}{De uma partícula a um sistema de partículas}
+		\scriptsize
+		
+		Até aqui descrevemos muitas situações tratando o corpo como uma partícula. Agora consideramos um sistema com
+		$
+		n>1
+		$
+		partículas, com massas \(m_1,m_2,\ldots,m_n\) e posições
+		$
+		\vec r_1,\vec r_2,\ldots,\vec r_n .
+		$
+		Para cada partícula, a segunda lei de Newton pode ser escrita como
+		\[
+		\textcolor{red}{m_i\vec a_i=\vec F_i, \qquad i=1,2,\ldots,n.}
+		\]
+		
+		\begin{columns}[T]
+			\begin{column}{0.7\textwidth}
+				\textcolor{blue}{\textbf{Problema:}}
+				
+				Para \(n>2\), resolver todas as equações de Newton pode ser difícil.
+				
+				\vspace{0.15cm}
+				
+				\textcolor{blue}{\textbf{Ideia principal:}}
+				
+				Muitas vezes não precisamos conhecer a trajetória de cada partícula. Basta estudar um ponto especial do sistema:
+				\[
+				\textcolor{red}{\text{centro de massa.}}
+				\]
+				
+				Esse ponto resume o movimento global do sistema.
+			\end{column}
+			
+			\begin{column}{0.3\textwidth}
+				\centering
+				\begin{tikzpicture}[scale=0.85,>=stealth]
+					\draw[eixo] (-0.3,0) -- (3.6,0) node[right] {$x$};
+					\draw[eixo] (0,-0.3) -- (0,2.7) node[above] {$y$};
+					
+					\filldraw[fill=blue!25, draw=blue!80!black] (0.8,1.9) circle (0.13);
+					\node[above] at (0.8,2.05) {\scriptsize \(m_1\)};
+					\filldraw[fill=green!25, draw=green!60!black] (2.7,1.7) circle (0.18);
+					\node[above] at (2.7,1.9) {\scriptsize \(m_2\)};
+					\filldraw[fill=orange!35, draw=orange!80!black] (1.8,0.7) circle (0.11);
+					\node[below] at (1.8,0.55) {\scriptsize \(m_3\)};
+					
+					\filldraw[fill=red!70!black] (1.9,1.45) circle (0.06);
+					\node[right] at (1.98,1.45) {\scriptsize CM};
+					
+					\draw[vetord] (0,0) -- (0.8,1.9) node[midway,left] {\scriptsize \(\vec r_1\)};
+					\draw[vetord] (0,0) -- (2.7,1.7) node[midway,above] {\scriptsize \(\vec r_2\)};
+					\draw[vetord] (0,0) -- (1.8,0.7) node[midway,below] {\scriptsize \(\vec r_3\)};
+				\end{tikzpicture}
+			\end{column}
+		\end{columns}
+		
+	\end{frame}
+	
+	
+	% SLIDE 3
+	\begin{frame}{Centro de massa (CM): definição e exemplo em 1D}
+		\tiny
+		
+		\textbf{Definição.} Para um sistema de partículas com massa total
+		\(\textcolor{red}{M=m_1+m_2+\cdots+m_n}\), o centro de massa é
+		\[
+		\textcolor{red}{
+			\vec r_{\text{cm}}=
+			\frac{m_1\vec r_1+m_2\vec r_2+\cdots+m_n\vec r_n}{M}}.
+		\]
+		
+		No plano:
+		$
+		\textcolor{red}{
+			x_{\text{cm}}=\frac{m_1x_1+\cdots+m_nx_n}{M}},
+		\qquad
+		\textcolor{red}{
+			y_{\text{cm}}=\frac{m_1y_1+\cdots+m_ny_n}{M}}.
+		$
+		
+		\vspace{0.3cm}
+		
+		\begin{columns}[T]
+			\begin{column}{0.50\textwidth}
+				\textcolor{blue}{\textbf{Leitura física}}
+				\begin{itemize}
+					\item \(\vec r_{\text{cm}}\) é uma média ponderada pelas massas;
+					\item massas maiores deslocam o CM para mais perto delas;
+					\item o CM não precisa coincidir com uma partícula real.
+				\end{itemize}
+				
+				\vspace{0.05cm}
+				
+				\textcolor{blue}{\textbf{Exemplo: duas partículas em 1D}}
+				
+				\vspace{0.3cm}
+				
+				Para \(x_1=0\) e \(x_2=d\):
+				\[
+				\textcolor{red}{
+					x_{\text{cm}}=
+					\frac{M_1x_1+M_2x_2}{M_1+M_2}
+					=
+					\frac{M_2d}{M_1+M_2}.}
+				\]
+				
+				\vspace{-0.2cm}
+				
+				\[
+				\begin{array}{c|c}
+					\text{condição} & \text{posição do CM} \\ \hline
+					M_1=M_2 & x_{\text{cm}}=d/2 \\[1pt]
+					M_1\gg M_2 & x_{\text{cm}}\approx 0
+				\end{array}
+				\]
+				
+				\textcolor{red}{\textbf{Mensagem:} o CM fica mais perto da massa maior.}
+			\end{column}
+			
+			\begin{column}{0.50\textwidth}
+				\centering
+				\begin{tikzpicture}[scale=0.82,>=stealth]
+					\draw[eixo] (-0.4,0) -- (4.3,0) node[right] {$x$};
+					
+					% massas
+					\filldraw[fill=blue!25, draw=blue!80!black] (0,0) circle (0.24);
+					\node[below] at (0,-0.30) {\scriptsize \(M_1\)};
+					\node[above] at (0,0.28) {\scriptsize \(x_1=0\)};
+					
+					\filldraw[fill=green!25, draw=green!60!black] (3.3,0) circle (0.14);
+					\node[below] at (3.3,-0.30) {\scriptsize \(M_2\)};
+					\node[above] at (3.3,0.28) {\scriptsize \(x_2=d\)};
+					
+					% distância
+					\draw[decorate, decoration={brace, mirror, amplitude=5pt}] (0,-0.72) -- (3.3,-0.72);
+					\node[below] at (1.65,-0.93) {\scriptsize \(d\)};
+					
+					% CM
+					\filldraw[fill=red!80!black] (0.55,0) circle (0.065);
+					\node[above, red!80!black] at (0.55,0.85) {\scriptsize CM};
+					\draw[dashed, red!80!black] (0.55,0.08) -- (0.55,0.9);
+					
+					% caso limite
+					\node[align=center, font=\scriptsize, text=red!80!black] at (2.25,1.05)
+					{\(M_1\gg M_2\)\\ \(x_{\text{cm}}\approx 0\)};
+				\end{tikzpicture}
+				
+				\vspace{0.15cm}
+				
+				\[
+				\textcolor{red}{
+					M_1=M_2 \Rightarrow x_{\text{cm}}=\frac d2,
+					\qquad
+					M_1\gg M_2 \Rightarrow x_{\text{cm}}\approx 0.}
+				\]
+			\end{column}
+		\end{columns}
+		
+	\end{frame}
+	
+	
+	% SLIDE 4
+	\begin{frame}{Movimento do centro de massa}
+		\scriptsize
+		
+		Partindo da definição do centro de massa e derivando em relação ao tempo:
+		\[
+		\textcolor{red}{
+			\vec v_{\text{cm}}
+			=
+			\frac{d\vec r_{\text{cm}}}{dt}
+			=
+			\frac{m_1\vec v_1+m_2\vec v_2+\cdots+m_n\vec v_n}{M}.}
+		\]
+		
+		Derivando novamente:
+		\[
+		\textcolor{red}{
+			\vec a_{\text{cm}}
+			=
+			\frac{d\vec v_{\text{cm}}}{dt}
+			=
+			\frac{m_1\vec a_1+m_2\vec a_2+\cdots+m_n\vec a_n}{M}.}
+		\]
+		
+		Multiplicando por \(M\):
+		$
+		{
+			M\vec a_{\text{cm}}
+			=
+			m_1\vec a_1+m_2\vec a_2+\cdots+m_n\vec a_n.}
+		$
+		Pela segunda lei de Newton, \(m_i\vec a_i=\vec F_i\). Logo:
+		\[
+		\textcolor{red}{
+			M\vec a_{\text{cm}}
+			=
+			\vec F_1+\vec F_2+\cdots+\vec F_n
+			=
+			\vec F_{\text{ext}}.}
+		\]
+		
+		\textcolor{blue}{\textbf{Ideia física:}}
+		
+		As forças internas cancelam-se em pares. Portanto, o movimento global do centro de massa é determinado apenas pela força externa resultante:
+		\[
+		\textcolor{red}{M\vec a_{\text{cm}}=\vec F_{\text{ext}}.}
+		\]
+		
+		Se
+		$
+		\vec F_{\text{ext}}=0,
+		$
+		então
+		$
+		\vec a_{\text{cm}}=0
+		\qquad \Rightarrow \qquad
+		\vec r_{\text{cm}}=\vec r_0+\vec v_{\text{cm}}t.
+		$
+		Ou seja: o centro de massa permanece em repouso ou move-se com velocidade constante.
+		
+	\end{frame}
+	
+	
+	% SLIDE 5
+	\begin{frame}{Momento linear de uma partícula e de um sistema}
+		\tiny
+		
+		\textcolor{blue}{\textbf{Partícula.}}
+		Para uma partícula de massa \(m\), com velocidade \(\vec v\), o momento linear é
+		$
+		\textcolor{red}{\vec p=m\vec v},
+		\qquad
+		[\vec p]=\textcolor{red}{\mathrm{kg\,m/s}}.
+		$
+		
+		\begin{columns}[T]
+			\begin{column}{0.66\textwidth}
+				\textcolor{blue}{\textbf{Sistema de partículas.}}
+				Se o sistema tem \(n\) partículas, o momento linear total é a soma vetorial:
+				\[
+				\textcolor{red}{
+					\vec P=\vec p_1+\vec p_2+\cdots+\vec p_n
+					=
+					m_1\vec v_1+m_2\vec v_2+\cdots+m_n\vec v_n.}
+				\]
+				
+				Como
+				$
+				\vec v_{\text{cm}}=
+				\frac{m_1\vec v_1+m_2\vec v_2+\cdots+m_n\vec v_n}{M},
+				$
+				então
+				$
+				\textcolor{red}{\vec P=M\vec v_{\text{cm}}.}
+				$
+				
+				\vspace{0.25cm}
+				
+				\textcolor{blue}{\textbf{Leitura física:}}
+				o momento linear total do sistema é o momento linear de uma partícula equivalente,
+				com massa \(M\), movendo-se com a velocidade do centro de massa.
+			\end{column}
+			
+			\begin{column}{0.34\textwidth}
+				\centering
+				\begin{tikzpicture}[scale=0.62,>=stealth]
+					\draw[fill=blue!20, draw=blue!80!black] (0,1.8) circle (0.13);
+					\draw[vetorv] (0.15,1.8) -- (1.2,2.15)
+					node[midway, above] {\scriptsize \(\vec p_1\)};
+					
+					\draw[fill=green!20, draw=green!60!black] (1.2,0.6) circle (0.16);
+					\draw[vetorv] (1.35,0.6) -- (2.3,0.25)
+					node[midway, below] {\scriptsize \(\vec p_2\)};
+					
+					\draw[fill=orange!30, draw=orange!80!black] (2.4,1.5) circle (0.11);
+					\draw[vetorv] (2.55,1.5) -- (3.1,2.2)
+					node[midway, right] {\scriptsize \(\vec p_3\)};
+					
+					\filldraw[fill=red!80!black] (1.45,1.35) circle (0.06);
+					\draw[vetorf] (1.45,1.35) -- (2.75,1.6)
+					node[midway, above] {\scriptsize \(\vec P\)};
+					
+					\node[align=center, font=\scriptsize] at (1.55,-0.65)
+					{\tiny \(\vec P\) é a soma vetorial\\ \tiny dos momentos lineares};
+				\end{tikzpicture}
+			\end{column}
+		\end{columns}
+		
+		\vspace{0.1cm}
+		
+		\begin{center}
+			\fbox{
+				\begin{minipage}{0.94\textwidth}
+					\tiny
+					\textcolor{blue}{\textbf{Segunda lei de Newton escrita com o momento linear.}}
+					Para cada partícula:
+					$
+					\textcolor{red}{
+						\vec F_i=\frac{d\vec p_i}{dt}}
+					\qquad
+					(i=1,2,\ldots,n).
+					$
+					
+					Como \(\vec P=\vec p_1+\vec p_2+\cdots+\vec p_n\), temos
+					\[
+					\frac{d\vec P}{dt}
+					=
+					\frac{d\vec p_1}{dt}
+					+
+					\frac{d\vec p_2}{dt}
+					+\cdots+
+					\frac{d\vec p_n}{dt}
+					=
+					\vec F_1+\vec F_2+\cdots+\vec F_n.
+					\]
+					
+					As forças internas do sistema cancelam-se em pares; assim,
+					\(\vec F_1+\vec F_2+\cdots+\vec F_n=\vec F_{\text{ext}}\).
+					Logo,
+					\[
+					\textcolor{red}{
+						\frac{d\vec P}{dt}=\vec F_{\text{ext}}.}
+					\]
+					
+					\vspace{-0.15cm}
+					
+					\textcolor{red}{\textbf{Mensagem:}}
+					o momento linear total de um sistema só muda se existir força externa resultante.
+			\end{minipage}}
+		\end{center}
+		
+	\end{frame}
+	
+	
+	% SLIDE 6
+	\begin{frame}{Conservação do momento linear, colisão e impulso}
+		\tiny
+		
+		\textcolor{blue}{\textbf{Ideia central.}}
+		Para um sistema de partículas:
+		$
+		\textcolor{red}{
+			\frac{d\vec P}{dt}=\vec F_{\text{ext}}.}
+		$
+		
+		\vspace{0.2cm}
+		
+		\begin{columns}[T]
+			\begin{column}{0.52\textwidth}
+				\textcolor{blue}{\textbf{Conservação do momento linear}}
+				
+				\vspace{0.2cm}
+				
+				Se a força externa resultante é nula,
+				$
+				\vec F_{\text{ext}}=0,
+				$
+				então o momento linear total não muda:
+				\[
+				\textcolor{red}{\vec P=\text{constante}}
+				\qquad \Rightarrow \qquad
+				\textcolor{red}{\vec P_i=\vec P_f.}
+				\]
+				
+				Em componentes:
+				$
+				\textcolor{red}{
+					P_{x,i}=P_{x,f}, \qquad
+					P_{y,i}=P_{y,f}.}
+				$
+				
+				\vspace{0.2cm}
+				
+				\textcolor{blue}{\textbf{Uso em colisões.}}
+				Durante uma colisão de curta duração, se a força externa resultante é desprezável,
+				usamos \(\vec P_i=\vec P_f\) para relacionar as velocidades antes e depois.
+			\end{column}
+			
+			\begin{column}{0.48\textwidth}
+				\textcolor{blue}{\textbf{Colisão e impulso}}
+				
+				\vspace{0.2cm}
+				
+				Durante uma colisão, a velocidade pode mudar, em módulo e sentido, num intervalo curto \(\Delta t\).
+				A variação do momento linear é
+				\[
+				\textcolor{red}{\Delta \vec p=\vec p_f-\vec p_i.}
+				\]
+				
+				Essa variação é chamada impulso:
+				$
+				\textcolor{red}{\vec J=\Delta \vec p.}
+				$
+				
+				Se \(F\) é o módulo da força média durante a colisão:
+				\[
+				\textcolor{red}{
+					F=\frac{\Delta p}{\Delta t}},
+				\qquad
+				\Delta p=|\Delta \vec p|.
+				\]
+				
+				\textcolor{red}{\textbf{Interpretação:}}
+				para a mesma \(\Delta p\),
+				\[
+				\textcolor{red}{
+					\Delta t \text{ maior}
+					\quad \Rightarrow \quad
+					F \text{ menor}.}
+				\]
+			\end{column}
+		\end{columns}
+		
+		\vspace{0.05cm}
+		
+		\begin{columns}[T]
+			\begin{column}{0.52\textwidth}
+				\vspace{-1.15cm}
+				
+				\centering
+				\begin{tikzpicture}[scale=0.82,>=stealth]
+					% antes
+					\node[font=\tiny] at (0,1.95) {antes};
+					\draw[fill=blue!20, draw=blue!80!black] (-0.95,1.35) circle (0.16);
+					\draw[fill=green!20, draw=green!60!black] (0.95,1.35) circle (0.16);
+					\draw[vetorv] (-0.95,1.35) -- (-0.15,1.35) node[midway, above] {\tiny \(\vec v_{1i}\)};
+					\draw[vetorv] (0.95,1.35) -- (0.25,1.35) node[midway, above] {\tiny \(\vec v_{2i}\)};
+					
+					% depois
+					\node[font=\tiny] at (0,0.45) {depois};
+					\draw[fill=blue!20, draw=blue!80!black] (-0.45,-0.10) circle (0.16);
+					\draw[fill=green!20, draw=green!60!black] (0.45,-0.10) circle (0.16);
+					\draw[vetorv] (-0.45,-0.10) -- (-1.20,-0.10) node[midway, below] {\tiny \(\vec v_{1f}\)};
+					\draw[vetorv] (0.45,-0.10) -- (1.20,-0.10) node[midway, below] {\tiny \(\vec v_{2f}\)};
+					
+					\node[align=center, font=\tiny, red!80!black] at (0,-0.95)
+					{\(\vec P_i=\vec P_f\) se \(\vec F_{\text{ext}}=0\)};
+				\end{tikzpicture}
+			\end{column}
+			
+			\begin{column}{0.48\textwidth}
+				\centering
+				\begin{tikzpicture}[scale=0.86,>=stealth]
+					% chão
+					\draw[thick] (-1.8,-0.45) -- (2.0,-0.45);
+					
+					% parede/alvo
+					\draw[fill=gray!20, draw=black, pattern=north east lines] (0.95,-0.45) rectangle (1.25,1.05);
+					\node[right] at (1.25,0.25) {\tiny alvo};
+					
+					% partícula antes
+					\draw[fill=blue!25, draw=blue!80!black] (-1.05,0.00) circle (0.14);
+					\draw[vetorv] (-1.05,0.00) -- (-0.20,0.00) node[midway, above] {\tiny \(\vec p_i\)};
+					
+					% partícula no instante logo após o choque
+					\draw[fill=blue!25, draw=blue!80!black] (0.75,0.00) circle (0.14);
+					\draw[vetorv] (0.75,0.00) -- (-0.00,0.00) node[midway, below] {\tiny \(\vec p_f\)};
+					
+					% delta p junto da parede
+					\draw[vetorf] (0.90,0.42) -- (0.15,0.42) node[midway, above] {\tiny \(\Delta \vec p\)};
+					\draw[dashed] (0.90,0.42) -- (0.90,0.05);
+					
+					\node[align=center, font=\tiny, red!80!black] at (0.1,-1.05)
+					{choque no alvo: \\ \(\Delta \vec p\) ocorre no contacto com a parede};
+				\end{tikzpicture}
+			\end{column}
+		\end{columns}
+		
+	\end{frame}
+	
+	
+	% SLIDE 7
+	\begin{frame}{Como resolver problemas de colisões}
+		\scriptsize
+		
+		\begin{columns}[T]
+			\begin{column}{0.57\textwidth}
+				\textcolor{blue}{\textbf{Procedimento recomendado:}}
+				
+				\begin{enumerate}
+					\item Escolher o sistema: quais corpos fazem parte da colisão?
+					\item Verificar se o sistema pode ser tratado como isolado durante a colisão.
+					\item Escrever os momentos lineares antes:
+					\[
+					\vec P_i=\sum m_i\vec v_{i}.
+					\]
+					\item Escrever os momentos lineares depois:
+					\[
+					\vec P_f=\sum m_i\vec v_{f}.
+					\]
+					\item Usar
+					\[
+					\textcolor{red}{\vec P_i=\vec P_f.}
+					\]
+					\item Se a colisão for elástica, acrescentar também a conservação da energia cinética (discutimos isso nas próximas slides).
+				\end{enumerate}
+			\end{column}
+			
+			\begin{column}{0.43\textwidth}
+				\centering
+				\begin{tikzpicture}[scale=0.72,>=stealth]
+					\node[draw, rounded corners, fill=blue!5, align=center] (s1) at (0,3.2)
+					{\scriptsize escolher\\ sistema};
+					\node[draw, rounded corners, fill=blue!5, align=center] (s2) at (0,2.15)
+					{\scriptsize verificar\\ isolamento};
+					\node[draw, rounded corners, fill=blue!5, align=center] (s3) at (0,1.10)
+					{\scriptsize escrever\\ estado inicial};
+					\node[draw, rounded corners, fill=blue!5, align=center] (s4) at (0,0.05)
+					{\scriptsize escrever\\ estado final};
+					\node[draw, rounded corners, fill=red!5, draw=red!80!black, align=center] (s5) at (0,-1.10)
+					{\scriptsize aplicar\\ \(\vec P_i=\vec P_f\)};
+					\node[draw, rounded corners, fill=green!5, draw=green!60!black, align=center] (s6) at (0,-2.25)
+					{\scriptsize se elástica:\\ \(K_i=K_f\)};
+					
+					\draw[->, thick] (s1) -- (s2);
+					\draw[->, thick] (s2) -- (s3);
+					\draw[->, thick] (s3) -- (s4);
+					\draw[->, thick] (s4) -- (s5);
+					\draw[->, thick] (s5) -- (s6);
+				\end{tikzpicture}
+			\end{column}
+		\end{columns}
+		
+	\end{frame}
+	
+	
+	% SLIDE 8
+	\begin{frame}{\large Tipos de colisões: elástica, inelástica e perfeitamente inelástica}
+		\tiny
+		
+		\textcolor{blue}{\textbf{Assumimos um sistema fechado e isolado durante a colisão.}}
+		Assim, o momento linear total conserva-se:
+		$
+		\textcolor{red}{\vec P_i=\vec P_f.}
+		$
+		
+		\vspace{0.15cm}
+		
+		\begin{center}
+			\renewcommand{\arraystretch}{1.35}
+			\begin{tabular}{c|c|c}
+				\textbf{Tipo de colisão} & \textbf{Momento linear} & \textbf{Energia cinética} \\ \hline
+				\textcolor{blue}{elástica} &
+				\(\textcolor{red}{\vec P_i=\vec P_f}\) &
+				\(\textcolor{red}{K_i=K_f}\) \\[2pt]
+				
+				\textcolor{blue}{inelástica} &
+				\(\textcolor{red}{\vec P_i=\vec P_f}\) &
+				\(\textcolor{red}{K_i\neq K_f}\), normalmente \(K_f<K_i\) \\[2pt]
+				
+				\textcolor{blue}{perfeitamente inelástica} &
+				\(\textcolor{red}{\vec P_i=\vec P_f}\) &
+				\(\textcolor{red}{K_f<K_i}\), corpos ficam juntos
+			\end{tabular}
+		\end{center}
+		
+		\vspace{0.15cm}
+		
+		\textcolor{red}{\textbf{Ideia-chave:}}
+		na colisão elástica conservam-se \(\vec P\) e \(K\); na colisão inelástica conserva-se \(\vec P\), mas não \(K\); na perfeitamente inelástica, os corpos ficam unidos depois da colisão.
+		
+		\vspace{0.15cm}
+		
+		\begin{columns}[T]
+			% Exemplo elástico
+			\begin{column}{0.50\textwidth}
+				\textcolor{blue}{\textbf{Exemplo simples: colisão elástica}}
+				
+				\vspace{0.1cm}
+				
+				Duas massas iguais; a segunda está inicialmente em repouso:
+				$
+				m_1=m_2=m,
+				\qquad
+				v_{1i}=v,
+				\qquad
+				v_{2i}=0.
+				$
+				\vspace{0.3cm}
+				
+				Considere uma colisão elástica frontal:
+				$
+				{v_{1f}=0,
+					v_{2f}=v.}
+				$ e $
+				{K_i=K_f.}
+				$
+				
+				\vspace{0.3cm}
+				
+				\centering
+				\begin{tikzpicture}[scale=0.75,>=stealth]
+					\node[font=\tiny] at (-0.3,1.55) {antes};
+					\draw[thick] (-2.0,1.0) -- (2.0,1.0);
+					\draw[fill=blue!20, draw=blue!80!black] (-1.05,1.0) circle (0.16);
+					\draw[fill=green!20, draw=green!60!black] (0.75,1.0) circle (0.16);
+					\draw[vetorv] (-1.05,1.0) -- (-0.25,1.0) node[midway, above] {\tiny \(v\)};
+					\node[above] at (0.75,1.18) {\tiny repouso};
+					
+					\node[font=\tiny] at (0,0.25) {depois};
+					\draw[thick] (-2.0,-0.25) -- (2.0,-0.25);
+					\draw[fill=blue!20, draw=blue!80!black] (-0.45,-0.25) circle (0.16);
+					\node[below] at (-0.45,-0.43) {\tiny para};
+					\draw[fill=green!20, draw=green!60!black] (0.45,-0.25) circle (0.16);
+					\draw[vetorv] (0.45,-0.25) -- (1.25,-0.25) node[midway, above] {\tiny \(v\)};
+					
+					\node[align=center, font=\tiny, red!80!black] at (0,-1.05)
+					{o momento é totalmente transferido para a segunda massa \(m_2\)};
+				\end{tikzpicture}
+			\end{column}
+			
+			% Exemplo inelástico não perfeito
+			\begin{column}{0.50\textwidth}
+				\textcolor{blue}{\textbf{Exemplo simples: colisão inelástica}}
+				
+				\vspace{0.1cm}
+				
+				Uma bola colide com uma parede e ricocheteia, mas perde parte da energia cinética:
+				${K_f<K_i}$. A bola não fica presa à parede:
+				\[
+				\textcolor{red}{\text{não é perfeitamente inelástica}.}
+				\]
+				
+				O momento linear da bola muda:
+				$
+				\Delta \vec p=\vec p_f-\vec p_i.
+				$
+				
+				\vspace{0.3cm}
+				
+				\centering
+				\begin{tikzpicture}[scale=0.78,>=stealth]
+					\draw[thick] (-2.0,-0.35) -- (1.8,-0.35);
+					\draw[fill=gray!20, draw=black, pattern=north east lines] (0.95,-0.35) rectangle (1.25,1.25);
+					\node[right] at (1.25,0.45) {\tiny parede};
+					
+					% antes
+					\draw[fill=blue!25, draw=blue!80!black] (-1.15,0.25) circle (0.14);
+					\draw[vetorv] (-1.15,0.25) -- (-0.35,0.25) node[midway, above] {\tiny \(\vec p_i\)};
+					
+					% depois
+					\draw[fill=blue!25, draw=blue!80!black] (0.45,0.25) circle (0.14);
+					\draw[vetorv] (0.45,0.25) -- (-0.15,0.25) node[midway, below] {\tiny \(\vec p_f\)};
+					
+					% perda de energia
+					\node[align=center, font=\tiny, red!80!black] at (-0.25,-1.05)
+					{ricocheteia, mas com\\ menor energia cinética};
+				\end{tikzpicture}
+				
+				\vspace{0.05cm}
+				
+				\[
+				\textcolor{red}{K_f<K_i, \qquad \text{corpos não ficam unidos}.}
+				\]
+			\end{column}
+		\end{columns}
+		
+	\end{frame}
+	
+	
+	% SLIDE 9
+	\begin{frame}{Equações de conservação nas colisões}
+		\scriptsize
+		
+		Considere dois corpos em movimento numa reta. Escolhemos o eixo \(x\) ao longo da reta da colisão.
+		As velocidades são escritas como componentes:
+		\[
+		v_{1x,i},\quad v_{2x,i}
+		\qquad \text{antes da colisão,}
+		\qquad
+		v_{1x,f},\quad v_{2x,f}
+		\qquad \text{depois da colisão.}
+		\]
+		
+		\textcolor{blue}{\textbf{Nota:}}
+		o sinal de cada componente indica o sentido do movimento no eixo \(x\).
+		Para uma colisão elástica, usamos duas leis:
+		
+		\begin{columns}[T]
+			\begin{column}{0.58\textwidth}
+				\[
+				\textcolor{blue}{\textbf{Momento linear:}\,\,}
+				\textcolor{red}{
+					m_1v_{1x,i}+m_2v_{2x,i}
+					=
+					m_1v_{1x,f}+m_2v_{2x,f}.}
+				\]
+				
+				\[
+				\begin{aligned}
+					\textcolor{blue}{\textbf{Energia cinética:}}\quad
+					&\textcolor{red}{
+						\frac12m_1v_{1x,i}^2+\frac12m_2v_{2x,i}^2
+						=
+						\frac12m_1v_{1x,f}^2+\frac12m_2v_{2x,f}^2.}
+				\end{aligned}
+				\]
+				\vspace{0.1cm}
+				{(A conservação da energia cinética aplica-se apenas às colisões elásticas.)}
+				
+			\end{column}
+			
+			\begin{column}{0.42\textwidth}
+				\makebox[\linewidth][r]{%
+					\begin{tikzpicture}[scale=0.75,>=stealth]
+						\draw[eixo] (-2.25,2.05) -- (2.25,2.05) node[right] {\scriptsize \(x\)};
+						
+						\node[font=\scriptsize] at (0,2.55) {antes};
+						\draw[thick] (-2.1,1.55) -- (2.1,1.55);
+						
+						\draw[fill=blue!25, draw=blue!80!black] (-1.25,1.55) circle (0.18);
+						\node[below] at (-1.25,1.25) {\scriptsize \(m_1\)};
+						\draw[vetorv] (-1.25,1.55) -- (-0.25,1.55)
+						node[midway, above] {\scriptsize \(v_{1x,i}\)};
+						
+						\draw[fill=green!25, draw=green!60!black] (1.25,1.55) circle (0.14);
+						\node[below] at (1.25,1.25) {\scriptsize \(m_2\)};
+						\draw[vetorv] (1.25,1.55) -- (0.35,1.55)
+						node[midway, above] {\scriptsize \(v_{2x,i}\)};
+						
+						\node[font=\scriptsize] at (0,0.65) {depois};
+						\draw[thick] (-2.1,-0.25) -- (2.1,-0.25);
+						
+						\draw[fill=blue!25, draw=blue!80!black] (-0.45,-0.25) circle (0.18);
+						\draw[vetorv] (-0.45,-0.25) -- (-1.25,-0.25)
+						node[midway, below] {\scriptsize \(v_{1x,f}\)};
+						
+						\draw[fill=green!25, draw=green!60!black] (0.45,-0.25) circle (0.14);
+						\draw[vetorv] (0.45,-0.25) -- (1.55,-0.25)
+						node[midway, below] {\scriptsize \(v_{2x,f}\)};
+						
+						\node[align=center, font=\scriptsize, red!80!black] at (0,-1.1)
+						{};
+					\end{tikzpicture}%
+				}
+			\end{column}
+		\end{columns}
+		
+		\vspace{0.25cm}
+		
+		\textcolor{blue}{\textbf{Como usar na prática:}}
+		com os dados do problema, substituímos os valores conhecidos nas duas equações acima.
+		Se houver duas incógnitas, o sistema permite determinar as massas ou velocidades desconhecidas.
+		
+	\end{frame}
+	
+	
+	% SLIDE 10
+	\begin{frame}{Exemplos: colisão elástica e perfeitamente inelástica}
+		\tiny
+		
+		\begin{columns}[T]
+			% COLUNA ESQUERDA: COLISÃO ELÁSTICA
+			\begin{column}{0.50\textwidth}
+				\textcolor{blue}{\textbf{Colisão elástica frontal com alvo em repouso}}
+				
+				\vspace{0.1cm}
+				
+				Projétil \(m_1\) com velocidade inicial \(v_{1i}\) colide elasticamente com um alvo \(m_2\) inicialmente em repouso:
+				$
+				\textcolor{red}{v_{2i}=0.}
+				$
+				
+				\vspace{0.1cm}
+				
+				Da conservação do momento linear e da energia cinética:
+				\[
+				m_1v_{1i}=m_1v_{1f}+m_2v_{2f},
+				\qquad
+				\frac12m_1v_{1i}^2=
+				\frac12m_1v_{1f}^2+\frac12m_2v_{2f}^2.
+				\]
+				
+				Da primeira equação:
+				$
+				\textcolor{red}{m_1(v_{1i}-v_{1f})=m_2v_{2f}.}
+				$
+				\vspace{0.1cm}
+				
+				Da segunda:
+				$
+				\textcolor{red}{m_1(v_{1i}^2-v_{1f}^2)=m_2v_{2f}^2.}
+				$
+				
+				\vspace{0.1cm}
+				
+				Como \(v_{1i}^2-v_{1f}^2=(v_{1i}-v_{1f})(v_{1i}+v_{1f})\), dividindo as duas expressões:
+				\[
+				\textcolor{red}{v_{2f}=v_{1i}+v_{1f}.}
+				\]
+				
+				Substituindo:
+				$
+				m_1(v_{1i}-v_{1f})=m_2(v_{1i}+v_{1f})
+				$
+				\[
+				\textcolor{red}{
+					v_{1f}=
+					\frac{m_1-m_2}{m_1+m_2}\,v_{1i}},
+				\qquad
+				\textcolor{red}{
+					v_{2f}=
+					\frac{2m_1}{m_1+m_2}\,v_{1i}.}
+				\]
+				
+				Se \(m_1=m_2\), então
+				$
+				\textcolor{red}{v_{1f}=0,\quad v_{2f}=v_{1i}.}
+				$
+				
+				\centering
+				\begin{tikzpicture}[scale=0.62,>=stealth]
+					\draw[thick] (-2.1,1.5) -- (2.1,1.5);
+					\node[font=\tiny] at (-1.55,2.15) {antes};
+					
+					\draw[fill=blue!25, draw=blue!80!black] (-1.2,1.5) circle (0.17);
+					\draw[vetorv] (-1.05,1.5) -- (-0.25,1.5) node[midway, above] {\tiny \(v_{1i}\)};
+					
+					\draw[fill=green!25, draw=green!60!black] (0.9,1.5) circle (0.17);
+					\node[above] at (0.9,1.72) {\tiny \(v_{2i}=0\)};
+					
+					\draw[thick] (-2.1,0.0) -- (2.1,0.0);
+					\node[font=\tiny] at (-1.05,0.65) {depois, se \(m_1=m_2\)};
+					
+					\draw[fill=blue!25, draw=blue!80!black] (-0.35,0) circle (0.17);
+					\node[below] at (-0.35,-0.22) {\tiny para};
+					
+					\draw[fill=green!25, draw=green!60!black] (0.75,0) circle (0.17);
+					\draw[vetorv] (0.9,0) -- (1.75,0) node[midway, above] {\tiny \(v_{1i}\)};
+					
+					\node[align=center, font=\tiny, red!80!black] at (0,-0.9)
+					{};
+				\end{tikzpicture}
+			\end{column}
+			
+			% COLUNA DIREITA: COLISÃO PERFEITAMENTE INELÁSTICA
+			\begin{column}{0.50\textwidth}
+				\textcolor{blue}{\textbf{Colisão perfeitamente inelástica: carruagens}}
+				
+				\vspace{0.1cm}
+				
+				Uma carruagem aproxima-se de outra em repouso com
+				$
+				v=0{,}5\,\text{m/s}.
+				$
+				Depois da colisão, as carruagens acoplam-se e movem-se juntas com a mesma velocidade \(v'\).
+				
+				\vspace{0.1cm}
+				
+				Se as carruagens têm a mesma massa \(m\):
+				\[
+				mv+m\cdot 0=mv'+mv'
+				\]
+				\[
+				mv=2mv'
+				\qquad \Rightarrow \qquad
+				\textcolor{red}{v'=\frac{v}{2}=0{,}25\,\text{m/s}.}
+				\]
+				
+				A energia cinética não se conserva:
+				\[
+				K_i=\frac12mv^2,
+				\qquad
+				K_f=\frac12(2m)\left(\frac v2\right)^2=\frac14mv^2.
+				\]
+				Logo,
+				$
+				\textcolor{red}{K_f<K_i.}
+				$
+				
+				\centering
+				\begin{tikzpicture}[scale=0.68,>=stealth]
+					\draw[thick] (-2.2,2.0) -- (2.2,2.0);
+					\node[font=\tiny] at (-1.55,2.75) {antes};
+					
+					\draw[fill=blue!10, draw=blue!80!black] (-1.85,2.0) rectangle (-0.85,2.55);
+					\draw[fill=blue!10, draw=blue!80!black] (0.65,2.0) rectangle (1.65,2.55);
+					\draw[vetorv] (-0.85,2.28) -- (-0.1,2.28) node[midway, above] {\tiny \(v\)};
+					\node[above] at (1.15,2.55) {\tiny repouso};
+					
+					\draw[thick] (-2.2,0.2) -- (2.2,0.2);
+					\node[font=\tiny] at (0.55,1.0) {depois};
+					
+					\draw[fill=green!10, draw=green!60!black] (-0.55,0.2) rectangle (0.45,0.75);
+					\draw[fill=green!10, draw=green!60!black] (0.45,0.2) rectangle (1.45,0.75);
+					\draw[vetorv] (1.45,0.48) -- (2.05,0.48) node[midway, above] {\tiny \(v'\)};
+					
+					\node[align=center, font=\tiny, red!80!black] at (0,-0.75)
+					{corpos acoplados:\\ colisão perfeitamente inelástica};
+				\end{tikzpicture}
+			\end{column}
+		\end{columns}
+		
+	\end{frame}
+	
+	
+	% SLIDE 11
+	\begin{frame}{Colisões em duas dimensões}
+		\scriptsize
+		
+		Se os corpos não se movem todos ao longo da mesma reta, a colisão é bidimensional. A conservação do momento continua válida para um sistema isolado:
+		\[
+		\textcolor{red}{\vec p_{1i}+\vec p_{2i}=\vec p_{1f}+\vec p_{2f}.}
+		\]
+		
+		\begin{columns}[T]
+			\begin{column}{0.58\textwidth}
+				Na forma de componentes:
+				\[
+				\textcolor{red}{P_{x,i}=P_{x,f}},
+				\qquad
+				\textcolor{red}{P_{y,i}=P_{y,f}.}
+				\]
+				
+				Para um alvo inicialmente em repouso e projétil inicialmente no eixo \(x\):
+				\[
+				x: \,\, m_1v_{1i}
+				=
+				m_1v_{1f}\cos\theta_1+
+				m_2v_{2f}\cos\theta_2,
+				\]
+				\[
+				y: \,\, 0
+				=
+				m_1v_{1f}\sin\theta_1-
+				m_2v_{2f}\sin\theta_2.
+				\]
+				
+				Se a colisão também for elástica:
+				\[
+				\textcolor{red}{
+					\frac12m_1v_{1i}^2
+					=
+					\frac12m_1v_{1f}^2+
+					\frac12m_2v_{2f}^2.}
+				\]
+			\end{column}
+			
+			\begin{column}{0.42\textwidth}
+				\centering
+				\begin{tikzpicture}[scale=0.8,>=stealth]
+					\draw[eixo] (-1.8,0) -- (2.6,0) node[right] {$x$};
+					\draw[eixo] (0,-1.7) -- (0,2.0) node[above] {$y$};
+					
+					\draw[fill=blue!25, draw=blue!80!black] (-1.4,0) circle (0.14);
+					\draw[vetorv] (-1.25,0) -- (-0.25,0) node[midway, above] {\scriptsize \(v_{1i}\)};
+					
+					\draw[fill=green!25, draw=green!60!black] (0,0) circle (0.14);
+					\node[below left] at (0,0) {\scriptsize \(m_2\)};
+					
+					\draw[fill=blue!25, draw=blue!80!black] (1.1,1.05) circle (0.14);
+					\draw[vetorv] (0.15,0.1) -- (1.1,1.05) node[midway, above left] {\scriptsize \(v_{1f}\)};
+					\draw[dashed] (0.25,0) -- (1.3,0);
+					\node at (0.75,0.22) {\scriptsize \(\theta_1\)};
+					
+					\draw[fill=green!25, draw=green!60!black] (1.4,-0.95) circle (0.14);
+					\draw[vetorv] (0.15,-0.1) -- (1.4,-0.95) node[midway, below left] {\scriptsize \(v_{2f}\)};
+					\node at (0.85,-0.23) {\scriptsize \(\theta_2\)};
+					
+					\node[align=center, font=\scriptsize, red!80!black] at (0,-2.15)
+					{duas equações de momento:\\ uma em \(x\), outra em \(y\)};
+				\end{tikzpicture}
+			\end{column}
+		\end{columns}
+		
+	\end{frame}
+	
+	
+	% SLIDE 12
+	\begin{frame}{Exemplo: colisão de uma bola com uma parede}
+		\scriptsize
+		
+		Considere uma bola que colide com uma parede. Durante o intervalo de contacto
+		\(\Delta t\), a parede exerce uma força sobre a bola, alterando a componente do
+		momento linear perpendicular à parede assim que essa componente muda so o sentido mas nao a magnitude.
+		
+		\vspace{0.2cm}
+		
+		Neste exemplo idealizado, considera-se que a componente perpendicular à parede
+		troca de sinal, enquanto a componente paralela permanece igual.
+		
+		\vspace{0.2cm}
+		
+		Para a bola:
+		$
+		\textcolor{red}{p'_x=-p_x, \qquad p'_y=p_y.}
+		$
+		
+		\vspace{0.2cm}
+		
+		Portanto,
+		$
+		\textcolor{red}{\Delta p_x=p'_x-p_x=-2p_x=-2mv_x,}
+		\qquad
+		\textcolor{red}{\Delta p_y=0.}
+		$
+		
+		\vspace{0.2cm}
+		
+		\begin{columns}[T]
+			\begin{column}{0.72\textwidth}
+				
+				A variação do momento linear da bola é causada pela força exercida pela
+				parede durante o intervalo de contacto. Para o módulo da força média exercida pela parede sobre a bola:
+				$
+				\textcolor{red}{F_{\text{méd}}=\frac{|\Delta \vec p|}{\Delta t}.}
+				$
+				
+				\vspace{0.35cm}
+				
+				Como apenas a componente \(x\) varia:
+				$
+				\textcolor{red}{|\Delta \vec p|=2|p_x|=2m|v_x|.}
+				$
+				
+				\vspace{0.35cm}
+				
+				No caso de incidência normal:
+				$
+				\textcolor{red}{F_{\text{méd}}=\frac{2mv}{\Delta t}.}
+				$
+				
+			\end{column}
+			
+			\begin{column}{0.28\textwidth}
+				\centering
+				
+				\begin{tikzpicture}[scale=0.7,>=stealth]
+					% parede
+					\draw[thick, pattern=north east lines] (1.55,-1.5) rectangle (1.8,1.6);
+					\node[right] at (1.8,1.45) {\scriptsize parede};
+					
+					% linha perpendicular no ponto de contacto
+					\draw[dashed] (1.39,-1.2) -- (1.39,1.2);
+					
+					% bola antes da colisão
+					\draw[fill=blue!25, draw=blue!80!black] (0.20,0.75) circle (0.14);
+					\draw[vetorv] (0.34,0.70) -- (1.22,0.30)
+					node[midway, above] {\scriptsize \(\vec v_i\)};
+					
+					% bola no instante do choque: encostada à parede
+					\draw[fill=blue!25, draw=blue!80!black] (1.39,0.20) circle (0.16);
+					\node[above left] at (1.32,0.38) {};
+					
+					% bola após ricochetear
+					\draw[fill=blue!25, draw=blue!80!black] (0.45,-0.55) circle (0.14);
+					\draw[vetorv] (1.23,0.08) -- (0.58,-0.48)
+					node[midway, below] {\scriptsize \(\vec v_f\)};
+					
+					\node[align=center, font=\scriptsize, red!80!black] at (0,-1.95)
+					{\(p_x\) troca de sinal;\\ \(p_y\) permanece};
+				\end{tikzpicture}
+			\end{column}
+		\end{columns}
+		
+		\vspace{0.3cm}
+		
+		\textcolor{blue}{\textbf{Aplicação numérica:}}
+		$
+		m=60\,\text{g}=0{,}06\,\text{kg},
+		\quad
+		v=72\,\text{km/h}=20\,\text{m/s},
+		\quad
+		\Delta t=0{,}01\,\text{s},
+		$
+		
+		\[
+		F_{\text{méd}}=
+		\frac{2(0{,}06)(20)}{0{,}01}
+		=240\,\text{N}.
+		\]
+		
+	\end{frame}
+	
+	
+	% SLIDE 13
+	\begin{frame}{Resumo para estudo}
+		\scriptsize
+		
+		\begin{columns}[T]
+			\begin{column}{0.58\textwidth}
+				\textcolor{blue}{\textbf{Fórmulas centrais}}
+				
+				\[
+				\vec r_{\text{cm}}=
+				\frac{m_1\vec r_1+\cdots+m_n\vec r_n}{M},
+				\qquad
+				M=m_1+\cdots+m_n.
+				\]
+				
+				\[
+				M\vec a_{\text{cm}}=\vec F_{\text{ext}}.
+				\]
+				
+				\[
+				\vec p=m\vec v,
+				\qquad
+				\vec P=\vec p_1+\cdots+\vec p_n=M\vec v_{\text{cm}}.
+				\]
+				
+				\[
+				\vec F_{\text{ext}}=0
+				\qquad \Rightarrow \qquad
+				\vec P_i=\vec P_f.
+				\]
+				
+				\[
+				\Delta \vec p=\vec p_f-\vec p_i,
+				\qquad
+				F=\frac{\Delta p}{\Delta t}.
+				\]
+			\end{column}
+			
+			\begin{column}{0.42\textwidth}
+				\textcolor{blue}{\textbf{Perguntas de controlo}}
+				
+				\begin{enumerate}
+					\item Qual é o sistema escolhido?
+					\item A força externa resultante é nula?
+					\item O problema é unidimensional ou bidimensional?
+					\item Os corpos ficam juntos depois da colisão?
+					\item A colisão é elástica?
+					\item Devo usar só \(\vec P_i=\vec P_f\), ou também \(K_i=K_f\)?
+				\end{enumerate}
+				
+				\vspace{0.15cm}
+				
+				\textcolor{red}{\textbf{Mensagem final:}}
+				
+				O centro de massa descreve o movimento global do sistema; o momento linear é a grandeza conservada quando não há força externa resultante.
+			\end{column}
+		\end{columns}
+		
+		\vspace{0.3cm}
+		
+		{
+			\textcolor{red}{\textbf{Atenção:}}
+			se existe força externa resultante, por exemplo atrito, então
+			$
+			\textcolor{red}{
+				\frac{d\vec P}{dt}=\vec F_{\text{ext}}\neq 0.}
+		$
+			Nesse caso, em geral, \textcolor{red}{não podemos usar} \(\vec P_i=\vec P_f\).
+		}
+		
+	\end{frame}
+	
+\end{document}

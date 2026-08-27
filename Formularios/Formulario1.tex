@@ -1,0 +1,243 @@
+\documentclass[12pt,a4paper,landscape]{article}
+
+\usepackage[portuguese]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[a4paper,landscape,margin=0.4cm]{geometry}
+\usepackage{amsmath}
+\usepackage{array}
+\usepackage{multicol}
+\usepackage{graphicx}
+\usepackage{tikz}
+
+\pagestyle{empty}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0pt}
+\setlength{\columnsep}{0.12cm}
+\setlength{\abovedisplayskip}{0.6pt}
+\setlength{\belowdisplayskip}{0.6pt}
+\setlength{\abovedisplayshortskip}{0.3pt}
+\setlength{\belowdisplayshortskip}{0.3pt}
+\renewcommand{\arraystretch}{0.9}
+
+\newcommand{\secao}[1]{\textbf{#1}\par}
+
+\begin{document}
+\normalsize
+\textbf{Formulário -- Primeira Parte}\par
+
+\noindent
+\begin{minipage}[t][0.46\textheight][t]{0.245\textwidth}
+\vspace{0pt}
+\secao{Unidades de Medida}
+\begingroup
+\small
+\[
+\text{mili} = 10^{-3}, \qquad \text{micro} = 10^{-6}, \qquad \text{nano} = 10^{-9}
+\]
+\[
+\begin{array}{>{\scriptstyle}l<{} @{\qquad} >{\scriptstyle}l<{}}
+1\,km = 10^3\,m & 10^{-3}\,km = 1\,m \\
+1\,m = 10^2\,cm & 10^2\,cm = 1\,m \\
+1\,mm = 10^{-3}\,m & 10^3\,mm = 1\,m \\
+1\,\mu m = 10^{-6}\,m & 10^6\,\mu m = 1\,m \\
+1\,nm = 10^{-9}\,m & 10^9\,nm = 1\,m
+\end{array}
+\]
+\endgroup
+
+\secao{Módulo}
+\textbf{Caso 1D}
+\[
+v = \sqrt{v_x^2} = |v_x|,
+\qquad
+|a|=
+\begin{cases}
+a, & \text{se } a>0 \\
+-a, & \text{se } a<0
+\end{cases}
+\]
+\textbf{Caso 2D}
+\[
+v = |\vec{v}| = (v_x^2+v_y^2)^{1/2} = \sqrt{v_x^2+v_y^2}
+\]
+\end{minipage}\hfill
+\begin{minipage}[t][0.46\textheight][t]{0.245\textwidth}
+\vspace{0pt}
+\secao{Trigonometria}
+\begingroup
+\small
+\begin{center}
+\begin{tikzpicture}[scale=0.46]
+\draw (0,0) -- (4,0) -- (4,2.6) -- cycle;
+\draw (3.6,0) -- (3.6,0.4) -- (4,0.4);
+\node[below] at (2,0) {$b$};
+\node[right] at (4,1.3) {$a$};
+\node[above left] at (2,1.3) {$c$};
+\draw (0.7,0) arc (0:33:0.7);
+\node at (0.95,0.35) {$\theta$};
+\draw (4,2.1) arc (-90:-147:0.5);
+\node at (3.55,1.85) {$\varphi$};
+\end{tikzpicture}
+\end{center}
+\[
+\cos\theta=\frac{b}{c}, \qquad \sin\theta=\frac{a}{c}
+\]
+\[
+\cos\varphi=\frac{a}{c}, \qquad \sin\varphi=\frac{b}{c}
+\]
+\[
+c=\sqrt{a^2+b^2}
+\]
+\[
+\begin{array}{ll}
+\text{Para } \theta: & b=c\cos\theta,\quad a=c\sin\theta \\
+\text{Para } \varphi: & a=c\cos\varphi,\quad b=c\sin\varphi
+\end{array}
+\]
+\endgroup
+
+\secao{Conversão para Radianos}
+\begingroup
+\small
+\[
+180^\circ = \pi \text{ radianos},\qquad \pi \approx 3,14
+\]
+\[
+\frac{x}{180}=\frac{\theta_{\rm rad}}{\pi}
+\qquad \Longrightarrow \qquad
+\theta_{\rm rad}=x\cdot\frac{\pi}{180}
+\]
+\endgroup
+\end{minipage}\hfill
+\begin{minipage}[t][0.46\textheight][t]{0.245\textwidth}
+\vspace{0pt}
+\secao{Derivadas e Aceleração 2D}
+\begingroup
+\small
+\[
+\frac{df}{dt}=f'
+\]
+\[
+\frac{d}{dt}(\alpha f+\beta g)=\alpha\frac{d}{dt}f+\beta\frac{d}{dt}g
+\]
+\[
+\vec{v}=\frac{d\vec{r}}{dt}
+=\left(\frac{dr_x}{dt},\frac{dr_y}{dt}\right)
+\]
+\[
+\text{rapidez}=|\vec{v}|=\sqrt{v_x^2+v_y^2}
+\]
+\[
+a_x(t)=\frac{dv_x}{dt},\qquad
+a_y(t)=\frac{dv_y}{dt}
+\]
+\[
+\vec{a}_m=\frac{\vec{v}_B-\vec{v}_A}{t_B-t_A}
+\]
+\endgroup
+
+\secao{Movimento 1D}
+\begingroup
+\footnotesize
+\[
+\renewcommand{\arraystretch}{1.5} % Aumenta o espaçamento entre linhas em 50%
+\begin{array}{ll}
+	1) & r(t)=r_0+v_0t+\tfrac{1}{2}at^2 ,\,\, r_B=r_A+v_A(t_B-t_A)+\tfrac{1}{2}a(t_B-t_A)^2 \\
+	2) & v(t)=v_0+at,\,\,v_B=v_A+a(t_B-t_A) \\
+	3) & v^2(t)=v_0^2+2a(r(t)-r_0),\,\, v_B^2=v_A^2+2a(r_B-r_A) \\
+	4) & \tfrac{r(t)-r_0}{t}=\tfrac{v(t)+v_0}{2}=v_m,\,\,\tfrac{r_B-r_A}{t_B-t_A}=\tfrac{v_B+v_A}{2}=v_m
+\end{array}
+\]
+\endgroup
+\end{minipage}\hfill
+\begin{minipage}[t][0.46\textheight][t]{0.245\textwidth}
+\vspace{0pt}
+\secao{Valores Notáveis}
+\begingroup
+\footnotesize
+\setlength{\tabcolsep}{3pt}
+\renewcommand{\arraystretch}{0.92}
+\[
+\begin{array}{|c|c|c|c|}
+\hline
+\text{Grau} & \text{Rad} & \text{Sen} & \text{Cos} \\
+\hline
+0^\circ & 0 & 0 & 1 \\
+\hline
+30^\circ & \frac{\pi}{6} & \frac{1}{2} & \frac{\sqrt{3}}{2} \\
+\hline
+45^\circ & \frac{\pi}{4} & \frac{\sqrt{2}}{2} & \frac{\sqrt{2}}{2} \\
+\hline
+60^\circ & \frac{\pi}{3} & \frac{\sqrt{3}}{2} & \frac{1}{2} \\
+\hline
+90^\circ & \frac{\pi}{2} & 1 & 0 \\
+\hline
+180^\circ & \pi & 0 & -1 \\
+\hline
+270^\circ & \frac{3\pi}{2} & -1 & 0 \\
+\hline
+360^\circ & 2\pi & 0 & 1 \\
+\hline
+\end{array}
+\]
+\endgroup
+\end{minipage}
+
+\vspace{4.em}
+\hrule
+\vspace{0.3em}
+
+
+
+\secao{Movimento Balístico}
+\begingroup
+\footnotesize
+\renewcommand{\arraystretch}{0.82}
+\[
+v_{0x}=v_0\cos\theta,\quad v_{0y}=v_0\sin\theta,\quad g=10\,\tfrac{m}{s^2}
+\]
+
+\noindent
+\begin{minipage}[t]{0.60\textwidth}
+\vspace{0pt}
+\textbf{Se $t_0=0$:}\par
+\[
+\renewcommand{\arraystretch}{1.2}
+\begin{array}{@{}ll@{}}
+1a)& x(t)=x_0+v_{0x}t=x_0+(v_0\cos\theta)t \\
+1b)& y(t)=y_0+v_{0y}t-\tfrac{1}{2}gt^2=y_0+(v_0\sin\theta)t-\tfrac{1}{2}gt^2 \\
+2a)& v_x(t)=v_{0x} \\
+2b)& v_y(t)=v_{0y}-gt=v_0\sin\theta-gt \\
+3)& v_y^2(t)=v_{0y}^2-2g(y(t)-y_0)\quad \leftarrow\ \text{relaciona } v(t)\text{ e }\Delta y \\
+4)& t_{\max}=\tfrac{v_{0y}}{g}=\tfrac{v_0\sin\theta}{g}\quad \leftarrow\ \text{instante da altura máx. (relativo ao lançamento)} \\
+5)& h_{\max}=\tfrac{v_{0y}^2}{2g}=\tfrac{v_0^2\sin^2\theta}{2g}\quad \leftarrow\ \text{altura máx. (relativa ao lançamento)} \\
+6)& R=x(t_f)-x_0=v_{0x}t_f\quad \leftarrow\ \text{alcance em relação ao ponto de lançamento} \\
+6')& \text{se } h_f=0:\ R=\tfrac{v_0^2\sin 2\theta}{g}\quad \leftarrow\ \text{lançamento e aterragem à mesma altura} \\
+7)& y(x)=y_0+(\tan\theta)(x-x_0)-\tfrac{g(x-x_0)^2}{2(v_0\cos\theta)^2}\quad \leftarrow\ \text{trajetória } y(x) \\
+7')& \text{se } (x_0,y_0)=(0,0):\ y(x)=x\tan\theta-\tfrac{gx^2}{2(v_0\cos\theta)^2}
+\end{array}
+\]
+\end{minipage}\hfill
+\begin{minipage}[t]{0.38\textwidth}
+\vspace{0pt}
+\textbf{Se $t_0, x_0, y_0$ são genéricos:}\par
+\[
+\renewcommand{\arraystretch}{1.3}
+\begin{array}{@{}ll@{}}
+1a)& x(t)=x_0+v_{0x}(t-t_0) \\
+1b)& y(t)=y_0+v_{0y}(t-t_0)-\tfrac{1}{2}g(t-t_0)^2 \\
+2a)& v_x(t)=v_{0x} \\
+2b)& v_y(t)=v_{0y}-g(t-t_0) \\
+3)& v_y^2(t)=v_{0y}^2-2g(y(t)-y_0) \\
+4)& t_{\max}=t_0+\tfrac{v_y(t_0)}{g}=t_0+\tfrac{v_0\sin\theta}{g} \\
+5)& h_{\max}=\tfrac{v_y^2(t_0)}{2g}=\tfrac{v_0^2\sin^2\theta}{2g} \\
+6)& h_f=y(t_f)-y_0,\quad t_f=t_0+\tfrac{v_{0y}+\sqrt{v_{0y}^2-2gh_f}}{g},\quad R=v_{0x}(t_f-t_0) \\
+7)& y(x)=y_0+(\tan\theta)(x-x_0)-\tfrac{g(x-x_0)^2}{2(v_0\cos\theta)^2}
+\end{array}
+\]
+\end{minipage}
+\endgroup
+
+\vspace{0.5cm}
+\end{document}

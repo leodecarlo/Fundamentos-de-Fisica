@@ -1,0 +1,797 @@
+\documentclass{beamer}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[portuguese]{babel}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta, calc, decorations.pathreplacing}
+
+% Tema
+\usetheme{Madrid}
+\usecolortheme{default}
+\beamertemplatenavigationsymbolsempty
+
+% Cores e estilos
+\tikzset{
+	eixo/.style={->, thick},
+	fio/.style={thick},
+	placa/.style={very thick},
+	carga/.style={font=\scriptsize},
+	seta/.style={->, thick, red!80!black}
+}
+
+% Informação do título
+\title{Aula 11: Teoria e Prática}
+\subtitle{Condensadores}
+\date{25 Maio 2026}
+
+
+\begin{document}
+	
+	\frame{\titlepage}
+	
+	% SLIDE 2
+	\begin{frame}{Introdução: cargas elétricas e potencial elétrico}
+		\scriptsize
+		
+		Nos componentes dos circuitos elétricos circulam cargas elétricas, ou seja,
+		pequenas unidades de matéria que podem ter dois sinais:
+		
+		\[
+		\textcolor{red}{\text{cargas positivas}}
+		\qquad \text{e} \qquad
+		\textcolor{blue}{\text{cargas negativas}}.
+		\]
+		
+		Entre as cargas existem forças:
+		
+		\begin{itemize}
+			\item \textcolor{red}{repulsivas}, quando as cargas têm o mesmo sinal;
+			\item \textcolor{blue}{atrativas}, quando as cargas têm sinais diferentes.
+		\end{itemize}
+		
+		A essas forças associa-se uma energia potencial, como fizemos no caso
+		da força elástica e da força gravitacional.
+		Em particular, é sob o efeito dessas forças que as cargas circulam num circuito.
+		A uma determinada quantidade de carga \(Q\) é associado um potencial elétrico
+		\(V\) da carga \(Q\).
+		
+		\[
+		Q \longleftrightarrow V
+		\]
+		
+		\[
+		[Q]=\text{Coulomb}=C,
+		\qquad
+		[V]=\frac{\text{Joule}}{C}
+		\quad
+		\left(
+		\textcolor{red}{[V]=\frac{\text{energia}}{\text{unidade de carga}}}
+		\right).
+		\]
+	\end{frame}
+	
+	% SLIDE 3
+	\begin{frame}{O que é um condensador?}
+		\scriptsize
+		
+		\textbf{Condensadores} são aparelhos que servem para armazenar a carga elétrica.
+		Um condensador básico consiste em duas placas metálicas paralelas,
+		com cargas opostas.
+		
+		\vspace{0.1cm}
+		
+		\begin{columns}[T]
+			
+			% COLUNA ESQUERDA: FIGURA
+			\begin{column}{0.42\textwidth}
+				\begin{center}
+					\begin{tikzpicture}[
+						scale=0.60,
+						every node/.style={font=\scriptsize, inner sep=1pt}
+						]
+						\draw[fio] (-3,0) -- (-0.55,0);
+						\draw[fio] (0.55,0) -- (3,0);
+						
+						\draw[placa] (-0.55,-1.0) -- (-0.55,1.0);
+						\draw[placa] (0.55,-1.0) -- (0.55,1.0);
+						
+						\node[font=\tiny, red!80!black] at (-0.85,0.75) {\(+Q\)};
+						\node[font=\tiny, red!80!black] at (-0.85,0.30) {\(+\)};
+						\node[font=\tiny, red!80!black] at (-0.85,-0.15) {\(+\)};
+						
+						\node[font=\tiny, blue!80!black] at (0.85,0.75) {\(-Q\)};
+						\node[font=\tiny, blue!80!black] at (0.85,0.30) {\(-\)};
+						\node[font=\tiny, blue!80!black] at (0.85,-0.15) {\(-\)};
+						
+						\draw[<->, thick] (-0.55,-1.25) -- (0.55,-1.25);
+						\node[below, font=\scriptsize] at (0,-1.25) {\(d\)};
+						
+						\draw[<->, red!80!black] (-0.55,1.35) -- (0.55,1.35);
+						\node[above, red!80!black, font=\scriptsize] at (0,1.35) {\(\Delta V\)};
+						
+						\node[font=\scriptsize] at (-2.2,0.25) {\(A\)};
+						\node[font=\scriptsize] at (2.2,0.25) {\(B\)};
+					\end{tikzpicture}
+				\end{center}
+			\end{column}
+			
+			% COLUNA DIREITA: DEFINIÇÕES
+			\begin{column}{0.58\textwidth}
+				O condensador armazena carga: \(+Q\) numa placa e \(-Q\) na outra.
+				\(\Delta V\) é a diferença entre os potenciais das placas. ~
+				
+				Observação: A soma das cargas de um condensador é zero $\textcolor{red}{Q}+\textcolor{blue}{(-Q)}=\textcolor{red}{Q}-\textcolor{blue}{Q}=0$, ou seja o condensador é eletricamente neutro.
+				
+				\vspace{0.15cm}
+				
+				A capacitância de um condensador, isto é, a sua capacidade de armazenar carga,
+				é definida por:
+				
+				\[
+				C=\frac{Q}{\Delta V}
+				\]
+				
+				Logo:
+				
+				\[
+				Q=C\Delta V.
+				\]
+			\end{column}
+			
+		\end{columns}
+		
+		\vspace{0.1cm}
+		
+		{\tiny
+			
+			\begin{center}
+			\begin{tabular}{c|c}
+				Grandeza & Significado \\ \hline
+				\(C\) & capacitância \\
+				\(Q\) & magnitude da carga em cada placa \\
+				\(\Delta V\) & diferença de potencial entre as placas
+			\end{tabular}
+		\end{center}}
+		
+		\vspace{0.05cm}
+		
+		A unidade de capacitância é o \textbf{Farad}: \([F]=C^2N^{-1}m^{-1}\). \textcolor{red}{A partir de agora, indicaremos \(\Delta V\) simplesmente por \(V\)}.
+		
+	\end{frame}
+	
+	% SLIDE 4
+	\begin{frame}{Associação de condensadores}
+		\scriptsize
+		
+		As duas associações principais são:
+		
+		\[
+		\textcolor{red}{\text{condensadores em série}}
+		\qquad
+		\text{e}
+		\qquad
+		\textcolor{blue}{\text{condensadores em paralelo}}.
+		\]
+		
+		O objetivo é substituir vários condensadores por um único condensador equivalente:
+		
+		\[
+		C_1,C_2,\ldots,C_n
+		\qquad
+		\longrightarrow
+		\qquad
+		C.
+		\]
+		
+		Depois de determinar a capacitância equivalente \(C\), usamos:
+		
+		\[
+		Q=CV
+		\]
+		
+		para calcular a carga associada ao circuito equivalente.
+	\end{frame}
+	
+	% SLIDE 5
+	\begin{frame}{Condensadores em série}
+		\scriptsize
+		
+		Os pontos \(A\) e \(B\) são os \textbf{pontos de contacto} da associação.
+		Entre esses pontos é aplicada uma diferença de potencial \(V=V_{AB}\).
+		
+		\vspace{0.15cm}
+		
+		\begin{center}
+			\begin{tikzpicture}[
+				scale=0.8,
+				every node/.style={font=\tiny, inner sep=1pt}
+				]
+				\draw[fio] (-3,0) -- (-2.1,0);
+				\draw[placa] (-2.1,-0.5) -- (-2.1,0.5);
+				\draw[placa] (-1.8,-0.5) -- (-1.8,0.5);
+				\draw[fio] (-1.8,0) -- (-0.2,0);
+				
+				\draw[placa] (-0.2,-0.5) -- (-0.2,0.5);
+				\draw[placa] (0.1,-0.5) -- (0.1,0.5);
+				\draw[fio] (0.1,0) -- (1.6,0);
+				
+				\node[left] at (-3,0) {\(A\)};
+				\node[right] at (1.6,0) {\(B\)};
+				\node[above] at (-1.95,0.65) {\(C_1\)};
+				\node[above] at (-0.05,0.65) {\(C_2\)};
+				
+				\node[below, red!80!black] at (-2.25,-0.55) {\(+Q\)};
+				\node[below, blue!80!black] at (-1.65,-0.55) {\(-Q\)};
+				\node[below, red!80!black] at (-0.35,-0.55) {\(+Q\)};
+				\node[below, blue!80!black] at (0.25,-0.55) {\(-Q\)};
+			\end{tikzpicture}
+		\end{center}
+		
+		{\tiny Quando os condensadores estão ligados em série, o condutor intermédio não está ligado diretamente aos extremos da fonte. Como esse condutor permanece eletricamente neutro, as cargas acumuladas nas suas duas superfícies têm a mesma magnitude e sinais opostos. Assim, a magnitude da carga é a mesma em cada condensador:}
+		\textcolor{red}{\[
+			Q_1=Q_2=Q.\]
+			}
+		Em cada condensador há uma diferença de potencial:	
+		\[
+		V_1=\frac{Q}{C_1},
+		\qquad
+		V_2=\frac{Q}{C_2}.
+		\]
+		
+		A diferença de potencial total entre os pontos \(A\) e \(B\) é:
+		$
+		V=V_{AB}=V_1+V_2
+		=
+		\frac{Q}{C_1}
+		+
+		\frac{Q}{C_2}
+		=
+		\frac{Q}{C}.
+		$
+		
+		Então:
+		
+		\[
+		\frac{1}{C}
+		=
+		\frac{1}{C_1}
+		+
+		\frac{1}{C_2}
+		\,\,
+		\Rightarrow
+		\,\,
+		C=\frac{C_1C_2}{C_1+C_2}.\text{\qquad Para \(n\) condensadores em série:} \frac{1}{C}
+			=
+			\sum_{i=1}^{n}\frac{1}{C_i}.
+		\]
+		
+		
+	
+	\end{frame}
+	
+	
+	% SLIDE 6
+	\begin{frame}{Exemplo: dois condensadores em série}
+		\scriptsize
+		
+		Seja:
+		
+		\[
+		C_1=4\mu F,
+		\qquad
+		C_2=6\mu F,
+		\qquad
+		\mu F=10^{-6}F,
+		\qquad
+		V=10V.
+		\]
+		
+		\[
+		C=
+		\frac{C_1C_2}{C_1+C_2}
+		=
+		\frac{4\cdot 6}{4+6}\mu F
+		=
+		2,4\mu F.
+		\]
+		
+		\[
+		Q=CV
+		=
+		2,4\mu F\cdot 10V
+		=
+		24\mu C.
+		\]
+		
+		As diferenças de potencial são:
+		
+		\[
+		V_1=\frac{Q}{C_1}
+		=
+		\frac{24\mu C}{4\mu F}
+		=
+		6V,
+		\]
+		
+		\[
+		V_2=\frac{Q}{C_2}
+		=
+		\frac{24\mu C}{6\mu F}
+		=
+		4V.
+		\]
+	\end{frame}
+	
+	% SLIDE 7
+	\begin{frame}{Condensadores em paralelo}
+		\scriptsize
+		
+		As cargas distribuem-se num condutor de modo que todas as partes em contacto
+		do condutor estejam ao mesmo potencial. Assim, numa figura como esta, todas
+		as partes do circuito em contacto com o ponto \(A\) estão ao mesmo potencial
+		\(V_A\), e todas as partes em contacto com o ponto \(B\) estão ao mesmo potencial
+		\(V_B\).
+		
+		\vspace{0.15cm}
+		
+		\begin{center}
+			\begin{tikzpicture}[
+				scale=0.55,
+				every node/.style={font=\tiny, inner sep=1pt}
+				]
+				\draw[fio] (-3,0) -- (-2,0);
+				\draw[fio] (2,0) -- (3,0);
+				
+				\draw[fio] (-2,0) -- (-2,1.2);
+				\draw[fio] (-2,0) -- (-2,-1.2);
+				\draw[fio] (2,0) -- (2,1.2);
+				\draw[fio] (2,0) -- (2,-1.2);
+				
+				% Condensador C1
+				\draw[fio] (-2,1.2) -- (-0.35,1.2);
+				\draw[placa] (-0.35,0.75) -- (-0.35,1.65);
+				\draw[placa] (0.0,0.75) -- (0.0,1.65);
+				\draw[fio] (0.0,1.2) -- (2,1.2);
+				\node[above] at (-0.17,1.65) {\(C_1\)};
+				\node[red!80!black, below] at (-0.68,0.77) {\(+Q_1\)};
+				\node[blue!80!black, below] at (0.33,0.77) {\(-Q_1\)};
+				
+				% Condensador C2
+				\draw[fio] (-2,-1.2) -- (-0.35,-1.2);
+				\draw[placa] (-0.35,-1.65) -- (-0.35,-0.75);
+				\draw[placa] (0.0,-1.65) -- (0.0,-0.75);
+				\draw[fio] (0.0,-1.2) -- (2,-1.2);
+				\node[below] at (-0.17,-1.65) {\(C_2\)};
+				\node[red!80!black, above] at (-0.68,-0.77) {\(+Q_2\)};
+				\node[blue!80!black, above] at (0.33,-0.77) {\(-Q_2\)};
+				
+				\node[left] at (-3,0) {\(A\)};
+				\node[right] at (3,0) {\(B\)};
+				
+				\node[above] at (-2,1.35) {\(V_A\)};
+				\node[above] at (2,1.35) {\(V_B\)};
+			\end{tikzpicture}
+		\end{center}
+		
+		Então, pela diferença de potencial entre \(A\) e \(B\), temos:
+		$
+		V_B-V_A=V
+		=
+		\frac{Q_1}{C_1}
+		=
+		\frac{Q_2}{C_2}.
+		$
+		
+		Consequentemente, se os condensadores têm capacitâncias diferentes, as cargas
+		são diferentes em condensadores ligados em paralelo.
+		
+		\[
+		Q=Q_1+Q_2
+		=
+		C_1V+C_2V
+		=
+		(C_1+C_2)V
+		=
+		CV.
+		\]
+		
+		Então:
+		$
+		C=C_1+C_2.
+		$
+		
+		Para \(n\) condensadores em paralelo:
+		
+		\[
+		C=\sum_{i=1}^{n}C_i.
+		\]
+	\end{frame}
+	
+	% SLIDE 8
+	\begin{frame}{Exemplo: dois condensadores em paralelo}
+		\scriptsize
+		
+		Sejam:
+		
+		\[
+		C_1=4\mu F,
+		\qquad
+		C_2=6\mu F,
+		\qquad
+		V=10V.
+		\]
+		
+		A capacitância equivalente é:
+		
+		\[
+		C=C_1+C_2
+		=
+		4\mu F+6\mu F
+		=
+		10\mu F.
+		\]
+		
+		As cargas nos condensadores são:
+		
+		\[
+		Q_1=C_1V
+		=
+		4\mu F\cdot 10V
+		=
+		40\mu C,
+		\]
+		
+		\[
+		Q_2=C_2V
+		=
+		6\mu F\cdot 10V
+		=
+		60\mu C.
+		\]
+	\end{frame}
+	
+	% SLIDE 9
+	\begin{frame}{Circuito misto: série + paralelo}
+		\scriptsize
+		
+		\begin{center}
+			\begin{tikzpicture}[
+				scale=0.65,
+				every node/.style={font=\tiny, inner sep=1pt}
+				]
+				\filldraw (-3,0) circle (1.5pt);
+				\node[left] at (-3,0) {\(A\)};
+				
+				\filldraw (-0.7,0) circle (1.5pt);
+				\node[below left] at (-0.7,0) {\(B\)};
+				
+				\filldraw (3,0) circle (1.5pt);
+				\node[right] at (3.8,0) {\(C\)};
+				
+				% C1
+				\draw[fio] (-3,0) -- (-2.1,0);
+				\draw[placa] (-2.1,-0.45) -- (-2.1,0.45);
+				\draw[placa] (-1.75,-0.45) -- (-1.75,0.45);
+				\draw[fio] (-1.75,0) -- (-0.7,0);
+				\node[above] at (-1.93,0.55) {\(C_1\)};
+				\node[red!80!black] at (-2.25,-0.70) {\(+Q_1\)};
+				\node[blue!80!black] at (-1.60,-0.70) {\(-Q_1\)};
+				
+				% fios do paralelo
+				\draw[fio] (-0.7,0) -- (-0.7,1.2);
+				\draw[fio] (-0.7,0) -- (-0.7,-1.2);
+				\draw[fio] (3,0) -- (3,1.2);
+				\draw[fio] (3,0) -- (3,-1.2);
+				
+				% C2
+				\draw[fio] (-0.7,1.2) -- (0.8,1.2);
+				\draw[placa] (0.8,0.75) -- (0.8,1.65);
+				\draw[placa] (1.15,0.75) -- (1.15,1.65);
+				\draw[fio] (1.15,1.2) -- (3,1.2);
+				\node[above] at (0.98,1.65) {\(C_2\)};
+				\node[red!80!black] at (0.62,0.5) {\(+Q_2\)};
+				\node[blue!80!black] at (1.53,0.5) {\(-Q_2\)};
+				
+				% C3
+				\draw[fio] (-0.7,-1.2) -- (0.8,-1.2);
+				\draw[placa] (0.8,-1.65) -- (0.8,-0.75);
+				\draw[placa] (1.15,-1.65) -- (1.15,-0.75);
+				\draw[fio] (1.15,-1.2) -- (3,-1.2);
+				\node[below] at (0.98,-1.65) {\(C_3\)};
+				\node[red!80!black] at (0.62,-0.5) {\(+Q_3\)};
+				\node[blue!80!black] at (1.53,-0.50) {\(-Q_3\)};
+				
+				% linha exterior em C
+				\draw[fio] (3,0) -- (3.8,0);
+			\end{tikzpicture}
+		\end{center}
+		
+		O condensador \(C_1\) está ligado em série com o sistema de dois condensadores ligados em paralelo.
+		
+		\[
+		C_{23}=C_2+C_3.
+		\]
+		
+		Como \(C_1\) está em série com \(C_{23}\):
+		
+		\[
+		\frac{1}{C_{123}}
+		=
+		\frac{1}{C_1}
+		+
+		\frac{1}{C_{23}}
+		=
+		\frac{1}{C_1}
+		+
+		\frac{1}{C_2+C_3}.
+		\]
+		
+		Logo:
+		
+		\[
+		C_{123}
+		=
+		\frac{C_1(C_2+C_3)}{C_1+C_2+C_3}.
+		\]
+	\end{frame}
+	
+	% SLIDE 10
+	\begin{frame}{Exemplo anterior: circuito misto série + paralelo}
+		\scriptsize
+		
+		Sejam:
+		$
+		V_{AC}=10V,
+		\,
+		C_1=2\mu F,
+		\,
+		C_2=4\mu F,
+		\,
+		C_3=6\mu F.
+		$
+		\vspace{0.2cm}
+		
+		Como \(C_2\) e \(C_3\) estão em paralelo:
+		$
+		C_{23}=C_2+C_3=4\mu F+6\mu F=10\mu F.
+		$
+			
+		\vspace{0.2cm}
+				
+		Como \(C_1\) está em série com \(C_{23}\):
+		
+		\[
+		C_{123}
+		=
+		\frac{C_1(C_2+C_3)}{C_1+C_2+C_3}
+		=
+		\frac{2\cdot 10}{2+10}\mu F
+		=
+		1,66\mu F.
+		\]
+		
+		Logo:
+		
+		\[
+		Q_1=Q_{23}=C_{123}V_{AC}
+		=
+		1,66\mu F\cdot 10V
+		=
+		16,6\mu C.
+		\]
+		
+		Como:
+		$
+		Q_{23}=C_{23}V_{BC},
+		\rightarrow  \,\, V_{BC}
+		=
+		\frac{Q_{23}}{C_{23}}
+		=
+		\frac{16,6\mu C}{10\mu F}
+		=
+		1,66V.$
+		
+	
+		
+		Como \(C_2\) e \(C_3\) estão em paralelo:
+		
+		\[
+		V_2=V_3=V_{BC}.
+		\]
+		
+		Portanto:
+		
+		\[
+		Q_2=C_2V_{BC}
+		=
+		4\mu F\cdot 1,66V
+		=
+		6,64\mu C,
+		\qquad
+		Q_3=C_3V_{BC}
+		=
+		6\mu F\cdot 1,66V
+		=
+		9,96\mu C.
+		\]
+		
+		Verificação:
+		
+		\[
+		Q_2+Q_3=6,64\mu C+9,96\mu C=16,6\mu C=Q_{23}.
+		\]
+	\end{frame}
+	
+% SLIDE 12
+\begin{frame}{Projeto computacional: circuito com dois blocos}
+	\scriptsize
+	
+	No projeto, vamos construir duas associações de condensadores, chamadas
+	\textbf{bloco \(AB\)} e \textbf{bloco \(BC\)}. Cada bloco contém exatamente
+	três condensadores.
+	
+	\vspace{0.15cm}
+	
+	Em cada bloco, o utilizador escolhe uma das duas estruturas:
+	
+	\[
+	P(S(C_1,C_2),C_3)
+	\qquad \text{ou} \qquad
+	S(P(C_1,C_2),C_3).
+	\]
+	
+	Usaremos a notação:
+	$
+	S(\cdots)=\text{bloco em série},
+	\qquad
+	P(\cdots)=\text{bloco em paralelo}.
+	$
+	
+	\vspace{0.3cm}
+	
+	Assim, \(P(S(C_1,C_2),C_3)\) significa que \(C_1\) e \(C_2\) estão em série,
+	e esse bloco está em paralelo com \(C_3\). Por outro lado,
+	\(S(P(C_1,C_2),C_3)\) significa que \(C_1\) e \(C_2\) estão em paralelo,
+	e esse bloco está em série com \(C_3\).
+	
+	\vspace{0.15cm}
+	
+	O programa deve pedir ao utilizador:
+	
+	\[
+	V,\qquad C_1,C_2,C_3,\qquad C_4,C_5,C_6.
+	\]
+	
+	Depois, o utilizador deve escolher:
+	
+	\[
+	\text{estrutura do bloco } AB,
+	\,
+	\text{estrutura do bloco } BC,
+	\,
+	\text{ligação final entre os dois blocos: série ou paralelo}.
+	\]
+	
+\end{frame}
+
+
+% SLIDE 13
+\begin{frame}{Ideia do projeto}
+	\scriptsize
+	
+	O utilizador constrói dois blocos de três condensadores. Depois escolhe se os
+	dois blocos estão ligados em série ou em paralelo.
+	
+	\vspace{0.25cm}
+	
+	\begin{center}
+		\begin{tikzpicture}[scale=0.82, every node/.style={font=\scriptsize}]
+			
+			% Caso em série
+			\node at (0,1.55) {\textbf{Caso 1: blocos em série}};
+			
+			\filldraw (-4,0.5) circle (1.5pt);
+			\node[below] at (-4,0.5) {\(A\)};
+			
+			\filldraw (0,0.5) circle (1.5pt);
+			\node[below] at (0,0.5) {\(B\)};
+			
+			\filldraw (4,0.5) circle (1.5pt);
+			\node[below] at (4,0.5) {\(C\)};
+			
+			\draw[fio] (-4,0.5) -- (-3.2,0.5);
+			\draw[fio] (-0.8,0.5) -- (0,0.5);
+			\draw[fio] (0,0.5) -- (0.8,0.5);
+			\draw[fio] (3.2,0.5) -- (4,0.5);
+			
+			\draw[thick] (-3.2,-0.2) rectangle (-0.8,1.2);
+			\node at (-2.0,0.5) {\textbf{bloco \(AB\)}};
+			
+			\draw[thick] (0.8,-0.2) rectangle (3.2,1.2);
+			\node at (2.0,0.5) {\textbf{bloco \(BC\)}};
+			
+			% Caso em paralelo
+			\node at (1.5,-1.25) {\textbf{Caso 2: blocos em paralelo}};
+			
+			\filldraw (-4,-2.2) circle (1.5pt);
+			\node[left] at (-4,-2.2) {\(A\)};
+			
+			\filldraw (4,-2.2) circle (1.5pt);
+			\node[right] at (4,-2.2) {\(C\)};
+			
+			\draw[fio] (-4,-2.2) -- (-4,-1.7);
+			\draw[fio] (-4,-2.2) -- (-4,-2.7);
+			\draw[fio] (4,-2.2) -- (4,-1.7);
+			\draw[fio] (4,-2.2) -- (4,-2.7);
+			
+			\draw[fio] (-4,-1.7) -- (-3.2,-1.7);
+			\draw[fio] (-0.8,-1.7) -- (4,-1.7);
+			\draw[thick] (-3.2,-2.25) rectangle (-0.8,-1.15);
+			\node at (-2.0,-1.7) {\textbf{bloco \(AB\)}};
+			
+			\draw[fio] (-4,-2.7) -- (-3.2,-2.7);
+			\draw[fio] (-0.8,-2.7) -- (4,-2.7);
+			\draw[thick] (-3.2,-3.25) rectangle (-0.8,-2.15);
+			\node at (-2.0,-2.7) {\textbf{bloco \(BC\)}};
+			
+		\end{tikzpicture}
+	\end{center}
+	
+	No caso em série, os blocos estão ligados por um ponto intermédio \(B\).
+	No caso em paralelo, os dois blocos estão ligados aos mesmos pontos de contacto externos.
+	
+\end{frame}
+
+
+% SLIDE 14
+\begin{frame}{Algoritmo do projeto}
+	\scriptsize
+	
+	\textbf{A)} O utilizador escolhe os valores das seis capacitâncias:
+	\[
+	C_1,\ C_2,\ C_3,\ C_4,\ C_5,\ C_6,
+	\]
+	e a diferença de potencial externa total aplicada ao circuito:
+	\[
+	V_{\mathrm{tot}}.
+	\]
+	
+	\textbf{B)} O utilizador escolhe a estrutura de cada bloco:
+	\[
+	\text{bloco } AB
+	\qquad \text{e} \qquad
+	\text{bloco } BC.
+	\]
+	
+	\textbf{C)} O utilizador escolhe se os dois blocos estão ligados em série ou em paralelo.
+	
+	\textbf{D)} O programa calcula a capacitância equivalente de cada bloco:
+	\[
+	C_{AB}
+	\qquad \text{e} \qquad
+	C_{BC}.
+	\]
+	
+	\textbf{E)} O programa calcula a capacitância equivalente final:
+	\[
+	C_{\mathrm{tot}}.
+	\]
+	
+	\textbf{F)} O programa calcula a carga total final:
+	\[
+	Q_{\mathrm{tot}}.
+	\]
+	
+	\textbf{G)} O programa calcula, para cada condensador:
+	\[
+	V_i
+	\qquad \text{e} \qquad
+	Q_i.
+	\]
+	
+\end{frame}
+	
+\end{document}

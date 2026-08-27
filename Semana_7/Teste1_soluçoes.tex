@@ -1,0 +1,134 @@
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[portuguese]{babel}
+\usepackage{amsmath}
+\usepackage{siunitx}
+\usepackage{graphicx}
+\usepackage{geometry}
+\usepackage{multicol}
+\usepackage{circuitikz}
+\usepackage{parskip}
+\usepackage{enumitem}
+
+\geometry{a4paper, left=1.5cm, right=1.5cm, top=1cm, bottom=2cm}
+
+\newcommand{\cabecalho}{
+	\hfill
+	\begin{minipage}[t]{0.7\textwidth}
+		\raggedleft
+		\textbf{Teste Modelo 1, Fundamentos de Física} \\
+		\textit{Chave de Resolução}
+	\end{minipage}
+}
+
+\newcommand{\pontos}[1]{\hfill\textbf{(#1 valores)}}
+
+\title{Teste Modelo 1 - Soluções}
+\author{}
+\date{20 de março de 2026}
+
+\setlength{\parindent}{0pt}
+\setlist[enumerate]{itemsep=4pt, topsep=4pt}
+
+\begin{document}
+	
+	\cabecalho
+	
+	\vspace{0.5cm}
+	
+	\textbf{Exercício 1}. Considere uma piscina cilíndrica com base circular de raio $2\,\text{m}$ e altura $3\,\text{m}$. A piscina está cheia de um líquido até $30\,\text{cm}$ da borda.
+	\begin{enumerate}[label=\textbf{\alph*)}]
+		\item Calcule o volume total da piscina. \pontos{1,5}
+		\item Sabendo que o líquido tem uma densidade $\rho = 600\,\text{kg/m}^3$, qual é a massa do líquido na piscina? \pontos{1,0}
+	\end{enumerate}
+	
+	\vspace{0.4cm}
+	\textbf{Resolução:}
+	\begin{enumerate}[label=\alph*), itemsep=12pt]
+		\item O volume de um cilindro é $V = \pi r^2 H$. \\
+		Com $r = 2\,\text{m}$ e $H = 3\,\text{m}$, temos: $V = \pi \times 2^2 \times 3 = 12\pi \approx 37,70\,\text{m}^3$.
+		
+		\item A altura do líquido é $h_L = 3\,\text{m} - 0,30\,\text{m} = 2,7\,\text{m}$. \\
+		O volume do líquido é $V_L = \pi r^2 h_L = \pi \times 2^2 \times 2,7 = 10,8\pi \approx 33,93\,\text{m}^3$. \\
+		A massa é $m = \rho V_L = 600 \times 33,93 \approx 20358\,\text{kg}$.
+	\end{enumerate}
+	
+	\vspace{0.8cm}
+	
+	\textbf{Exercício 2}. Considere o vetor $\overline{v} = (v_x, v_y)$ de módulo 2 e orientação definida pelo ângulo $\theta = 60^\circ$.
+	\begin{enumerate}[label=\textbf{\alph*)}]
+		\item Desenhe o vetor no plano cartesiano. \pontos{0,5}
+		\item Calcule as suas componentes e escreva $\overline{v}$ com os vetores unitários $\overline{i}$ e $\overline{j}$. \pontos{1,5}
+		\item Calcule o vetor unitário com a mesma orientação de $-\overline{v}$. \pontos{1,0}
+		\item Se $\overline{w} = (0; 1,3)$, quais são os valores de $|\overline{w}|$ e $\phi$, tais que $w_x = |\overline{w}| \cos \phi$ e $w_y = |\overline{w}| \sin \phi$? \pontos{1,5}
+	\end{enumerate}
+	
+	\vspace{0.4cm}
+	\textbf{Resolução:}
+	\begin{enumerate}[label=\alph*), itemsep=12pt]
+		\item \quad \\
+		\begin{tikzpicture}[scale=1, baseline=(current bounding box.north)]
+			\draw[->] (-0.5,0) -- (2,0) node[right] {$x$};
+			\draw[->] (0,-0.5) -- (0,2) node[above] {$y$};
+			\draw[->, thick, red] (0,0) -- (1, 1.732) node[above right] {$\overline{v}$};
+			\draw (0.4,0) arc (0:60:0.4) node[midway, right, xshift=2pt] {$60^\circ$};
+		\end{tikzpicture}
+		
+		\item $v_x = 2 \cos(60^\circ) = 2(0,5) = 1$ e $v_y = 2 \sin(60^\circ) = 2(\frac{\sqrt{3}}{2}) = \sqrt{3} \approx 1,732$. \\
+		Escrita unitária: $\overline{v} = 1\overline{i} + \sqrt{3}\overline{j}$.
+		
+		\item O vetor $-\overline{v} = (-1, -\sqrt{3})$ tem módulo 2. \\
+		O vetor unitário é $\hat{u} = \frac{-\overline{v}}{|-\overline{v}|} = \left(-\frac{1}{2}, -\frac{\sqrt{3}}{2}\right)$.
+		
+		\item $|\overline{w}| = \sqrt{0^2 + 1,3^2} = 1,3$. \\
+		$w_x = 1,3 \cos \phi = 0 \implies \cos \phi = 0$. \\
+		$w_y = 1,3 \sin \phi = 1,3 \implies \sin \phi = 1$. Logo, $\phi = 90^\circ$ (ou $\pi/2\,\text{rad}$).
+	\end{enumerate}
+	
+	\vspace{0.8cm}
+	
+	\textbf{Exercício 3}. Uma partícula no plano descreve um movimento acelerado (não necessariamente uniformemente acelerado), passando de um ponto na posição $\overline{r}_A = (1; 1)\,\text{m}$ para a posição $\overline{r}_B = (1; 1,5)\,\text{m}$, percorrendo uma distância $d = 0,65\,\text{m}$.
+	\begin{enumerate}[label=\textbf{\alph*)}]
+		\item O movimento é retilíneo ou curvilíneo? Desenhe uma possível trajetória que passe por A e B. \pontos{1,0}
+		\item Devido a um mecanismo, no ponto B a velocidade da partícula passa de $\overline{v}_1 = (2, -1)\,\text{m/s}$ para uma velocidade $\overline{v}_2 = (0, -1)\,\text{m/s}$ num intervalo de tempo de $\Delta t = 750\,\text{ms}$. Calcule a aceleração média da partícula durante $\Delta t$ e explique o significado do seu sinal. \pontos{2,5}
+		\item Depois do intervalo $\Delta t$, o corpo continua em movimento retilíneo uniformemente variado, sem mudar a orientação da trajetória, e imobiliza-se após um intervalo $\Delta T = 15\,\text{s}$. Qual é a aceleração durante esse intervalo? \pontos{1,5}
+		\item Desenhe a trajetória durante $\Delta T$ e calcule a distância percorrida. \pontos{1,5}
+	\end{enumerate}
+	
+	\vspace{0.4cm}
+	\textbf{Resolução:}
+	\begin{enumerate}[label=\alph*), itemsep=12pt]
+		\item Deslocamento $\Delta r = \sqrt{(1-1)^2 + (1,5-1)^2} = 0,5\,\text{m}$. Como a distância percorrida $d = 0,65\,\text{m}$ é superior ao módulo do deslocamento ($0,5\,\text{m}$), o movimento é obrigatoriamente curvilíneo.
+		\item $\Delta t = 0,75\,\text{s}$. Cálculo vetorial: $\overline{a}_m = \frac{\overline{v}_2 - \overline{v}_1}{\Delta t} = \frac{(0, -1) - (2, -1)}{0,75} = \frac{(-2, 0)}{0,75} \approx (-2,67; 0)\,\text{m/s}^2$. \\
+		\textbf{Significado do sinal:} A aceleração média tem uma componente $x$ negativa. Como a velocidade inicial no eixo $x$ era positiva ($v_{1x} = 2$) e a final passou a ser zero, a aceleração aponta no sentido oposto ao movimento horizontal. Fisicamente, isto significa que o mecanismo provocou uma travagem (desaceleração) ao longo do eixo $x$, anulando essa componente da velocidade.
+		\item $\overline{v}_i = (0, -1)\,\text{m/s}$, $\overline{v}_f = (0, 0)$. Como imobiliza, $\overline{a} = \frac{\overline{v}_f-\overline{v}_i}{\Delta T} = \frac{(0,0)-(0,-1)}{15} = (0; 0,067)\,\text{m/s}^2$.
+		\item Trajetória é uma linha reta sobre $x=1$, deslocando-se para baixo no eixo $y$. \\
+		Usando a velocidade média: $d = |v_m| \Delta T = \frac{1 + 0}{2} \times 15 = 7,5\,\text{m}$.
+	\end{enumerate}
+	
+	\vspace{0.8cm}
+	
+	\textbf{Exercício 4}. Uma bola é lançada do topo de um prédio de altura $30 \text{ m}$. No instante do lançamento, a bola tem uma velocidade de $10 \text{ m/s}$, apontando para baixo e formando um ângulo de $45,0^\circ$ com a vertical. Desprezando a resistência do ar, determine:
+	\begin{enumerate}[label=\textbf{\alph*)}]
+		\item Desenhe a trajetória do projétil, explicitando numericamente o ângulo de lançamento. \pontos{0,5}
+		\item Qual é a altura máxima atingida durante a trajetória? \pontos{1,0}
+		\item Qual é o instante em que o projétil atinge o solo? \pontos{2,0}
+		\item A que distância horizontal do prédio o projétil atinge o solo? \pontos{1,0}
+		\item Calcule o ângulo de impacto e a velocidade no ponto de impacto, desenhando o seu sentido e orientação. \pontos{2,0}
+	\end{enumerate}
+	
+	\vspace{0.4cm}
+	\textbf{Resolução:} (Considerando $g = 10\,\text{m/s}^2$)
+	\begin{enumerate}[label=\alph*), itemsep=12pt]
+		\item Trajetória parabólica descendente partindo de $(0, 30)$, com vetor inicial a apontar $45^\circ$ para baixo em relação à vertical.
+		\item Como o lançamento é imediatamente para baixo, a bola nunca sobe. Logo, a altura máxima é a altura inicial do prédio: $h_{max} = 30\,\text{m}$.
+		\item $v_{0y} = -10 \cos(45^\circ) \approx -7,07\,\text{m/s}$. Equação da posição: $y(t) = 30 - 7,07t - 5t^2 = 0$. \\
+		Resolvendo a equação quadrática ($5t^2 + 7,07t - 30 = 0$) e descartando o tempo negativo: $t \approx 1,84\,\text{s}$.
+		\item $v_{0x} = 10 \sin(45^\circ) \approx 7,07\,\text{m/s}$ (constante). \\
+		Alcance horizontal $x = v_{0x} \times t = 7,07 \times 1,84 \approx 13,01\,\text{m}$.
+		\item Componente vertical final: $v_{fy} = v_{0y} - gt = -7,07 - 10(1,84) \approx -25,47\,\text{m/s}$. \\
+		Módulo da velocidade final: $v_f = \sqrt{v_{0x}^2 + v_{fy}^2} = \sqrt{7,07^2 + (-25,47)^2} \approx 26,43\,\text{m/s}$. \\
+		O ângulo de impacto $\alpha$ em relação à horizontal é $\tan \alpha = \frac{-25,47}{7,07} \approx -3,60 \implies \alpha \approx -74,5^\circ$.
+	\end{enumerate}
+	
+\end{document}

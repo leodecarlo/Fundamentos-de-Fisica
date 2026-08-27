@@ -1,0 +1,1037 @@
+\documentclass{beamer}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[portuguese]{babel}
+\usepackage{amsmath}
+\usepackage{tikz}
+% A linha abaixo foi corrigida com "decorations.pathreplacing"
+\usetikzlibrary{shapes.geometric, arrows.meta, 3d, calc, decorations.pathreplacing}
+
+% Configuração do Tema
+\usetheme{Madrid}
+\usecolortheme{default}
+
+% Informações do Título
+\title{Aula 5: Teoria e Prática}
+\subtitle{Movimento Balístico}
+\date{23 Março 2026}
+
+\begin{document}
+	
+	\frame{\titlepage}
+	
+	% PAGE 1
+	\begin{frame}
+		\footnotesize % Reduz o tamanho da fonte para caber tudo num slide
+		
+		\textcolor{red}{\textbf{Abreviações:} MU := ``Movimento Uniforme'', MUA := ``Mov. Uniformemente Acelerado''}
+		
+		\vspace{0.1cm}
+		Anteriormente introduzimos o ``Movimento Uniformemente Acelerado'' no caso planar, isto é, onde a velocidade e a aceleração têm duas componentes $(x, y)$. Lembrete: ``uniformemente acelerado'' significa com aceleração constante: $\vec{a}(t) = (a_x, a_y)$ com $a_x$ e $a_y$ independentes do tempo.
+		
+		\vspace{0.1cm}
+		Depois focámos no caso 1-d. Hoje passamos a estudar o mov. unif. acc. no caso 2-d.
+		
+		\vspace{0.1cm}
+		No caso 1-d, se um ponto se desloca de $A$ a $B$, a distância percorrida de $A$ a $B$ é igual à magnitude do deslocamento: $|\vec{r}_{AB}| = \ell$.
+		\vspace{0.1cm}
+		\begin{minipage}{0.65\textwidth}
+			$\vec{r}_{AB}$ : deslocamento \\
+			$\ell$ : distância percorrida de A a B 
+		\end{minipage}%
+		\begin{minipage}{0.35\textwidth}
+			\centering
+			\begin{tikzpicture}[scale=0.65]
+				\draw[->] (0,0) -- (4,0);
+				\filldraw (0.5,0) circle (1pt) node[above left] {$A$};
+				\filldraw (3.5,0) circle (1pt) node[above right] {$B$};
+				\draw[->, green!60!black, thick] (0.5,0) -- (3.5,0) node[midway, below] {$\vec{r}_{AB}$};
+				\draw[red, thick] (0.5, 0.3) -- (3.5, 0.3) node[midway, above] {$\ell$};
+			\end{tikzpicture}
+		\end{minipage}
+		
+		\vspace{0.1cm}
+		Em 2-d, em geral, a distância percorrida de $A$ a $B$, é maior que a magnitude do deslocamento, porque o movimento é curvilíneo: 	$|\vec{r}_{AB}| \le \ell$.
+		\vspace{0.1cm}
+		\begin{minipage}{0.65\textwidth}
+			$\vec{r}_{AB}$ : deslocamento \\
+			$\ell$ : distância percorrida de A a B 
+		\end{minipage}%
+		\begin{minipage}{0.35\textwidth}
+			\centering
+			\begin{tikzpicture}[scale=0.65]
+				\filldraw (0,0) circle (1pt) node[left] {$A$};
+				\filldraw (3,0) circle (1pt) node[right] {$B$};
+				\draw[->, green!60!black, thick] (0,0) -- (3,0) node[midway, below] {$\vec{r}_{AB}$};
+				\draw[red, thick] (0,0) to[out=60, in=120] node[midway, above] {$\ell$} (3,0);
+			\end{tikzpicture}
+		\end{minipage}
+		
+		\vspace{0.1cm}
+		Como caso de movimento curvilíneo planar focamos no ``Movimento Balístico''. Também começamos a chamar o ``ponto material de massa M'' como a ``partícula de massa M''.
+		
+	\end{frame}
+	
+	% PAGE 2 - PARTE 1
+	\begin{frame}{Movimento Balístico}
+		\footnotesize % Letra mais pequena para garantir que nada é cortado no fundo
+		
+		O \underline{``Movimento Balístico''} é um caso especial de movimento 2-d: uma partícula é lançada com uma velocidade inicial $\vec{v}_0$ e a única aceleração (constante) a que está sujeita é a gravidade $\vec{g}$ (dirigida para baixo), isto é, um corpo que sobe e depois cai. (Não consideramos o atrito do ar).
+		
+		\vspace{0.3cm}
+		$\Rightarrow \vec{v}_0 = (v_{0x}, v_{0y})$, $\vec{a} = (0, -g) = \vec{g}$ ($g = 10 \text{ m/s}^2$). Visualizamos esse movimento com lançamento da origem.
+		
+		\vspace{0.5cm}
+		O facto essencial é que no Mov. Bal. o movimento horizontal \textcolor{red}{$x(t)$} e o mov. vertical \textcolor{red}{$y(t)$} são independentes, ou seja, um não afeta o outro. A consequência é que podemos analisar o movimento decompondo em dois problemas unidimensionais independentes: $x(t)$ e $y(t)$.
+		
+		\vspace{0.2cm}
+		\begin{columns}[T] % Alinhamento pelo topo das colunas
+			% Coluna Esquerda: Gráfico Principal
+			\begin{column}{0.45\textwidth}
+				\centering
+				\begin{tikzpicture}[scale=0.75]
+					% Eixos
+					\draw[->] (-0.2,0) -- (4.2,0);
+					\draw[->] (0,-0.2) -- (0,2.5) node[above] {$y$};
+					\node[below left] at (0,0) {$O$};
+					
+					% Chão
+					\fill[brown!40] (-0.2,-0.2) rectangle (4,0);
+					\draw (-0.2,0) -- (4,0);
+					
+					% Trajetória
+					\draw[cyan!80!blue, thick] (0,0) parabola bend (1.8, 2.2) (3.6,0);
+					\node[blue, right] at (1.5, 2.4) {trajetória};
+					
+					% Vetores e Pontos
+					\filldraw[cyan] (0,0) circle (2.5pt);
+					\draw[->, magenta, thick] (0,0) -- (0.7, 1.4) node[right] {$\vec{v}_0$};
+					
+					\filldraw (1.8, 2.2) circle (1.5pt);
+					\draw[->, thick] (1.8, 2.2) -- (1.8, 1.3) node[right] {$\vec{g}$};
+					
+					\node[below] at (3.6,0) {$P$};
+					\node[blue, align=center, font=\scriptsize] (land) at (3.6, 1.2) {ponto de \\ aterragem};
+					\draw[->, blue, shorten >=2pt, bend left=20] (land.south) to (3.6,0.1);
+				\end{tikzpicture}
+			\end{column}
+			
+			% Coluna Direita: Texto Vermelho e Gráficos pequenos
+			\begin{column}{0.55\textwidth}
+				\textcolor{red}{\textbf{Obs:} Na figura a lado o ponto de lançamento $O$ e de aterragem $P$ estão na mesma altura. Em geral $O$ pode estar mais alto ou mais baixo de $P$.}
+				
+				\vspace{0.3cm}
+				\centering
+				\begin{tikzpicture}[scale=0.65]
+					% Gráfico 1 (O mais alto)
+					\draw[->] (0,0) -- (2.5,0);
+					\draw[->] (0,-0.2) -- (0,2);
+					\filldraw (0,1) circle (1.5pt) node[left] {$O$};
+					% Usando parabola bend com um vértice bem definido para uma curva natural
+					\draw[blue, thick, ->] (0,1) parabola bend (0.9, 1.7) (2, 0);
+					\filldraw (2, 0) circle (1.5pt) node[below] {$P$};
+					
+					% Gráfico 2 (O mais baixo)
+					\begin{scope}[xshift=3.5cm]
+						\draw[->] (0,0) -- (2.5,0);
+						\draw[->] (0,-0.2) -- (0,2);
+						\filldraw (0,0.5) circle (1.5pt) node[left] {$O$};
+						\draw[blue, thick, ->] (0,0.5) parabola bend (1.1, 1.6) (2, 1);
+						\filldraw (2, 1) circle (1.5pt) node[right] {$P$};
+					\end{scope}
+				\end{tikzpicture}
+			\end{column}
+		\end{columns}
+		
+	\end{frame}
+	
+	
+	% PAGE 2 - PARTE 2 (A Sequência Completa)
+	\begin{frame}
+		\centering
+		% Ajusta perfeitamente à largura máxima do ecrã
+		\resizebox{\textwidth}{!}{
+			\begin{tikzpicture}[
+				font=\small, 
+				ball/.style={circle, shading=ball, ball color=cyan!40, minimum size=3mm, inner sep=0pt},
+				traj/.style={cyan!30, thick}
+				]
+				
+				% ================= CABEÇALHOS =================
+				\node at (1, 2.2) {\textbf{Movimento vertical}};
+				\node at (4.5, 2.2) {\Large $\mathbf{+}$};
+				\node at (8, 2.2) {\textbf{Movimento horizontal}};
+				\node at (11.5, 2.2) {\Huge $\mathbf{\Rightarrow}$};
+				\node at (16, 2.2) {\textbf{Movimento balístico}};
+				
+				% ================= ROW 1: Lançamento (t=0) =================
+				\begin{scope}[yshift=0cm]
+					% Col 1
+					\begin{scope}[xshift=0cm]
+						\draw[->] (-0.2,0) -- (2.5,0) node[right] {$x$};
+						\draw[->] (0,-0.2) -- (0,2.5) node[above] {$y$};
+						\node[below left] at (0,0) {$O$};
+						\node[ball] (b11) at (0,0) {};
+						\draw[->, magenta, thick] (0,0) -- (0,1.6) node[left] {$v_{0y}$};
+						\node[right] at (0.2, 1) {Velocidade vertical};
+						\node[below] at (1, -0.3) {Lançamento};
+					\end{scope}
+					
+					% Col 2
+					\begin{scope}[xshift=5.5cm]
+						\draw[->] (-0.2,0) -- (6.5,0) node[right] {$x$};
+						\draw[->] (0,-0.2) -- (0,1) node[above] {$y$};
+						\node[below left] at (0,0) {$O$};
+						\node[ball] (b12) at (0,0) {};
+						\draw[->, magenta, thick] (0,0) -- (1.25,0) node[below] {$v_{0x}$};
+						\node[below] at (3, -0.3) {Lançamento};
+						
+						% Caixa de texto Col 2 (espaçosa)
+						\node[fill=yellow!10, text width=3.8cm, align=left, draw=gray!30] (box) at (2.5, 1.0) {O movimento balístico é uma combinação do movimento vertical com o movimento horizontal.};
+					\end{scope}
+					
+					% Linhas de ligação da caixa (conectam Col 1 e Col 3)
+					\draw[gray] (box.west) -- (b11.north east);
+					\draw[gray] (box.east) -- (13.5, 1.4);
+					
+					% Col 3
+					\begin{scope}[xshift=13.5cm]
+						\draw[->] (-0.2,0) -- (6.5,0) node[right] {$x$};
+						\draw[->] (0,-0.2) -- (0,2.5) node[above] {$y$};
+						\node[below left] at (0,0) {$O$};
+						\draw[traj] (0,0) parabola bend (2.5,2) (5,0);
+						\node[ball] (b13) at (0,0) {};
+						% Vetor Inicial: Tangente na origem (x=0, declive=1.6/1.25)
+						\draw[->, magenta, thick] (0,0) -- (1.25,1.8) node[above right, inner sep=1pt] {$\vec{v}_0$};
+						\draw[->, dashed] (0,0) -- (1.25,0) node[below] {$v_{0x}$};
+						\draw[->, dashed] (0,0) -- (0,1.6) node[left] {$v_{0y}$};
+						\draw[dashed] (1.25,0) -- (1.25,1.6) -- (0,1.6);
+						\draw (0.5,0) arc (0:52:0.5);
+						\node at (0.7, 0.3) {$\theta_0$};
+						\node[right] at (1.3, 1.6) {Velocidade de lançamento};
+						\node[right] at (1.0, 0.3) {Ângulo de lançamento};
+					\end{scope}
+				\end{scope}
+				
+				% ================= ROW 2: Subida (t=1) =================
+				\begin{scope}[yshift=-2.8cm]
+					% Col 1
+					\begin{scope}[xshift=0cm]
+						\draw[->] (-0.2,0) -- (2.5,0) node[right] {$x$};
+						\draw[->] (0,-0.2) -- (0,2.5) node[above] {$y$};
+						\node[below left] at (0,0) {$O$};
+						\node[ball] at (0,1.5) {}; % Altura correspondente a x=1.25 na parábola y = -8/25*(x-2.5)^2 + 2 = 1.5
+						\draw[->, magenta, thick] (0,1.5) -- (0,2.3) node[left] {$v_y$}; % v_y diminuiu (1.6 -> 0.8)
+						\node[right, align=left, text width=4.5cm] at (0.2, 0.6) {Velocidade \underline{decrescente} : \\ \textcolor{red}{porque $\vec{g}$ é para baixo}};
+					\end{scope}
+					
+					% Col 2
+					\begin{scope}[xshift=5.5cm]
+						\draw[->] (-0.2,0) -- (6.5,0) node[right] {$x$};
+						\draw[->] (0,-0.2) -- (0,1) node[above] {$y$};
+						\node[below left] at (0,0) {$O$};
+						\node[ball] at (1.25,0) {}; % Posição x constante
+						\draw[->, magenta, thick] (1.25,0) -- (2.5,0) node[above] {$v_x$};
+						\node[below, align=left] at (3.5, -0.2) {Velocidade constante : \textcolor{red}{porque $a_x = 0$}};
+					\end{scope}
+					
+					% Col 3
+					\begin{scope}[xshift=13.5cm]
+						\draw[->] (-0.2,0) -- (6.5,0) node[right] {$x$};
+						\draw[->] (0,-0.2) -- (0,2.5) node[above] {$y$};
+						\node[below left] at (0,0) {$O$};
+						\draw[traj] (0,0) parabola bend (2.5,2) (5,0);
+						\node[ball] (b23) at (1.25,1.5) {};
+						% Vetor perfeitamente tangente (v_x = 1.25, v_y = 0.8)
+						\draw[->, magenta, thick] (1.25,1.5) -- (2.5,2.3) node[above right, inner sep=1pt] {$\vec{v}$};
+						\draw[->, dashed] (1.25,1.5) -- (2.5,1.5) node[below] {$v_x$};
+						\draw[->, dashed] (1.25,1.5) -- (1.25,2.3) node[left] {$v_y$};
+						\draw[dashed] (2.5,1.5) -- (2.5,2.3) -- (1.25,2.3);
+					\end{scope}
+				\end{scope}
+				
+				% ================= ROW 3: Altura Máxima (t=2) =================
+				\begin{scope}[yshift=-5.6cm]
+					% Col 1
+					\begin{scope}[xshift=0cm]
+						\draw[->] (-0.2,0) -- (2.5,0) node[right] {$x$};
+						\draw[->] (0,-0.2) -- (0,2.5) node[above] {$y$};
+						\node[below left] at (0,0) {$O$};
+						\node[ball] (b31) at (0,2) {}; % Vértice y=2
+						\node[right] at (0.2, 2) {$v_y = 0$};
+						\node[right, align=left, text width=2.5cm] at (0.2, 1) {Velocidade nula na altura máxima};
+					\end{scope}
+					
+					% Col 2
+					\begin{scope}[xshift=5.5cm]
+						\draw[->] (-0.2,0) -- (6.5,0) node[right] {$x$};
+						\draw[->] (0,-0.2) -- (0,1) node[above] {$y$};
+						\node[below left] at (0,0) {$O$};
+						\node[ball] at (2.5,0) {}; % x = 2.5
+						\draw[->, magenta, thick] (2.5,0) -- (3.75,0) node[above] {$v_x$};
+						\node[below] at (3.5, -0.2) {Velocidade constante};
+						
+						% Texto vermelho mais largo e posicionado para a direita
+						\node[red, align=left, text width=4cm] (txtRed) at (-1, 1.2) {$\leftarrow$ a altura é máxima quando o corpo começa a cair: ou seja a velocidade $v_y$ passa de $>0$ a $<0$.};
+					\end{scope}
+					
+					% Col 3
+					\begin{scope}[xshift=13.5cm]
+						\draw[->] (-0.2,0) -- (6.5,0) node[right] {$x$};
+						\draw[->] (0,-0.2) -- (0,2.5) node[above] {$y$};
+						\node[below left] at (0,0) {$O$};
+						\draw[traj] (0,0) parabola bend (2.5,2) (5,0);
+						\node[ball] (b33) at (2.5,2) {};
+						% Vetor Horizontal no topo da curva (v_y = 0)
+						\draw[->, magenta, thick] (2.5,2) -- (3.75,2) node[above] {$\vec{v}$};
+						\node[below] at (2.5, 1.9) {$v_y = 0$};
+						
+						% Textos do topo a vermelho
+						\node[red, above] at (2.5, 2.2) {$v_y(h_{max}) = 0$};
+						\draw[->, red, thick] (2.5, 2.4) -- (2.5, 2.15);
+						\draw[red, loosely dashed, thick] (2.5, 1.7) -- (2.5, 0);
+						\node[red, left] at (2.4, 0.8) {$v_y > 0$};
+						\node[red, left] at (2.4, 0.4) {(sobe)};
+						\node[red, right] at (2.6, 0.8) {$v_y < 0$};
+						\node[red, right] at (2.6, 0.4) {(cai)};
+						
+						% Referencial
+						\begin{scope}[xshift=4.5cm, yshift=0.5cm]
+							\draw[->, thick] (0,0) -- (1,0) node[below] {$\vec{i}$};
+							\draw[->, thick] (0,0) -- (0,1) node[left] {$\vec{j}$};
+						\end{scope}
+					\end{scope}
+					
+					% Seta vermelha apontando para Col 3
+					\draw[->, red, shorten >=2pt, thick, out=15, in=165] (txtRed.east) to (13.5 + 2.3, 2.1);
+				\end{scope}
+				
+				% ================= ROW 4: Queda (t=3) =================
+				\begin{scope}[yshift=-8.4cm]
+					% Col 1
+					\begin{scope}[xshift=0cm]
+						\draw[->] (-0.2,0) -- (2.5,0) node[right] {$x$};
+						\draw[->] (0,-1.5) -- (0,2.5) node[above] {$y$};
+						\node[below left] at (0,0) {$O$};
+						\node[ball] at (0,1.5) {}; % Altura correspondente a x=3.75 (simétrica)
+						\draw[->, magenta, thick] (0,1.5) -- (0,0.7) node[left] {$v_y$}; % v_y virada para baixo (0.8)
+						\node[right, align=left] at (0.2, 1.5) {Velocidade crescente};
+						\node[red, right] at (0.2, 0.8) {queda $\Rightarrow v_y < 0$};
+					\end{scope}
+					
+					% Col 2
+					\begin{scope}[xshift=5.5cm]
+						\draw[->] (-0.2,0) -- (6.5,0) node[right] {$x$};
+						\draw[->] (0,-0.2) -- (0,1) node[above] {$y$};
+						\node[below left] at (0,0) {$O$};
+						\node[ball] at (3.75,0) {}; % x = 3.75
+						\draw[->, magenta, thick] (3.75,0) -- (5.0,0) node[above] {$v_x$};
+						\node[below] at (3.5, -0.2) {Velocidade constante};
+					\end{scope}
+					
+					% Col 3
+					\begin{scope}[xshift=13.5cm]
+						\draw[->] (-0.2,0) -- (6.5,0) node[right] {$x$};
+						\draw[->] (0,-1.5) -- (0,2.5) node[above] {$y$};
+						\node[below left] at (0,0) {$O$};
+						\draw[traj] (0,0) parabola bend (2.5,2) (5,0);
+						\node[ball] (b43) at (3.75,1.5) {};
+						% Vetor perfeitamente tangente de descida (v_x = 1.25, v_y = -0.8)
+						\draw[->, magenta, thick] (3.75,1.5) -- (5.0,0.7) node[below right, inner sep=1pt] {$\vec{v}$};
+						\draw[->, dashed] (3.75,1.5) -- (5.0,1.5) node[above] {$v_x$};
+						\draw[->, dashed] (3.75,1.5) -- (3.75,0.7) node[left] {$v_y$};
+						\draw[dashed] (5.0,1.5) -- (5.0,0.7) -- (3.75,0.7);
+					\end{scope}
+				\end{scope}
+				
+				% ================= ROW 5: Aterragem (t=4) =================
+				\begin{scope}[yshift=-11.2cm]
+					% Col 1
+					\begin{scope}[xshift=0cm]
+						\draw[->] (-0.2,0) -- (2.5,0) node[right] {$x$};
+						\draw[->] (0,-1.8) -- (0,2.5) node[above] {$y$};
+						\node[below left] at (0,0) {$O$};
+						\node[ball] at (0,0) {}; % Retorna a y=0
+						\draw[->, magenta, thick] (0,0) -- (0,-1.6) node[left] {$v_y$}; % Simétrico ao lançamento
+					\end{scope}
+					
+					% Col 2
+					\begin{scope}[xshift=5.5cm]
+						\draw[->] (-0.2,0) -- (6.5,0) node[right] {$x$};
+						\draw[->] (0,-0.2) -- (0,1) node[above] {$y$};
+						\node[below left] at (0,0) {$O$};
+						\node[ball] at (5,0) {}; % x = 5 (ponto de aterragem)
+						\draw[->, magenta, thick] (5,0) -- (6.25,0) node[above] {$v_x$};
+						\node[below] at (3.5, -0.2) {Velocidade constante};
+					\end{scope}
+					
+					% Col 3
+					\begin{scope}[xshift=13.5cm]
+						\draw[->] (-0.2,0) -- (6.5,0) node[right] {$x$};
+						\draw[->] (0,-1.8) -- (0,2.5) node[above] {$y$};
+						\node[below left] at (0,0) {$O$};
+						\draw[traj] (0,0) parabola bend (2.5,2) (5,0);
+						\node[ball] (b53) at (5,0) {};
+						% Vetor Final (Aterragem): Tangente à chegada
+						\draw[->, magenta, thick] (5,0) -- (6.25,-1.6) node[below right, inner sep=1pt] {$\vec{v}$};
+						\draw[->, dashed] (5,0) -- (6.25,0) node[above] {$v_x$};
+						\draw[->, dashed] (5,0) -- (5,-1.6) node[left] {$v_y$};
+						\draw[dashed] (6.25,0) -- (6.25,-1.6) -- (5,-1.6);
+						\draw (5.5,0) arc (0:-52:0.5);
+						\node at (5.7, -0.3) {$\theta$};
+						
+						% Anotação vermelha da Aterragem, deslocada para não tocar no eixo
+						\node[red, align=left, text width=2.5cm] (txtEnd) at (5.5, 1.2) {aterragem com velocidade\\$\vec{v}=(v_x, v_y)$};
+						\draw[->, red, thick, out=-90, in=45] (txtEnd.south) to (5.2, 0.2);
+					\end{scope}
+				\end{scope}
+				
+			\end{tikzpicture}
+		}
+	\end{frame}
+	
+	% PAGE 3: Independência dos Movimentos e Atrito
+	\begin{frame}
+		\tiny % Letra pequena para caber toda a teoria num único slide
+		
+		% Notas Manuscritas (Canto Superior Direito)
+		\begin{itemize}
+			\setlength{\itemsep}{0pt} % Reduz o espaço entre os bullets
+			\item A trajetória é parabólica, próprio porque a aceleração $\vec{a}$ é constante ($a_x = 0$ e $a_y < 0$).
+			\item O \underline{alcance} é a distância de $O$ a $P$. Depois do ponto de máxima altura $v_y < 0$ (queda).
+			\item Consideramos o corpo só até ao instante final de impacto `$t_f$', $\vec{v}(t_f) = \vec{v}_f$. Não depois.
+		\end{itemize}
+		
+		\vspace{0.5cm}
+		\textcolor{blue!80!black}{\normalsize \textbf{Um experimento sobre a independecia entro o mov. hor. e vert. .}}
+		
+		\vspace{0.1cm}
+		\begin{columns}[T]
+			% Coluna 1: Fotografia Estroboscópica (TikZ recria a imagem do livro)
+			\begin{column}{0.22\textwidth}
+				\centering
+				\begin{tikzpicture}[scale=0.45] % Escala reduzida para poupar espaço vertical
+					% Fundo preto
+					\fill[black] (-0.2, 0.2) rectangle (3.8, -4.6);
+					% Fios/Linhas de referência
+					\foreach \y in {0, -0.2, -0.6, -1.2, -2.0, -3.0, -4.2} {
+						\draw[white!50, thin] (-0.2,\y) -- (3.8,\y);
+						% Bola Vermelha (Queda Livre vertical)
+						\shade[ball color=red] (0.2, \y) circle (4pt);
+					}
+					% Bola Amarela (Lançamento Horizontal)
+					\shade[ball color=yellow] (0.2, 0) circle (4pt);
+					\shade[ball color=yellow] (0.7, -0.2) circle (4pt);
+					\shade[ball color=yellow] (1.2, -0.6) circle (4pt);
+					\shade[ball color=yellow] (1.7, -1.2) circle (4pt);
+					\shade[ball color=yellow] (2.2, -2.0) circle (4pt);
+					\shade[ball color=yellow] (2.7, -3.0) circle (4pt);
+					\shade[ball color=yellow] (3.2, -4.2) circle (4pt);
+				\end{tikzpicture}
+			\end{column}
+			
+			% Coluna 2: Texto Explicativo
+			\begin{column}{0.78\textwidth}
+				Fotografia estroboscópica de duas bolas de golfe, uma que simplesmente foi deixada cair e outra que foi lançada horizontalmente por uma mola. As bolas de golfe têm o mesmo movimento vertical; ambas percorrem a mesma distância vertical no mesmo intervalo de tempo. O fato de uma bola estar se movendo horizontalmente enquanto está caindo não afeta o movimento vertical; ou seja, os movimentos horizontal e vertical são independentes.
+				
+				\vspace{0.1cm}
+				\textcolor{red}{\textbf{$\Rightarrow$} As duas bolas chegam ao chão no mesmo instante. Isso porque podemos realizar condições onde o atrito do ar é negligenciável. Por exemplo $v_0$ bastante pequeno ou em câmara de vácuo. Quando o atrito é importante a velocidade horizontal diminui durante a trajetória $\Rightarrow$ menores alcance, tempo de voo e $h_{max}$.}
+			\end{column}
+		\end{columns}
+		
+		\vspace{0.6cm}
+		% O link agora fica na mesma linha para poupar espaço
+		Aqui um video da experiência: \href{https://www.youtube.com/watch?v=UqJ32-5Jd4A}{\textcolor{red}{https://www.youtube.com/watch?v=UqJ32-5Jd4A}}
+		\vspace{0.1cm}
+		
+		% Secção Inferior: Efeitos do Atrito do Ar e Tabela
+		\begin{columns}[c] % Alinhamento centralizado para equilibrar gráfico e tabela
+			\begin{column}{0.4\textwidth}
+				\centering
+				\begin{tikzpicture}[scale=0.55] % Gráfico ligeiramente mais pequeno
+					% Chão e Eixos
+					\fill[brown!50] (-0.2,-0.15) rectangle (5.2,0);
+					\draw (-0.2,0) -- (5.2,0) node[right, font=\tiny] {$x$};
+					\draw[->] (0,-0.2) -- (0,2.5) node[above, font=\tiny] {$y$};
+					
+					% Vácuo (Trajetória II)
+					\draw[cyan!60!blue, thick] (0,0) parabola bend (2.2, 2.0) (4.4,0);
+					\node[font=\tiny, right] at (3.8, 1.2) {II};
+					
+					% Ar (Trajetória I)
+					\draw[purple, thick] (0,0) .. controls (1.0, 1.8) and (2.0, 1.3) .. (2.6,0);
+					\node[font=\tiny, left] at (1.8, 1.0) {I};
+					
+					% Vetor Inicial e Ângulo
+					\draw[->, thick, magenta] (0,0) -- (0.6, 1.0) node[above left, font=\tiny, inner sep=1pt] {$\vec{v}_0$};
+					\draw (0.3,0) arc (0:60:0.3);
+					\node[font=\tiny] at (0.5, 0.15) {$60^\circ$};
+					
+					% Anotações
+					\node[ font=\tiny, inner sep=2pt, text width=1.5cm, align=center] at (1.2, 2.3) {O ar reduz a altura \dots};
+					\node[ font=\tiny, inner sep=2pt, text width=1.5cm, align=center] at (3.8, 2.3) {\dots e o alcance.};
+				\end{tikzpicture}
+			\end{column}
+			
+			\begin{column}{0.6\textwidth}
+				\centering
+				\resizebox{\textwidth}{!}{ % Força a tabela a não exceder a largura da coluna
+					\begin{tabular}{lcc}
+						\multicolumn{3}{l}{\textcolor{green!50!black}{\textbf{Tabela 4-1(Halleday) Trajetórias de Duas Bolas de Beisebol$^*$}}} \\ \hline
+						& Trajetória I (Ar) & Trajetória II (Vácuo) \\ \hline
+						Alcance & 98,5 m & 177 m \\
+						Altura máxima & 53,0 m & 76,8 m \\
+						Tempo de percurso & 6,6 s & 7,9 s \\ \hline
+						\multicolumn{3}{l}{\textit{$^*$Veja a Fig. 4.13. O ângulo de lançamento é $60^\circ$ e a vel. inicial é 44,7 m/s.}}
+					\end{tabular}
+				}
+			\end{column}
+		\end{columns}
+		
+	\end{frame}
+	
+	
+	% Comando para o circulo vermelho (seguro e robusto)
+	\providecommand{\circled}[1]{\mbox{\tikz[baseline=(char.base)]{\node[shape=circle,draw=red,thick,inner sep=0.5pt,text=red,font=\tiny\bfseries] (char) {#1};}}}
+	
+	% Comando para o circulo vermelho (seguro e robusto)
+	\providecommand{\circled}[1]{\mbox{\tikz[baseline=(char.base)]{\node[shape=circle,draw=red,thick,inner sep=0.5pt,text=red,font=\tiny\bfseries] (char) {#1};}}}
+	
+	% PAGE 4: Análise de Movimento Balístico
+	\begin{frame}{Análise de Movimento Balístico}
+		\tiny % Tamanho de letra reduzido para caber tudo perfeitamente
+		\textcolor{red}{(Abreviação: MB := ``Movimento Balístico'')} \\
+		\vspace{0.2cm}
+		$\vec{r}(t) = r_x(t)\hat{i} + r_y(t)\hat{j}$, chamando $x(t)=r_x(t)$ e $y(t)=r_y(t)$, $\vec{r}(t) = x(t)\hat{i} + y(t)\hat{j}$. \\
+		Na '$x$': Mov. \underline{Uniforme}, na '$y$': Mov. unif. acc.
+		
+		\vspace{0.1cm}
+		\begin{minipage}{0.18\textwidth}
+			\centering
+			\begin{tikzpicture}[scale=0.75]
+				\draw[->] (-0.2,0) -- (1.5,0);
+				\draw[->] (0,-0.2) -- (0,1.2);
+				\node[below left] at (0,0) {$O$};
+				\draw[->, magenta, thick] (0,0) -- (0.7, 1.) node[left] {$\vec{v}_0$};
+				\draw[blue, dashed] (0,0) parabola bend (1.2, 0.9) (1.5, 0.8);
+				\draw (0.3,0) arc (0:38:0.3);
+				\node at (0.45, 0.15) {$\theta$};
+			\end{tikzpicture}
+		\end{minipage}%
+		\begin{minipage}{0.82\textwidth}
+			% O resizebox garante que a linha com as 'cases' cabe inteira na horizontal
+			\resizebox{\linewidth}{!}{%
+				$\vec{v}_0 = (v_{0x}, v_{0y}) = (\overbrace{v_0}^{\text{módulo de } \vec{v}_0}\cos\theta, v_0\operatorname{sen}\theta) \rightarrow \quad 
+				\begin{cases} 
+					\circled{1a} \, x(t) = x_0 + \underbrace{(v_0\cos\theta)}_{v_{0x}} t \\ 
+					\circled{1b} \, y(t) = y_0 + (v_0\operatorname{sen}\theta) t - \frac{1}{2}gt^2 
+				\end{cases}$%
+			}
+		\end{minipage}
+		
+		\vspace{0.2cm}
+		% CORREÇÃO AQUI: Equação do t recuperada
+		$\circled{2a} \, v_x(t) = v_{0x} \quad \forall t, \quad \circled{2b} \, v_y(t) = v_0\operatorname{sen}\theta - gt$. Como fizemos no MUA em 1d, substituindo $t = \frac{-(v_y - v_{0y})}{g}$ em $y(t)$, encontramos: 
+		$\circled{3} \, v_y^2(t) = (v_0\operatorname{sen}\theta)^2 - 2g(\underbrace{y(t) - y(0)}_{\Delta y})$.
+		
+		
+		% CORREÇÃO AQUI: Título vermelho completo com "do ponto de lançamento"
+		\textcolor{red}{\textbf{Altura máxima do ponto de lançamento $h_{max}$ e instante $t_{max}$ quando é atingida $ h(t_{max})=h_{max}$ }}
+		
+		\vspace{0.2cm}
+		\hspace*{-0.4cm}
+		\begin{minipage}{0.23\textwidth}
+			\centering
+			\begin{tikzpicture}[scale=0.6]
+				% Eixos
+				\draw[->, thick] (-1,0) -- (3,0);
+				\draw[->, thick] (0,-1) -- (0,2);
+				\node[below left] at (0,0) {$O$};
+				
+				% Trajetória
+				\draw[blue, thick] (-0.5, 0.5) parabola bend (1, 1.5) (2.5, -0.75);
+				
+				% Ponto A (Lançamento)
+				\filldraw[blue] (0, 1.05) circle (2pt);
+				\node[above left, font=\tiny, align=center] at (0, 1.1) {$(x(0), y(0))=A$};
+				
+				% Vetor e ângulo em A
+				\draw[->, thin, green] (0, 1.05) -- (0.5, 1.5);
+				\draw[dashed] (-0.5, 1.05) -- (2.2, 1.05);
+				\draw[green!60!black] (0.3, 1.05) arc (0:30:0.3);
+				\node[green!60!black, font=\tiny] at (0.4, 0.8) {$\theta$};
+				
+				% Altura Máxima
+				\draw[<->, red, thin] (1, 1.05) -- (1, 1.5);
+				\draw[->, red, shorten >=2pt] (1.5, 0.7) node[below, font=\tiny] {$h_{max}$} to[out=90, in=0] (1, 1.25);
+				
+				% Ponto B (Aterragem) - CORRIGIDO O ALINHAMENTO COM TABULAR
+				\filldraw[blue] (2.2, 0.0) circle (2pt);
+				\node[below right, font=\tiny, inner sep=0pt] at (2.0, -0.1) {
+					\begin{tabular}{@{}c@{}c@{}l@{}}
+						$(x(t_f),$ & $y(t_f))$ & $=B$ \\
+						$\shortparallel$ & $\shortparallel$ & \\
+						$R$ & $0$ &
+					\end{tabular}
+				};
+			\end{tikzpicture}
+		\end{minipage}\hfill
+		\begin{minipage}{0.6\textwidth}
+			$h_{max}$ é atingida quando $v_y = 0 \rightarrow 0 = v_y(t_{max}) = v_{0y} - gt_m = v_0\operatorname{sen}\theta - gt_m$
+			
+			\vspace{0.1cm}
+			$ 0 = v_0\operatorname{sen}\theta - gt_m  \rightarrow t_{max} \overset{\circled{4}}{=} \frac{v_0\operatorname{sen}\theta}{g}  \rightarrow  y(t_{max}) = y_0 + v_{0y}t_m - \frac{1}{2}gt_m^2$
+			
+			\vspace{0.2cm}
+			\resizebox{\linewidth}{!}{%
+				$\rightarrow y(t_{max}) - y_0 = h_{max} = v_{0y}t_m - \frac{1}{2}gt_m^2 = \frac{(v_0\operatorname{sen}\theta)^2}{g} - \frac{1}{2}\frac{(v_0\operatorname{sen}\theta)^2}{g} = \frac{v_0^2\operatorname{sen}^2\theta}{2g} = h_{max}$
+			}
+			
+			\vspace{0.2cm}
+			% CORREÇÃO AQUI: O 5 está agora em cima do sinal de igual
+			$\rightarrow h_{max} \overset{\circled{5}}{=} \frac{v_0^2\operatorname{sen}^2\theta}{2g}$
+		\end{minipage}
+		
+	\end{frame}
+	
+	
+	% Garante que o comando existe, mas deve estar SEMPRE FORA do frame para não dar erro
+	\providecommand{\circled}[1]{\mbox{\tikz[baseline=(char.base)]{\node[shape=circle,draw=red,thick,inner sep=0.5pt,text=red,font=\tiny\bfseries] (char) {#1};}}}
+	
+	% PAGE 5: Alcance Horizontal (Continuação, sem título)
+	\begin{frame}
+		\scriptsize % Tamanho de letra uniforme e legível para TODO o slide
+		
+		O \textcolor{red}{\textbf{Alcance Horizontal $R$}} é a distância entre o ponto de lançamento $A$ e de aterragem $B$ \\
+		(A pode ser mais elevado B ou o contrário ou a mesma altura)
+		
+		\vspace{0.2cm}
+		\begin{minipage}[t]{0.75\textwidth}
+			\vspace{0pt}
+			$x(t) = x(0) + v_{0x}t \rightsquigarrow x(t_f) - x(0) = R = v_{0x}t_f = (v_0\cos\theta)t_f$
+			
+			\vspace{0.1cm}
+			$y(t) = y(0) + v_{0y}t - \frac{1}{2}gt^2 \rightsquigarrow h(t) := y(t) - y(0) = (v_0\operatorname{sen}\theta)t - \frac{1}{2}gt^2$ \\
+			\textit{\tiny (onde $h(t)$ é a altura em relação ao ponto de lançamento no instante $t$)}
+			
+			\vspace{0.3cm}
+			$\text{altura final } \rightarrow h_f = h(t_f) \rightarrow \frac{1}{2}gt_f^2 - (v_0\operatorname{sen}\theta)t_f + h_f = 0$ 
+			a solução em $t_f$ são: $\quad t_f = \frac{v_0\operatorname{sen}\theta \pm \sqrt{v_0^2\operatorname{sen}^2\theta - 2gh_f}}{g}$
+			
+			\vspace{0.3cm}
+			O ponto de aterragem é no futuro $\rightsquigarrow$ uso raiz '+', isto é, o instante maior: 
+			\tikz[remember picture, baseline=(tffinal.base)]{\node[inner sep=0pt] (tffinal) {$t_f = \frac{v_0\operatorname{sen}\theta + \sqrt{v_0^2\operatorname{sen}^2\theta - 2gh_f}}{g}$};}
+			
+			\vspace{0.3cm}
+			$R = \underbrace{(v_0\cos\theta)}_{v_{0x}} \tikz[remember picture, baseline=(tftarget.base)]{\node[inner sep=0pt] (tftarget) {$t_f$};} \overset{\circled{6}}{=} \frac{(v_0^2\cos\theta\operatorname{sen}\theta)}{g} + \frac{(v_0\cos\theta)\sqrt{v_0^2\operatorname{sen}^2\theta - 2gh_f}}{g}$
+			
+			\begin{tikzpicture}[remember picture, overlay]
+				\draw[->, red, thick, out=180, in=90] (tffinal.south west) to (tftarget.north);
+			\end{tikzpicture}
+			
+
+			Se $A$ e $B$ estão na mesma altura 
+			\begin{tikzpicture}[baseline=-0.1cm, scale=0.4]
+				\draw[->, thick] (-0.5,0) -- (2.5,0);
+				\draw[->, thick] (0,-0.5) -- (0,1.5);
+				\draw[blue, thick, ->] (0.2, 0) parabola bend (1.2, 1) (2.2, 0);
+				\filldraw[blue] (0.2, 0) circle (2pt) node[below, font=\tiny, text=black] {$A$};
+				\filldraw[blue] (2.2, 0) circle (2pt) node[below, font=\tiny, text=black] {$B$};
+			\end{tikzpicture}
+			, ou seja, $h_f = y_f - y_0 = 0$
+			
+			
+			$\rightsquigarrow R = \frac{v_0^2\cos\theta\operatorname{sen}\theta}{g} + \frac{v_0^2\cos\theta\operatorname{sen}\theta}{g} = \frac{v_0^2 (\overbrace{2\cos\theta\operatorname{sen}\theta}^{= \operatorname{sen} 2\theta})}{g}\rightsquigarrow  R \overset{\circled{6'}}{=} \frac{v_0^2\operatorname{sen} 2\theta}{g}$
+		\end{minipage}\hfill
+		\begin{minipage}[t]{0.25\textwidth}
+			\vspace{0pt}
+			% Diagrama 1 CORRIGIDO: Seta tangente e rótulos curvos apontando para A e B
+			\begin{tikzpicture}[scale=0.5]
+				\draw[->, thick] (-0.5,0) -- (3.5,0);
+				\draw[->, thick] (0,-0.5) -- (0,2.5);
+				\node[below left] at (0,0) {$O$};
+				
+				\draw[blue, thin, ->] (0, 1.2) parabola bend (1.5, 2.2) (2.9, 0);
+				\filldraw[blue] (0, 1.2) circle (2pt);
+				
+				% Rótulo A com seta curva
+				\node[font=\tiny, inner sep=1pt] (nodeA) at (-1.0, 2.3) {$(x(0), y(0))\!=\!A$};
+				\draw[->, out=-90, in=135, thin] (nodeA.south) to (-0.1, 1.3);
+				
+				% Seta verde TANGENTE NO PONTO A (Declive perfeitamente calculado)
+				\draw[->, thick, green!70!black] (0, 1.2) -- (0.6, 2.0);
+				\draw[dashed] (0, 1.2) -- (1.5, 1.2);
+				\draw[green!70!black] (0.35, 1.2) arc (0:53:0.35);
+				\node[green!70!black, font=\tiny] at (0.55, 1.4) {$\theta$};
+				
+				% Ponto B (interseção exata)
+				\filldraw[blue] (2.85, 0) circle (2pt);
+				
+				% Rótulo B com seta curva
+				\node[font=\tiny, inner sep=0pt, align=center] (nodeB) at (1.8, -1.5) {
+					\begin{tabular}{@{}c@{}c@{}l@{}}
+						$(x(t_f),$ & $y(t_f))$ & $=B$ \\
+						$\shortparallel$ & $\shortparallel$ & \\
+						$R$ & $0$ &
+					\end{tabular}
+				};
+				\draw[->, out=40, in=-10, thin] (nodeB.north east) to (2.9, -0.15);
+			\end{tikzpicture}
+			
+			\vspace{0.4cm}
+			% Diagrama 2 CORRIGIDO: Linhas, pontos A/B assinalados e as cotas h(t) e h(t_f)
+			\begin{tikzpicture}[scale=0.5]
+				\draw[->, thick] (-0.5,0) -- (3.5,0);
+				\draw[->, thick] (0,-0.5) -- (0,2.5);
+				\node[below left] at (0,0) {$0$}; 
+				
+				\draw[blue, thick, ->] (0, 1.2) parabola bend (1.5, 2.2) (3.2, -0.4);
+				
+				% Ponto A
+				\filldraw[black] (0, 1.2) circle (2pt) node[left, font=\tiny] {$y_0$};
+				\node[below right, font=\tiny, inner sep=1pt] at (0, 1.2) {$A$};
+				
+				\draw[dashed] (0, 1.2) -- (3.5, 1.2); % Linha tracejada horizontal de A
+				
+				% Cota h(t)
+				\draw[<->, thin, font=\tiny] (1.5, 1.2) -- (1.5, 2.2) node[midway, right] {$h(t)$};
+				
+				% Ponto B
+				\filldraw[black] (2.6, 0.4) circle (2pt); 
+				\node[below left, font=\tiny, inner sep=2pt] at (2.6, 0.4) {$B$};
+				
+				\draw[dashed] (2.0, 0.4) -- (3.5, 0.4); % Linha tracejada horizontal de B
+				
+				% Cota h(t_f)
+				\draw[<->, thin, font=\tiny] (2.6, 1.2) -- (2.6, 0.4) node[midway, right] {$h(t_f)$};
+			\end{tikzpicture}
+		\end{minipage}
+		
+	\end{frame}
+	
+	
+
+% PAGE 6: Equação da Trajetória (Parábola)
+	\begin{frame}
+		\scriptsize
+		
+	
+		\textcolor{red}{\textbf{Proposição:}} A trajetória do Movimento Balístico no plano $x-y$ é uma ``parábola para baixo'': $y = ax^2 + bx + c, \ a < 0$.
+	
+		
+		
+		\vspace{0.2cm}
+		\textcolor{red}{\textbf{Dem.}} Da \circled{1a} $t = \frac{x(t) - x_0}{v_0 \cos \theta}$, substituindo em \circled{1b}, encontro: 
+		$y(t) = y_0 + (v_0 \operatorname{sen} \theta) \left( \frac{x(t) - x_0}{v_0 \cos \theta} \right) - \frac{1}{2} g \left( \frac{x(t) - x_0}{v_0 \cos \theta} \right)^2 \rightsquigarrow $\\
+		$y(t) \overset{\circled{7}}{=} y_0 + (\tan \theta)(x(t) - x_0) - \frac{g(x(t) - x_0)^2}{2(v_0 \cos \theta)^2}= y_0 + x(t) \tan \theta - x_0 \tan \theta - \frac{g x^2}{2(v_0 \cos \theta)^2} + \frac{g x x_0}{(v_0 \cos \theta)^2} - \frac{g x_0^2}{2(v_0 \cos \theta)^2}$
+		
+		\vspace{0.2cm}
+		$= \underbrace{\left( - \frac{g}{2(v_0 \cos \theta)^2} \right)}_{a} x^2 + \underbrace{\left( \frac{g x_0}{(v_0 \cos \theta)^2} + \tan \theta \right)}_{b} x(t) + \underbrace{\left( y_0 - x_0 \tan \theta - \frac{g x_0^2}{2(v_0 \cos \theta)^2} \right)}_{c} = ax^2 + bx + c$
+		
+		\vspace{0.1cm}
+		\hfill \textit{\tiny ($c$: termo definido dos dados $(x_0, y_0), v_0$ e $g$, independente de $t$)}
+		
+		
+		$a = - \underbrace{\left( \frac{\overbrace{g}^{>0}}{2(v_0 \cos \theta)^2} \right)}_{>0} \implies a < 0$ \hfill $\blacksquare$
+		
+		
+		Se tivesse definido $(x_0, y_0) = (0,0) \rightsquigarrow y(t) \overset{\circled{7'}}{=} \left( - \frac{g}{2(v_0 \cos \theta)^2} \right) x^2(t) + (\tan \theta) x(t)$
+		
+	\end{frame}
+	
+	% PAGE 7: Resumo Movimento Balístico
+	\begin{frame}{Resumo Movimento Balístico}
+		\scriptsize % Tamanho de letra maior e legível
+		\setbeamercolor{itemize item}{fg=red}
+		
+		% PARTE SUPERIOR: Definições e Triângulo
+		\begin{columns}[c]
+			\begin{column}{0.65\textwidth}
+				$v_{0x} = v_0 \cos\theta \ , \ v_{0y} = v_0 \operatorname{sen}\theta \ , \ g = 10 \text{ m/s}^2$
+			\end{column}
+			
+			\begin{column}{0.33\textwidth}
+				\centering
+				\begin{tikzpicture}[scale=0.6]
+					\draw (0,0) -- (2.5,0) node[midway, below] {$v_0 \cos\theta$} -- (2.5,1.5) node[midway, right] {$v_0 \operatorname{sen}\theta$} -- cycle node[midway, above left] {$v_0$};
+					\draw (0.5,0) arc (0:31:0.5);
+					\node at (0.8,0.25) {$\theta$};
+				\end{tikzpicture}
+			\end{column}
+		\end{columns}
+		
+		% LISTA DE EQUAÇÕES (Sem opções de enumitem para evitar erros)
+		\begin{itemize}
+			\item $x(t) \overset{\circled{1a}}{=} x_0 + v_{0x}t = x_0 + (v_0\cos\theta)t$ 
+			
+			\item $y(t) \overset{\circled{1b}}{=} y_0 + v_{0y}t - \frac{1}{2}gt^2 = y_0 + (v_0\operatorname{sen}\theta)t - \frac{1}{2}gt^2$ \\
+			
+			\item $v_x(t) \overset{\circled{2a}}{=} v_{0x} \ \forall t \ , \ v_y(t) \overset{\circled{2b}}{=} v_{0y} - gt = v_0\operatorname{sen}\theta - gt$
+			
+			\item $v_y^2(t) \overset{\circled{3}}{=} (v_0\operatorname{sen}\theta)^2 - 2g(y(t)-y(0)) \ \leftarrow$ Relaciona $v(t)$ e $\Delta y = y(t)-y(0)$
+			
+			\item $t_{max} \overset{\circled{4}}{=} \frac{v_{0y}}{g} = \frac{v_0\operatorname{sen}\theta}{g} \ \leftarrow$ instante da altura máx. (relativo ao lançamento)
+			
+			\item $h_{max} \overset{\circled{5}}{=} \frac{v_0^2 \operatorname{sen}^2\theta}{2g} \ \leftarrow$ altura máxima (relativa ao lançamento)
+			
+			\item $R \overset{\circled{6}}{=} x(t_f) - x(0)= (v_0\cos\theta)t_f = \frac{(v_0^2 \cos\theta \operatorname{sen}\theta)}{g} + \frac{(v_0 \cos\theta)\sqrt{v_0^2\operatorname{sen}^2\theta - 2gh(t_f)}}{g}$ \\
+			$R \overset{\circled{6'}}{=} \frac{v_0^2 \operatorname{sen} 2\theta}{g} \quad 
+			\begin{cases} 
+				\text{\circled{6} Alcance em relação ao ponto de lançamento.} \\ 
+				\text{\circled{6'} lançamento e aterragem à mesma altura.} 
+			\end{cases}$ \\
+			
+			
+			\item $y(t) \overset{\circled{7}}{=} y_0 + (\tan\theta)(x(t)-x_0) - \frac{g(x(t)-x_0)^2}{2(v_0\cos\theta)^2} \ \leftarrow$ trajetória $y(x)$ \\
+			$y(t) \overset{\circled{7'}}{=} \left(-\frac{g}{2(v_0\cos\theta)^2}\right)x^2(t) + (\tan\theta)x(t) \ \leftarrow$ caso $(x_0, y_0) = (0,0)$
+		\end{itemize}
+		
+	
+
+	\end{frame}		
+
+	% PAGE 8: Exemplo Prático
+	\begin{frame}{Exemplo }
+		\scriptsize
+		
+		\textcolor{red}{\textbf{Exemplo}} \quad Considere o lançamento de uma bola onde o ponto de lançamento está à mesma altura do ponto de aterragem. Com velocidade inicial $\vec{v} = (5, 10) \text{ m/s}$.
+		
+		\vspace{0.1cm}
+		\begin{columns}[T]
+			\begin{column}{0.65\textwidth}
+				\begin{itemize}
+					\item[a)] calcule o instante de aterragem;
+					\item[b)] calcule a altura da bola no instante $t = 1 \text{ s}$;
+					\item[c)] calcule o ângulo de lançamento.
+				\end{itemize}
+			\end{column}
+			\begin{column}{0.33\textwidth}
+				\centering
+				\begin{tikzpicture}[scale=0.5]
+					\draw[->] (-0.5,0) -- (3,0);
+					\draw[->] (0,-0.5) -- (0,2);
+					\node[below left] at (0,0) {\tiny $0$};
+					\draw[blue, thick] (0,0) parabola bend (1.2,1.5) (2.4,0);
+					\draw[->, red, thick] (0,0) -- (0.35,0.9) node[above right] {\tiny $\vec{v}_0$};
+					\draw (0.3,0) arc (0:56:0.3);
+					\node at (0.45,0.2) {\tiny $\theta$};
+					\filldraw[black] (2.4,0) circle (1.5pt) node[below] {\tiny $P$};
+					\node[below, font=\tiny] at (2.4,-0.3) {$(x_f, y_f) = (R, 0)$};
+				\end{tikzpicture}
+			\end{column}
+		\end{columns}
+		
+		\vspace{0.2cm}
+		\textcolor{blue}{\textbf{Sol}} \quad \textbf{a)} \ 
+		$\underset{\substack{\shortparallel \\ 0}}{y(t_f)} = \underset{\substack{\shortparallel \\ 0}}{y_0} + v_{0y}t_f - \frac{1}{2}gt_f^2 \rightsquigarrow 0 = 10t_f - 5t_f^2$
+		
+		\vspace{0.2cm}
+		$5t_f^2 - 10t_f = 0 \rightsquigarrow t_{f, \pm} = \frac{10 \pm \sqrt{100 - 0}}{10} = 
+		\begin{cases} 
+			\frac{10+10}{10} = 2 \text{ s} \leftarrow \text{aterragem porque é o instante maior} \\ 
+			\frac{10-10}{10} = 0 \text{ s} 
+		\end{cases}$
+		
+		\vspace{0.2cm}
+		\textbf{b)} $y(t=1) = y_0 + v_{0y} \cdot 1 - 5 \cdot 1^2 = 0 + 10 - 5 = 5 \text{ m}$
+		
+		\vspace{0.4cm}
+		\textbf{c)} $\vec{v} = (v_{0x}, v_{0y}) \ , \ v_{0x} = v_0 \cos\theta \ , \ v_{0y} = v_0 \operatorname{sen}\theta$
+		
+		\vspace{0.3cm}
+		$\frac{v_{0y}}{v_{0x}} = \frac{v_0 \operatorname{sen}\theta}{v_0 \cos\theta} = \tan\theta \rightsquigarrow \theta = \operatorname{arctg}\left(\frac{v_{0y}}{v_{0x}}\right) = \operatorname{arctg}\left(\frac{10}{5}\right) = \operatorname{arctg} 2 \approx 63^\circ$
+		
+	\end{frame}
+	
+
+	% PAGE 9: Exercício Prático - Enunciado e Figura
+	\begin{frame}{Exercício}
+		\scriptsize 
+		
+		\begin{columns}[T]
+			% Coluna 1: Texto do Exercício
+			\begin{column}{0.55\textwidth}
+				\textcolor{red}{\textbf{Exercício}}
+				
+				\vspace{0.2cm}
+				Uma bola de massa $M = 0,1 \text{ kg}$ é lançada com uma velocidade inicial $\vec{v}_0$, de módulo $v_0 = 10 \text{ m/s}$, formando um ângulo de $30^\circ$ em relação à horizontal. Sabendo que o ponto de aterragem se encontra a uma altura de $10 \text{ cm}$ acima do ponto de lançamento, determine:
+				
+				\vspace{0.3cm}
+				\begin{itemize}
+					\item[A)] o vetor da velocidade inicial $\vec{v}_0$;
+					\item[B)] o instante de aterragem;
+					\item[C)] o módulo da velocidade no instante do impacto;
+					\item[D)] o instante em que $v_y = 0$ e a altura máxima;
+					\item[E)] o alcance do lançamento.
+				\end{itemize}
+			\end{column}
+			
+			% Coluna 2: Diagrama TikZ Melhorado
+			\begin{column}{0.45\textwidth}
+				\centering
+				\vspace{0.5cm}
+				\begin{tikzpicture}[scale=0.9] % Aumentado ligeiramente por ter o slide só para si
+					% Eixos x e y com setas
+					\draw[->, thick] (-0.5,0) -- (4,0) node[below] {$x$};
+					\draw[->, thick] (0,-0.5) -- (0,2.5) node[left] {$y$};
+					\node[below left] at (0,0) {$O$};
+					
+					% Cota de 10cm à extrema esquerda
+					\draw[<->, thick] (-0.3, 0) -- (-0.3, 0.4) node[midway, left, font=\tiny] {$10\text{ cm}$};
+					
+					% Linha horizontal tracejada do nível de aterragem (10cm)
+					\draw[dashed, thick] (0, 0.4) -- (3.5, 0.4);
+					
+					% Ponto de impacto P
+					\coordinate (P) at (3.2, 0.4);
+					\filldraw[black] (P) circle (1.5pt) node[above right, font=\tiny] {$P = (x(t_f), y(t_f))$};
+					
+					% Trajetória parabólica azul (dobra em 1.6, 1.5)
+					\draw[blue, thick, ->] (0,0) parabola bend (1.6, 1.5) (P);
+					
+					% Seta vermelha TANGENTE à curva inicial
+					\draw[->, thick, red] (0,0) -- (0.5, 0.93) node[above left, font=\tiny] {$\vec{v}_0$};
+					
+					% Ângulo (desenhado para bater visualmente com a tangente)
+					\draw (0.35,0) arc (0:61:0.35);
+					\node[font=\tiny] at (0.55, 0.25) {$30^\circ$};
+					
+					% Altura máxima (h_max)
+					\draw[<->, dashed, thick] (1.6,0) -- (1.6, 1.5) node[midway, right, font=\tiny] {$h_{max}$};
+				\end{tikzpicture}
+			\end{column}
+		\end{columns}
+	\end{frame}
+
+
+	% PAGE 11: Resolução do Exercício Prático
+	\begin{frame}{}
+		\scriptsize
+		
+		% Resumo dos Dados
+		$M = 0,1 \text{ kg} \ , \ |\vec{v}_0| = 10 \text{ m/s} \ , \ \theta = 30^\circ \ , \ h_f = h(t_f) = 10 \text{ cm} = 0,1 \text{ m}$
+		
+		\vspace{0.2cm}
+		\textcolor{blue}{\textbf{Sol:}} \quad \textbf{A)} $v_{0x} = v_0 \cos 30^\circ = 10 \frac{\sqrt{3}}{2} \text{ m/s} = 5\sqrt{3} \text{ m/s} \ , \ v_{0y} = v_0 \operatorname{sen} 30^\circ = 10 \cdot \frac{1}{2} = 5 \text{ m/s}$ \\
+		\vspace{0.05cm}
+		\quad $\rightsquigarrow \vec{v}_0 = \left(5\sqrt{3} \frac{\text{m}}{\text{s}}\right)\vec{i} + \left(5 \frac{\text{m}}{\text{s}}\right)\vec{j}$
+		
+		\vspace{0.2cm}
+		\textbf{B)} $y(t) = y(0) + v_{0y}t - \frac{1}{2}gt^2 = 5t - 5t^2 \ , \ y(t_f) = 0,1 \text{ m} \rightsquigarrow 0,1 = 5t - 5t^2$ \\
+		\vspace{0.05cm}
+		\quad $\rightsquigarrow 5t^2 - 5t + 0,1 = 0 \rightsquigarrow t_{\pm} = \frac{5 \pm \sqrt{25 - 4\cdot 5 \cdot 0,1}}{2 \cdot 5} = \frac{5 \pm \sqrt{23}}{10} = 
+		\begin{cases} 
+			0,02 \text{ s} \\ 
+			0,98 \text{ s} \leftarrow \text{aterragem} 
+		\end{cases}$
+		
+		\vspace{0.2cm}
+		\textbf{C)} $v_x = 5\sqrt{3} \text{ m/s (constante)} \ , \ v_y(t_f) = v_{0y} - gt_f = 5 - \left(10 \cdot \frac{5+\sqrt{23}}{10}\right) = 5 - 5 - \sqrt{23} = -\sqrt{23} \text{ m/s}$ \\
+		\vspace{0.05cm}
+		\quad $\rightsquigarrow |\vec{v}(t_f)| = \left(v_{0x}^2 + v_y^2(t_f)\right)^{1/2} = (25\cdot 3 + 23)^{1/2} = \sqrt{98} \text{ m/s} = 7\sqrt{2} \text{ m/s} \approx 9,9 \text{ m/s}$
+		
+		\vspace{0.4cm}
+		\textbf{D)} $v_y(t) = v_{0y} - gt = 5 - 10t \ , \ \text{no ponto mais alto } v_y = 0 = 5 - 10t \rightsquigarrow t_{max} = 0,5 \text{ s}$ \\
+		\vspace{0.05cm}
+		\quad $\text{altura máxima (em relação ao lançamento) } h_m = y(t_m) - y_0 = v_{0y}t_m - \frac{1}{2}gt_m^2$ \\
+		\quad $= 0 + 5 \cdot 0,5 - 0,5 \cdot 10 \cdot (0,5)^2 = 2,5 - 1,25 = 1,25 \text{ m} = h_{max}$
+		
+		\vspace{0.4cm}
+		\textbf{E)} $x(t_f) - x(0) = x(t_f) = (v_0 \cos\theta)t_f = (5\sqrt{3} \cdot 0,98) \text{ m} \approx 8,5 \text{ m}$
+		
+	\end{frame}
+	
+	% PAGE 11: Exercício 31 - Lançamento Descendente (Corrigido para Trajetória Parabólica)
+	\begin{frame}
+		
+		\scriptsize % Tamanho uniforme e legível para todo o slide
+		
+		\textcolor{red}{\textbf{Exercício 31}} \textcolor{red}{(Ficha Mov. Bidimensional)}
+		
+
+		% TOPO: Enunciado (esquerda) e Figura (direita)
+		\begin{columns}[T]
+			\begin{column}{0.65\textwidth}
+				Um avião voa em trajetória descendente com velocidade constante. Ao passar à altitude de $730 \text{ m}$, larga um projétil e afasta-se. No instante da largada, o projétil tem a mesma velocidade que o avião, formando um ângulo de $53,0^\circ$ com a vertical. Desprezando a resistência do ar, o projétil atinge o solo $5,00 \text{ s}$ depois. Determine:
+				
+				\vspace{0.15cm}
+				\textbf{a)} $|\vec{v}_0|$  \textbf{b)} distância horizontal $d$  \textbf{c)} $v_x$ no solo  \textbf{d)} $v_y$ no solo.
+				
+				\vspace{0.2cm}
+				$y(0) = 730 \text{ m} \ , \ \theta = 53^\circ \ , \ t_f = 5 \text{ s} \ , \ g = 10 \text{ m/s}^2$
+			\end{column}
+			
+			\begin{column}{0.35\textwidth}
+				\centering
+				\vspace{-0.2cm}
+				\begin{tikzpicture}[scale=0.5]
+					% Chão
+					\draw[thick, fill=brown!60!black] (0,-0.2) rectangle (5,0);
+					\draw[thick] (0,0) -- (5,0);
+					
+					% Referencial
+					\draw[->, thick] (-1,0.5) -- (-0.3,0.5) node[right, font=\tiny] {$\vec{i}$};
+					\draw[->, thick] (-1,0.5) -- (-1,1.2) node[above, font=\tiny] {$\vec{j}$};
+					
+					% Lançamento
+					\filldraw (0, 4) circle (2pt);
+					\draw[dotted, thick] (0,0) -- (0,4);
+					\node[left, font=\tiny] at (0, 2) {730 m};
+					
+					% Trajetória Parabólica Matemática (Garante a curva perfeita da gravidade)
+					% A inclinação inicial é definida por -0.75*x, que corresponde aos -37 graus (slope = v0y/v0x).
+					% O termo -0.11*x^2 dá a curvatura para baixo.
+					\draw[dashed, ->, domain=0:3.5, smooth, variable=\x] plot (\x, {4 - 0.75*\x - 0.11*\x*\x});
+					
+					% Alcance d (ajustado para o novo ponto de aterragem na parábola)
+					\draw[<->, dotted, thick] (0,-0.5) -- (3.5,-0.5) node[midway, below, font=\tiny] {$d$};
+					\draw[dotted, thick] (3.5,0) -- (3.5,-0.6);
+					\draw[dotted, thick] (0,-0.2) -- (0,-0.6);
+					
+					% Vetor v0 e Ângulo TANGENTE à curva
+					\draw[->, thick, red] (0,4) -- +(-37:1.5) node[right, font=\tiny] {$\vec{v}_0$};
+					\draw[dashed] (0,4) -- (0, 2.5);
+					\draw (0,3.2) arc (270:323:0.8);
+					\node[font=\tiny] at (0.4, 3.0) {$53^\circ$};
+					
+					% Triângulo das componentes
+					\begin{scope}[shift={(2.5, 4.5)}, scale=0.7]
+						\draw (0,0) -- (2,-1.5) node[midway, above right, font=\tiny] {$v_0$};
+						\draw (0,0) -- (0,-1.5) node[midway, left, font=\tiny] {$v_0 \cos\theta$};
+						\draw (0,-1.5) -- (2,-1.5) node[midway, below, font=\tiny] {$v_0 \operatorname{sen}\theta$};
+						\draw (0,-0.4) arc (270:323:0.4);
+						\node[font=\tiny] at (0.3, -0.6) {$\theta$};
+					\end{scope}
+				\end{tikzpicture}
+			\end{column}
+		\end{columns}
+		
+		\vspace{0.3cm}
+		% FUNDO: Resolução Matemática
+		\textcolor{blue}{\textbf{Sol.}} \ \textbf{a)} $y(t_f) = y(0) + v_{0y}t_f - \frac{1}{2}g t_f^2 \rightsquigarrow 0 = 730 + v_{0y}(5) - 5(5)^2$
+		
+		\vspace{0.3cm}
+		 $(v_{0x}, v_{0y}) = (v_0 \operatorname{sen} 53^\circ, \underbrace{-v_0 \cos 53^\circ}_{\vec{v}_0 \text{ aponta para baixo}}) \rightsquigarrow -125 - (v_0\cos 53^\circ)5 + 730 = 0$
+		
+		\vspace{0.1cm}
+		\quad $\rightsquigarrow v_0 = \frac{730 - 125}{5 \cdot \cos 53^\circ} \approx 201,9 \text{ m/s} = |\vec{v}_0|$
+		
+		\vspace{0.25cm}
+		\textbf{b)} $v_{0x} = 202 \cdot \operatorname{sen} 53^\circ = 161 \text{ m/s} \ , \ v_{0y} = -202 \cdot \cos 53^\circ = -121 \text{ m/s}$
+		
+		\vspace{0.2cm}
+		
+		A distancia horizontal é $x(t_f) = v_{0x} t_f = 161 \cdot 5 = 806 \text{ m}$ 
+		
+		\vspace{0.25cm}
+		\textbf{c) + d)} Movimento Balístico: a velocidade em $x$ é constante e a velocidade em $y$ é MUA.
+		
+		\vspace{0.1cm}
+		\quad $v_x(t_f) \underset{\substack{\uparrow \\ \text{\tiny Mov. Balístico}}}{=} v_{0x} = 161 \text{ m/s} \ , \quad v_y(t_f) = v_{0y} - gt_f = -121 \frac{\text{m}}{\text{s}} - 10 \cdot 5 \frac{\text{m}}{\text{s}} = -171 \text{ m/s}$
+		
+	\end{frame}
+	
+	
+	
+	
+\end{document}

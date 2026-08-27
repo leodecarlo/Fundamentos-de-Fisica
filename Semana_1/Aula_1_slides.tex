@@ -1,0 +1,325 @@
+\documentclass{beamer}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[portuguese]{babel}
+\usepackage{amsmath}
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric, arrows.meta, 3d}
+
+% Configuração do Tema
+\usetheme{Madrid}
+\usecolortheme{default}
+
+% Informações do Título
+\title{Aula 1: Teoria e Prática}
+\subtitle{Introdução às Medidas}
+
+\date{16 Fevereiro 2026}
+
+\begin{document}
+	
+	% --- Slide 1: Título ---
+	\begin{frame}
+		\titlepage
+	\end{frame}
+	
+	% --- Slide 2: Avaliação ---
+	\begin{frame}{Método de Avaliação}
+		\begin{block}{Componentes da Avaliação}
+			\begin{table}[]
+				\begin{tabular}{l l c}
+					\textbf{Componente} & \textbf{Data} & \textbf{Peso} \\
+					\hline
+					A) Teste 1 & 13/04/26 & 40\% \\
+					B) Teste 2 & 18/05/26 & 40\% \\
+					C) Projeto/Trabalho & 25/05 e 08/06 & 20\% \\
+				\end{tabular}
+			\end{table}
+		\end{block}
+		
+		\begin{alertblock}{Exame Oral Facultativo (D)}
+			Para melhorar a nota final: de 0 a 6 pontos adicionais.
+		\end{alertblock}
+		
+		\vspace{0.5cm}
+		\textbf{** Alternativa:}
+		A) e B) é a frequência final que vale o 80\% da nota final.
+	\end{frame}
+	
+	% --- Slide 3: Cálculo da Nota Final ---
+	\begin{frame}{Cálculo da Nota Final}
+		\textbf{Fórmula:}
+		$$ Nota_{Final} = (Nota_{Teste1} \cdot 0,4) + (Nota_{Teste2} \cdot 0,4) + (Proj \cdot 0,2) $$
+		
+		$$ Nota_{FinalTotal} = A + B + C + \text{pontos extra de } D $$
+		
+		\begin{exampleblock}{Exemplo de Cálculo}
+			Supondo as notas: Teste 1 = 8; Teste 2 = 12; Projeto = 16.
+			$$ (8 \cdot 0,4) + (12 \cdot 0,4) + (16 \cdot 0,2) $$
+			$$ = 3,2 + 4,8 + 3,2 = 11,2 $$
+			
+			\textbf{Com Oral:} O estudante decide fazer exame oral e tem nota 3.
+			$$ Nota_{Final} = 11,2 + 3 = 14,2 $$
+		\end{exampleblock}
+		
+		\footnotetext{Email para dúvidas: p8346@ulusofona.pt}
+	\end{frame}
+	
+	% --- Slide 4: Unidades de Medida ---
+	\begin{frame}{Unidades de Medida (SI)}
+		Cada grandeza física (Comprimento, Massa, Tempo, Temperatura, etc.) vem medida com unidades standard.
+		
+		\textbf{Standard:} Significa que, por exemplo, um metro é o mesmo em todo o mundo.
+		
+		\begin{block}{Sistema Internacional (SI)}
+			\begin{itemize}
+				\item \textbf{Comprimento:} $\rightarrow [L] = m$ (metro)
+				\item \textbf{Massa:} $\rightarrow [M] = kg$ (quilograma)
+				\item \textbf{Tempo:} $\rightarrow [T] = s$ (segundo)
+			\end{itemize}
+		\end{block}
+		
+		Nota: Se escrevo $m=10$, significa massa de 10 kg (no SI).
+	\end{frame}
+	
+	% --- Slide 5: Prefixos e Potências de 10 ---
+	\begin{frame}{Conversão de Unidades e Potências de 10}
+		Precisamos frequentemente de converter unidades usando potências de 10.
+		
+		\begin{columns}
+			\column{0.5\textwidth}
+			\textbf{Múltiplos e Submúltiplos:}
+			\begin{itemize}
+				\item $1 km = 10^3 m$
+				\item $1 m = 10^2 cm$
+				\item $1 mm = 10^{-3} m$
+				\item $1 \mu m = 10^{-6} m$
+				\item $1 nm = 10^{-9} m$
+			\end{itemize}
+			
+			\column{0.5\textwidth}
+			\textbf{Relações Inversas:}
+			\begin{itemize}
+				\item $10^{-3} km = 1 m$
+				\item $10^2 cm = 1 m$
+				\item $10^3 mm = 1 m$
+				\item $10^6 \mu m = 1 m$
+				\item $10^9 nm = 1 m$
+			\end{itemize}
+		\end{columns}
+		
+		\vspace{0.5cm}
+		$\mu$ é a letra grega pronunciada 'mu'.
+	\end{frame}
+	
+	% --- Slide 6: Exercícios - Comprimento ---
+	\begin{frame}{Exercício: Conversão de Comprimento}
+		Converter $6,7 m$ em:
+		\begin{enumerate}[A)]
+			\item $km$
+			\item $cm$
+		\end{enumerate}
+		Converter $2 \mu m$ em:
+		\begin{enumerate}[C)]
+			\item $m$
+		\end{enumerate}
+		
+		\pause
+		\textbf{Solução:}
+		\begin{itemize}
+			\item[A)] $6,7 m = 6,7 \cdot 10^{-3} km = 0,0067 km$
+			\item[B)] $6,7 m = 6,7 \cdot 10^2 cm = 670 cm$
+			\item[C)] $2 \mu m = 2 \cdot 10^{-6} m$
+		\end{itemize}
+		
+		\small{(Nota: $1 km = 10^3 m \rightarrow 1 m = 10^{-3} km$)}
+	\end{frame}
+	
+	% --- Slide 7: Exercícios - Tempo ---
+	\begin{frame}{Exercício: Conversão de Tempo}
+		\begin{columns}
+			% --- Coluna da Esquerda: Exercícios ---
+			\column{0.55\textwidth}
+			\textbf{Converter:}
+			\begin{enumerate}[A)]
+				\item $1,23 s$ em $ms$ (milisegundos)
+				\item $5,2 ns$ em $ms$ (milisegundos)
+			\end{enumerate}
+			
+			\pause
+			\vspace{0.2cm}
+			\textbf{Solução:}
+			\begin{itemize}
+				\item[A)] $1 s = 10^3 ms$:
+				$$ 1,23 s = 1230 ms $$
+				
+				\item[B)] $1 ns = 10^{-9} s$:
+				{\small
+					$$ 5,2 ns = 5,2 \cdot 10^{-9} s $$
+					$$ = 5,2 \cdot 10^{-6} \cdot 10^{-3} s $$
+					$$ = 5,2 \cdot 10^{-6} ms $$
+				}
+			\end{itemize}
+			
+			% --- Coluna da Direita: Tabela ---
+			\column{0.45\textwidth}
+			\centering
+			\textbf{Tabela ($s$)}
+			
+			\scriptsize % Fonte menor para a tabela caber na coluna
+			\begin{tabular}{|l|c|l|}
+				\hline
+				\textbf{Unid.} & \textbf{Símb.} & \textbf{Segundos ($s$)} \\ \hline
+				Hora & $h$ & $3600$ \\ \hline
+				Min & $min$ & $60$ \\ \hline
+				Seg & $s$ & $1$ \\ \hline
+				Mili & $ms$ & $10^{-3}$ \\ \hline
+				Micro & $\mu s$ & $10^{-6}$ \\ \hline
+				Nano & $ns$ & $10^{-9}$ \\ \hline
+			\end{tabular}
+		\end{columns}
+	\end{frame}
+	
+	% --- Slide 8: Análise Dimensional ---
+	\begin{frame}{Análise Dimensional das Grandezas}
+		Seja $[G] = u$ (a unidade da grandeza G).
+		
+		\textbf{Propriedades:}
+		\begin{enumerate}
+			\item Se $G_1 = G_2 \Rightarrow [G_1] = [G_2]$ .
+			
+			\item $[G_1] = [G_2] \Rightarrow [G_1] = [\alpha G_1 + \beta G_2]$.
+			\begin{itemize}
+				\item Só podemos somar grandezas com a mesma unidade.
+				\item $\alpha$ e $\beta$ são números puros (adimensionais).
+			\end{itemize}
+			
+			\item $[G_1 \cdot G_2] = [G_1] \cdot [G_2]$ e $[G_1 / G_2] = [G_1] / [G_2]$.
+			\begin{itemize}
+				\item A unidade do produto é o produto das unidades.
+			\end{itemize}
+		\end{enumerate}
+	\end{frame}
+	
+	% --- Slide 9: Exercícios de Análise Dimensional ---
+	\begin{frame}{Exercícios: Dimensões}
+		\textbf{A)} Se $x = 1,3 m$ e $y=x$. Qual é $[y]$?
+		\begin{itemize}
+			\item Resposta: $[y] = m$
+		\end{itemize}
+		
+		\vspace{0.3cm}
+		\textbf{B)} Se $m_1 = 1,2 g$ e $m_2 = 0,1 kg$. Qual é o valor de $m_1 + 2 \cdot m_2$ no SI?
+		\begin{itemize}
+			\item Conversão: $1,2 g = 1,2 \cdot 10^{-3} kg = 0,0012 kg$.
+			\item Cálculo: $0,0012 kg + 2(0,1 kg) = 0,0012 + 0,2 = 0,2012 kg$.
+			\item Unidade final: $[m_{total}] = kg$.
+		\end{itemize}
+		
+		\vspace{0.3cm}
+		\textbf{C)} Se o lado de um quadrado é $l = 1 cm$, qual a unidade da Área?
+		\begin{itemize}
+			\item $A = l \cdot l \Rightarrow [A] = cm^2$ (ou $m^2$ no SI).
+		\end{itemize}
+		
+		\vspace{0.3cm}
+		\textbf{D)} Velocidade: $[v] = \frac{[L]}{[T]} = \frac{m}{s}$.
+	\end{frame}
+	
+	% --- Slide 10: Volume e Densidade (Diagrama) ---
+	\begin{frame}{Exercício: Volume e Densidade}
+		
+		\begin{columns}
+			\column{0.5\textwidth}
+			% Diagrama da sala/piscina
+			\begin{tikzpicture}
+				\draw[thick] (0,0) rectangle (3,2); % Front face
+				\draw[thick] (0,2) -- (1,2.8) -- (4,2.8) -- (3,2); % Top face
+				\draw[thick] (3,0) -- (4,0.8) -- (4,2.8); % Side face
+				\draw[dashed] (0,0) -- (1,0.8) -- (1,2.8); % Back hidden
+				\draw[dashed] (1,0.8) -- (4,0.8); % Bottom hidden
+				
+				\node at (1.5, -0.3) {$a = 5m$};
+				\node at (4.2, 1) {$b = 6m$};
+				\node at (-0.5, 1) {$c = 3m$};
+			\end{tikzpicture}
+			
+			\column{0.5\textwidth}
+			Temos uma sala/piscina com:
+			\begin{itemize}
+				\item Largura $a = 5m$
+				\item Comprimento $b = 6m$
+				\item Altura $c = 3m$
+			\end{itemize}
+		\end{columns}
+		
+		\vspace{0.5cm}
+		\textbf{A)} Qual a unidade do volume?
+		$$ V = a \cdot b \cdot c \Rightarrow [V] = m \cdot m \cdot m = m^3 $$
+		
+		\textbf{B)} Temos $2000 kg$ de um líquido. Qual a densidade $\rho$?
+		$$ \rho = \frac{Massa}{Volume} = \frac{2000 kg}{5m \cdot 6m \cdot 3m} $$
+		$$ \rho = \frac{2000}{90} \frac{kg}{m^3} \approx 22,2 \frac{kg}{m^3} $$
+	\end{frame}
+	
+	% --- Slide 11: Geometria (Prisma) ---
+	\begin{frame}{Geometria: Prisma Retangular}
+		\begin{center}
+			\begin{tikzpicture}
+				\draw[thick] (0,0) rectangle (4,2.5); 
+				\draw[thick] (0,2.5) -- (1.5,3.5) -- (5.5,3.5) -- (4,2.5); 
+				\draw[thick] (4,0) -- (5.5,1) -- (5.5,3.5); 
+				\draw[dashed] (0,0) -- (1.5,1) -- (1.5,3.5); 
+				\draw[dashed] (1.5,1) -- (5.5,1);
+				
+				\node at (2, -0.3) {$l_1$};
+				\node at (5.2, 0.3) {$l_2$};
+				\node at (-0.3, 1.25) {$l_3$};
+			\end{tikzpicture}
+		\end{center}
+		
+		\begin{itemize}
+			\item \textbf{Área da Superfície (Base):} $A = l_1 \cdot l_2$
+			\item \textbf{Volume:} $V = l_1 \cdot l_2 \cdot l_3$
+		\end{itemize}
+	\end{frame}
+	
+	% --- Slide 12: Trabalho de Casa (Garrafa) ---
+	\begin{frame}{Exercício de Casa (TPC)}
+		\begin{columns}
+			\column{0.4\textwidth}
+			% Diagrama do Cilindro
+			\begin{tikzpicture}
+				\draw[thick] (0,0) ellipse (1.5 and 0.5);
+				\draw[thick] (0,4) ellipse (1.5 and 0.5);
+				\draw[thick] (-1.5,0) -- (-1.5,4);
+				\draw[thick] (1.5,0) -- (1.5,4);
+				
+				\draw[->] (0,4) -- (1.5,4) node[midway, above] {$R$};
+				\node at (2, 2) {$h$};
+				
+				% Hachura simples para simular "cheia"
+				\foreach \y in {0.5, 1.5, 2.5, 3.5}
+				\draw[blue!50] (-1.2,\y) -- (1.2,\y+0.2);
+			\end{tikzpicture}
+			
+			\column{0.6\textwidth}
+			Temos uma garrafa com base circular e altura $h$.
+			
+			\textbf{Dados:}
+			\begin{itemize}
+				\item Raio $R = 5 m$ (conforme nota)
+				\item Altura $h = 20 mm$ 
+				\item Cheia de 1L de água ($1L = 1kg$)
+			\end{itemize}
+			
+			\vspace{0.5cm}
+			\textbf{Perguntas:}
+			\begin{enumerate}[A)]
+				\item Calcular o Volume da garrafa.
+				\item Qual é a unidade de densidade $\rho$?
+			\end{enumerate}
+		\end{columns}
+	\end{frame}
+	
+\end{document}

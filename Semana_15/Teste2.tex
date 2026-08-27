@@ -1,0 +1,181 @@
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[portuguese]{babel}
+\usepackage{amsmath}
+\usepackage{siunitx}
+\usepackage{graphicx}
+\usepackage{geometry}
+\usepackage{multicol}
+\usepackage{parskip}
+\usepackage{enumitem}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,calc,decorations.pathmorphing}
+
+\geometry{a4paper, left=1cm, right=1.5cm, top=1cm, bottom=1.5cm}
+
+\newcommand{\cabecalho}{
+	\hfill
+	\begin{minipage}[t]{0.7\textwidth}
+		\raggedleft
+		\textbf{Teste  2, Fundamentos de Física}
+	\end{minipage}
+	\vspace{0.35cm}
+}
+
+\newcommand{\pontos}[1]{\hfill\textbf{(#1 valores)}}
+
+\title{Teste Modelo 2}
+\author{}
+\date{}
+
+\setlength{\parindent}{0pt}
+\setlist[enumerate]{itemsep=4pt, topsep=4pt}
+
+\begin{document}
+
+	\cabecalho
+
+	\textbf{Nome:} \rule{10cm}{0.4pt}
+	\hfill
+	\textbf{Data:} \rule{2.5cm}{0.4pt}
+
+	\vspace{0.2cm}
+
+	\textbf{Indicação:} Sempre que necessário, considere $g = 10\,\text{m/s}^2$.
+	Antes de efetuar os cálculos, converta as grandezas para unidades do SI.
+
+	\vspace{0.25cm}
+
+	\textbf{Exercício 1}. Dois blocos estão ligados por uma corda ideal e deslizam sem atrito
+	sobre uma superfície horizontal. Uma força horizontal de módulo $84\,\text{N}$ puxa o
+	bloco $m_1$ para a direita. As massas são
+	\[
+	m_1=18\,\text{kg}, \qquad m_2=10000\,\text{g}.
+	\]
+
+	\begin{center}
+		\begin{tikzpicture}[scale=0.95, >=Latex]
+			\draw[thick] (-0.8,0) -- (7.3,0);
+			\draw[thick] (0,0) rectangle (1.7,1);
+			\draw[thick] (3.7,0) rectangle (5.4,1);
+			\draw[thick] (1.7,0.5) -- (3.7,0.5);
+			\draw[->, very thick] (5.4,0.5) -- (7.0,0.5) node[right] {$\vec{F}$};
+			\node at (0.85,0.5) {$m_2$};
+			\node at (4.55,0.5) {$m_1$};
+			\node[above] at (2.7,0.5) {$T$};
+		\end{tikzpicture}
+	\end{center}
+
+	\begin{enumerate}[label=\textbf{\alph*)}]
+		\item Desenhe o diagrama de corpo livre de cada bloco, indicando as forças horizontais. \pontos{0,75}
+		\item Calcule a aceleração do sistema. \pontos{1,0}
+		\item Calcule a tensão $T$ na corda. \pontos{1,5}
+		\item Considerando como sistema os dois blocos e a corda, indique as forças externas
+		aplicadas ao sistema e as forças internas. Por qual princípio, na equação do sistema
+		completo, as forças internas se cancelam? Explique. \pontos{1,25}
+	\end{enumerate}
+
+	\vspace{0.25cm}
+
+	\textbf{Exercício 2}. Uma roldana gira inicialmente a $28\,\text{rev/s}$ e reduz
+	uniformemente a sua velocidade angular para $16\,\text{rev/s}$ durante um intervalo
+	de tempo total de $6,0\,\text{s}$.
+
+	\begin{enumerate}[label=\textbf{\alph*)}]
+		\item Calcule a aceleração angular da roldana. \pontos{1,0}
+		\item Calcule o número de revoluções completadas durante a primeira metade do
+		intervalo de tempo total. \pontos{1,0}
+		\item Calcule o ângulo total percorrido durante todo o intervalo de tempo. \pontos{1,0}
+		\item Considere agora uma partícula que descreve uma circunferência com rapidez
+		constante. Explique por que existe aceleração, apesar de a rapidez ser constante.
+		Indique a direção e o sentido dessa aceleração. \pontos{1,25}
+	\end{enumerate}
+
+	\newpage
+
+	\cabecalho
+
+	\textbf{Exercício 3}. Um bloco de massa $m=4000\,\text{g}$ desce uma distância
+	$d=150\,\text{cm}$ ao longo de uma rampa inclinada de $\theta=30^\circ$ em relação à
+	horizontal. Uma força de módulo $F=16\,\text{N}$, paralela ao plano inclinado e dirigida
+	para baixo da rampa, atua sobre o bloco. Não existe atrito entre o bloco e a rampa.
+	O bloco parte do repouso.
+
+	\begin{center}
+		\begin{tikzpicture}[scale=1.0, >=Latex]
+			\coordinate (A) at (0,0);
+			\coordinate (B) at (6,0);
+			\coordinate (C) at (6,3.464);
+			\draw[thick] (A) -- (B) -- (C) -- cycle;
+			\begin{scope}[shift={(3.4,1.96)}, rotate=30]
+				\draw[fill=white, thick] (-0.65,0) rectangle (0.65,0.85);
+				\draw[->, very thick] (-0.65,0.42) -- (-2.05,0.42) node[left] {$\vec{F}$};
+				\draw[->, thick] (0,0.42) -- (0,1.75) node[above] {$\vec{F}_N$};
+			\end{scope}
+			% Peso aplicado no centro de massa do bloco
+			\draw[->, thick] (3.1875,2.3281) -- (3.1875,0.8981) node[below] {$m\vec{g}$};
+			\draw (0.9,0) arc[start angle=0,end angle=30,radius=0.9];
+			\node at (1.2,0.28) {$30^\circ$};
+			\draw[->, thick] (2.4,1.39) -- (1.0,0.58);
+			\node[above left] at (1.8,1.05) {$d$};
+		\end{tikzpicture}
+	\end{center}
+	\begin{enumerate}[label=\textbf{\alph*)}]
+		\item Desenhe o diagrama de corpo livre e calcule o módulo da força normal
+		$\lvert\vec{F}_N\rvert$. \pontos{0,75}
+		\item Calcule o trabalho realizado durante o deslocamento por cada uma das seguintes
+		forças: força aplicada, força gravítica e força normal. \pontos{1,5}
+		\item Calcule a variação da energia potencial do bloco durante o deslocamento. \pontos{1,5}
+		\item Se aplicássemos uma força $\tilde{F}$ paralela ao solo, qual seria o seu trabalho
+		durante o deslocamento? \pontos{1,5}
+	\end{enumerate}
+
+	\vspace{0.25cm}
+
+	\textbf{Exercício 4}. Uma esfera de massa $m=400\,\text{g}$ move-se horizontalmente
+	com rapidez inicial $v=15\,\text{m/s}$ e colide com um bloco de massa
+	$M=1600\,\text{g}$, inicialmente em repouso sobre uma superfície horizontal sem atrito.
+	O bloco está ligado a uma mola ideal de constante elástica $k=288\,\text{N/m}$ e
+	encontra-se inicialmente na posição de equilíbrio da mola, com $x=0$. A esfera fica
+	incrustada no bloco. Após o impacto, o conjunto bloco--esfera desloca-se para a direita,
+	alongando a mola.
+
+	\begin{center}
+		\begin{tikzpicture}[scale=0.9, >=Latex]
+			% Superfície e parede à esquerda
+			\draw[thick] (-0.1,0) -- (11.0,0);
+			\draw[thick] (0.5,0) -- (0.5,2.2);
+			\foreach \y in {0.2,0.5,...,2.0}{
+				\draw[thin] (0.5,\y) -- (0.2,\y+0.2);
+			}
+			% Mola abaixo da trajetória da esfera: ao mover-se para a direita, o bloco alonga a mola
+			\draw[thick,decorate,decoration={zigzag,segment length=7pt,amplitude=4pt}]
+			(0.5,0.30) -- (7.1,0.30);
+			% Bloco
+			\draw[fill=white, thick] (7.1,0) rectangle (8.6,1.1);
+			\node at (7.85,0.62) {$M$};
+			\node[above] at (3.8,0.52) {$k$};
+			% Esfera incidente, acima da mola
+			\draw[fill=white, thick] (4.9,0.82) circle (0.20);
+			\node[below] at (4.9,1.57) {$m$};
+			\draw[->, very thick] (5.15,0.82) -- (6.7,0.82) node[midway, above] {$\vec{v}$};
+			\node at (5.8,-0.42) {};
+		\end{tikzpicture}
+	\end{center}
+
+	\begin{enumerate}[label=\textbf{\alph*)}]
+		\item Classifique a colisão. Indique as formas de energia envolvidas. Após o impacto,
+		de qual forma de energia para qual forma de energia ocorre a transformação e por quê? \pontos{1,5}
+		\item Calcule a rapidez do conjunto bloco--esfera imediatamente após o impacto. \pontos{1,5}
+		\item Qual é a rapidez do conjunto no ponto de alongamento máximo da mola? \pontos{1,0}
+		\item Calcule o alongamento máximo da mola e o trabalho realizado pela força elástica
+		desde a posição de equilíbrio até ao ponto de alongamento máximo. Interprete o sinal
+		do trabalho realizado pela força elástica. \pontos{2,0}
+	\end{enumerate}
+
+
+
+	
+
+\end{document}

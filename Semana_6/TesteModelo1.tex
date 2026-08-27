@@ -1,0 +1,78 @@
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[portuguese]{babel}
+\usepackage{amsmath}
+\usepackage{siunitx}
+\usepackage{graphicx}
+\usepackage{geometry}
+\usepackage{multicol}
+\usepackage{circuitikz}
+\usepackage{parskip}
+\usepackage{enumitem}
+
+\geometry{a4paper, left=1.5cm, right=1.5cm, top=1cm, bottom=2cm}
+
+\newcommand{\cabecalho}{
+	\hfill
+	\begin{minipage}[t]{0.7\textwidth}
+		\raggedleft
+		\textbf{Teste Modelo 1, Fundamentos de Física}
+	\end{minipage}
+	
+}
+
+\newcommand{\pontos}[1]{\hfill\textbf{(#1 valores)}}
+
+\title{Teste Modelo 1}
+\author{}
+\date{20 de março de 2026}
+
+\setlength{\parindent}{0pt}
+\setlist[enumerate]{itemsep=4pt, topsep=4pt}
+
+\begin{document}
+	
+	\cabecalho
+	
+	\textbf{Exercício 1}. Temos uma piscina de largura 5 m, altura 4 m e comprimento 0,5 km. A piscina está cheia de um líquido até 30 cm da borda.
+	\begin{enumerate}[label=\alph*)]
+		\item Calcule o volume da piscina. \pontos{0,5}
+		\item Sabendo que a piscina está cheia de um líquido de densidade $\rho = 0.6\,\text{kg/m}^3$, qual é a massa do líquido na piscina? \pontos{1,0}
+	\end{enumerate}
+	
+	\vspace{0.4cm}
+	
+	\textbf{Exercício 2}. Dado o vetor $\overline{v} = (v_x, v_y)$ de módulo 2 e orientação definida pelo ângulo $\theta = 120^\circ$.
+	\begin{enumerate}[label=\alph*)]
+		\item Desenhe o vetor no plano cartesiano. \pontos{0,5}
+		\item Calcule as suas componentes e escreva $\overline{v}$ com os vetores unitários $\overline{i}$ e $\overline{j}$. \pontos{1,5}
+		\item Calcule o vetor unitário, com a mesma orientação de $-\overline{v}$. \pontos{1,0}
+		\item Se $\overline{w} = (-1,-1)$, quais são $|\overline{w}|$ e $\phi$, tais que $w_x = |\overline{w}| \cos \phi$ e $w_y = |\overline{w}| \sin \phi$? \pontos{1,5}
+	\end{enumerate}
+	
+	\vspace{0.4cm}
+	
+	\textbf{Exercício 3}. Uma partícula no plano descreve um movimento acelerado (não necessariamente uniformemente acelerado), passando de um ponto na posição $\overline{r}_A = (1,1)\,\text{m}$ à posição $\overline{r}_B = (1,2)\,\text{m}$, percorrendo uma distância $d = 1,2\,\text{m}$.
+	\begin{enumerate}[label=\alph*)]
+		\item O movimento é retilíneo ou curvilíneo? Desenhe uma possível trajetória que passe por A e B. \pontos{1,0}
+		\item Devido a um mecanismo, no ponto B a velocidade da partícula passa de $\overline{v}_1 = (1,-1)\,\text{m/s}$ para uma velocidade $\overline{v}_2 = (0,-1)\,\text{m/s}$ num intervalo de tempo de $\Delta t = 500\,\text{ms}$. Calcule a aceleração média da partícula durante $\Delta t$. \pontos{2,5}
+		\item Depois do intervalo $\Delta t$, o corpo continua em movimento retilíneo uniformemente variado, sem mudar a orientação, e para após um intervalo $\Delta T = 10\,\text{s}$. Qual é a aceleração durante esse intervalo? \pontos{1,5}
+		\item Desenhe a trajetória durante $\Delta T$ e calcule a distância percorrida. \pontos{1,5}
+	\end{enumerate}
+	
+	\vspace{0.4cm}
+	
+	\textbf{Exercício 4}. Um projétil descreve um movimento balístico com uma velocidade inicial $\overline{v}_0 = (10, 0)\,\text{m/s}$ a partir de uma altura $h = 50\,\text{m}$. A aterragem ocorre numa plataforma a uma altura de $50\,\text{cm}$ do solo.
+	\begin{enumerate}[label=\alph*)]
+		\item Desenhe a trajetória do projétil, explicitando numericamente o ângulo de lançamento. \pontos{0,5}
+		\item Qual é a altura máxima atingida durante a trajetória? \pontos{1,0}
+		\item Calcule o alcance até ao ponto de aterragem na plataforma. \pontos{2,0}
+		\item Calcule a velocidade no ponto de impacto, desenhando o seu sentido e orientação. \pontos{2,0}
+		\item Qual é o ângulo de impacto? \pontos{1,0}
+		\item Quanto tempo demorou o projétil a chegar à plataforma? \pontos{1,0}
+	\end{enumerate}
+	
+
+
+	
+\end{document}

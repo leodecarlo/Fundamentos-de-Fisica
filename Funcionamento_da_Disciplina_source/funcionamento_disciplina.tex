@@ -1,0 +1,70 @@
+\documentclass{beamer}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[portuguese]{babel}
+\usepackage{amsmath}
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric, arrows.meta, 3d}
+
+% Configuração do Tema
+\usetheme{Madrid}
+\usecolortheme{default}
+
+% Informações do Título
+\title{Fundamentos da Disciplina}
+\subtitle{Fundamentos de Fisica}
+
+\date{}
+
+\begin{document}
+	
+	% --- Slide 1: Título ---
+	\begin{frame}
+		\titlepage
+	\end{frame}
+	
+	% --- Slide 2: Avaliação ---
+	\begin{frame}{Método de Avaliação}
+		\begin{block}{Componentes da Avaliação}
+			\begin{table}[]
+				\begin{tabular}{l l c}
+					\textbf{Componente} & \textbf{Data} & \textbf{Peso} \\
+					\hline
+					A) Teste 1 & 13/04/26 & 40\% \\
+					B) Teste 2 & 08/06/26 & 40\% \\
+					C) Projeto/Trabalho & 15/06 e 22/06 & 20\% \\
+				\end{tabular}
+			\end{table}
+		\end{block}
+		
+		\begin{alertblock}{Exame Oral Facultativo (D)}
+			Para melhorar a nota final: de 0 a 6 pontos adicionais. É possível aceder ao exame oral apenas com nota mínima de 7.
+		\end{alertblock}
+		
+		\vspace{0.5cm}
+		\textbf{** Alternativa:}
+		A) e B) é a frequência final que vale o 80\% da nota final no exame oral.
+	\end{frame}
+	
+	% --- Slide 3: Cálculo da Nota Final ---
+	\begin{frame}{Cálculo da Nota Final}
+		\textbf{Fórmula:}
+		$$ Nota_{Final} = (Nota_{Teste1} \cdot 0,4) + (Nota_{Teste2} \cdot 0,4) + (Proj \cdot 0,2) $$
+		
+		$$ Nota_{FinalTotal} = A + B + C + \text{pontos extra de } D $$
+		
+		\begin{exampleblock}{Exemplo de Cálculo}
+			Supondo as notas: Teste 1 = 8; Teste 2 = 12; Projeto = 16.
+			$$ (8 \cdot 0,4) + (12 \cdot 0,4) + (16 \cdot 0,2) $$
+			$$ = 3,2 + 4,8 + 3,2 = 11,2 $$
+			
+			\textbf{Com Oral:} O estudante decide fazer exame oral e tem nota 3.
+			$$ Nota_{Final} = 11,2 + 3 = 14,2 $$
+		\end{exampleblock}
+		
+		\footnotetext{Email para dúvidas: p8346@ulusofona.pt}
+	\end{frame}
+	
+
+	
+\end{document}

@@ -1,0 +1,693 @@
+\documentclass{beamer}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[portuguese]{babel}
+\usepackage{amsmath}
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric, arrows.meta, 3d, calc}
+
+% Configuração do Tema
+\usetheme{Madrid}
+\usecolortheme{default}
+
+% Informações do Título
+\title{Aula 2: Teoria e Prática}
+\subtitle{Escalares, Vetores e Trigonometria}
+
+\date{23 Fevereiro 2026}
+
+\begin{document}
+	
+	% --- Slide Título ---
+	\begin{frame}
+		\titlepage
+	\end{frame}
+	
+	% --- Slide 1 (Pág 1 PDF): Grandezas Escalares ---
+	\begin{frame}{1. Grandezas Escalares}
+		\begin{columns}
+			% Coluna da Esquerda: Texto
+			\column{0.6\textwidth}
+			Temos grandezas como \textbf{Massa, Temperatura, Tempo}, etc., que são descritas simplesmente através de um número.
+			
+			\begin{block}{Definição}
+				Grandezas escalares: um número (magnitude) e sua unidade.
+			\end{block}
+			
+			\textbf{Exemplos:}
+			\begin{itemize}
+				\item Massa: $m = 5 kg$, $m = 0 kg$
+				\item Tempo: $t = 10 s$
+				\item Temperatura: $T = 283 K$ (equiv. $10^{\circ}C$)
+			\end{itemize}
+			
+
+			\textbf{Nota sobre Temperatura (SI):}
+			Mede-se em Kelvin ($K$), de $0$ até $+\infty$. ($ 0^{\circ}C \approx 273 K $)
+			
+			% Coluna da Direita: Diagrama das Escalas
+			\column{0.35\textwidth}
+			\centering
+			\begin{tikzpicture}[scale=0.9]
+				% Linha Celsius
+				\draw[->, thick] (0,0) -- (0,4.5) node[above] {$^{\circ}C$};
+				\node at (0.3, 3.5) {\footnotesize $+$}; % Sinal +
+				\node at (0.3, 1.5) {\footnotesize $-$}; % Sinal -
+				
+				% Marcas Celsius
+				\draw[thick] (-0.15, 3) -- (0.15, 3) node[left] {\small $0^{\circ}C$};
+				\draw[thick] (-0.15, 0.5) -- (0.15, 0.5) node[left] {\small $-273^{\circ}C$};
+				
+				% Linha Kelvin
+				\draw[->, thick] (2.5,0) -- (2.5,4.5) node[above] {$K$};
+				
+				% Marcas Kelvin
+				\draw[thick] (2.35, 3) -- (2.65, 3) node[right] {\small $273 K$};
+				\draw[thick] (2.35, 0.5) -- (2.65, 0.5) node[right] {\small $0$};
+				
+				% Linhas de correspondência tracejadas
+				\draw[dashed, gray!70] (0, 3) -- (2.5, 3);
+				\draw[dashed, gray!70] (0, 0.5) -- (2.5, 0.5);
+			\end{tikzpicture}
+		\end{columns}
+	\end{frame}
+	
+	% --- Slide 2 (Pág 2 PDF): Introdução a Vetores ---
+	\begin{frame}{2. Grandezas Vetoriais (Introdução)}
+		Temos outras grandezas onde é necessário especificar mais do que um número escalar. \textbf{Exemplo: Deslocamento}
+		\begin{itemize}
+			\item O deslocamento pode ser de A a B ou o contrário.
+			\item $\Rightarrow$ falamos de \textbf{orientação/sentido};
+		\end{itemize}
+		
+		\begin{center}
+			\begin{tikzpicture}[scale=0.9]
+				% Diagrama de Sentido (A->B e B->A)
+				\draw[fill] (0,0) circle (1.5pt) node[above]{A};
+				\draw[fill] (2.5,0) circle (1.5pt) node[above]{B};
+				\draw[->, thick] (0,0) -- (2.5,0); % Seta A para B
+				
+				\node at (3.5,0) {ou};
+				
+				\draw[fill] (4.5,0) circle (1.5pt) node[above]{A};
+				\draw[fill] (7,0) circle (1.5pt) node[above]{B};
+				\draw[<-, thick] (4.5,0) -- (7,0); % Seta B para A
+			\end{tikzpicture}
+		\end{center}
+		
+		\begin{itemize}
+			\item A e B podem estar em "todas as direções".
+			\item $\Rightarrow$ falamos de \textbf{direção} (a reta onde estamos);
+		\end{itemize}
+		
+		\begin{center}
+			\begin{tikzpicture}[scale=0.8]
+				% Diagrama de Direções (Várias inclinações)
+				% 1. Diagonal subindo
+				\draw[fill] (0,0) circle (1.5pt) node[left]{A};
+				\draw[fill] (1.5,1.5) circle (1.5pt) node[right]{B};
+				\draw[thick] (0,0) -- (1.5,1.5);
+				
+				% 2. Vertical
+				\draw[fill] (3.5,0) circle (1.5pt) node[right]{A};
+				\draw[fill] (3.5,1.5) circle (1.5pt) node[right]{B};
+				\draw[thick] (3.5,0) -- (3.5,1.5);
+				
+				% 3. Outra inclinação
+				\draw[fill] (5.5,0.5) circle (1.5pt) node[below]{A};
+				\draw[fill] (7.5,1.5) circle (1.5pt) node[below]{B};
+				\draw[thick] (5.5,0.5) -- (7.5,1.5);
+			\end{tikzpicture}
+		\end{center}
+		
+		\vspace{0.2cm}
+		\small{Outro exemplo: Velocidade $\vec{v} = 10 m/s$ (precisa de orientação).}
+	\end{frame}
+	
+	% --- Slide 3 (Pág 3 PDF): Definição de Vetor ---
+	\begin{frame}{3. Magnitude, Direção e Orientação}
+		Analogamente à velocidade, estas grandezas têm:
+		\begin{enumerate}
+			\item \textbf{Magnitude} (Módulo)
+			\item \textbf{Direção} (Reta suporte)
+			\item \textbf{Orientação/Sentido} (Seta)
+		\end{enumerate}
+		
+		São chamadas \textbf{Grandezas Vetoriais}.
+		
+		\textbf{Notação:}
+		Escrevemos com uma seta ou barra em cima: $\vec{v}, \bar{x}, \vec{v}$.
+		
+		\vspace{0.3cm}
+		\textit{A magnitude de um vetor é representada pelo tamanho do seu segmento.}
+	\end{frame}
+	
+	% --- Slide 4 (Pág 4 PDF): Vetores no Espaço ---
+	\begin{frame}{4. Vetores no Espaço (1D, 2D)}
+		Os vetores podem "viver" em:
+		\begin{itemize}
+			\item 1D: Uma reta (monodimensional).
+			\item 2D: Um plano (bidimensional).
+			\item 3D: O espaço (tridimensional).
+		\end{itemize}
+		
+		\textbf{Na cadeira focaremos em 1D e 2D.}
+		
+		\vspace{0.3cm}
+		\textbf{Em 1D (Reta):} Temos só dois possíveis sentidos. Decidimos que um é positivo (usualmente direita) e o outro negativo.
+		
+		O sentido positivo é indicado com uma seta do eixo.
+		
+		\vspace{0.3cm}
+		\begin{columns}
+			% Caso 1: Sentido positivo para a direita
+			\column{0.5\textwidth}
+			\centering
+			\begin{tikzpicture}[scale=0.8]
+				% Eixo
+				\draw[->, thick] (0,0) -- (4,0);
+				
+				% Vetores (vermelhos)
+				\draw[->, thick, red] (2,0) -- (3,0) node[midway, above] {+5};
+				\draw[->, thick, red] (2,0) -- (1,0) node[midway, above] {-5};
+				
+				% Texto descritivo
+				\node[align=center, below] at (2,-0.3) {\footnotesize Reta com sentido\\ \footnotesize positivo para \textbf{direita}};
+				\draw[->, thin, bend right] (3.5,-0.5) to (3.8, -0.1); % Seta apontando para o eixo
+			\end{tikzpicture}
+			
+			% Caso 2: Sentido positivo para a esquerda
+			\column{0.5\textwidth}
+			\centering
+			\begin{tikzpicture}[scale=0.8]
+				% Eixo
+				\draw[<-, thick] (0,0) -- (4,0);
+				
+				% Vetores (vermelhos)
+				% Positivo segue a seta do eixo (esquerda)
+				\draw[->, thick, red] (2,0) -- (1,0) node[midway, above] {+5};
+				% Negativo vai contra a seta do eixo (direita)
+				\draw[->, thick, red] (2,0) -- (3,0) node[midway, above] {-5};
+				
+				% Texto descritivo
+				\node[align=center, below] at (2,-0.3) {\footnotesize Reta com sentido\\ \footnotesize positivo para \textbf{esquerda}};
+				\draw[->, thin, bend left] (0.5,-0.5) to (0.2, -0.1); % Seta apontando para o eixo
+			\end{tikzpicture}
+		\end{columns}
+	\end{frame}
+	
+		
+% --- Slide 5 (Pág 5 PDF): Vetor Unitário ---
+\begin{frame}{5. Vetor Unitário e Componentes}
+	O vetor é indicado usando um \textbf{vetor unitário} $\vec{i}$ que indica o sentido positivo da reta.
+	\begin{center}
+		\begin{tikzpicture}
+			% Eixo x
+			\draw[->] (0,0) -- (5,0) node[right] {$x$};
+			
+			% Vetor i (azul)
+			\draw[->, thick, blue] (1,-0.5) -- (2,-0.5) node[midway, above] {$\vec{i}$};
+			
+			% Vetor -i (vermelho)
+			\draw[->, thick, red] (1,-1.0) -- (0,-1.0) node[midway, above] {$-\vec{i}$};
+		\end{tikzpicture}
+	\end{center}
+	
+	\begin{itemize}
+		\item Se $\vec{v} = 5 \vec{i}$: Magnitude 5, sentido positivo.
+		\item Se $\vec{v} = -5 \vec{i} = 5(-\vec{i})$: Magnitude 5, sentido negativo.
+	\end{itemize}
+	
+	\vspace{0.2cm}
+	Escrevemos $\vec{v} = v_x \vec{i}$ (onde $v_x$ é a componente).A magnitude indica apenas um número real positivo: $ v := \sqrt{v_x^2} = |v_x| $. Onde o módulo $|a|$ é definido por:$ |a| = \begin{cases} a, & \text{se } a > 0 \\ -a, & \text{se } a < 0 \end{cases} $
+	
+	\vspace{0.2cm}
+	\footnotesize{\textit{Nota: O vetor unitário tem magnitude 1 ($|\vec{i}| = 1$).}}
+\end{frame}
+
+	% --- Slide 6 (Pág 6 PDF): Exemplos de Módulo ---
+	\begin{frame}{6. Exemplos de Cálculo de Módulo}
+		Calcule a magnitude dos seguintes vetores:
+		
+		\vspace{0.5cm}
+		\textbf{A)} $\vec{v} = 6,3 \vec{i}$
+		$$ v = |6,3| = 6,3 $$
+		
+		\textbf{B)} $\vec{v} = -5,2 \vec{i}$
+		$$ v = |-5,2| = 5,2 $$
+		
+		\textbf{C)} $\vec{v} = 0 \vec{i}$
+		$$ v = |0| = 0 $$
+	\end{frame}
+	
+	% --- Slide 7 (Pág 7 PDF): Soma de Vetores (Teoria) ---
+	\begin{frame}{7. Soma e Subtração de Vetores}
+		Sejam $\vec{v} = v_x \vec{i}$ e $\vec{w} = w_x \vec{i}$.
+		$v_x$ e $w_x$ são as componentes.
+		
+		$$ \vec{v} + \vec{w} = v_x \vec{i} + w_x \vec{i} = (v_x + w_x) \vec{i} $$
+		
+		\begin{alertblock}{Regra Fundamental}
+			Em física, só podemos somar vetores com as \textbf{mesmas unidades}.
+		\end{alertblock}
+		
+		\textbf{Exemplo de erro:}
+		Somar uma velocidade com um deslocamento ($\vec{v} + \vec{x}$).
+		\textit{Não tem significado físico.}
+	\end{frame}
+	
+	% --- Slide 8 (Pág 8 PDF): Exercício de Soma ---
+	\begin{frame}{8. Exercício: Soma Numérica}
+		\textbf{Dados:}
+		$\vec{v} = (5 \cdot 10 \frac{m}{s}) \vec{i}$ e $\vec{w} = -(10^2 \frac{m}{s}) \vec{i}$.
+		
+		\textbf{Pergunta:} Calcule $\vec{u} = \vec{v} + \vec{w}$ e a sua magnitude.
+		
+		\textbf{Resolução:}
+		\begin{itemize}
+			\item $v_x = 50 m/s$
+			\item $w_x = -100 m/s$
+		\end{itemize}
+		
+		$$ \vec{u} = (50 - 100) \frac{m}{s} \vec{i} = -50 \frac{m}{s} \vec{i} $$
+		
+		\textbf{Magnitude:} $|\vec{u}| = |-50| = 50 m/s$.
+		
+		\vspace{0.3cm}
+		\textbf{Representação Gráfica:}
+		\begin{center}
+			\begin{tikzpicture}
+				% Eixo
+				\draw[->, thick] (0,0) -- (6,0) node[below] {$\vec{i}$};
+				
+				% Vetor u (vermelho) apontando para a esquerda
+				\draw[->, ultra thick, red] (3,0) -- (1,0) node[midway, above] {$\vec{u}$};
+				
+				% Texto u = ...
+				\node at (3, -0.8) {$\vec{u} = u_x \vec{i} = (-50 \frac{m}{s}) \vec{i}$};
+			\end{tikzpicture}
+		\end{center}
+	\end{frame}
+	
+	% --- Slide 9 (Pág 9 PDF): Método Gráfico ---
+	\begin{frame}{9. Representação Gráfica}
+		Mais, representamos graficamente a soma $\vec{u} = \vec{v} + \vec{w}$:
+		
+		\begin{enumerate}
+			\item Decidir a origem de $\vec{v}$ (início);
+			\item Fazer coincidir a \textbf{extremidade} de $\vec{v}$ com a \textbf{origem} de $\vec{w}$;
+			\item Para obter $\vec{u}$, ligue a \textbf{origem} de $\vec{v}$ com a \textbf{extremidade} de $\vec{w}$.
+		\end{enumerate}
+		
+		\begin{center}
+			\begin{tikzpicture}[scale=1.2]
+				% Eixo preto (estendido para caber os vetores negativos)
+				\draw[->] (-3,0) -- (4,0);
+				
+				% Linha tracejada de origem (vertical em 0)
+				\draw[dashed] (0, -1.0) -- (0, 0.6);
+				
+				% Vetor v (vermelho) - Exemplo v = 50
+				\draw[->, thick, red] (0, 0.4) -- (2.5, 0.4) node[midway, above] {$\vec{v} = (50 \text{ SI}) \vec{i}$};
+				
+				% Linha tracejada da extremidade de v (vertical em 2.5)
+				\draw[dashed] (2.5, 0.4) -- (2.5, 0);
+				
+				% Vetor w (amarelo/laranja) - Exemplo w = -100
+				% Label colocado ABAIXO (below)
+				\draw[->, thick, orange] (2.5, 0) -- (-2.5, 0) node[midway, below] {$\vec{w} = (-100 \text{ SI}) \vec{i}$};
+				
+				% Vetor u (verde) - Resultado u = -50
+				% Colocado mais abaixo para não sobrepor o texto de w
+				\draw[->, thick, green!60!black] (0, -0.9) -- (-2.5, -0.9) node[midway, below] {$\vec{u} = (-50 \text{ SI}) \vec{i}$};
+			\end{tikzpicture}
+		\end{center}
+		
+		\vspace{0.1cm}
+		\textbf{B)} $\vec{v} = (2,1 \mu m)\vec{i}$, $\vec{w} = 2\vec{v}$.
+		\begin{itemize}
+			\item Calcular $\vec{u} = \vec{v} + \vec{w}$;
+			\item Qual é a magnitude de $\vec{u}$ no SI (metros)?
+			\item Representar graficamente o vetor soma $\vec{u}$.
+		\end{itemize}
+	\end{frame}
+	
+% --- Slide 10 (Pág 10 PDF): Exercício Detalhado ---
+\begin{frame}{10. Exercício: Solução com Unidades}
+	\textbf{Problema:} $\vec{v} = (2,1 \mu m)\vec{i}$ e $\vec{w} = 2\vec{v}$. Calcule $\vec{u} = \vec{v} + \vec{w}$.
+	
+	\textbf{Solução:}
+	$$ \vec{w} = 2 \cdot (2,1 \mu m)\vec{i} = (4,2 \mu m)\vec{i} $$
+	$$ \vec{u} = (2,1 + 4,2) \mu m \vec{i} = 6,3 \mu m \vec{i} $$
+	
+	\textbf{No SI (metros):}
+	$$ 6,3 \mu m = 6,3 \cdot 10^{-6} m $$
+	$$ |\vec{u}| = 6,3 \cdot 10^{-6} m $$
+	
+	\vspace{0.2cm}
+	\textbf{Representação Gráfica:}
+	\begin{center}
+		\begin{tikzpicture}[scale=0.9]
+			% Eixo preto e Vetor v (vermelho) no eixo
+			\draw[->] (-1,0) -- (8,0);
+			\draw[->, thick, red] (1,0) -- (3,0) node[midway, above] {$\vec{v}$};
+			
+			% Linha tracejada vertical (Origem)
+			\draw[dashed, teal] (1,0) -- (1,-1.5);
+			
+			% Vetor w (amarelo/laranja) - Começa onde v acaba (x=3), deslocado para baixo
+			\draw[->, thick, orange] (3,-0.6) -- (7,-0.6) node[midway, above] {$\vec{w}$};
+			
+			% Vetor u (verde) - Começa na origem (x=1), vai até o fim de w (x=7)
+			\draw[->, thick, green!60!black] (1,-1.2) -- (7,-1.2) node[midway, below] {$\vec{u}$};
+		\end{tikzpicture}
+	\end{center}
+\end{frame}
+	
+% --- Slide 11 (Pág 11 PDF): Propriedades ---
+\begin{frame}{11. Propriedades e Casos Sem Sentido}
+	\textbf{C) Caso Sem Sentido:}
+	$\vec{x} = (6 cm)\vec{i}$ e $\vec{w} = (3 m/s)\vec{i}$.
+	Calcular $\vec{x} + \vec{w}$?
+	\begin{itemize}
+		\item \textbf{Resposta:} Não tem sentido. Somar deslocamento com velocidade é impossível fisicamente.
+	\end{itemize}
+	
+	\vspace{0.3cm}
+	\textbf{D) Propriedade Comutativa:} A ordem da soma não altera o resultado.
+	$$ \vec{v} + \vec{w} = (v_x + w_x)\vec{i} \quad ; \quad \vec{w} + \vec{v} = (w_x + v_x)\vec{i} $$
+	Como $v_x, w_x$ são números reais, então $w_x + v_x = v_x + w_x$.
+	$$ \implies \vec{v} + \vec{w} = \vec{w} + \vec{v} $$
+	
+	\textbf{De facto:}
+	$$ v_x \vec{i} + w_x \vec{i} = w_x \vec{i} + v_x \vec{i} $$
+	$$ \implies v_x \vec{i} + w_x \vec{i} - w_x \vec{i} - v_x \vec{i} = 0 $$
+	$$ \implies 0 = 0 \quad (\text{Verdade}) $$
+\end{frame}
+	
+	% --- Slide 12 (Pág 12 PDF): Trigonometria ---
+	\begin{frame}{12. Cálculo dos catetos de um triângulo retângulo.}
+		
+		
+		\begin{columns}
+			% Coluna Esquerda: Definições e Triângulo
+			\column{0.65\textwidth}
+			\begin{tikzpicture}[scale=1.2]
+				\draw (0,0) -- (3,0) node[midway, below]{$b$ (adj. a $\theta$)} -- (3,2) node[midway, right]{$a$ (oposto a $\theta$)} -- cycle;
+				\node at (1.5, 1.2) {$c$ (hip.)};
+				
+				% Ângulo Theta
+				\draw (0.5,0) arc (0:33.69:0.5);
+				\node at (0.7,0.2) {$\theta$};
+				
+				% Ângulo Phi
+				\draw (2.7,1.8) arc (215:270:0.3);
+				\node at (2.6, 1.5) {$\varphi$};
+				
+				% Ângulo Reto
+				\draw (2.7,0) -- (2.7,0.3) -- (3,0.3);
+			\end{tikzpicture}
+			
+			\vspace{0.2cm}
+			\textbf{Para $\theta$:}
+			\begin{itemize}
+				\item $\cos \theta = \frac{b}{c}$ \quad ; \quad $\sin \theta = \frac{a}{c}$
+			\end{itemize}
+			
+			\textbf{Para $\varphi$:}
+			\begin{itemize}
+				\item $\cos \varphi = \frac{a}{c}$ (adjacente a $\varphi$ é $a$)
+				\item $\sin \varphi = \frac{b}{c}$ (oposto a $\varphi$ é $b$)
+			\end{itemize}
+			
+			% Coluna Direita: Observações (Obs)
+			\column{0.35\textwidth}
+			\vrule{} \hspace{0.2cm} \textbf{\textcolor{red}{Obs.}}
+			\vspace{0.2cm}
+			
+			Em um triângulo:
+			$$ 0 \le \cos \theta \le 1 $$
+			$$ 0 \le \sin \theta \le 1 $$
+			
+			\textbf{Porque} $a < c$ e $b < c$:
+			$$ \implies \frac{a}{c} < 1 $$
+			$$ \implies \frac{b}{c} < 1 $$
+			
+			E como $a, b, c > 0$:
+			$$ \implies \frac{a}{c}, \frac{b}{c} > 0 $$
+		\end{columns}
+	\end{frame}
+	
+% --- Slide 13 (Pág 13 PDF): Comportamento do Cosseno ---
+\begin{frame}{13. Análise de Valores (Cosseno)}
+	
+	$$ \cos \theta = \frac{a}{c} $$
+	
+	\begin{center}
+		\begin{tikzpicture}[scale=1.]
+			% Caso 1: Theta pequeno, a grande
+			\draw[thick] (0,0) -- (3,0) node[midway, below] {$a$} -- (3,1) node[midway, right] {$b$} -- cycle;
+			\node at (1.5, 0.7) {$c$};
+			\draw (0.6,0) arc (0:18.4:0.6);
+			\node at (0.8,0.15) {$\theta$};
+			
+			% Caso 2: Theta grande, a pequeno
+			\begin{scope}[shift={(5,0)}]
+				\draw[thick] (0,0) -- (1,0) node[midway, below] {$a$} -- (1,2.5) node[midway, right] {$b$} -- cycle;
+				\node at (0.2, 1.5) {$c$};
+				\draw (0.4,0) arc (0:68.2:0.4);
+				\node at (0.5,0.6) {$\theta$};
+			\end{scope}
+		\end{tikzpicture}
+	\end{center}
+	
+
+	\begin{itemize}
+		\item Menor é $\theta$ e maior é '$a$' respeito a '$c$' $\leadsto$ maior é $\cos \theta = \frac{a}{c}$
+		\item Em vez, maior é $\theta$ e menor é '$a$' respeito a '$c$' $\leadsto$ menor é $\cos \theta = \frac{a}{c}$
+	\end{itemize}
+	
+	\vspace{0.3cm}
+	\textbf{O contrário no caso de $b$.}
+\end{frame}
+	
+	% --- Slide 14 (Pág 14 PDF): Graus e Radianos ---
+	\begin{frame}{14. Conversão Graus vs Radianos}
+		Definimos o ângulo raso $180^{\circ}$ como $\pi$ radianos.
+		$$ \pi \approx 3,14 $$
+		
+		\textbf{Fórmula de Conversão:}
+		Se $\theta = x^{\circ}$, em radianos:
+		$$ \frac{x}{180} = \frac{\theta_{rad}}{\pi} \implies \theta_{rad} = x \cdot \frac{\pi}{180} $$
+	\end{frame}
+	
+	% --- Slide 15 (Pág 15 PDF): Exemplo Resolvido ---
+	\begin{frame}{15. Exemplo Triângulo}
+		Considere um triângulo com hipotenusa $c=1$, $\theta = 30^{\circ}$ e $\varphi = 60^{\circ}$.
+		
+		\vspace{0.5cm}
+		
+		\begin{columns}
+			% Coluna da Esquerda: Cálculos
+			\column{0.55\textwidth}
+			\textbf{1. Converter ângulos:}
+			$$ \theta_{rad} = \frac{30}{180}\pi = \frac{\pi}{6} $$
+			$$ \varphi_{rad} = \frac{60}{180}\pi = \frac{\pi}{3} $$
+			
+			\textbf{2. Calcular Lados:}
+			% Corrigido conforme notas: a é o adjacente (cos), b é o oposto (sen)
+			$$ a = c \cdot \cos(30^{\circ}) = 1 \cdot \frac{\sqrt{3}}{2} \approx 0,866 $$
+			$$ b = c \cdot \sin(30^{\circ}) = 1 \cdot 0,5 = 0,5 $$
+			
+			% Coluna da Direita: Desenho
+			\column{0.45\textwidth}
+			\centering
+			\begin{tikzpicture}[scale=4.5]
+				% Coordenadas
+				% Base a = 0.866 (eixo x), Altura b = 0.5 (eixo y)
+				\coordinate (O) at (0,0);
+				\coordinate (A) at ({cos(30)}, 0); 
+				\coordinate (B) at ({cos(30)}, {sin(30)});
+				
+				% Triângulo
+				\draw[thick] (O) -- (A) node[midway, below] {$a \approx 0,866$};
+				\draw[thick] (A) -- (B) node[midway, right] {$b = 0,5$};
+				\draw[thick] (O) -- (B) node[midway, above left] {$c=1$};
+				
+				% Ângulo Reto (em baixo à direita)
+				\draw ({cos(30)-0.1}, 0) -- ({cos(30)-0.1}, 0.1) -- ({cos(30)}, 0.1);
+				
+				% Ângulo Theta (30 graus) - Em baixo à esquerda
+				\draw (0.25,0) arc (0:30:0.25);
+				\node at (0.35, 0.1) {$30^\circ$};
+				
+				% Ângulo Phi (60 graus) - No topo
+				% Arco desenhado a partir da vertical (270) até à hipotenusa (210)
+				\draw ({cos(30)}, {sin(30)-0.15}) arc (270:210:0.15);
+				% Etiqueta posicionada bem acima para não confundir com o ângulo reto
+				\node at ({cos(30)-0.1}, {sin(30)-0.25}) {$60^\circ$};
+			\end{tikzpicture}
+		\end{columns}
+	\end{frame}
+
+
+
+% --- Slide 16 (Pág 16 PDF): TPC (Enunciados) ---
+\begin{frame}{16. Exercícios de Casa (TPC)}
+	\textbf{Problema A:}
+	$\vec{w} = (2,1 cm)\vec{i}$, $\vec{v} = -0,1 \vec{w}$.
+	Calcule $\vec{u} = \vec{v} + \vec{w}$, a magnitude, e represente graficamente.
+	
+	\vspace{0.5cm}
+	\textbf{Problema B:}
+	Considere um triângulo retângulo com:
+	\begin{itemize}
+		\item Hipotenusa $c = 2$
+		\item Cateto $a = b = 2\frac{\sqrt{2}}{2}$
+	\end{itemize}
+	Calcule os ângulos em graus e radianos e desenhe o triângulo.
+\end{frame}
+
+% --- Novo Slide: Gráficos e Tabela de Trigonometria ---
+\begin{frame}{Funções Trigonométricas e Valores Notáveis}
+	\begin{columns}
+		% --- Coluna Esquerda: Gráficos ---
+		\column{0.45\textwidth} % Reduzi ligeiramente a largura da coluna
+		\centering
+		\textbf{Seno ($y = \sin x$)}
+		\begin{tikzpicture}[domain=0:6.28, scale=0.7] % Escala ajustada para 0.6
+			\draw[->] (-0.2,0) -- (6.5,0) node[right] {$x$};
+			\draw[->] (0,-1.2) -- (0,1.2) node[above] {$y$};
+			\draw[blue, thick] plot[samples=100] (\x,{sin(\x r)});
+			
+			% Origem 0
+			\node[below left] at (0,0) {\tiny 0};
+			
+			% Eixo X labels
+			\draw (1.57,0.1) -- (1.57,-0.1) node[below] {\tiny $\frac{\pi}{2}$};
+			\draw (3.14,0.1) -- (3.14,-0.1) node[below] {\tiny $\pi$};
+			\draw (4.71,0.1) -- (4.71,-0.1) node[below] {\tiny $\frac{3\pi}{2}$};
+			\draw (6.28,0.1) -- (6.28,-0.1) node[below] {\tiny $2\pi$};
+			% Eixo Y labels
+			\draw (0.1,1) -- (-0.1,1) node[left] {\tiny $1$};
+			\draw (0.1,-1) -- (-0.1,-1) node[left] {\tiny $-1$};
+		\end{tikzpicture}
+		
+		\vspace{0.2cm}
+		\textbf{Cosseno ($y = \cos x$)}
+		\begin{tikzpicture}[domain=0:6.28, scale=0.7] % Escala ajustada para 0.6
+			\draw[->] (-0.2,0) -- (6.5,0) node[right] {$x$};
+			\draw[->] (0,-1.2) -- (0,1.2) node[above] {$y$};
+			\draw[red, thick] plot[samples=100] (\x,{cos(\x r)});
+			
+			% Origem 0
+			\node[below left] at (0,0) {\tiny 0};
+			
+			% Eixo X labels
+			\draw (1.57,0.1) -- (1.57,-0.1) node[below] {\tiny $\frac{\pi}{2}$};
+			\draw (3.14,0.1) -- (3.14,-0.1) node[below] {\tiny $\pi$};
+			\draw (4.71,0.1) -- (4.71,-0.1) node[below] {\tiny $\frac{3\pi}{2}$};
+			\draw (6.28,0.1) -- (6.28,-0.1) node[below] {\tiny $2\pi$};
+			% Eixo Y labels
+			\draw (0.1,1) -- (-0.1,1) node[left] {\tiny $1$};
+			\draw (0.1,-1) -- (-0.1,-1) node[left] {\tiny $-1$};
+		\end{tikzpicture}
+		
+		% --- Coluna Direita: Tabela ---
+		\column{0.55\textwidth} % Dei mais espaço para a tabela
+		\centering
+		\normalsize % Fonte normal (maior que scriptsize)
+		\renewcommand{\arraystretch}{1.3} % Aumenta o espaçamento entre linhas
+		\begin{tabular}{|c|c|c|c|}
+			\hline
+			\textbf{Grau} & \textbf{Rad} & \textbf{Sen} & \textbf{Cos} \\ \hline
+			$0^{\circ}$ & $0$ & $0$ & $1$ \\ \hline
+			$30^{\circ}$ & $\frac{\pi}{6}$ & $\frac{1}{2}$ & $\frac{\sqrt{3}}{2}$ \\ \hline
+			$45^{\circ}$ & $\frac{\pi}{4}$ & $\frac{\sqrt{2}}{2}$ & $\frac{\sqrt{2}}{2}$ \\ \hline
+			$60^{\circ}$ & $\frac{\pi}{3}$ & $\frac{\sqrt{3}}{2}$ & $\frac{1}{2}$ \\ \hline
+			$90^{\circ}$ & $\frac{\pi}{2}$ & $1$ & $0$ \\ \hline
+			$180^{\circ}$ & $\pi$ & $0$ & $-1$ \\ \hline
+			$270^{\circ}$ & $\frac{3\pi}{2}$ & $-1$ & $0$ \\ \hline
+			$360^{\circ}$ & $2\pi$ & $0$ & $1$ \\ \hline
+		\end{tabular}
+	\end{columns}
+\end{frame}
+
+	
+% --- Slide 16 (Pág 16 PDF): TPC (Enunciados) ---
+\begin{frame}{16. Exercícios de Casa (TPC)}
+	\textbf{Problema A:}
+	$\vec{w} = (2,1 cm)\vec{i}$, $\vec{v} = -0,1 \vec{w}$.
+	Calcule $\vec{u} = \vec{v} + \vec{w}$, a magnitude, e represente graficamente.
+	
+	\vspace{0.5cm}
+	\textbf{Problema B:}
+	Considere um triângulo retângulo com:
+	\begin{itemize}
+		\item Hipotenusa $c = 2$
+		\item Cateto $a = b = 2\frac{\sqrt{2}}{2}$
+	\end{itemize}
+	Calcule os ângulos em graus e radianos e desenhe o triângulo.
+\end{frame}
+
+% --- Slide 17: Soluções do TPC ---
+\begin{frame}{Soluções do TPC}
+	\begin{columns}
+		% --- Coluna Esquerda: Problema A (Vetores) ---
+		\column{0.5\textwidth}
+		\textbf{A) Solução:}
+		\footnotesize
+		Dados: $\vec{w} = 2,1 \vec{i}$ e $\vec{v} = -0,1 \vec{w} = -0,21 \vec{i}$.
+		
+		\textbf{Cálculo:}
+		$$ \vec{u} = \vec{w} + \vec{v} = (2,1 - 0,21)\vec{i} $$
+		$$ \vec{u} = 1,89 \text{ cm } \vec{i} $$
+		\textbf{Magnitude:} $|\vec{u}| = 1,89 \text{ cm}$.
+		
+		\vspace{0.2cm}
+		\centering
+		\begin{tikzpicture}[scale=1.5]
+			\draw[->] (0,0) -- (2.5,0);
+			% w (azul) vai até 2.1
+			\draw[->, thick, blue] (0,0) -- (2.1,0) node[midway, above] {\tiny $\vec{w}$};
+			% v (vermelho) recua 0.21 a partir da ponta de w
+			\draw[->, thick, red] (2.1,0) -- (1.89,0) node[midway, below] {\tiny $\vec{v}$};
+			% u (verde) é o resultado
+			\draw[->, thick, green!60!black] (0,-0.3) -- (1.89,-0.3) node[midway, below] {\tiny $\vec{u}$};
+		\end{tikzpicture}
+		
+		% --- Coluna Direita: Problema B (Trigonometria) ---
+		\column{0.5\textwidth}
+		\textbf{B) Solução:}
+		\footnotesize
+		Dados: $c=2$, $a=b=\sqrt{2}$ (pois $2\frac{\sqrt{2}}{2} = \sqrt{2}$).
+		
+		\textbf{Ângulos:}
+		Como $a=b$, é um triângulo isósceles.
+		$$ \cos \theta = \frac{b}{c} = \frac{\sqrt{2}}{2} $$
+		$$ \Rightarrow \theta = 45^{\circ} $$
+		
+		\textbf{Em Radianos:}
+		$$ \theta_{rad} = 45 \cdot \frac{\pi}{180} = \frac{\pi}{4} $$
+		
+		\vspace{0.1cm}
+		\centering
+		\begin{tikzpicture}[scale=0.8]
+			% Coordenadas: sqrt(2) approx 1.41
+			\coordinate (O) at (0,0);
+			\coordinate (Base) at (1.41, 0);
+			\coordinate (Top) at (1.41, 1.41);
+			
+			\draw[thick] (O) -- (Base) node[midway, below] {\tiny $\sqrt{2}$} -- (Top) node[midway, right] {\tiny $\sqrt{2}$} -- cycle;
+			\node at (0.5, 0.9) {\tiny $c=2$};
+			
+			% Ângulo 45
+			\draw (0.5,0) arc (0:45:0.5);
+			\node at (0.8, 0.3) {\tiny $45^{\circ}$};
+			
+			% Ângulo Reto
+			\draw (1.2,0) -- (1.2,0.2) -- (1.41,0.2);
+		\end{tikzpicture}
+	\end{columns}
+\end{frame}
+\end{document}

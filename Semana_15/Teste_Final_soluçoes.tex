@@ -1,0 +1,497 @@
+
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[portuguese]{babel}
+\usepackage{amsmath}
+\usepackage{siunitx}
+\usepackage{graphicx}
+\usepackage{geometry}
+\usepackage{parskip}
+\usepackage{enumitem}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,calc,decorations.pathmorphing}
+
+\geometry{a4paper, left=1cm, right=1.5cm, top=1cm, bottom=1.5cm}
+
+\newcommand{\cabecalho}{
+    \hfill
+    \begin{minipage}[t]{0.7\textwidth}
+        \raggedleft
+        \textbf{Teste Final, Fundamentos de Física}
+    \end{minipage}
+    \vspace{0.35cm}
+}
+
+\newcommand{\pontos}[1]{\hfill\textbf{(#1 valores)}}
+
+\setlength{\parindent}{0pt}
+\setlist[enumerate]{itemsep=4pt, topsep=4pt}
+
+\begin{document}
+
+\cabecalho
+
+\textbf{Nome:} \rule{10cm}{0.4pt}
+\hfill
+\textbf{Data:} \rule{2.5cm}{0.4pt}
+
+\vspace{0.2cm}
+
+\textbf{Indicação:} Sempre que necessário, considere $g = 10\,\text{m/s}^2$.
+Antes de efetuar os cálculos, converta as grandezas para unidades do SI.
+
+\vspace{0.25cm}
+
+\textbf{Exercício 1}. Considere o vetor $\vec{v}=(v_x,v_y)$ de módulo $4$ e
+orientação definida pelo ângulo $\theta=150^\circ$, medido a partir do semieixo positivo
+de $x$.
+
+\begin{enumerate}[label=\textbf{\alph*)}]
+    \item Calcule as componentes de $\vec{v}$ e escreva o vetor usando os vetores
+    unitários $\vec{i}$ e $\vec{j}$. \pontos{1,0}
+    \item Calcule o vetor unitário com a mesma orientação do vetor $(v_x,-v_y)$. \pontos{1,0}
+    \item Considere o vetor $\vec{w}=(3,\,3\sqrt{3})$. Determine $|\vec{w}|$ e o
+    ângulo $\phi$, tais que $w_x=|\vec{w}|\cos\phi$ e
+    $w_y=|\vec{w}|\sin\phi$. \pontos{1,0}
+    \item Um vetor $\vec{u}$ tem módulo $6$ e forma um ângulo de $60^\circ$ com
+    $\vec{v}$. Calcule o produto escalar $\vec{v}\cdot\vec{u}$ e explique o significado
+    geométrico do produto escalar entre dois vetores. \pontos{1,0}
+\end{enumerate}
+
+\vspace{0.25cm}
+
+\textbf{Exercício 2}. Uma moeda é lançada do solo na direção vertical, com
+rapidez inicial de $10\,\text{m/s}$. Desprezando a resistência do ar, determine:
+
+\begin{enumerate}[label=\textbf{\alph*)}]
+    \item Qual é o instante em que a moeda atinge a altura máxima e qual é a sua velocidade
+    nesse ponto? \pontos{1,5}
+    \item Qual é a velocidade da moeda no instante em que atinge o solo? \pontos{1,0}
+    \item A que distância horizontal do ponto de lançamento a moeda atinge o solo? \pontos{1,0}
+\end{enumerate}
+
+\vspace{0.25cm}
+
+\textbf{Exercício 3}. Dois blocos estão ligados por uma corda ideal e sobem, sem atrito,
+um plano inclinado que forma um ângulo de $30^\circ$ com a horizontal. Uma força de módulo
+$140\,\text{N}$, paralela ao plano inclinado e dirigida para cima, puxa o bloco $m_1$.
+As massas são:
+\[
+m_1=12\,\text{kg}, \qquad m_2=8000\,\text{g}.
+\]
+
+\begin{center}
+	\begin{tikzpicture}[scale=0.95, >=Latex]
+		\coordinate (A) at (0,0);
+		\coordinate (B) at (8,0);
+		\coordinate (C) at (8,4.62);
+		\draw[thick] (A) -- (B) -- (C) -- cycle;
+		\begin{scope}[shift={(2.8,1.62)}, rotate=30]
+			\draw[fill=white, thick] (0,0) rectangle (1.6,0.95);
+			\node at (0.8,0.48) {$m_2$};
+			\draw[thick] (1.6,0.48) -- (3.2,0.48);
+			\node[above] at (2.4,0.48) {$T$};
+			\draw[fill=white, thick] (3.2,0) rectangle (4.8,0.95);
+			\node at (4.0,0.48) {$m_1$};
+			\draw[->, very thick] (4.8,0.48) -- (6.4,0.48) node[right] {$\vec{F}$};
+		\end{scope}
+		\draw (1.1,0) arc[start angle=0,end angle=30,radius=1.1];
+		\node at (1.45,0.32) {$30^\circ$};
+	\end{tikzpicture}
+\end{center}
+
+\begin{enumerate}[label=\textbf{\alph*)}]
+	\item Desenhe o diagrama de corpo livre de cada bloco, indicando as forças paralelas
+	e perpendiculares ao plano inclinado. \pontos{1,0}
+	\item Calcule a aceleração do sistema. \pontos{1,5}
+	\item Calcule a tensão $T$ na corda. \pontos{1,0}
+	\item Considerando como sistema os dois blocos e a corda, indique as forças externas
+	aplicadas ao sistema e as forças internas. Por qual princípio, na equação do sistema
+	completo, as forças internas se cancelam? Explique. \pontos{1,0}
+\end{enumerate}
+
+
+
+
+\cabecalho
+
+\textbf{Exercício 4}. Uma roldana gira inicialmente a $28\,\text{rev/s}$ e reduz
+uniformemente a sua velocidade angular para $16\,\text{rev/s}$ durante um intervalo
+de tempo total de $6,0\,\text{s}$.
+
+\begin{enumerate}[label=\textbf{\alph*)}]
+	\item Calcule a aceleração angular da roldana. \pontos{1,0}
+	\item Calcule o número de revoluções completadas durante a primeira metade do
+	intervalo de tempo total. \pontos{1,0}
+	\item Calcule o ângulo total percorrido durante todo o intervalo de tempo. \pontos{1,0}
+	\item Considere agora uma partícula que descreve uma circunferência com rapidez
+	constante. Explique por que existe aceleração, apesar de a rapidez ser constante.
+	Indique a direção e o sentido dessa aceleração. \pontos{1,0}
+\end{enumerate}
+
+
+
+\vspace{0.25cm}
+
+\textbf{Exercício 5}. Uma esfera de massa $m=400\,\text{g}$ move-se horizontalmente
+com rapidez inicial $v=15\,\text{m/s}$ e colide com um bloco de massa
+$M=1600\,\text{g}$, inicialmente em repouso sobre uma superfície horizontal sem atrito.
+O bloco está ligado a uma mola ideal de constante elástica $k=288\,\text{N/m}$ e
+encontra-se inicialmente na posição de equilíbrio da mola, com $x=0$. A esfera fica
+incrustada no bloco. Após o impacto, o conjunto bloco--esfera desloca-se para a direita,
+alongando a mola.
+
+\begin{center}
+	\begin{tikzpicture}[scale=0.9, >=Latex]
+		% Superfície e parede à esquerda
+		\draw[thick] (-0.1,0) -- (11.0,0);
+		\draw[thick] (0.5,0) -- (0.5,2.2);
+		\foreach \y in {0.2,0.5,...,2.0}{
+			\draw[thin] (0.5,\y) -- (0.2,\y+0.2);
+		}
+		% Mola abaixo da trajetória da esfera: ao mover-se para a direita, o bloco alonga a mola
+		\draw[thick,decorate,decoration={zigzag,segment length=7pt,amplitude=4pt}]
+		(0.5,0.30) -- (7.1,0.30);
+		% Bloco
+		\draw[fill=white, thick] (7.1,0) rectangle (8.6,1.1);
+		\node at (7.85,0.62) {$M$};
+		\node[above] at (3.8,0.52) {$k$};
+		% Esfera incidente, acima da mola
+		\draw[fill=white, thick] (4.9,0.82) circle (0.20);
+		\node[below] at (4.9,1.57) {$m$};
+		\draw[->, very thick] (5.15,0.82) -- (6.7,0.82) node[midway, above] {$\vec{v}$};
+		\node at (5.8,-0.42) {};
+	\end{tikzpicture}
+\end{center}
+
+\begin{enumerate}[label=\textbf{\alph*)}]
+	\item Classifique a colisão. Indique as formas de energia envolvidas. Após o impacto,
+	de que forma de energia para que forma de energia ocorre a transformação e porquê? \pontos{1,5}
+	\item Calcule a rapidez do conjunto bloco--esfera imediatamente após o impacto. \pontos{1,5}
+	\item Qual é a rapidez do conjunto no ponto de alongamento máximo da mola? \pontos{1,0}
+	\item Calcule o alongamento máximo da mola e o trabalho realizado pela força elástica
+	desde a posição de equilíbrio até ao ponto de alongamento máximo. \pontos{2,0}
+\end{enumerate}
+
+\newpage
+
+\section*{Soluções}
+
+\textbf{Exercício 1}
+
+\begin{enumerate}[label=\textbf{\alph*)}]
+    \item
+    \[
+    v_x=v\cos\theta=4\cos150^\circ=-2\sqrt{3},
+    \qquad
+    v_y=v\sin\theta=4\sin150^\circ=2.
+    \]
+    Logo:
+    \[
+    \vec{v}=-2\sqrt{3}\,\vec{i}+2\,\vec{j}.
+    \]
+
+    \item O vetor $(v_x,-v_y)$ é:
+    \[
+    (v_x,-v_y)=(-2\sqrt{3},-2).
+    \]
+    O seu módulo é:
+    \[
+    \sqrt{(-2\sqrt{3})^2+(-2)^2}=4.
+    \]
+    Portanto, o vetor unitário com a mesma orientação é:
+    \[
+    \frac{(v_x,-v_y)}{\sqrt{v_x^2+(-v_y)^2}}
+    =-\frac{\sqrt{3}}{2}\,\vec{i}-\frac12\,\vec{j}.
+    \]
+
+    \item
+    \[
+    |\vec{w}|=\sqrt{3^2+(3\sqrt{3})^2}
+    =\sqrt{9+27}=6.
+    \]
+    Como $w_x>0$ e $w_y>0$, o vetor encontra-se no primeiro quadrante. Além disso:
+    \[
+    \cos\phi=\frac{3}{6}=\frac12,
+    \qquad
+    \sin\phi=\frac{3\sqrt{3}}{6}=\frac{\sqrt{3}}{2}.
+    \]
+    Portanto:
+    \[
+    \phi=60^\circ.
+    \]
+
+    \item
+    \[
+    \vec{v}\cdot\vec{u}
+    =|\vec{v}|\,|\vec{u}|\cos60^\circ
+    =4(6)\left(\frac12\right)
+    =12.
+    \]
+    O produto escalar pode ser interpretado como o módulo de um vetor multiplicado
+    pela projeção do outro vetor sobre ele:
+    \[
+    \vec{a}\cdot\vec{b}=ab\cos\varphi.
+    \]
+\end{enumerate}
+
+\vspace{0.2cm}
+
+\textbf{Exercício 2}
+
+Escolhemos o eixo $y$ orientado para cima. Como a moeda é lançada verticalmente a
+partir do solo:
+\[
+y_0=0,
+\qquad
+v_{0y}=10\,\text{m/s},
+\qquad
+a_y=-g=-10\,\text{m/s}^2.
+\]
+
+\begin{enumerate}[label=\textbf{\alph*)}]
+    \item No ponto de altura máxima:
+    \[
+    v_y=0.
+    \]
+    Usando:
+    \[
+    v_y=v_{0y}-gt,
+    \]
+    obtemos:
+    \[
+    0=10-10t
+    \quad\Rightarrow\quad
+    t=1,0\,\text{s}.
+    \]
+    Portanto, a moeda atinge a altura máxima no instante:
+    \[
+    t_{\max}=1,0\,\text{s},
+    \]
+    e a sua velocidade nesse ponto é:
+    \[
+    \vec{v}=0.
+    \]
+
+    \item A moeda regressa ao solo no instante:
+    \[
+    t=2,0\,\text{s}.
+    \]
+    A velocidade nesse instante é:
+    \[
+    v_y=v_{0y}-gt
+    =10-10(2,0)
+    =-10\,\text{m/s}.
+    \]
+    Logo:
+    \[
+    \vec{v}=-10\,\vec{j}\,\text{m/s}.
+    \]
+
+    \item Como o movimento é exclusivamente vertical:
+    \[
+    \Delta x=0.
+    \]
+    Portanto, a moeda atinge o solo a uma distância horizontal:
+    \[
+    0\,\text{m}
+    \]
+    do ponto de lançamento.
+\end{enumerate}
+
+\vspace{0.2cm}
+
+\textbf{Exercício 3}
+
+Conversão:
+\[
+m_2=8000\,\text{g}=8,0\,\text{kg}.
+\]
+
+Escolhemos o eixo $x$ paralelo ao plano inclinado, orientado para cima, e o eixo $y$
+perpendicular ao plano.
+
+\begin{enumerate}[label=\textbf{\alph*)}]
+    \item Para o bloco $m_1$, as forças são: a força aplicada $\vec{F}$ e a tensão
+    $\vec{T}$, paralelas ao plano; a força gravítica $m_1\vec{g}$, verticalmente para
+    baixo; e a força normal $\vec{F}_{N,1}$, perpendicular ao plano. A componente do
+    peso paralela ao plano é $m_1g\sin\theta$, dirigida para baixo da rampa.
+
+    Para o bloco $m_2$, atuam a tensão $\vec{T}$, paralela ao plano e dirigida para
+    cima; a força gravítica $m_2\vec{g}$; e a força normal $\vec{F}_{N,2}$. A componente
+    do peso paralela ao plano é $m_2g\sin\theta$, dirigida para baixo da rampa.
+
+    \item Aplicando a segunda lei de Newton ao sistema completo, na direção paralela
+    ao plano:
+    \[
+    F-(m_1+m_2)g\sin\theta=(m_1+m_2)a.
+    \]
+    Logo:
+    \[
+    a=
+    \frac{F-(m_1+m_2)g\sin\theta}{m_1+m_2}.
+    \]
+    Substituindo os valores:
+    \[
+    a=
+    \frac{140-(12+8,0)(10)\sin30^\circ}{12+8,0}
+    =
+    \frac{140-100}{20}
+    =2,0\,\text{m/s}^2.
+    \]
+
+    \item Para o bloco $m_2$, na direção paralela ao plano:
+    \[
+    T-m_2g\sin\theta=m_2a.
+    \]
+    Portanto:
+    \[
+    T=m_2a+m_2g\sin\theta.
+    \]
+    Assim:
+    \[
+    T=8,0(2,0)+8,0(10)\sin30^\circ
+    =16+40
+    =56\,\text{N}.
+    \]
+
+    \item Considerando como sistema os dois blocos e a corda, as forças externas são:
+    a força aplicada $\vec{F}$, os pesos dos blocos e as forças normais exercidas pelo
+    plano inclinado. As forças internas são as interações entre a corda e cada bloco.
+
+    Pela terceira lei de Newton, as forças internas formam pares ação--reação:
+    possuem o mesmo módulo e sentidos opostos. Como os dois membros de cada par
+    pertencem ao mesmo sistema, a soma vetorial das forças internas é nula.
+
+    Na direção paralela ao plano, resta:
+    \[
+    F-(m_1+m_2)g\sin\theta=(m_1+m_2)a.
+    \]
+\end{enumerate}
+
+\vspace{0.2cm}
+
+\textbf{Exercício 4}
+
+\begin{enumerate}[label=\textbf{\alph*)}]
+    \item As velocidades angulares inicial e final são:
+    \[
+    \omega_i=2\pi(28)=56\pi\,\text{rad/s},
+    \qquad
+    \omega_f=2\pi(16)=32\pi\,\text{rad/s}.
+    \]
+    Portanto:
+    \[
+    \alpha=\frac{\omega_f-\omega_i}{\Delta t}
+    =\frac{32\pi-56\pi}{6,0}
+    =-4\pi\,\text{rad/s}^2.
+    \]
+
+    \item A primeira metade do intervalo total corresponde a:
+    \[
+    t=\frac{6,0}{2}=3,0\,\text{s}.
+    \]
+    Nesse instante:
+    \[
+    \omega(3,0)
+    =\omega_i+\alpha t
+    =56\pi+(-4\pi)(3,0)
+    =44\pi\,\text{rad/s}.
+    \]
+    Como a variação é uniforme:
+    \[
+    \Delta\theta_{\text{metade}}
+    =\left(\frac{56\pi+44\pi}{2}\right)(3,0)
+    =150\pi\,\text{rad}.
+    \]
+    Logo:
+    \[
+    N_{\text{rev, metade}}
+    =\frac{150\pi}{2\pi}
+    =75\ \text{revoluções}.
+    \]
+
+    \item Durante todo o intervalo:
+    \[
+    \Delta\theta_{\text{total}}
+    =\left(\frac{\omega_i+\omega_f}{2}\right)\Delta t
+    =\left(\frac{56\pi+32\pi}{2}\right)(6,0)
+    =264\pi\,\text{rad}.
+    \]
+
+    \item A rapidez permanece constante, mas o vetor velocidade muda continuamente
+    de direção. Como a velocidade é uma grandeza vetorial, essa mudança corresponde
+    a uma aceleração. No movimento circular uniforme, a aceleração é centrípeta:
+    tem direção radial e sentido para o centro da circunferência.
+\end{enumerate}
+
+\vspace{0.2cm}
+
+\textbf{Exercício 5}
+
+Conversões:
+\[
+m=400\,\text{g}=0,40\,\text{kg},
+\qquad
+M=1600\,\text{g}=1,60\,\text{kg}.
+\]
+
+\begin{enumerate}[label=\textbf{\alph*)}]
+    \item Como a esfera fica incrustada no bloco, os dois corpos permanecem unidos
+    após o impacto. Portanto, trata-se de uma colisão perfeitamente inelástica.
+
+    Durante o impacto, conserva-se o momento linear do sistema esfera--bloco, mas
+    a energia cinética não se conserva: parte dela é transformada noutras formas de
+    energia, como energia térmica e energia sonora.
+
+    Após o impacto, o conjunto bloco--esfera alonga a mola. Como não existe atrito,
+    a energia mecânica conserva-se: a energia cinética do conjunto transforma-se em
+    energia potencial elástica do sistema bloco--esfera--mola. Essa transformação
+    ocorre porque a força elástica realiza trabalho negativo enquanto a mola é
+    alongada.
+
+    \item Durante o impacto:
+    \[
+    mv=(M+m)V.
+    \]
+    Portanto:
+    \[
+    V=\frac{m}{M+m}v
+    =\frac{0,40}{1,60+0,40}(15)
+    =3,0\,\text{m/s}.
+    \]
+
+    \item No ponto de alongamento máximo, o conjunto está momentaneamente parado:
+    \[
+    V_{\text{máx. alongamento}}=0\,\text{m/s}.
+    \]
+
+    \item Imediatamente após o impacto, a mola encontra-se ainda na posição de
+    equilíbrio, $x=0$, e a energia do conjunto é cinética. No alongamento máximo,
+    a rapidez é nula e a energia é potencial elástica:
+    \[
+    \frac12(M+m)V^2=\frac12kx_{\max}^2.
+    \]
+    Logo:
+    \[
+    x_{\max}
+    =V\sqrt{\frac{M+m}{k}}
+    =3,0\sqrt{\frac{2,0}{288}}
+    =0,25\,\text{m}.
+    \]
+    O trabalho realizado pela força elástica entre $x_i=0$ e $x_f=x_{\max}$ é:
+    \[
+    W_k=\frac12kx_i^2-\frac12kx_f^2
+    =-\frac12kx_{\max}^2.
+    \]
+    Assim:
+    \[
+    W_k=-\frac12(288)(0,25)^2
+    =-9,0\,\text{J}.
+    \]
+    O sinal negativo indica que a força elástica tem sentido oposto ao deslocamento
+    do conjunto enquanto a mola é alongada.
+\end{enumerate}
+
+\end{document}

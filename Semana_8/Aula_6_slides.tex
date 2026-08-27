@@ -1,0 +1,763 @@
+\documentclass{beamer}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[portuguese]{babel}
+\usepackage{amsmath}
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric, arrows.meta, 3d, calc, decorations.pathreplacing,patterns}
+
+% Configuração do Tema
+\usetheme{Madrid}
+\usecolortheme{default}
+
+% Comando para o círculo vermelho (Definido globalmente no preâmbulo)
+\providecommand{\circled}[1]{\mbox{\tikz[baseline=(char.base)]{\node[shape=circle,draw=red,thick,inner sep=0.5pt,text=red,font=\tiny\bfseries] (char) {#1};}}}
+
+% Informações do Título
+\title{Aula 6: Teoria e Prática}
+\subtitle{ Força e Movimento - I}
+\date{20 Abril 2026}
+
+\begin{document}
+	
+	\frame{\titlepage}
+	
+	% SLIDE 1: Introdução
+	\begin{frame}{Mecânica Newtoniana}
+		\footnotesize
+		
+		Nos capítulos anteriores estudamos a \textbf{Cinemática}: como descrever o movimento (posição, velocidade e aceleração) sem nos preocuparmos com o que causa esse movimento.
+		
+		\vspace{0.2cm}
+		Agora entramos na \textbf{Dinâmica} (Mecânica Newtoniana): o estudo das relações entre a aceleração de um corpo e as \underline{forças} que atuam sobre ele.
+		
+		\vspace{0.2cm}
+		\textcolor{red}{\textbf{O que causa a aceleração?}} \\
+		A aceleração de um corpo é causada por uma força. Uma força é, intuitivamente, um "empurrão" ou um "puxão". Ou seja, uma ação externa aplicada no corpo do qual estamos a descrever o Movimento. 
+		
+		\vspace{0.1cm}
+		\textcolor{blue}{\textbf{Princípio Fundamental:}} A aceleração ($\vec{a}$) de um corpo tem \textbf{sempre a mesma direção e o mesmo sentido} da força resultante ($\vec{F}$) aplicada sobre ele.
+		
+		\centering
+		\begin{tikzpicture}[scale=0.8]
+			% Exemplo 1: Força Horizontal
+			\begin{scope}[shift={(0,0)}]
+				\fill[blue!20] (0,0) rectangle (1.5,1);
+				\draw[thick] (0,0) rectangle (1.5,1);
+				\node at (0.75,0.5) {$m$};
+				% Vetores Sobrepostos (Início no centro do bloco)
+				\draw[->, ultra thick, red] (0.75,0.5) -- (2.5,0.5) node[right] {$\vec{F}$};
+				\draw[->, thick, green!60!black] (0.75,0.5) -- (1.8,0.5) node[above] {$\vec{a}$};
+			\end{scope}
+			
+			% Exemplo 2: Força Diagonal
+			\begin{scope}[shift={(4.5,0)}]
+				\fill[blue!20] (0,0) rectangle (1.5,1);
+				\draw[thick] (0,0) rectangle (1.5,1);
+				\node at (0.75,0.5) {$m$};
+				% Vetores Sobrepostos (30 graus)
+				\draw[->, ultra thick, red] (0.75,0.5) -- +(30:1.8) node[right] {$\vec{F}$};
+				\draw[->, thick, green!60!black] (0.75,0.5) -- +(30:1.1) node[above left] {$\vec{a}$};
+			\end{scope}
+			
+			% Exemplo 3: Força Vertical
+			\begin{scope}[shift={(9,0)}]
+				\fill[blue!20] (0,0) rectangle (1.5,1);
+				\draw[thick] (0,0) rectangle (1.5,1);
+				\node at (0.75,0.5) {$m$};
+				% Vetores Sobrepostos (Para baixo)
+				\draw[->, ultra thick, red] (0.75,0.5) -- (0.75,-0.8) node[right] {$\vec{F}$};
+				\draw[->, thick, green!60!black] (0.75,0.5) -- (0.75,-0.3) node[left] {$\vec{a}$};
+			\end{scope}
+			
+			% Legenda unificada
+			\node[font=\scriptsize, align=center, text=gray!80!black] at (5.25, -1.8) {
+				Note que $\vec{a}$ é colinear a $\vec{F}$ em todos os casos: a direção e o sentido são idênticos.
+			};
+		\end{tikzpicture}
+		
+	\end{frame}
+	
+	% SLIDE 2: Primeira Lei de Newton
+	\begin{frame}{A Primeira Lei de Newton}
+		\footnotesize
+		
+		Antes de Newton, acreditava-se que uma força era necessária para manter um corpo em movimento com velocidade constante. Newton estabeleceu que não. No mundo real, lidamos sempre com o atrito (a resistência que um corpo experimenta em contacto com o seu ambiente). Por isso, para observar esta lei de forma clara, precisamos de um cenário ideal, como um disco deslizando sobre uma superfície de gelo (sem atrito).
+		
+		\vspace{0.3cm}
+		\textcolor{blue}{\textbf{Primeira Lei de Newton:}} \\
+		Se nenhuma força atua sobre um corpo, sua velocidade não pode mudar, ou seja, o corpo não pode sofrer uma aceleração.
+		
+		\vspace{0.3cm}
+		\textbf{Implicações:}
+		\begin{itemize}
+			\item Se o corpo está em repouso ($v = 0$), ele permanece em repouso.
+			\item Se o corpo está em movimento, ele permanece em movimento retilíneo uniforme (velocidade constante).
+		\end{itemize}
+		
+		\vspace{0.4cm}
+		\textcolor{red}{\textbf{Inércia:}} É a tendência de um corpo de resistir a uma mudança em seu estado de movimento. A Primeira Lei é frequentemente chamada de \textit{Lei da Inércia}.
+		
+	\end{frame}
+	
+	% SLIDE 3: Referenciais Inerciais
+	\begin{frame}{Referenciais Inerciais}
+		\footnotesize
+		
+		A Primeira Lei de Newton não é válida em todos os referenciais. Ela é válida apenas em \textbf{referenciais inerciais}: em termos práticos, trata-se de um referencial que não possui aceleração. Ao longo dessa cadeira, assumiremos sempre referenciais deste tipo.
+		
+		\vspace{0.3cm}
+		\begin{columns}[c]
+			\begin{column}{0.55\textwidth}
+				\textbf{Exemplo:}
+				Imagine um disco de hóquei sobre o piso perfeitamente liso (sem atrito) de um comboio.
+				\begin{itemize}
+					\item \textcolor{blue}{\textbf{Referencial Inercial (Vel. Constante):}} Se o comboio viaja com velocidade constante, o disco solto no chão permanece no seu estado de repouso (ou movimento retilíneo uniforme) em relação a ele. A Primeira Lei funciona.
+					\item \textcolor{red}{\textbf{Referencial Não-Inercial (A travar):}} Se o comboio \textbf{trava} (acelera para trás), o disco parecerá acelerar sozinho para a frente, mesmo sem nenhuma força horizontal atuar nele. Aqui, a Primeira Lei parece falhar.
+				\end{itemize}
+			\end{column}
+			\begin{column}{0.45\textwidth}
+				\centering
+				\begin{tikzpicture}[scale=0.8]
+					% Referencial Inercial
+					\draw[thick] (0,0) rectangle (3,1.5);
+					\node[font=\tiny] at (1.5,1.7) {Comboio com $\vec{v}$ constante};
+					\filldraw[cyan!40, draw=black] (1.5,0.15) ellipse (0.3 and 0.08);
+					\node[above, font=\tiny, blue] at (1.5,0.25) {$\vec{v} = 0$ (relativo)};
+					\node[font=\tiny, blue] at (1.5,-0.3) {Inercial};
+					
+					% Referencial Não-Inercial (A travar)
+					\begin{scope}[yshift=-3cm]
+						\draw[thick] (0,0) rectangle (3,1.5);
+						\node[font=\tiny] at (1.5,1.7) {Comboio a Travar};
+						\filldraw[cyan!40, draw=black] (1.5,0.15) ellipse (0.3 and 0.08);
+						% Seta de aceleração aparente para a frente
+						\draw[->, thick, red] (1.8,0.15) -- (2.8,0.15) node[above, font=\tiny] {$\vec{a}_{aparente}$};
+						% Seta de aceleração do comboio (para trás) - Afastada para a esquerda
+						\draw[<-, ultra thick, black] (-1.6,0.7) node[left, font=\tiny] {$\vec{a}_{comboio}$} -- (-0.4,0.7);
+						\node[font=\tiny, red] at (1.5,-0.3) {Não-Inercial};
+					\end{scope}
+				\end{tikzpicture}
+			\end{column}
+		\end{columns}
+	\end{frame}
+	
+	% SLIDE 4: Força e Superposição
+	\begin{frame}{Força e o Princípio da Superposição}
+		\footnotesize
+		
+		Força é uma \textbf{grandeza vetorial}.
+		Unidade no SI: \textbf{Newton (N)}. 
+		$1 \text{ N} = 1 \text{ kg} \cdot \text{m/s}^2$.
+		
+		\vspace{0.2cm}
+		\textcolor{red}{\textbf{Princípio da Superposição de Forças:}} Quando duas ou mais forças atuam simultaneamente sobre um corpo, a força resultante (ou força líquida) $\vec{F}_{res}$ é a soma vetorial de todas as forças individuais.
+		\begin{equation*}
+			\vec{F}_{res} = \sum_{i=1}^n \vec{F}_i = \vec{F}_1 + \vec{F}_2 + \dots + \vec{F}_n
+		\end{equation*}
+		
+		\textbf{Nova formulação da 1ª Lei de Newton:} 
+		Se a força resultante sobre um corpo é nula ($\vec{F}_{res} = 0$), sua velocidade não muda (a aceleração é zero).
+		
+		\begin{columns}[c]
+			% Coluna Esquerda: A Figura
+			\begin{column}{0.45\textwidth}
+				\centering
+				\begin{tikzpicture}[scale=0.7]
+					\filldraw[gray!30, draw=black] (0,0) circle (0.5);
+					\draw[->, thick, red] (0,0) -- (1.5, 0.5) node[right] {$\vec{F}_1$};
+					\draw[->, thick, blue] (0,0) -- (1.0, -1.0) node[right] {$\vec{F}_2$};
+					\draw[->, thick, purple, dashed] (0,0) -- (2.5, -0.5) node[right] {$\vec{F}_{res}$};
+				\end{tikzpicture}
+			\end{column}
+			
+			% Coluna Direita: O Exemplo Numérico
+			\begin{column}{0.55\textwidth}
+				\textcolor{blue}{\textbf{Exemplo Numérico (2D):}} \\
+				Considere duas forças a atuar num ponto material:
+				\begin{itemize}
+					\item $\vec{F}_1 = 3\vec{i} + 4\vec{j} \text{ (N)}$
+					\item $\vec{F}_2 = 2\vec{i} - 1\vec{j} \text{ (N)}$
+				\end{itemize}
+				\vspace{0.1cm}
+				A força resultante é a soma das componentes:
+				\begin{align*}
+					\vec{F}_{res} &= (3 + 2)\vec{i} + (4 - 1)\vec{j},\,\,
+					\vec{F}_{res} &= 5\vec{i} + 3\vec{j} \text{ (N)}
+				\end{align*}
+			\end{column}
+		\end{columns}
+		
+	\end{frame}
+	
+	% SLIDE 5: Massa
+	\begin{frame}{Massa}
+		\footnotesize
+		
+		{\textbf{Massa}} $m$ é uma propriedade intrínseca de um corpo que relaciona a força aplicada ao corpo com a aceleração produzida. É a constante de proporcionalidade que relaciona a força aplicada a um corpo e a aceleração por ele adquirida. É uma grandeza escalar. Unidade no SI: \textbf{kg}.
+		
+		\vspace{0.2cm}
+		A massa é a medida da inércia de um corpo. Quanto maior a massa, mais o corpo resiste a ser acelerado por uma força.
+		
+		\vspace{0.3cm}
+		\begin{columns}[c]
+			\begin{column}{0.65\textwidth}
+				\textbf{Comparação Experimental:}
+				Se aplicamos a \textbf{mesma} força resultante $\vec{F}$ a dois corpos de massas diferentes:
+				\begin{itemize}
+					\item Massa menor $m_1 \implies$ aceleração maior $a_1$
+					\item Massa maior $m_2 \implies$ aceleração menor $a_2$
+				\end{itemize}
+				
+				\vspace{0.2cm}
+				Como o módulo da força é exatamente o mesmo para ambos os corpos: 
+				$|\vec{F}| = m_1 a_1 \quad \text{e} \quad |\vec{F}| = m_2 a_2$, igualando as duas expressões, obtemos: \\
+				$m_1 a_1 = m_2 a_2 \implies \frac{m_1}{m_2} = \frac{a_2}{a_1} < 1 \implies a_2 < a_1$
+			\end{column}
+			
+			\begin{column}{0.35\textwidth}
+				\centering
+				\begin{tikzpicture}[scale=0.7]
+					% Massa pequena
+					\fill[blue!20] (0,2) rectangle (1,2.8);
+					\draw[thick] (0,2) rectangle (1,2.8);
+					\node at (0.5,2.4) {$m_1$};
+					\draw[->, thick, red] (1,2.4) -- (2.5,2.4) node[right] {$\vec{F}$};
+					\draw[->, thick, green!60!black] (0.2,3) -- (1.8,3) node[right] {$\vec{a}_1$ (grande)};
+					
+					% Massa grande
+					\fill[blue!40] (0,0) rectangle (2,1.2);
+					\draw[thick] (0,0) rectangle (2,1.2);
+					\node at (1,0.6) {$m_2 > m_1$};
+					\draw[->, thick, red] (2,0.6) -- (3.5,0.6) node[right] {$\vec{F}$};
+					\draw[->, thick, green!60!black] (0.5,1.5) -- (1.2,1.5) node[right] {$\vec{a}_2$ (pequena)};
+				\end{tikzpicture}
+			\end{column}
+		\end{columns}
+		
+	\end{frame}
+	
+	% SLIDE 6: Segunda Lei de Newton
+	\begin{frame}{A Segunda Lei de Newton}
+		\footnotesize
+		
+		A Segunda Lei de Newton estabelece a relação matemática precisa entre força resultante, massa e aceleração:
+		\begin{equation*}
+			\vec{F}_{res} = m\vec{a}
+		\end{equation*}
+		{\scriptsize \begin{center}
+				\textit{(A força resultante sobre um corpo é igual ao produto da massa do corpo pela sua aceleração)}
+		\end{center}}
+		
+		\vspace{0.1cm}
+		Ao aplicar esta lei, $\vec{F}_{res}$ refere-se exclusivamente às \textbf{forças externas} (exercidas por agentes fora do sistema). As \textbf{forças internas} (interações entre as partes do corpo ou sistema) não são incluídas pois a sua soma vetorial é nula.
+		
+		\vspace{0.1cm}
+		Como é uma equação vetorial, podemos decompô-la em componentes independentes nos eixos cartesianos: $F_{res,x} = ma_x $ e $F_{res,y} = ma_y $.
+		
+		\vspace{0.2cm}
+		\textcolor{red}{\textbf{Nota crucial:}} 
+		A aceleração $\vec{a}$ tem \underline{exatamente a mesma direção e sentido} da força resultante $\vec{F}_{res}$.
+		Se a soma resultante das forças externas for nula ($\vec{F}_{res} = 0$), não haverá aceleração, exatamente como se nenhuma força tivesse sido aplicada.
+		
+		\vspace{0.4cm}
+		\centering
+		\begin{tikzpicture}[scale=0.75]
+			% Corpo m (Equilíbrio simples)
+			\filldraw[gray!30, draw=black] (0,0) circle (0.5) node[black] {$m$};
+			\draw[thick, dashed] (-2, -0.6) -- (2, -0.6); % Chão
+			
+			% Forças Opostas
+			\draw[->, ultra thick, red] (0,0) -- (1.5,0) node[right] {$\vec{F}_1$};
+			\draw[->, ultra thick, red] (0,0) -- (-1.5,0) node[left] {$\vec{F}_2 = -\vec{F}_1$};
+			
+			\node[blue!80!black, font=\tiny, align=center] at (0, 1.0) {Equilíbrio: $\vec{F}_{res} = \vec{F}_1 + \vec{F}_2 = 0$ \\ $\implies \vec{a}=0$};
+		\end{tikzpicture}
+		
+	\end{frame}
+	
+	% SLIDE 7: Exemplo Segunda Lei
+	\begin{frame}{Exemplo : Segunda Lei de Newton (1D e 2D)}
+		\scriptsize
+		
+		\textcolor{red}{\textbf{Exemplo Simples}} \\
+		Um corpo de  massa $m = 0,20 \text{ kg}$ desliza sobre o gelo horizontal sem atrito. Duas forças, $\vec{F}_1$ e $\vec{F}_2$, empurram o corpo  na superfície plana.
+		
+		\vspace{0.2cm}
+		\begin{columns}[T]
+			\begin{column}{0.65\textwidth}
+				\textbf{Caso A (1D):} Apenas $\vec{F}_1$ de $4,0 \text{ N}$ atua para a direita. \\
+				\vspace{0.1cm}
+				$\vec{F}_{res} = \vec{F}_1 = 4,0\vec{i} \text{ N}$ \\
+				$a_x = \frac{F_{res,x}}{m} = \frac{4,0}{0,20} = 20 \text{ m/s}^2 \implies \vec{a} = 20\vec{i} \text{ m/s}^2$
+				
+				\vspace{0.3cm}
+				\textbf{Caso B (2D):} $\vec{F}_1 = 4,0 \text{ N}$ no eixo x positivo e $\vec{F}_2 = 3,0 \text{ N}$ no eixo y positivo. Qual a magnitude e ângulo da aceleração?
+				
+				\vspace{0.1cm}
+				$\vec{F}_{res} = (4,0\vec{i} + 3,0\vec{j}) \text{ N}$ \\
+				Magnitude: $|\vec{F}_{res}| = \sqrt{4,0^2 + 3,0^2} = 5,0 \text{ N}$ \\
+				Aceleração (módulo): $a = \frac{|\vec{F}_{res}|}{m} = \frac{5,0}{0,20} = 25 \text{ m/s}^2$
+				
+				\vspace{0.1cm}
+				Ângulo da aceleração (mesmo de $\vec{F}_{res}$): \\
+				$\theta = \operatorname{arctg}\left(\frac{F_{res,y}}{F_{res,x}}\right) = \operatorname{arctg}\left(\frac{3,0}{4,0}\right) \approx 37^\circ$
+			\end{column}
+			
+			\begin{column}{0.35\textwidth}
+				\centering
+				\textbf{Caso B} \\
+				\vspace{0.2cm}
+				\begin{tikzpicture}[scale=0.8]
+					\draw[->] (-0.5,0) -- (3,0) node[right, font=\tiny] {$x$};
+					\draw[->] (0,-0.5) -- (0,3) node[above, font=\tiny] {$y$};
+					
+					\filldraw[cyan!40, draw=black] (0,0) circle (0.3);
+					
+					\draw[->, thick, red] (0,0) -- (2,0) node[below] {$\vec{F}_1$};
+					\draw[->, thick, blue] (0,0) -- (0,1.5) node[left] {$\vec{F}_2$};
+					\draw[->, thick, purple] (0,0) -- (2,1.5) node[above right] {$\vec{F}_{res}$};
+					\draw[dashed] (2,0) -- (2,1.5) -- (0,1.5);
+					
+					\draw (0.5,0) arc (0:37:0.5);
+					\node[font=\tiny] at (0.7,0.25) {$37^\circ$};
+				\end{tikzpicture}
+			\end{column}
+		\end{columns}
+		
+	\end{frame}
+	
+	
+	
+	% SLIDE 8: Forças Específicas: Força Gravítica, Peso e Pesagem
+	\begin{frame}{Algumas Forças Específicas: Força Gravítica e Peso}
+		\footnotesize
+		
+		\textcolor{blue}{\textbf{1. Força Gravítica ($\vec{F}_g$):}} 		A força com a qual a Terra atrai um corpo. Aponta verticalmente para baixo (direção do centro da Terra).
+		Segundo a 2ª Lei, um corpo em queda livre (sujeito apenas a $\vec{F}_g$) cai com aceleração $\vec{a} = \vec{g}$.
+		\begin{equation*}
+			\vec{F}_g = m\vec{g}
+		\end{equation*}
+
+		\textcolor{blue}{\textbf{2. O Peso ($P$):}} O peso é o \underline{módulo} da força gravítica. 
+		\begin{equation*}
+			P = |\vec{F}_g| = m |\vec{g}| \implies P = mg
+		\end{equation*}
+		
+
+		
+		
+	\end{frame}
+	
+	% SLIDE 9: Forças Específicas 2
+	\begin{frame}{Algumas Forças Específicas: Normal e Atrito}
+		\scriptsize
+		
+		\textcolor{blue}{\textbf{3. Força Normal ($\vec{F}_N$):}} \\
+		Quando um corpo pressiona uma superfície, a superfície deforma-se ligeiramente e exerce uma força de reação no corpo. Essa força é sempre \underline{perpendicular} (normal) à superfície.
+		
+		\vspace{0.2cm}
+		\textcolor{red}{\textbf{Nota: Pesagem (O que mede uma balança?)}}		Uma balança não mede o peso diretamente, mas sim a \textbf{Força Normal} ($F_N$) que exerce para suportar o corpo. Se o corpo estiver num referencial acelerado (como um elevador), a leitura será o \textbf{Peso Aparente}. 	Aplicando a 2ª Lei de Newton (eixo $y$ para cima):
+		\begin{columns}[c]
+			\begin{column}{0.65\textwidth}
+				\begin{equation*}
+					F_{res,y} = F_N - mg = ma_y \implies \mathbf{F_N = m(g + a_y)}
+				\end{equation*}
+				
+				\vspace{0.1cm}
+				\begin{itemize}
+					\item \textbf{$a_y = 0$} (repouso ou vel. const.): $F_N = mg$ (Peso Real)
+					\item \textbf{$a_y > 0$} (acelera para cima): $F_N > mg$ (Mais "pesado")
+					\item \textbf{$a_y < 0$} (acelera para baixo): $F_N < mg$ (Mais "leve")
+				\end{itemize}
+			\end{column}
+			
+			\begin{column}{0.35\textwidth}
+				\centering
+				\begin{tikzpicture}[scale=0.75]
+					% Balança e Corpo
+					\draw[thick, fill=gray!30] (-1,0) rectangle (1,0.2) node[midway, below, font=\tiny] {Balança};
+					\draw[thick, fill=blue!20] (-0.5,0.2) rectangle (0.5,1.2) node[midway] {$m$};
+					
+					% Forças
+					\draw[->, thick, red] (0,0.7) -- (0, 2.2) node[right] {$\vec{F}_N$};
+					\draw[->, thick, green!60!black] (0,0.7) -- (0, -0.6) node[right] {$\vec{F}_g$};
+					
+					% Vetor Aceleração do Elevador
+					\draw[->, ultra thick] (1.5, 0.5) -- (1.5, 1.5) node[right] {$\vec{a}_y$};
+				\end{tikzpicture}
+			\end{column}
+		\end{columns}
+		
+		\vspace{0.3cm}
+		
+		\begin{columns}[c]
+			\begin{column}{0.65\textwidth}
+				\textcolor{blue}{\textbf{4. Força de Atrito ($\vec{f}$):}} \\
+				Força de resistência ao movimento de um corpo sobre uma superfície. A força de atrito é paralela à superfície e possui o sentido \underline{oposto} ao movimento (ou à tendência de movimento). 
+			\end{column}
+			\begin{column}{0.35\textwidth}
+				\centering
+				\begin{tikzpicture}[scale=0.6]
+					% Chão
+					\draw[thick] (-1.2,0) -- (1.5,0);
+					% Bloco
+					\draw[thick, fill=blue!20] (-0.5,0) rectangle (0.5,0.8);
+					% Força Aplicada
+					\draw[->, thick, red] (0.5,0.4) -- (1.5,0.4) node[right] {$\vec{F}$};
+					% Força de Atrito
+					\draw[->, thick, orange] (-0.5,0.05) -- (-1.2,0.05) node[left] {$\vec{f}$};
+				\end{tikzpicture}
+			\end{column}
+		\end{columns}
+		
+	\end{frame}
+	
+	
+	\begin{frame}{Força de Atrito ($\vec{f}$)}
+		\scriptsize
+		
+		A \textbf{força de atrito} ($\vec{f}$) surge da interação entre as superfícies em contacto e resiste ao movimento.		\textbf{Características Principais:}
+		1) É sempre \textbf{paralela à superfície}; 2) Tem o \textbf{sentido oposto ao movimento} (ou tendência de movimento); 3) O seu módulo é proporcional à força normal: $|\vec{f}| = \mu F_N$ e $\vec{f}= -(\mu F_N) \vec{i}$ ($F_N$ é o modulo da força normal).
+		
+		\vspace{0.4cm}
+		
+		\begin{columns}
+			% Coluna para o texto e equações
+			\begin{column}{0.65\textwidth}
+				\textbf{Coeficiente de atrito ($\mu$):}
+				\begin{itemize}
+					\item $\mu_s$: coeficiente de atrito \textbf{estático}
+					\item $\mu_d$: coeficiente de atrito \textbf{dinâmico}
+				\end{itemize}
+				
+				\vspace{0.4cm}
+				
+				\textbf{Análise do Movimento (Bloco $m$ num plano horizontal):} \\
+				Aplicando a 2\textsuperscript{a} Lei de Newton ($m\vec{a} = \underset{i}{\sum} \vec{F}_i$):
+				
+				\begin{itemize}
+					\item \textbf{Eixo $y$:} $m a_y = F_N - m g \implies F_N = mg$ \\
+					\textit{(Como o plano é horizontal, $a_y = 0$)}
+					
+					\item \textbf{Eixo $x$:} $m a_x = F - f \implies m a_x = F - \mu F_N$
+				\end{itemize}
+				
+				Substituindo $F_N$ na equação do eixo $x$:
+				\begin{equation*}
+					m a_x = F - \mu m g
+				\end{equation*}
+			\end{column}
+			
+			% Coluna para a figura em TikZ
+			\begin{column}{0.35\textwidth}
+				\begin{center}
+					\begin{tikzpicture}[>=stealth, scale=0.6, transform shape]
+						% Superfície (Chão)
+						\draw[thick] (-2.5,0) -- (2.5,0);
+						\fill[pattern=north east lines] (-2.5,-0.2) rectangle (2.5,0);
+						
+						% Bloco
+						\draw[thick, fill=blue!10] (-1,0) rectangle (1,1.5);
+						
+						% Ponto central para as forças
+						\coordinate (C) at (0,0.75);
+						\node at (-0.5, 1.2) {$m$};
+						
+						% Vetores de Força
+						% Peso
+						\draw[->, thick, violet] (C) -- (0,-1.2) node[right] {$m\vec{g}$};
+						% Normal
+						\draw[->, thick, cyan!80!blue] (C) -- (0,2.7) node[right] {$\vec{F}_N$};
+						% Força Aplicada (F)
+						\draw[->, thick, red] (C) -- (2.2,0.75) node[above] {$\vec{F}$};
+						% Força de Atrito (f) - Agora com origem no centro
+						\draw[->, thick, orange!80!red] (C) -- (-1.8,0.75) node[above] {$\vec{f}$}; 
+						
+						% Sentido do movimento (Aceleração) - Isolado no canto superior direito
+						\draw[->,  black] (1.3,2.2) -- (2.3,2.2) node[above] {$\vec{a}$};
+					\end{tikzpicture}
+				\end{center}
+			\end{column}
+		\end{columns}
+		
+	\end{frame}
+	
+	% SLIDE 10: Forças Específicas 3
+	\begin{frame}{Algumas Forças Específicas: Tração ou Tensão}
+		\footnotesize
+		
+		\textcolor{blue}{\textbf{5. Tração ou Tensão ($\vec{T}$):}} \\
+		Quando um fio, corda ou cabo é preso a um corpo e puxado, o fio exerce uma força orientada sempre \underline{afastando-se} do corpo, ao longo do próprio fio.
+		
+		\vspace{0.2cm}
+		\textbf{Hipótese da "Corda Ideal":}
+		Nos nossos problemas, consideramos:
+		\begin{itemize}
+			\item \textbf{Massa desprezível:} A corda não possui inércia própria (ou seja não consideramos cordas com massa).
+			\item \textbf{Inextensível:} A corda não estica (ao contrário de uma mola).
+		\end{itemize}
+		
+		\vspace{0.3cm}
+		Nestas condições, a corda serve apenas para transmitir a força inteiramente de uma extremidade à outra. A força transmitida tem o mesmo módulo em todos os pontos da corda. 
+		
+		\vspace{0.1cm}
+		O mesmo princípio aplica-se a \textbf{roldanas ideais} (sem massa e sem atrito), que têm como única função mudar a direção da força de tração.
+		
+		\vspace{0.2cm}
+		\begin{center}
+			\begin{tikzpicture}[scale=0.7]
+				\draw[thick, fill=gray!30] (-2,0) rectangle (0,1);
+				\node[below] at (-1,0) {\tiny Bloco};
+				\draw[thick, dashed] (0,0.5) -- (3,0.5); % corda
+				\draw[->, thick, red] (0,0.5) -- (1.5,0.5) node[above] {$\vec{T}$};
+				\filldraw[black] (3,0.5) circle (2pt) node[right, font=\tiny] {Mão a puxar};
+			\end{tikzpicture}
+		\end{center}
+		
+	\end{frame}
+	
+	% SLIDE 11: Terceira Lei de Newton
+	\begin{frame}{A Terceira Lei de Newton}
+		\footnotesize
+		
+		\textcolor{blue}{\textbf{Terceira Lei de Newton (Ação e Reação):}} 
+		Quando dois corpos interagem, a força $\vec{F}_{BC}$ que o corpo B exerce sobre o corpo C tem o \textbf{mesmo módulo e mesma direção}, porém \textbf{sentido oposto} à força $\vec{F}_{CB}$ que o corpo C exerce sobre o corpo B. Dizemos que se B exerce uma força sobre C, C responde com uma força "igual e contraria" (igual intensidade, mesma direção e sentido oposto).
+		
+		\begin{equation*}
+			\vec{F}_{BC} = -\vec{F}_{CB}
+		\end{equation*}
+		
+		\begin{itemize}
+			\item As forças de ação e reação atuam em \textbf{corpos diferentes}. 
+			\item \textbf{Exemplos:} Laranja ($L$) na mesa ($M$), Bloco ($B$) no fio ($C$), Mão ($M$) na parede ($P$).
+		\end{itemize}
+		
+		\begin{columns}[c]
+			% Primeira Figura: Laranja e Mesa
+			\begin{column}{0.33\textwidth}
+				\centering
+				\begin{tikzpicture}[scale=0.5, transform shape, >=stealth, 
+					vector_color/.style={draw=orange!80!black, text=orange!80!black, thick}]
+					
+					\node[vector_color, draw=none] at (0, 3.5) {$\vec{F}_{ML} = -\vec{F}_{LM}$};
+					
+					\draw[thick] (-2,0) -- (2,0) node[right] {$M$};
+					\draw[thick, vector_color] (0,1) circle (1cm);
+					\node[right, vector_color, draw=none] at (1, 1.2) {$L$};
+					
+					% Ação-Reação de CONTACTO (Mesa <-> Laranja)
+					\draw[->, vector_color] (0,0) -- (0,2.5) node[right] {$\vec{F}_{ML}$}; % Mesa empurra Laranja
+					\draw[->, vector_color] (0,0) -- (0,-2.5) node[right] {$\vec{F}_{LM}$}; % Laranja empurra Mesa
+				\end{tikzpicture}
+			\end{column}
+			
+			% Segunda Figura: Parede, Roldana e Bloco
+			\begin{column}{0.33\textwidth}
+				\centering
+				\begin{tikzpicture}[scale=0.65, transform shape, >=stealth, 
+					green_force/.style={draw=green!60!black, text=green!60!black, thick},
+					red_force/.style={draw=red!80!black, text=red!80!black, thick},
+					string/.style={draw=black, thin},
+					pulley/.style={draw=black, thick, fill=white}]
+					
+					% Estrutura
+					\draw[ultra thick] (0,1.5) -- (0,3) node[above] {$P$}; % Parede
+					\draw[string] (0,2.25) -- (3.85,2.25) node[midway, above] {$C$}; % Fio
+					
+					\draw[pulley] (4,2.25) circle (0.15cm); % Roldana
+					\draw (4,2.25) -- (3,1.5); % Suporte da roldana
+					
+					\draw[string] (4.15,2.25) -- (4.15,0.4); % Fio descendo
+					\draw[draw=black, fill=white] (4.0, -0.2) rectangle (4.3, 0.4) node[midway] {$B$};
+					
+					% Pares Parede <-> Fio
+					\draw[->, green_force] (0, 2.25) -- (-1.2, 2.25) node[left] {$\vec{F}_{CP}$};
+					\draw[->, green_force] (0, 2.25) -- (1.2, 2.25) node[right] {$\vec{F}_{PC}$};
+					\node[green_force, draw=none, font=\tiny] at (1.3, 3.5) {$\vec{F}_{PC} = -\vec{F}_{PC}$};
+					
+					% Pares Fio <-> Bloco (Corrigido: Fio puxa bloco para CIMA)
+					\draw[->, red_force] (4.15, 0.4) -- (4.15, 1.4) node[right] {$\vec{F}_{CB}$}; % Corda no Bloco
+					\draw[->, red_force] (4.15, 0.4) -- (4.15, -0.6) node[right] {$\vec{F}_{BC}$}; % Bloco na Corda
+					\node[red_force, draw=none, font=\tiny] at (3.5, -1.5) {$\vec{F}_{CB} = -\vec{F}_{BC}$};
+				\end{tikzpicture}
+			\end{column}
+			
+			% Terceira Figura: Mão e Parede
+			\begin{column}{0.33\textwidth}
+				\centering
+				\begin{tikzpicture}[scale=0.5, transform shape, >=stealth, 
+					blue_force/.style={draw=blue!80!black, text=blue!80!black, thick}]
+					
+					\node[blue_force, draw=none] at (-1, 3.5) {$\vec{F}_{PM} = -\vec{F}_{MP}$};
+					
+					% Parede
+					\draw[ultra thick] (0, -1.5) -- (0, 2.5) node[above] {$P$};
+					
+					% Mão apoiada
+					\draw[thick, fill=gray!10] (-3, 0.2) -- (-1.5, 0.2) 
+					.. controls (-0.8, 0.2) and (-0.5, 0.8) .. (-0.1, 0.8) 
+					-- (-0.1, -0.8) 
+					.. controls (-0.5, -0.8) and (-0.8, -0.2) .. (-1.5, -0.2) 
+					-- (-3, -0.2);
+					\node at (-2, -0.5) {$M$};
+					
+					% Pares Mão <-> Parede
+					\draw[->, blue_force] (0, 0) -- (1.2, 0) node[right] {$\vec{F}_{MP}$};
+					\draw[->, blue_force] (0, 0) -- (-1.2, 0) node[left] {$\vec{F}_{PM}$};
+				\end{tikzpicture}
+			\end{column}
+		\end{columns}
+	\end{frame}
+	
+	
+	
+	% SLIDE 12: Diagrama de Corpo Livre
+	\begin{frame}{Estratégia: Diagrama de Corpo Livre (DCL)}
+		\footnotesize
+		
+		Para aplicar as Leis de Newton e resolver problemas, isolamos cada corpo de interesse e identificamos todas as forças externas que atuam nele.
+		
+		\vspace{0.2cm}
+		\textcolor{red}{\textbf{Passos para construir e usar um DCL:}}
+		\begin{enumerate}
+			\item \textbf{Isole o corpo:} Represente o corpo como um simples ponto (partícula).
+			\item \textbf{Desenhe os vetores de força:} Desenhe a partir do ponto apenas as forças que \underline{atuam no corpo} (despreze as que o corpo exerce sobre outros).
+			\item \textbf{Escolha um sistema de coordenadas:} Adote eixos ($x, y$) de modo a simplificar a decomposição das forças (ex: um eixo alinhado com a aceleração esperada).
+			\item \textbf{Decomponha as forças:} Encontre os componentes $x$ e $y$ de cada força vetorial.
+			\item \textbf{Aplique a 2ª Lei:} Escreva $\sum F_x = ma_x$ e $\sum F_y = ma_y$ e resolva o sistema algébrico para encontrar a incógnita (força, massa ou aceleração).
+		\end{enumerate}
+		
+	\end{frame}
+	
+	% SLIDE 13: Exemplo Final DCL
+	\begin{frame}{Exemplo : Aplicação com DCL}
+		\scriptsize
+		
+		\textcolor{red}{\textbf{Exemplo Simples (Repouso)}} \\
+		Um bloco de massa $M = 2,0 \text{ kg}$ está suspenso em repouso por um fio ideal preso ao teto. Use a 2ª Lei para encontrar a tração $\vec{T}$ no fio. Use $g = 9,8 \text{ m/s}^2$.
+		
+		\vspace{0.2cm}
+		\begin{columns}[T]
+			\begin{column}{0.5\textwidth}
+				\textbf{1. Física do problema:}
+				O bloco não acelera ($\vec{a} = 0$). As forças envolvidas são a Tração ($\vec{T}$, para cima) e a Gravidade ($\vec{F}_g$, para baixo).
+				
+				\vspace{0.2cm}
+				\textbf{2. Aplicando o DCL (Eixo y):} \\
+				Adotamos o eixo $y$ positivo para cima.
+				\begin{itemize}
+					\item $T_y = +T$
+					\item $F_{g,y} = -mg$
+				\end{itemize}
+				
+				\vspace{0.2cm}
+				\textbf{3. Segunda Lei de Newton:} \\
+				$\sum F_y = m a_y \implies T - mg = 0$ \\
+				$T = mg$ \\
+				$T = (2,0 \text{ kg})(9,8 \text{ m/s}^2) = 19,6 \text{ N}$
+			\end{column}
+			
+			\begin{column}{0.5\textwidth}
+				\centering
+				\textbf{Diagrama Físico} \hspace{0.5cm} \textbf{DCL do Bloco} \\
+				\vspace{0.2cm}
+				\begin{tikzpicture}[scale=0.8]
+					% Teto e bloco
+					\draw[thick, pattern=north east lines] (-1, 3) rectangle (1, 3.2);
+					\draw[thick] (-1, 3) -- (1, 3);
+					\draw[thick] (0, 3) -- (0, 1.5); % corda
+					\draw[thick, fill=blue!30] (-0.6, 0.5) rectangle (0.6, 1.5);
+					\node at (0, 1) {$M$};
+					
+					% Eixos
+					\draw[->] (2, 0.5) -- (2, 2.5) node[above] {$y$};
+					
+					% DCL
+					\filldraw[black] (3.5, 1.5) circle (2pt) node[right] {Bloco};
+					\draw[->, thick, red] (3.5, 1.5) -- (3.5, 2.8) node[right] {$\vec{T}$};
+					\draw[->, thick, green!60!black] (3.5, 1.5) -- (3.5, 0.2) node[right] {$\vec{F}_g$};
+				\end{tikzpicture}
+			\end{column}
+		\end{columns}
+		
+		
+	\end{frame}
+	
+	\begin{frame}{Exemplo: Plano inclinado com atrito}
+		\scriptsize
+		
+		\textbf{Problema:} Uma caixa de massa de $10\text{ kg}$ começa a deslizar no instante do tempo $t=0\text{ s}$ do topo de um plano inclinado de ângulo de $30^{\circ}$ e com a velocidade inicial de zero. O coeficiente de atrito é de $0,4$. Determine: a) a força de atrito , b) a velocidade da caixa no instante $t=6\text{ s}$.
+	
+		\vspace{0.4cm}
+		
+		\begin{columns}[T]
+			\begin{column}{0.6\textwidth}
+				 % Caracteres menores conforme solicitado
+
+				\begin{enumerate}
+					\item \textbf{Decomposição da Gravidade ($\vec{F}_g = m\vec{g}$):}
+					$F_{gx} = mg \sin \theta = 10 \cdot 9,8 \cdot \sin 30^{\circ} = 49\text{ N}$
+					$F_{gy} = -mg \cos \theta = -10 \cdot 9,8 \cdot \cos 30^{\circ} \approx -84,8\text{ N}$
+					
+					\item \textbf{Força Normal ($\vec{F}_N$):}
+					A caixa não se move no eixo $y$, logo a força normal compensa a componente vertical da gravidade. $\vec{F}_N= F_N \vec{j}$ no sentido positivo de y.
+					
+					 $F_N + F_{gy} = 0 \implies F_N = 84,8\text{ N}$
+					
+					\item \textbf{Força de Atrito como vetor ($\vec{f}$):}
+					$\vec{f} = (-\mu F_N, 0) = (- 0,4\cdot 84,8)N \approx (-34, 0)\text{ N} \implies |\vec{f}| = 34\text{ N}$
+					
+					\item \textbf{Segunda Lei de Newton no eixo $x$ ($F_{res,x}$):}
+					$F_{res,x} = F_{gx} - f = 49 - 34 = 15\text{ N}$
+					$a = \frac{F_{res,x}}{m} = \frac{15}{10} = 1,5\text{ m/s}^2$
+					
+					\item \textbf{Cinemática:}
+					$v(t) = v(0) + at \implies v(6) = 0 + 1,5 \cdot 6 = 9,0\text{ m/s}$
+				\end{enumerate}
+			\end{column}
+			
+			\begin{column}{0.4\textwidth}
+				\begin{center}
+					\begin{tikzpicture}[>=latex, thick, scale=0.65, transform shape]
+						% Ângulo do plano
+						\def\ang{30}
+						
+						% Plano inclinado
+						\draw (0,0) -- (4,0) -- (4,{4*tan(\ang)}) -- cycle;
+						\draw (0.8,0) arc (0:\ang:0.8) node[midway, right] {$\theta$};
+						
+						% Bloco e Eixos
+						\begin{scope}[shift={(2.2,{2.2*tan(\ang)})}, rotate=\ang]
+							% Eixos x e y
+							\draw[->, gray, thin] (0,0) -- (-3.5,0) node[left] {$x$};
+							\draw[->, gray, thin] (0,0) -- (0,2.8) node[above] {$y$};
+							
+							\draw[fill=gray!20] (-0.5,0) rectangle (0.5,0.5);
+							\coordinate (CM) at (0,0.25);
+							
+							% Forças principais
+							\draw[->, blue] (CM) -- ++(0,1.3) node[right] {$\vec{F}_N$};
+							\draw[->, red] (CM) -- ++(-1.1,0) node[above] {$\vec{f}$};
+							
+							% Componentes Gravíticas (Tracejadas)
+							\draw[dashed, ->, gray] (CM) -- ++(1.3,0) node[below] {$F_{gx}$};
+							\draw[dashed, ->, gray] (CM) -- ++(0,-1.3) node[left] {$F_{gy}$};
+							
+							% Força Gravítica Total
+							\draw[->, green!50!black] (CM) -- +(-90-\ang:1.6) node[below] {$\vec{F}_g$};
+							
+							% Ângulo theta
+							\draw (CM) ++(-90:0.7) arc (-90:-90-\ang:0.7);
+							\path (CM) +(-90-\ang/2:0.9) node {\tiny $\theta$};
+						\end{scope}
+					\end{tikzpicture}
+				\end{center}
+			\end{column}
+		\end{columns}
+	\end{frame}
+	
+	
+			
+	
+\end{document}

@@ -1,0 +1,1180 @@
+\documentclass{beamer}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[portuguese]{babel}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric, arrows.meta, calc, decorations.pathreplacing, patterns}
+
+% Configuração do Tema
+\usetheme{Madrid}
+\usecolortheme{default}
+\beamertemplatenavigationsymbolsempty
+
+% Comando para o círculo vermelho
+\providecommand{\circled}[1]{\mbox{\tikz[baseline=(char.base)]{\node[shape=circle,draw=red,thick,inner sep=0.5pt,text=red,font=\tiny\bfseries] (char) {#1};}}}
+
+% Convenções visuais
+\tikzset{
+	eixo/.style={->, thick},
+	vetorv/.style={->, ultra thick, blue!75!black},
+	vetora/.style={->, ultra thick, red!80!black},
+	vetoraux/.style={->, thick, green!60!black},
+	ponto/.style={circle, fill=black, inner sep=1.5pt}
+}
+
+% Informações do Título
+\title{Aula 7: Teoria e Prática}
+\subtitle{ Movimento Circular e Força centripeta}
+\date{27 Abril 2026}
+
+\begin{document}
+	
+	% SLIDE 1
+	\frame{\titlepage}
+	
+	
+	
+	% SLIDE 2
+	\begin{frame}{Resumo movimento no plano: posição e deslocamento}
+		\footnotesize
+		
+		A localização de uma partícula no plano é especificada pelo vetor posição
+		\begin{equation*}
+			\vec r(t)=x(t)\vec i+y(t)\vec j.
+		\end{equation*}
+		
+		Se a partícula passa da posição \(\vec r_1\) para a posição \(\vec r_2\), o deslocamento é
+		\begin{equation*}
+			\Delta \vec r=\vec r_2-\vec r_1=\Delta x\,\vec i+\Delta y\,\vec j.
+		\end{equation*}
+		
+		\textcolor{red}{\textbf{Ideia importante:}} embora o movimento seja vetorial, podemos estudar separadamente as componentes \(x\) e \(y\), desde que no final interpretemos o resultado como vetor.
+		
+		\vspace{0.15cm}
+		\begin{columns}[c]
+			\begin{column}{0.55\textwidth}
+				\textcolor{blue}{\textbf{Leitura geométrica:}}
+				\begin{itemize}
+					\item \(x(t)\) mede a posição ao longo do eixo \(x\);
+					\item \(y(t)\) mede a posição ao longo do eixo \(y\);
+					\item \(\Delta \vec r\) liga diretamente a posição inicial à posição final;
+					\item a trajetória pode ser curva, mas \(\Delta \vec r\) é sempre um vetor entre dois pontos.
+				\end{itemize}
+			\end{column}
+			\begin{column}{0.45\textwidth}
+				\centering
+				\begin{tikzpicture}[scale=0.75]
+					\draw[eixo] (-0.2,0) -- (4.2,0) node[right] {$x$};
+					\draw[eixo] (0,-0.2) -- (0,3.4) node[above] {$y$};
+					\coordinate (A) at (0.9,0.7);
+					\coordinate (B) at (3.4,2.6);
+					\draw[thick, blue!60!black] plot[smooth] coordinates {(A) (1.4,1.5) (2.0,1.2) (2.7,2.2) (B)};
+					\filldraw[ponto] (A) node[below left] {$A$};
+					\filldraw[ponto] (B) node[above right] {$B$};
+					\draw[vetora] (A) -- (B) node[midway, below right] {$\Delta\vec r$};
+					\node[font=\scriptsize, blue!70!black] at (2.7,0.8) {trajetória};
+				\end{tikzpicture}
+			\end{column}
+		\end{columns}
+		
+	\end{frame}
+	
+	
+	% SLIDE 3
+	\begin{frame}{Exemplo 4.01 (Hal-Res): vetor posição do coelho}
+		\scriptsize
+		
+		Um coelho atravessa um estacionamento. As coordenadas da posição são dadas, no SI, por
+		\begin{equation*}
+			x(t)= -0{,}31t^2+7{,}2t+28, \qquad
+			y(t)= 0{,}22t^2-9{,}1t+30.
+		\end{equation*}
+		Logo,
+		\begin{equation*}
+			\vec r(t)=\left(-0{,}31t^2+7{,}2t+28\right)\vec i+
+			\left(0{,}22t^2-9{,}1t+30\right)\vec j.
+		\end{equation*}
+		
+		\begin{columns}[T]
+			\begin{column}{0.55\textwidth}
+				\textcolor{blue}{\textbf{No instante \(t=15\,\text{s}\):}}
+				\begin{align*}
+					x(15)&=-0{,}31(15)^2+7{,}2(15)+28 \approx 66\,\text{m},\\
+					y(15)&=0{,}22(15)^2-9{,}1(15)+30=-57\,\text{m}.
+				\end{align*}
+				Portanto,
+				\begin{equation*}
+					\textcolor{red}{\vec r(15\,\text{s})=(66\,\text{m})\vec i-(57\,\text{m})\vec j.}
+				\end{equation*}
+				O módulo e o ângulo são:
+				\begin{equation*}
+					|\vec r|=\sqrt{(66)^2+(-57)^2}\approx 87\,\text{m},
+				\end{equation*}
+				\begin{equation*}
+					\theta=\arctan\left(\frac{-57}{66}\right)\approx -41^\circ.
+				\end{equation*}
+			\end{column}
+			\begin{column}{0.45\textwidth}
+				\centering
+				\begin{tikzpicture}[scale=0.027]
+					\draw[->, thick] (-20,0) -- (125,0) node[right] {$x$};
+					\draw[->, thick] (0,-105) -- (0,60) node[above] {$y$};
+					
+					\draw[domain=0:24, smooth, variable=\t, thick, blue!70!black]
+					plot ({-0.31*\t*\t+7.2*\t+28},{0.22*\t*\t-9.1*\t+30});
+					
+					\coordinate (O) at (0,0);
+					\coordinate (Px) at (66.25,0);
+					\coordinate (P) at (66.25,-57);
+					
+					% vetor posição
+					\draw[->, thick, red] (O) -- (P) node[midway, below left] {$\vec r(15)$};
+					
+					% projeções nas componentes
+					\draw[dashed, gray] (P) -- (Px);
+					
+					
+					% ponto
+					\filldraw[black] (P) circle (3pt) node[right] {$t=15\,\text{s}$};
+					
+					% arco do ângulo
+					\draw[->, thick, black] (18,0) arc[start angle=0,end angle=-41,radius=18];
+					\node[font=\tiny] at (37,-8) {$\theta=-41^\circ$};
+					
+					\node[font=\scriptsize] at (72,25) {trajetória do coelho};
+				\end{tikzpicture}
+				
+				\vspace{0.1cm}
+				\textcolor{red}{\textbf{Interpretação:}} o coelho está no quarto quadrante: \(x>0\) e \(y<0\).
+			\end{column}
+		\end{columns}
+		
+	\end{frame}
+	
+	% SLIDE 4
+	\begin{frame}{Exemplo 4.02(Hal-Res): velocidade do coelho}
+		\scriptsize
+		
+		A velocidade instantânea é a derivada do vetor posição:
+		$\vec v(t)
+		=\frac{dx}{dt}\vec i+\frac{dy}{dt}\vec j
+		=v_x(t)\vec i+v_y(t)\vec j.$
+		
+		\begin{equation*}
+			v_x(t)=\frac{d}{dt}\left(-0{,}31t^2+7{,}2t+28\right)=-0{,}62t+7{,}2,
+			\qquad
+			v_y(t)=\frac{d}{dt}\left(0{,}22t^2-9{,}1t+30\right)=0{,}44t-9{,}1.
+		\end{equation*}
+		
+		\begin{columns}[T]
+			\begin{column}{0.70\textwidth}
+				\textcolor{blue}{\textbf{No instante \(t=15\,\text{s}\):}}
+				\begin{equation*}
+					v_x=-2{,}1\,\text{m/s}, \qquad v_y=-2{,}5\,\text{m/s}.
+				\end{equation*}
+				\begin{equation*}
+					\textcolor{red}{\vec v(15\,\text{s})=(-2{,}1\,\text{m/s})\vec i-(2{,}5\,\text{m/s})\vec j.}
+				\end{equation*}
+				
+				O módulo é:				$v=\sqrt{v_x^2+v_y^2}
+				=\sqrt{(-2{,}1)^2+(-2{,}5)^2}
+				\approx 3{,}3\,\text{m/s}.
+				$
+				
+				O ângulo satisfaz:
+				\[
+				\theta=\arctan\left(\frac{v_y}{v_x}\right)
+				=\arctan\left(\frac{-2{,}5}{-2{,}1}\right)=-130^\circ.
+				\]
+				
+				Como \(v_x<0\) e \(v_y<0\), o vetor está no \textbf{terceiro quadrante}.  	Logo, \textcolor{red}{\(\theta\approx -130^\circ\)}.\textcolor{red}{\textbf{Interpretação:}} a velocidade é tangente à trajetória no instante considerado e aponta para a esquerda e para baixo.
+			\end{column}
+			
+			\begin{column}{0.35\textwidth}
+				\centering
+				\begin{tikzpicture}[x=0.028cm,y=0.028cm,>=stealth,font=\scriptsize]
+					% Eixos
+					\draw[->, thick] (0,0) -- (88,0) node[right] {$x\;(\text{m})$};
+					\draw[->, thick] (0,-72) -- (0,45) node[above] {$y\;(\text{m})$};
+					
+					% Trajetória suave
+					\draw[thick, cyan!70!black, domain=0:25, samples=120, smooth, variable=\t]
+					plot ({-0.31*\t*\t+7.2*\t+28},{0.22*\t*\t-9.1*\t+30});
+					
+					% Ponto no instante t=15 s
+					\coordinate (P) at (66.25,-57);
+					\filldraw[orange!85!brown] (P) circle (3pt);
+					\node[right=11pt] at (P) {$t=15\,\text{s}$};
+					
+					% Vetor velocidade
+					\coordinate (Vtip) at (49.5,-77);
+					\draw[->, thick, magenta!80!black] (P) -- (Vtip)
+					node[below left] {$\vec v$};
+					
+					% Componentes
+					\coordinate (VxEnd) at (49.5,-57);
+					\coordinate (VyEnd) at (66.25,-77);
+					
+					\draw[->, thick, magenta!60!black] (P) -- (VxEnd);
+					\draw[->, thick, magenta!60!black] (P) -- (VyEnd);
+					
+					% Só a linha tracejada vertical auxiliar
+					\draw[dashed, gray] (Vtip) -- (VxEnd);
+					
+					% Linha cinzenta de referência do ângulo
+					% começa um pouco à direita de P para não cortar v_y
+					\draw[thin, gray!80] ($(P)+(2.5,0)$) -- ($(P)+(15,0)$);
+					
+					% Arco do ângulo
+					\draw[thin, gray!80!black] ($(P)+(8,0)$)
+					arc[start angle=0,end angle=-130,radius=8];
+					\node[gray!80!black] at (82,-68.5) {$-130^\circ$};
+					
+					% Legenda
+					\node at (53,28) {trajetória do coelho};
+				\end{tikzpicture}
+			\end{column}
+		\end{columns}
+		
+		
+		
+	\end{frame}
+	
+	
+	% SLIDE 5
+	\begin{frame}{Exemplo 4.03 (Hal-Res): aceleração do coelho}
+		\scriptsize
+		
+		A aceleração instantânea é a derivada da velocidade:
+		\[
+		\vec a(t)=\frac{d\vec v}{dt}
+		=\frac{dv_x}{dt}\vec i+\frac{dv_y}{dt}\vec j
+		=a_x\vec i+a_y\vec j.
+		\]
+		
+		Como
+		\[
+		v_x(t)=-0{,}62t+7{,}2,
+		\qquad
+		v_y(t)=0{,}44t-9{,}1,
+		\]
+		obtemos
+		\[
+		a_x=\frac{dv_x}{dt}=-0{,}62\,\text{m/s}^2,
+		\qquad
+		a_y=\frac{dv_y}{dt}=0{,}44\,\text{m/s}^2.
+		\]
+		
+		\begin{columns}[T]
+			\begin{column}{0.64\textwidth}
+				
+				Logo,
+				\[
+				\textcolor{red}{\vec a=(-0{,}62\,\text{m/s}^2)\vec i+(0{,}44\,\text{m/s}^2)\vec j.}
+				\]
+				
+				O módulo é
+				\[
+				a=\sqrt{a_x^2+a_y^2}
+				=\sqrt{(-0{,}62)^2+(0{,}44)^2}
+				\approx 0{,}76\,\text{m/s}^2.
+				\]
+				
+				O ângulo calculado diretamente é
+				\[
+				\theta=\arctan\left(\frac{a_y}{a_x}\right)
+				=\arctan\left(\frac{0{,}44}{-0{,}62}\right)
+				\approx -35^\circ.
+				\]
+				
+				\vspace{0.1cm}
+				\textcolor{red}{\textbf{Interpretação:}} a aceleração é constante e indica como o vetor velocidade está a mudar.
+				
+			\end{column}
+			
+			\begin{column}{0.36\textwidth}
+				\centering
+				\begin{tikzpicture}[x=0.025cm,y=0.025cm,>=stealth,font=\scriptsize]
+					% Eixos
+					\draw[->, thick] (0,0) -- (88,0) node[right] {$x\;(\text{m})$};
+					\draw[->, thick] (0,-72) -- (0,45) node[above] {$y\;(\text{m})$};
+					
+					% Trajetória suave
+					\draw[thick, cyan!70!black, domain=0:25, samples=140, smooth, variable=\t]
+					plot ({-0.31*\t*\t+7.2*\t+28},{0.22*\t*\t-9.1*\t+30});
+					
+					% Ponto t=15 s
+					\coordinate (P) at (66.25,-57);
+					\filldraw[orange!85!brown] (P) circle (3pt);
+					\node[right=3pt] at (P) {$t=15\,\text{s}$};
+					
+					% Vetor aceleração
+					\coordinate (Atip) at (50,-45);
+					\draw[->, semithick, orange!85!black] (P) -- (Atip)
+					node[above left] {$\vec a$};
+					
+					% Componentes
+					\coordinate (AxEnd) at (50,-57);
+					\coordinate (AyEnd) at (66.25,-45);
+					
+					\draw[->, semithick, orange!70!black] (P) -- (AxEnd);
+					\draw[->, semithick, orange!70!black] (P) -- (AyEnd);
+					
+					% Retângulo auxiliar
+					\draw[dashed, gray] (Atip) -- (AxEnd);
+					\draw[dashed, gray] (Atip) -- (AyEnd);
+					
+					% Linha horizontal de referência para o ângulo, no sentido de a_x
+					\draw[thin, gray!70] (P) -- ++(-18,0);
+					
+					% Arco do ângulo -35° entre a direção horizontal para a esquerda e o vetor a
+					\draw[thin, green!80!black]
+					($(P)+(-13,0)$)
+					arc[start angle=180, delta angle=-35, radius=13];
+					
+					\node[green!80!black] at ($(P)+(-30,5)$) {$-35^\circ$};
+					
+					
+					
+					% Legenda
+					\node at (53,28) {trajetória do coelho};
+				\end{tikzpicture}
+			\end{column}
+		\end{columns}
+		
+	\end{frame}
+	
+	
+	
+	% SLIDE 6
+	\begin{frame}{Movimento circular uniforme: definição}
+		\scriptsize
+		
+		Uma partícula está em \textbf{movimento circular uniforme} quando descreve uma circunferência, ou um arco de circunferência, com velocidade escalar constante. \textcolor{red}{\textbf{Ponto essencial:}} mesmo com velocidade escalar constante, a partícula está acelerada porque a direção da velocidade muda continuamente.
+		
+		\begin{columns}[c]
+			\begin{column}{0.65\textwidth}
+				\begin{itemize}
+					\item \(\vec v\): tangente à trajetória e \(|\vec v|=v\) constante;
+					\item \(\vec a_c\): radial, apontando para o centro, e \(|\vec a_c|\) constante.
+				\end{itemize}
+				
+				\begin{equation*}
+					\vec a_{\text{méd}}
+					=
+					\frac{\Delta \vec v}{\Delta t}
+					=
+					\frac{\vec v_2-\vec v_1}{\Delta t}.
+				\end{equation*}
+				
+				Como \(\vec v_1\) e \(\vec v_2\) têm o mesmo módulo, mas direções diferentes (a diferença é vetorial):$\Delta \vec v=\vec v_2-\vec v_1\neq 0.$
+				
+				\vspace{0.2cm}
+				
+				Logo, \textcolor{red}{\(\vec a\neq 0\)}. No limite \(\Delta t\to 0\), \(\Delta\vec v\) aponta para o centro; por isso a \textbf{aceleração é centrípeta}.
+			\end{column}
+			
+			\begin{column}{0.35\textwidth}
+				\centering
+				\begin{tikzpicture}[scale=0.6,>=stealth]
+					
+					% centro e raio
+					\coordinate (C) at (0,0);
+					\def\R{2.0}
+					
+					% circunferência
+					\draw[thin, orange!55!brown] (C) circle (\R);
+					
+					% setas de sentido ao longo da circunferência
+					% (anti-horário e afastadas dos pontos materiais)
+					\draw[->, thick, orange!55!brown]
+					(55:\R) arc[start angle=55,end angle=80,radius=\R];
+					
+					\draw[->, thick, orange!55!brown]
+					(170:\R) arc[start angle=170,end angle=195,radius=\R];
+					
+					\draw[->, thick, orange!55!brown]
+					(295:\R) arc[start angle=295,end angle=320,radius=\R];
+					
+					% posições da partícula
+					\coordinate (P1) at (135:\R);
+					\coordinate (P2) at (0:\R);
+					\coordinate (P3) at (230:\R);
+					
+					% centro
+					\filldraw[black] (C) circle (1.8pt);
+					\node[below left=1pt] at (C) {\scriptsize centro};
+					
+					% linhas radiais tracejadas
+					\draw[dashed, gray!70] (P1) -- (C);
+					\draw[dashed, gray!70] (P2) -- (C);
+					\draw[dashed, gray!70] (P3) -- (C);
+					
+					% partículas
+					\shade[ball color=cyan!55, draw=cyan!35!white] (P1) circle (0.18);
+					\shade[ball color=cyan!55, draw=cyan!35!white] (P2) circle (0.18);
+					\shade[ball color=cyan!55, draw=cyan!35!white] (P3) circle (0.18);
+					
+					% vetores velocidade
+					\draw[->, magenta!85!black] (P1) -- +(-1.35,-0.85)
+					node[left] {\(\vec v\)};
+					
+					\draw[->, magenta!85!black] (P2) -- +(0,1.55)
+					node[above] {\(\vec v\)};
+					
+					\draw[->, magenta!85!black] (P3) -- +(1.25,-0.85)
+					node[right] {\(\vec v\)};
+					
+					% vetores aceleração centrípeta
+					\draw[->, orange!90!black] (P1) -- ($(P1)!0.42!(C)$)
+					node[midway, right] {\(\vec a\)};
+					
+					\draw[->, thick, orange!90!black] (P2) -- ($(P2)!0.42!(C)$)
+					node[midway, below] {\(\vec a\)};
+					
+					\draw[->, orange!90!black] (P3) -- ($(P3)!0.42!(C)$)
+					node[midway, left] {\(\vec a\)};
+					
+				\end{tikzpicture}
+			\end{column}
+		\end{columns}
+		
+		\vspace{0.2cm}
+		
+		O módulo é	$\textcolor{red}{a_c=\frac{v^2}{r}}$. O tempo para completar uma volta é o \textbf{período} \(T\). Como a distância de uma volta completa é \(2\pi r\), temos $\textcolor{red}{T= \frac{\text{distância de uma volta completa}}{v}=\frac{2\pi r}{v}}.$
+		
+		\vspace{0.2cm}
+		\textcolor{blue}{\textbf{Exemplo simples:}} Um velocista corre com \(v=10\,\text{m/s}\) e faz uma curva de raio \(r=25\,\text{m}\). Qual é o módulo da aceleração centrípeta? Resposta: $	a_c=\frac{v^2}{r}=\frac{(10)^2}{25}=4{,}0\,\text{m/s}^2.$
+		
+		\vspace{0.2cm}
+		
+		\textcolor{red}{\textbf{Não confundir:}} \(v\) constante \(\not\Rightarrow \vec v\) constante. O módulo da velocidade é constante, mas o vetor velocidade muda de direção.
+		
+	\end{frame}
+	
+	% SLIDE 7
+	\begin{frame}{Força centrípeta}
+		\scriptsize
+		
+		Pela Segunda Lei de Newton, se existe uma aceleração radial para o centro, deve existir uma força resultante \(F_{\text{res}}\) na mesma direção e no mesmo sentido:
+		\[
+		\vec F_{\text{res}}=m\vec a_c,
+		\qquad
+		\textcolor{red}{F_c=m\frac{v^2}{R}}.
+		\]
+		
+		\textcolor{red}{\textbf{Importante:}} a ``força centrípeta'' não é uma nova força da natureza. É o nome dado à \textbf{resultante radial} das forças reais \textbf{para realizar o movimento circular}.
+		
+		\vspace{0.1cm}
+		\begin{columns}[T,onlytextwidth]
+			
+			%====================================================
+			\begin{column}{0.49\textwidth}
+				\textcolor{blue}{\textbf{Exemplo 1: carro numa curva plana}}
+				
+				\vspace{0.05cm}
+				\begin{columns}[c,onlytextwidth]
+					\begin{column}{0.42\textwidth}
+						\tiny
+						O carro precisa de uma força radial para fazer a curva. Essa força é fornecida pelo \textbf{atrito} entre os pneus e a estrada.
+						
+						\vspace{0.15cm}
+						\[
+						f=m\frac{v^2}{R}
+						\]
+						
+						\vspace{-0.15cm}
+						\begin{center}
+							O atrito fornece\\
+							a resultante radial.
+						\end{center}
+					\end{column}
+					\begin{column}{0.58\textwidth}
+						\centering
+						\begin{tikzpicture}[scale=0.6,>=stealth]
+							% centro e raio da curva
+							\coordinate (C) at (0,0);
+							\def\R{2.2}
+							
+							% estrada (arco)
+							\draw[thick, gray!65] (205:\R) arc[start angle=205,end angle=100,radius=\R];
+							
+							% posição do carro
+							\coordinate (Car) at (225:\R);
+							
+							% centro
+							\filldraw[black] (C) circle (1.2pt) node[right] {\tiny centro};
+							\draw[dashed, gray] (Car) -- (C);
+							
+							% carro
+							\draw[fill=blue!20, rotate around={45:(Car)}]
+							($(Car)+(-0.35,-0.18)$) rectangle ($(Car)+(0.35,0.18)$);
+							\node[font=\tiny] at (Car) {carro};
+							
+							% velocidade tangente (movimento horário)
+							\draw[->, thick, magenta!85!black]
+							(Car) -- +(135:1.0)
+							node[above left=-1pt] {$\vec v$};
+							
+							% força de atrito para o centro
+							\draw[->, thick, orange!90!black]
+							(Car) -- ($(Car)!0.55!(C)$)
+							node[midway, above] {$\vec f$};
+						\end{tikzpicture}
+					\end{column}
+				\end{columns}
+			\end{column}
+			
+			%====================================================
+			\begin{column}{0.49\textwidth}
+				\textcolor{blue}{\textbf{Exemplo 2: pedra presa a uma corda}}
+				
+				\vspace{0.05cm}
+				\begin{columns}[c,onlytextwidth]
+					\begin{column}{0.42\textwidth}
+						\tiny
+						A pedra move-se em circunferência porque a corda exerce uma \textbf{tração} dirigida para o centro.
+						
+						\vspace{0.15cm}
+						\[
+						T=m\frac{v^2}{R}
+						\]
+						
+						\vspace{-0.15cm}
+						\begin{center}
+							A tração fornece\\
+							a resultante radial.
+						\end{center}
+					\end{column}
+					\begin{column}{0.58\textwidth}
+						\centering
+						\begin{tikzpicture}[scale=0.6,>=stealth]
+							\coordinate (O) at (0,0);
+							\def\R{1.6}
+							\coordinate (P) at (40:\R);
+							
+							% trajetória
+							\draw[thin, orange!55!brown] (O) circle (\R);
+							\draw[->, thick, orange!55!brown]
+							(255:\R) arc[start angle=255,end angle=295,radius=\R];
+							
+							% mão e corda
+							\filldraw[black] (O) circle (1.3pt) node[below] {\tiny mão};
+							\draw[thick] (O) -- (P);
+							
+							% pedra
+							\shade[ball color=gray!35, draw=black] (P) circle (0.16);
+							\node[right=2pt] at (P) {\tiny pedra};
+							
+							% velocidade e tração
+							\draw[->, thick, magenta!85!black]
+							(P) -- +(130:0.8)
+							node[above] {$\vec v$};
+							
+							\draw[->, thick, orange!90!black]
+							(P) -- ($(P)!0.48!(O)$)
+							node[midway, below] {$\vec T$};
+						\end{tikzpicture}
+					\end{column}
+				\end{columns}
+			\end{column}
+			
+		\end{columns}
+		
+		\vspace{0.05cm}
+		\textcolor{red}{No \textbf{DCL:}} desenhamos as forças reais, como \(\vec f\) ou \(\vec T\), e depois identificamos a componente radial da resultante: $		\sum F_r=m\frac{v^2}{R}.$
+		
+	\end{frame}
+	
+	
+	% SLIDE 8
+	\begin{frame}{Derivação qualitativa da aceleração centrípeta}
+		\scriptsize
+		
+		Considere uma partícula em \textbf{movimento circular uniforme}, de raio \(r\) e rapidez constante \(v\). O módulo da velocidade não muda, mas a sua \textbf{direção} muda continuamente.
+		
+		\vspace{0.05cm}
+		\begin{columns}[T]
+			\begin{column}{0.58\textwidth}
+				
+				Num pequeno intervalo \(\Delta t\), a partícula percorre um arco \(\Delta s\) e roda de um ângulo \(\Delta\theta\). Os vetores \(\vec v_1\) e \(\vec v_2\) têm o mesmo módulo \(v\), mas direções diferentes.
+				
+				\vspace{0.3cm}
+				Para ângulos pequenos:
+				$
+				|\Delta \vec v|\approx v\,\Delta\theta.
+				$
+				\vspace{0.1cm}
+				A aceleração média é:
+				$
+				a_c\approx \frac{|\Delta \vec v|}{\Delta t}
+				\approx
+				\frac{v\,\Delta\theta}{\Delta t}.
+				$
+				
+				Como o arco percorrido é
+				$
+				\Delta s=r\,\Delta\theta,
+				$
+				então, dividindo por \(\Delta t\):
+				\[
+				\frac{\Delta s}{\Delta t}
+				=
+				r\frac{\Delta\theta}{\Delta t}.
+				\]
+				
+				Mas \(\frac{\Delta s}{\Delta t}=v\). Portanto:
+				$
+				\frac{\Delta\theta}{\Delta t}=\frac{v}{r}.
+				$
+				
+				Logo:
+				\[
+				\textcolor{red}{a_c=v\frac{v}{r}=\frac{v^2}{r}.}
+				\]
+				
+				\vspace{0.05cm}
+				\textcolor{red}{\textbf{Interpretação:}} \(\Delta\vec v\) aponta para o interior da trajetória; no limite \(\Delta t\to 0\), a aceleração aponta para o centro.
+				
+			\end{column}
+			
+			\begin{column}{0.42\textwidth}
+				\centering
+				\begin{tikzpicture}[scale=0.72,>=stealth]
+					\coordinate (C) at (0,0);
+					\def\R{1.75}
+					
+					% circunferência
+					\draw[thin, orange!55!brown] (C) circle (\R);
+					\filldraw[ponto] (C) node[below left] {\scriptsize centro};
+					
+					% pontos próximos
+					\coordinate (P1) at (25:\R);
+					\coordinate (P2) at (55:\R);
+					
+					% raios
+					\draw[dashed, gray] (C) -- (P1);
+					\draw[dashed, gray] (C) -- (P2);
+					
+					% partículas
+					\filldraw[blue!60!cyan] (P1) circle (2pt);
+					\filldraw[blue!60!cyan] (P2) circle (2pt);
+					
+					% velocidades
+					\draw[->, thick, magenta!85!black]
+					(P1) -- +({-0.8*sin(25)},{0.8*cos(25)})
+					node[right] {\(\vec v_1\)};
+					
+					\draw[->, thick, magenta!85!black]
+					(P2) -- +({-0.8*sin(55)},{0.8*cos(55)})
+					node[above left] {\(\vec v_2\)};
+					
+					% arco angular
+					\draw[->, thick, gray!80!black] (0.65,0) arc[start angle=0,end angle=25,radius=0.65];
+					\node at (0.95,0.18) {\(\Delta\theta\)};
+					
+					% arco percorrido
+					\draw[ultra thick, red!80!black] (25:\R) arc[start angle=25,end angle=55,radius=\R];
+					\node[red!80!black] at (1.55,1.15) {\(\Delta s\)};
+					
+					% triângulo auxiliar de velocidades (rodado de 90 graus)
+					\begin{scope}[shift={(0.95,-3.55)}, scale=0.9, rotate=90]
+						\coordinate (A) at (0,0);
+						\coordinate (B) at (1.2,0);
+						\coordinate (D) at (0.95,0.58);
+						
+						\draw[->, thick, magenta!85!black] (A) -- (B) node[midway, right] {\(\vec v_1\)};
+						\draw[->, thick, magenta!85!black] (A) -- (D) node[midway, left] {\(\vec v_2\)};
+						\draw[->, thick, orange!90!black] (B) -- (D) node[midway, above right] {\(\Delta\vec v\)};
+						
+						\node[font=\scriptsize] at (-0.5,-2.55) {triângulo das velocidades};
+					\end{scope}
+					
+				\end{tikzpicture}
+			\end{column}
+		\end{columns}
+		
+	\end{frame}
+	
+	% SLIDE 9
+	\begin{frame}{Movimento circular uniforme e uniformemente variado}
+		\scriptsize
+		
+		Considere uma \textbf{partícula} que se move sobre uma circunferência de raio \(r\).  
+		Em vez de descrever a posição pelo comprimento do arco \(s\), podemos descrever a posição pela \textbf{posição angular} \(\theta\). ($\textcolor{red}{1\,\text{volta}=2\pi\,\text{rad}=360^\circ}$)
+		
+		\vspace{0.1cm}
+		\begin{columns}[c]
+			\begin{column}{0.58\textwidth}
+				\textcolor{blue}{\textbf{Descrição escalar ao longo da trajetória:}}
+				\[
+				\theta=\frac{s}{r}, 
+				\qquad
+				\frac{\theta}{2\pi}=\frac{\theta_{\text{graus}}}{360^\circ},
+				\qquad
+				\Delta\theta=\theta_2-\theta_1=\frac{\Delta s}{r}.
+				\]
+				
+				\vspace{0.1cm}
+				\textcolor{blue}{\textbf{Descrição vetorial no plano:}}
+				\[
+				\vec r(t)=x(t)\vec i+y(t)\vec j.
+				\]
+				
+				Para uma trajetória circular de raio \(r\), centrada na origem:
+				\[
+				x(t)=r\cos\theta(t),
+				\qquad
+				y(t)=r\sin\theta(t).
+				\]
+				
+				\vspace{0.05cm}
+				\textcolor{red}{\textbf{Ideia-chave:}} a descrição escalar \(s\leftrightarrow\theta\) é equivalente à descrição vetorial \(\vec r(t)\), mas a forma vetorial mostra explicitamente as coordenadas no plano.
+			\end{column}
+			
+			\begin{column}{0.42\textwidth}
+				\centering
+				\begin{tikzpicture}[scale=0.85]
+					\coordinate (C) at (0,0);
+					\def\R{1.8}
+					\draw[thick] (C) circle (\R);
+					\filldraw[ponto] (C) node[below left] {centro};
+					
+					\coordinate (A) at (\R,0);
+					\coordinate (P) at (55:\R);
+					\coordinate (Px) at ({\R*cos(55)},0);
+					\coordinate (Py) at (0,{\R*sin(55)});
+					
+					% eixos
+					\draw[->, thick] (-0.3,0) -- (2.4,0) node[right] {$x$};
+					\draw[->, thick] (0,-0.3) -- (0,2.3) node[above] {$y$};
+					
+					% raio e arco
+					\draw[thick] (C) -- (A);
+					\draw[thick, blue!70!black] (C) -- (P) node[midway, above left] {$r$};
+					
+					\draw[ultra thick, red!80!black] (A) arc[start angle=0,end angle=55,radius=\R];
+					\node[red!80!black] at (1.45,0.75) {$s$};
+					
+					\draw[->, thick, gray!80!black] (0.6,0) arc[start angle=0,end angle=55,radius=0.6];
+					\node at (0.9,0.28) {$\theta$};
+					
+					% projeções
+					\draw[dashed, gray] (P) -- (Px) node[below] {$x$};
+					\draw[dashed, gray] (P) -- (Py) node[left] {$y$};
+					
+					% ponto
+					\filldraw[blue!70!black] (P) circle (1.8pt);
+					\node[above right] at (P) {partícula};
+					
+					% vetor posição
+					\draw[->, thick, red!80!black] (C) -- (P);
+				\end{tikzpicture}
+			\end{column}
+		\end{columns}
+		
+	\end{frame}
+	
+	
+	% SLIDE 10
+	\begin{frame}{}
+		\scriptsize
+		
+	As grandezas angulares são obtidas por derivação de $\theta(t)$, analogamente ao movimento retilíneo. Indicamos com $	\omega$ a velocidade angular e com $\alpha$ a aceleração angular.
+		
+		\vspace{0.1cm}
+		\begin{columns}[T]
+			\begin{column}{0.48\textwidth}
+				\textcolor{blue}{\textbf{Grandezas angulares:}}
+				\[
+				\omega_{\text{méd}}=\frac{\Delta\theta}{\Delta t},
+				\qquad
+				\omega=\frac{d\theta}{dt}.
+				\]
+				
+				\[
+				\alpha_{\text{méd}}=\frac{\Delta\omega}{\Delta t},
+				\qquad
+				\alpha=\frac{d\omega}{dt}
+				=
+				\frac{d^2\theta}{dt^2}.
+				\]
+				
+				\vspace{0.1cm}
+				\textcolor{blue}{\textbf{Analogia com a cinemática linear:}}
+				\[
+				x \longleftrightarrow \theta,
+				\qquad
+				v \longleftrightarrow \omega,
+				\qquad
+				a \longleftrightarrow \alpha.
+				\]
+				
+				\textcolor{red}{\textbf{Unidades:}} 
+				\(\theta\) em rad, \(\omega\) em rad/s, \(\alpha\) em rad/s\(^2\).
+				
+				\vspace{0.1cm}
+				\textcolor{red}{\textbf{Sentido positivo:}} também no movimento circular temos um sentido positivo e um sentido negativo, pois podemos girar nos dois sentidos. Usualmente, o sentido anti-horário é escolhido como positivo.
+			\end{column}
+			
+			\begin{column}{0.52\textwidth}
+				\textcolor{blue}{\textbf{Da forma angular à forma vetorial:}}
+				
+				Para \(\vec r(t)=r\cos\theta(t)\vec i+r\sin\theta(t)\vec j\), a velocidade é
+				\[
+				\vec v(t)=\frac{d\vec r}{dt}.
+				\]
+				
+				Como \(\omega=d\theta/dt\),
+				\[
+				\textcolor{red}{
+					\vec v(t)=
+					r\omega\left[-\sin\theta(t)\vec i+\cos\theta(t)\vec j\right].}
+				\]
+				
+				Assim, o módulo da velocidade é
+				\[
+				v=\omega r \rightarrow F_c= m \omega^2 r
+				\]
+				
+				\vspace{0.05cm}
+				\textcolor{blue}{\textbf{Aceleração:}}
+				$\vec a(t)=\frac{d\vec v}{dt}
+				=
+				\vec a_t+\vec a_r.
+				$
+				
+				\[
+				\textcolor{red}{a_t= r \frac{d \omega}{dt}=r\alpha},
+				\qquad
+				\textcolor{red}{a_r=\omega^2r=\frac{v^2}{r}}.
+				\]
+				
+				\textcolor{red}{\textbf{Leitura física:}}  
+				\(\vec a_t\) aceleração tangetial muda o módulo de \(\vec v\);  
+				\(\vec a_r\) aceleração radial muda a direção de \(\vec v\).
+			\end{column}
+		\end{columns}
+		
+		\vspace{0.2cm}
+		\centering
+		Se \(\omega\) é constante: \textbf{MCU}. \qquad
+		Se \(\alpha\) é constante: \textbf{MCUV}.
+		
+	\end{frame}
+	
+	
+	% SLIDE 11
+	\begin{frame}{Movimento circular uniforme (MCU)}
+		\scriptsize
+		
+		No \textbf{movimento circular uniforme}, a rapidez é constante e a velocidade angular também:
+		\[
+		\omega=\text{constante}, \qquad \alpha=0.
+		\]
+		
+		\begin{columns}[T,onlytextwidth]
+			\begin{column}{0.56\textwidth}
+				\textcolor{blue}{\textbf{Relações cinemáticas:}}
+				\begin{align*}
+					v &= \omega r, \qquad
+					T = \frac{2\pi}{\omega}=\frac{2\pi r}{v} \rightarrow
+					f = \frac{1}{T},\, \omega= \frac{2\pi}{T}= 2\pi f\\[0.1cm]
+					&\text{\(f\) é a frequência: número de voltas por segundo.}\\ 
+					&\text{\(T\) é o intervalo de tempo para cumprir uma volta.} 
+				\end{align*}
+				
+				\textcolor{blue}{\textbf{Aceleração centrípeta:}}
+				$
+				a_c=\frac{v^2}{r}=\omega^2 r.
+				$
+				
+				\vspace{0.2cm}
+				
+				\textcolor{blue}{\textbf{Dinâmica:}}
+				$
+				\sum F_r = m a_c = m\frac{v^2}{r}=m\omega^2 r.
+				$
+				
+				\vspace{0.2cm}
+				
+				\textcolor{red}{\textbf{Exemplo simples:}} se uma partícula percorre uma circunferência de raio \(2,0\,\text{m}\) com \(v=4,0\,\text{m/s}\),
+				\[
+				a_c=\frac{(4,0)^2}{2,0}=8,0\,\text{m/s}^2.
+				\]
+			\end{column}
+			
+			\begin{column}{0.44\textwidth}
+				\centering
+				\begin{tikzpicture}[scale=0.85,>=stealth]
+					\coordinate (C) at (0,0);
+					\def\R{1.8}
+					
+					\draw[thick, orange!60!brown] (C) circle (\R);
+					\filldraw[ponto] (C) node[below left] {centro};
+					
+					\coordinate (P) at (25:\R);
+					\filldraw[blue!60!cyan] (P) circle (2.3pt);
+					
+					\draw[dashed, gray] (C) -- (P) node[midway, below] {$r$};
+					
+					% velocidade tangente à trajetória
+					\draw[->, thick, magenta!85!black]
+					(P) -- +({-0.95*sin(25)},{0.95*cos(25)})
+					node[above] {$\vec v$};
+					
+					% aceleração centrípeta
+					\draw[->, thick, orange!90!black]
+					(P) -- ($(P)!0.5!(C)$)
+					node[midway, below] {$\vec a_c$};
+					
+					% sentido percorrido na circunferência
+					\draw[->, thick, orange!60!brown]
+					(110:\R) arc[start angle=110,end angle=140,radius=\R];
+					
+					\node[align=center, font=\scriptsize] at (0,-2.45)
+					{\(\vec v\) é tangente\\ \(\vec a_c\) aponta para o centro};
+				\end{tikzpicture}
+			\end{column}
+		\end{columns}
+		
+	\end{frame}
+	
+	% SLIDE 12
+	\begin{frame}{Movimento circular uniformemente variado (MCUV)}
+		\scriptsize
+		
+		Quando a \textbf{aceleração angular} é constante,
+		\[
+		\alpha=\text{constante},
+		\]
+		as equações são análogas às do movimento retilíneo uniformemente variado.
+		
+		\vspace{0.1cm}
+		\begin{columns}[T,onlytextwidth]
+			\begin{column}{0.54\textwidth}
+				\textcolor{blue}{\textbf{Equações angulares:}}
+				\begin{align*}
+					\omega(t) &= \omega(0)+\alpha t,\,\,
+					\theta(t) = \theta(0)+\omega(0)t+\frac{1}{2}\alpha t^2,\\
+					\omega^2(t) &= \omega^2(0)+2\alpha\bigl(\theta(t)-\theta(0)\bigr),\\
+					\theta(t) &= \theta(0)+\frac{1}{2}\bigl(\omega(0)+\omega(t)\bigr)t,\,\,
+					\omega_{\text{méd}} = \frac{1}{2}\bigl(\omega(0)+\omega(t)\bigr).
+				\end{align*}
+				
+				\textcolor{blue}{\textbf{Acelerações do ponto:}}
+				\begin{align*}
+					a_t &= \alpha r \qquad \text{(tangencial)},\\
+					a_r &= \omega^2 r \qquad \text{(radial)}.
+				\end{align*}
+				
+				\textcolor{red}{\textbf{Interpretação:}}  
+				\(a_t\) muda o \textbf{módulo} de \(\vec v\);  
+				\(a_r\) muda a \textbf{direção} de \(\vec v\).
+			\end{column}
+			
+			\begin{column}{0.46\textwidth}
+				\centering
+				\begin{tikzpicture}[scale=0.8,>=stealth]
+					\coordinate (C) at (0,0);
+					\def\R{1.7}
+					\draw[thick] (C) circle (\R);
+					\filldraw[ponto] (C);
+					
+					\coordinate (P) at (35:\R);
+					\filldraw[blue!60!cyan] (P) circle (2.2pt);
+					\draw[dashed] (C) -- (P) node[midway, below] {$r$};
+					
+					% velocidade tangencial
+					\draw[->, thick, magenta!85!black]
+					(P) -- +({-0.95*sin(35)},{0.95*cos(35)})
+					node[above] {$\vec v$};
+					
+					% aceleração radial
+					\draw[->, thick, orange!90!black]
+					(P) -- ($(P)!0.5!(C)$)
+					node[midway, below] {$\vec a_r$};
+					
+					% aceleração tangencial
+					\draw[->, thick, green!60!black]
+					(P) -- +({-0.55*sin(35)},{0.55*cos(35)})
+					node[right] {$\vec a_t$};
+					
+					% sentido angular
+					\draw[->, thick]
+					(2.0,0.15) arc[start angle=5,end angle=55,radius=1.95];
+					\node at (2.22,1.0) {$\omega$};
+					
+					\node[align=center, font=\scriptsize] at (0,-2.35)
+					{Duas componentes\\ da aceleração.};
+				\end{tikzpicture}
+			\end{column}
+		\end{columns}
+		
+	\end{frame}
+	
+	
+	% SLIDE 13
+	\begin{frame}{Interpretação vetorial de \(\omega\) e \(\alpha\)}
+		\scriptsize
+		
+		Até agora usamos \(\omega\) e \(\alpha\) como grandezas escalares com sinal.
+		Mas, em geral, a \textbf{velocidade angular} e a \textbf{aceleração angular}
+		podem ser representadas por vetores:
+		$
+		\vec\omega, \qquad \vec\alpha.
+		$
+		
+		\begin{columns}[T,onlytextwidth]
+			
+			\begin{column}{0.56\textwidth}
+				
+				\begin{itemize}
+					\item \(\vec\omega\) não aponta na direção do movimento da partícula.\(\vec\omega\) aponta ao longo do \textbf{eixo de rotação};
+					\item o sentido de \(\vec\omega\) é dado pela \textbf{regra da mão direita};
+					\item \(\vec\alpha\) indica como \(\vec\omega\) varia no tempo.
+				\end{itemize}
+				
+				\vspace{0.1cm}
+				
+				Para uma rotação no plano \(xy\), o eixo de rotação é o eixo \(z\):
+				\[
+				\omega>0
+				\quad \Rightarrow \quad
+				\vec\omega \text{ aponta no sentido positivo de } z,
+				\]
+				\[
+				\omega<0
+				\quad \Rightarrow \quad
+				\vec\omega \text{ aponta no sentido negativo de } z.
+				\]
+				
+				\vspace{0.1cm}
+				
+				\textcolor{red}{\textbf{No eixo fixo:}} podemos continuar a usar apenas
+				\(\omega\) e \(\alpha\), com sinal.
+			\end{column}
+			
+			\begin{column}{0.44\textwidth}
+				\centering
+				\begin{tikzpicture}[scale=0.85,>=stealth]
+					
+					%========================
+					% Caso anti-horario
+					%========================
+					\begin{scope}[shift={(0,1.25)}]
+						\coordinate (C) at (0,0);
+						\def\R{1.05}
+						
+						\draw[thick, orange!60!brown] (C) circle (\R);
+						\filldraw[ponto] (C);
+						
+						% sentido anti-horario
+						\draw[->, thick, orange!80!black]
+						(15:\R) arc[start angle=15,end angle=90,radius=\R];
+						
+						% eixo z saindo do plano
+						\node[blue!80!black, font=\Large] at (C) {\(\odot\)};
+						\node[right=0.9cm, blue!80!black] at (C) {\(\vec\omega\)};
+						
+						\node[font=\scriptsize] at (0,-1.45)
+						{anti-horário: \(\omega>0\)};
+						
+						\node[font=\scriptsize, blue!80!black] at (0,1.45)
+						{\(\vec\omega\) sai do plano};
+					\end{scope}
+					
+					%========================
+					% Caso horario
+					%========================
+					\begin{scope}[shift={(0,-2.55)}]
+						\coordinate (C) at (0,0);
+						\def\R{1.05}
+						
+						\draw[thick, orange!60!brown] (C) circle (\R);
+						\filldraw[ponto] (C);
+						
+						% sentido horario
+						\draw[->, thick, orange!80!black]
+						(90:\R) arc[start angle=90,end angle=15,radius=\R];
+						
+						% eixo z entrando no plano
+						\node[red!80!black, font=\Large] at (C) {\(\otimes\)};
+						\node[right=0.9cm, red!80!black] at (C) {\(\vec\omega\)};
+						
+						\node[font=\scriptsize] at (0,-1.45)
+						{horário: \(\omega<0\)};
+						
+						\node[font=\scriptsize, red!80!black] at (0,1.35)
+						{\(\vec\omega\) entra no plano};
+					\end{scope}
+					
+				\end{tikzpicture}
+			\end{column}
+		\end{columns}
+		
+		
+		
+	\end{frame}
+	
+	% SLIDE FINAL
+	\begin{frame}{Resumo: da descrição linear à descrição angular}
+		\scriptsize
+		
+		\begin{columns}[T]
+			\begin{column}{0.5\textwidth}
+				\textcolor{blue}{\textbf{Correspondências}}
+				\[
+				s \leftrightarrow \theta,
+				\qquad
+				v \leftrightarrow \omega,
+				\qquad
+				a_t \leftrightarrow \alpha
+				\]
+				
+				\begin{align*}
+					s &= r\theta, \qquad v = r\omega,\\
+					a_t &= \alpha r, \qquad
+					a_r = \frac{v^2}{r}=\omega^2 r.
+				\end{align*}
+				
+				\vspace{0.1cm}
+				\textcolor{blue}{\textbf{MCU}}
+				\begin{align*}
+					\omega &= \text{constante}, \qquad \alpha = 0,\\
+					T &= \frac{2\pi}{\omega}=\frac{2\pi r}{v},\,a_c = \frac{v^2}{r}=\omega^2 r.
+				\end{align*}
+			\end{column}
+			
+			\begin{column}{0.5\textwidth}
+				\textcolor{blue}{\textbf{MCUV}}
+				\begin{align*}
+					\omega(t) &= \omega(0)+\alpha t,\\
+					\theta(t) &= \theta(0)+\omega(0)t+\frac{1}{2}\alpha t^2,\\
+					\omega^2(t) &= \omega^2(0)+2\alpha\bigl(\theta(t)-\theta(0)\bigr).
+				\end{align*}
+				
+				\vspace{0.1cm}
+				\textcolor{blue}{\textbf{Dinâmica radial}}
+				\begin{equation*}
+					\sum F_r = m a_r = m\frac{v^2}{r}=m\omega^2 r.
+				\end{equation*}
+				
+				\vspace{0.1cm}
+				\textcolor{red}{\textbf{Ideia final:}}
+				\begin{itemize}
+					\item \(a_t\) altera a rapidez,\,\(a_r\) altera a direção;
+					\item no MCU só há aceleração radial;
+					\item no MCUV há aceleração radial e tangencial;
+				\end{itemize}
+			\end{column}
+		\end{columns}
+		
+		
+		
+	\end{frame}
+	
+	
+\end{document}

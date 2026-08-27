@@ -1,0 +1,908 @@
+\documentclass{beamer}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[portuguese]{babel}
+\usepackage{amsmath}
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric, arrows.meta, 3d, calc, decorations.pathreplacing}
+
+% Configuração do Tema
+\usetheme{Madrid}
+\usecolortheme{default}
+
+% Informações do Título
+\title{Aula 4: Teórico-Prática}
+\subtitle{Movimento Uniformemente variado, no espaço 1-d e 2-d}
+\date{16 Março 2026}
+
+\begin{document}
+	
+	\frame{\titlepage}
+	
+% PAGE 1
+\begin{frame}{}
+	\small
+	Um corpo em movimento é um objeto que identificamos com o seu centro de massa, ou seja um ponto ideal de massa M, e deslocando-se de um ponto 'A' a um ponto 'B', durante um intervalo de tempo $\Delta t = t_B - t_A$ ($t_B (t_A)$ istante que M é em B(A)).
+	
+	\vspace{0.2cm}
+	A posições do corpo em 'A' e 'B' são indicadas com vetores $\overline{r}_A$ e $\overline{r}_B$ de um sistema cartesiano:
+	
+	\vspace{0.2cm}
+	\textcolor{green!60!black}{$\overline{r}_{AB}$ : vetor deslocamento da A e B}
+	
+	\vspace{0.2cm}
+	\begin{columns}[T]
+		\begin{column}{0.65\textwidth}
+			\scriptsize
+			$\overline{r}_{AB} = \overline{r}_B - \overline{r}_A \quad \text{se} \quad \overline{r}_A = r_{A,x}\overline{i} + r_{A,y}\overline{j} \quad \text{e} \quad \overline{r}_B = r_{B,x}\overline{i} + r_{B,y}\overline{j}$
+			
+			\vspace{0.3cm}
+			$\leadsto \overline{r}_{AB} = (r_{B,x}\overline{i} + r_{B,y}\overline{j}) - (r_{A,x}\overline{i} + r_{A,y}\overline{j}) =$
+			
+			\vspace{0.2cm}
+			$= (r_{B,x} - r_{A,x})\overline{i} + (r_{B,y} - r_{A,y})\overline{j} = r_{AB,x}\overline{i} + r_{AB,y}\overline{j}$ \\ 
+			\vspace{0.2cm}
+			$\left( \begin{matrix} r_{AB,x} = r_{B,x} - r_{A,x} ,\,\, r_{AB,y} = r_{B,y} - r_{A,y} \end{matrix} \right)$
+		\end{column}
+		
+		\begin{column}{0.35\textwidth}
+			\begin{tikzpicture}[scale=0.7]
+				% Eixos Cartesianos
+				\draw[thick, ->] (-1.5,0) -- (3.5,0) node[below] {$x$};
+				\draw[thick, ->] (0,-1) -- (0,2.5) node[left] {$y$};
+				
+				% Trajetória
+				\draw[red, thick] (-1, 0.5) .. controls (0, -0.5) and (0.5, 2.5) .. (2.5, 1.5) .. controls (2.8, 1.3) and (3, 0.8) .. (3.2, 0.5) node[above, black, align=left] {\scriptsize trajetoria};
+				
+				% Pontos e Vetores de Posição
+				\coordinate (A) at (0.8, 1.32);
+				\coordinate (B) at (2.4, 1.55);
+				
+				\fill[green!60!black] (A) circle (1.5pt) node[above left] {\scriptsize A};
+				\fill[green!60!black] (B) circle (1.5pt) node[right] {\scriptsize B};
+				
+				\draw[thick, ->] (0,0) -- (A) node[midway, left] {\scriptsize $\overline{r}_A$};
+				\draw[thick, ->] (0,0) -- (B) node[midway, below right] {\scriptsize $\overline{r}_B$};
+				
+				% Vetor Deslocamento
+				\draw[thick, green!60!black, ->] (A) -- (B) node[midway, above] {\scriptsize $\overline{r}_{AB}$};
+				
+				% Eixos unitários em baixo
+				\begin{scope}[shift={(0.5, -1.2)}]
+					\draw[thick, ->] (0,0) -- (0, 0.5) node[left] {\scriptsize $\overline{j}$};
+					\draw[thick, ->] (0,0) -- (0.5, 0) node[below] {\scriptsize $\overline{i}$};
+				\end{scope}
+				
+				% Texto lateral
+				\node[right, font=\scriptsize] at (1.5, -0.8) {$\overline{r}(t=t_A) = \overline{r}_A$};
+				\node[right, font=\scriptsize] at (1.5, -1.3) {$\overline{r}(t=t_B) = \overline{r}_B$};
+			\end{tikzpicture}
+		\end{column}
+	\end{columns}
+\end{frame}
+	
+	% PAGE 2
+	\begin{frame}{}
+		\small
+		No instante $t_A$ o corpo está em A e no instante $t_B$ o corpo está em B. A diferença $t_B - t_A$ é o intervalo de tempo $\Delta t = t_B - t_A$ (também indicado $\Delta t_{AB}$) no qual o corpo vai de 'A' a 'B'.
+		
+		\vspace{0.3cm}
+		Um corpo em movimento é caracterizado por um vetor velocidade $\overline{v}(t)$, ou seja, $\overline{v}$ depende do instante.
+		
+		\vspace{0.5cm}
+		\textcolor{blue}{Exemplo} \quad Um corpo (em 1-d) parte do repouso e chega em B com velocidade $-10 \frac{m}{s} \overline{i}$
+		significa \quad $\overline{v}(\underbrace{t_A=0}_{\substack{\text{instante} \\ \text{inicial quando parte}}}) = 0 \quad , \quad \overline{v}(t_B) = \left(-10 \frac{m}{s}\right) \overline{i} = 10 \frac{m}{s} (-\overline{i})$
+		
+		\vspace{0.3cm}
+		\begin{columns}[T]
+			\begin{column}{0.55\textwidth}
+				$\leadsto$ O corpo deslocou-se da direita \\
+				\hspace{0.5cm} para a esquerda $\left(v_x = -10 \frac{m}{s} < 0\right)$
+			\end{column}
+			\begin{column}{0.45\textwidth}
+				\begin{tikzpicture}[scale=0.9]
+					% Eixo horizontal
+					\draw[thick, ->] (0,0) -- (5.5,0);
+					
+					% Pontos t_B e t_A
+					\filldraw (1.5,0) circle (1.2pt) node[below] {$t_B$} node[above] {$\overline{r}_B$};
+					\filldraw (4.5,0) circle (1.2pt) node[below] {$t_A$} node[above] {$\overline{r}_A$};
+					
+					% Vetor velocidade v em vermelho (apontando para a esquerda a partir de t_B)
+					\draw[thick, red, ->] (1.5,0) -- (0.5,0) node[below] {$\overline{v}$};
+					
+					% Vetor unitário i (em baixo à direita)
+					\draw[thick, ->] (5, -0.4) -- (5.5, -0.4) node[below] {$\overline{i}$};
+				\end{tikzpicture}
+			\end{column}
+		\end{columns}
+		
+		\vspace{0.6cm}
+		\textcolor{red}{Obs:} Se não estão definidos no texto, somos sempre livres de definir o instante inicial $t_A = 0$ e a posição inicial $\overline{r}_A = \overline{0}$ (vetor nulo).
+		
+		\vspace{0.4cm}
+		\textcolor{red}{Obs:} O vetor $\overline{r}$ é uma função do tempo $\overline{r}(t)$, $\overline{r}(t_B) = \overline{r}_B$ e $\overline{r}(t_A) = \overline{r}_A$.
+	\end{frame}
+	
+% PAGE 3
+\begin{frame}{}
+	\footnotesize
+	Se vamos de 'A' a 'B' em $\Delta t = t_B - t_A$, a fração \quad \fbox{$\overline{v}_m = \frac{\Delta \overline{r}_{AB}}{\Delta t}$} \quad é a velocidade média do corpo durante o deslocamento.
+	
+	\vspace{0.1cm}
+	\textcolor{blue}{Exemplo:} se $\Delta \overline{r}_{AB} = (500m)\overline{i}$ \quad e \quad $\Delta t = 10s$, um corpo deslocando-se com uma velocidade constante $\overline{v}_m = \frac{(500m)\overline{i}}{10s} = \left(50\frac{m}{s}\right)\overline{i}$ , na direção $\overline{i}$, desloca-se exatamente de $500m$ em $10s$.
+	
+	\vspace{-0.1cm}
+	\begin{center}
+		\begin{tikzpicture}[scale=0.7]
+			\draw[thick, ->] (0,0) -- (6,0);
+			\filldraw (0,0) circle (1.2pt) node[below] {$0=\overline{r}_A$};
+			\filldraw[red] (2,0) circle (1.5pt) node[below] {$M$};
+			\draw[thick, red, ->] (2, 0.2) -- (3.5, 0.2) node[midway, above] {\scriptsize $\overline{v}_m = 50 \frac{m}{s} \overline{i}$};
+			\filldraw (4.5,0) circle (1.2pt) node[below] {$\overline{r}_B=(500m)\overline{i}$};
+		\end{tikzpicture}
+	\end{center}
+	
+	\vspace{-0.3cm}
+	\underline{Em geral} no deslocamento de 'A' a 'B' um corpo trava e/ou acelera, então em um genérico instante 't' temos que $\overline{v}(t) \ne \overline{v}_m$.
+	
+	\vspace{0.2cm}
+	\begin{columns}[c]
+		% COLUNA ESQUERDA: O Eixo do Tempo
+		\begin{column}{0.4\textwidth}
+			\textcolor{red}{Questão:} Como definimos $v(t)$?
+			
+			\vspace{0.1cm}
+			$\overline{v}(t) = \frac{\Delta \overline{r}_{AB}}{\Delta t} \quad \text{com} \quad \Delta t \approx 0$
+			
+			\vspace{0.1cm}
+			\begin{tikzpicture}[scale=0.55]
+				\draw[thick, ->] (0,0) -- (4.5,0);
+				
+				% Passo alterado de 0.2 para 0.4 para distanciar as barrinhas
+				\foreach \x in {0.4, 0.8, ..., 4.4} \draw (\x, -0.1) -- (\x, 0.1);
+				
+				\filldraw[red] (2,0) circle (1.8 pt);
+				\node[below left, font=\tiny] at (2.3, -0.1) {$t_A$};
+				\node[below, font=\tiny] at (1.8, -0.5) {$\overline{v}(t_A)$};
+				
+				\filldraw[red] (2.4,0) circle (1.8 pt);
+				\node[below right, font=\tiny] at (2.3, -0.1) {$t_B = t_A + \Delta t$};
+				\node[below right, font=\tiny] at (2.3, -0.5) {$\Delta t = t_B - t_A$};
+				
+				\draw[decorate, decoration={brace, amplitude=1.3pt}, red] (2,0.2) -- (2.4,0.2) node[midway, above, font=\tiny] {$\Delta \overline{r}_{AB}$};
+			\end{tikzpicture}
+		\end{column}
+		
+		% COLUNA DIREITA: Figuras Trajetória e Texto Vermelho
+		\begin{column}{0.6\textwidth}
+			\begin{columns}[c]
+				
+				% Figura 1: Múltiplos Delta r
+				\begin{column}{0.33\textwidth}
+					\begin{center}
+						\begin{tikzpicture}[scale=0.6]
+							% Curva da trajetória
+							\draw[red, thick] (0,0.5) .. controls (0.5,2) and (1.5,2.5) .. (2.8,2.7);
+							\coordinate (O) at (1.5, -0.5); 
+							
+							\coordinate (A)  at (0.3, 1.25);
+							\coordinate (B3) at (0.8, 2.05); % Verde 
+							\coordinate (B2) at (1.4, 2.45); % Azul 
+							\coordinate (B1) at (2.2, 2.65); % Preto 
+							
+							\draw[->] (O) -- (A);
+							\draw[->, green!60!black] (O) -- (B3);
+							\draw[->, blue] (O) -- (B2);
+							\draw[->, black] (O) -- (B1);
+							
+							\draw[->, thick, black] (A) -- (B1) node[pos=0.8, right=-1pt, font=\tiny] {$\Delta r$};
+							\draw[->, thick, blue]  (A) -- (B2) node[pos=0.8, above left=-2pt, font=\tiny] {$\Delta r$};
+							\draw[->, thick, green!60!black] (A) -- (B3) node[pos=0.6, above left=-3pt, font=\tiny] {$\Delta r$};
+						\end{tikzpicture}
+					\end{center}
+				\end{column}
+				
+				% Figura 2: Limite Tangente
+				\begin{column}{0.33\textwidth}
+					\begin{center}
+						\begin{tikzpicture}[scale=0.7]
+							% Corta a base invisível para poupar espaço vertical
+							\clip (-0.2, -0.3) rectangle (3.2, 2.3); 
+							
+							% Curva da trajetória
+							\draw[red, thick] (0,-0.5) .. controls (0.2,0.8) and (1.2,1.5) .. (2.8,1.7);
+							
+							% Pontos na curva
+							\coordinate (P1) at (0.8, 1.05);
+							\coordinate (P2) at (1.1, 1.25);
+							
+							% Linha tracejada tangente
+							\draw[red, dashed, thick] (0.2, 0.45) -- (2.0, 2.25);
+							
+							% Vetor tangente (aprox Delta r / Delta t) em cima da tracejada
+							\draw[->, red, thick] (P1) -- (1.5, 1.75);
+							
+							% Vetores de posição simulados
+							\coordinate (O) at (1.2, -1.5);
+							\draw[green!60!black, thick, ->] (O) -- ($(O)!0.98!(P1)$);
+							\draw[green!60!black, thick, ->] (O) -- ($(O)!0.98!(P2)$);
+							
+							% Vetor minúsculo Delta r
+							\draw[green!60!black, thick, ->] (P1) -- (P2) node[pos=0.2, above left=-3pt, font=\tiny] {$\Delta r$};
+							
+							% Texto e seta curva
+							\node[font=\tiny, green!60!black, align=center] (texto) at (2.2, 0.6) {$\overline{v}\approx \frac{\Delta r}{\Delta t}$};
+							\draw[->, green!60!black] (texto.north) to[out=90, in=330] (1.3, 1.55);
+						\end{tikzpicture}
+					\end{center}
+				\end{column}
+				
+				% Texto Explicativo (Direita)
+				\begin{column}{0.34\textwidth}
+					\textcolor{red}{\tiny $\leftarrow$ Menor é o intervalo de tempo $\Delta t$ e menor é $\Delta \overline{r}$, quanto menor $\Delta t$ tanto mais a direção de $\frac{\Delta \overline{r}}{\Delta t}$ aproxima a direção tangente à trajetória}
+				\end{column}
+				
+			\end{columns}
+		\end{column}
+	\end{columns}
+	
+	\vspace{0.1cm}
+	se $\Delta t \approx 0$ também $\Delta \overline{r}_{AB} \approx 0$, rigorosamente definimos:
+	
+	\vspace{0.1cm}
+{ \scriptsize	$ \displaystyle \overline{v}(t) = \underbrace{\lim_{\Delta t \to 0}}_{\text{limite } \Delta t \to 0} \frac{\Delta \overline{r}_{AB}}{\Delta t} = \underbrace{\lim_{t_B \to t_A}}_{\text{limite } t_B \to t_A} \frac{\overline{r}_B - \overline{r}_A}{t_B - t_A} = \lim_{t_B \to t_A} \frac{\overline{r}(t_B) - \overline{r}(t_A)}{t_B - t_A} = \frac{d\overline{r}}{dt} \quad ( \text{  indicada }\overline{r}') $}
+	
+\end{frame}
+	
+	% PAGE 4
+	\begin{frame}{Velocidade Instantânea}
+		\small
+		A \underline{velocidade instantânea} é definida por:
+		
+
+		$\displaystyle \overline{v}(t) = \underbrace{\lim_{\Delta t \to 0}}_{\text{limite } \Delta t \to 0} \frac{\overline{r}_{AB}}{\Delta t} = \underbrace{\lim_{t_B \to t_A}}_{\text{limite } t_B \to t_A} \frac{\overline{r}_B - \overline{r}_A}{t_B - t_A} = \lim_{t_B \to t_A} \frac{\overline{r}(t_B) - \overline{r}(t_A)}{t_B - t_A} = \frac{d\overline{r}}{dt}$
+		
+		\vspace{0.1cm}
+		\hfill \scriptsize é a derivada de $\overline{r}(t)$ em relação a $dt$.
+		
+		\vspace{0.2cm}
+		\small
+		Está na direção da tangente da trajetória no ponto $\overline{r}(t)$ no instante '$t$'. $\overline{v}(t)$ indica o sentido da trajetória no instante $t$ na posição $\overline{r}(t)$.
+		
+		\vspace{0.2cm}
+		Mas agora, em geral não estamos em 1-d, então o que é $\displaystyle \overline{v} = \frac{d\overline{r}}{dt} = ?$
+		
+		\vspace{0.2cm}
+		\begin{columns}[T]
+			% Esquerda: Equação Principal e Regra da Linearidade
+			\begin{column}{0.65\textwidth}
+				$\displaystyle \overline{v} = \frac{d\overline{r}}{dt} = \frac{d}{dt} \left(r_x \overline{i} + r_y \overline{j}\right) = \frac{dr_x}{dt} \overline{i} + \frac{dr_y}{dt} \overline{j}$
+				
+				\vspace{0.2cm}
+				\begin{columns}[T]
+					\begin{column}{0.2\textwidth}
+						\vspace{0.2cm}
+						$\displaystyle \left(\frac{df}{dt} = f'\right)$
+					\end{column}
+					\begin{column}{0.8\textwidth}
+						\scriptsize
+						a derivada é uma operação linear, ou seja \\
+						\vspace{0.1cm}
+						$\displaystyle \frac{d}{dt}(\alpha f + \beta g) = \alpha \frac{d}{dt}f + \beta \frac{d}{dt}g$ \\
+						\vspace{0.1cm}
+						$\alpha, \beta$ números \\
+						$f, g$ funções de $t$
+					\end{column}
+				\end{columns}
+			\end{column}
+			
+			% Direita: Explicação das componentes e vetor coluna
+			\begin{column}{0.35\textwidth}
+				\scriptsize $\leftarrow$ faço a derivada de cada componente e obtenho o vetor derivada:
+				
+				\vspace{0.3cm}
+				$\displaystyle \overline{v} = \frac{d\overline{r}}{dt} = \begin{pmatrix} \frac{dr_x}{dt} \\[6pt] \frac{dr_y}{dt} \end{pmatrix}$
+			\end{column}
+		\end{columns}
+		
+		\vspace{0.1cm}
+		\normalsize
+		Chama-se \textcolor{red}{Rapidez} de $\overline{v}$ o módulo de $|\overline{v}| = (v_x^2 + v_y^2)^{1/2}$
+	\end{frame}
+	
+	% PAGE 5
+	\begin{frame}{}
+		\footnotesize
+		\begin{columns}[T]
+			\begin{column}{0.5\textwidth}
+				\textcolor{red}{Exemplo:} Se $\overline{r}(t) = \left( \underset{r_x}{1}, \underset{r_y}{2t} \right)$ (SI), qual é? 
+			\end{column}
+			\begin{column}{0.5\textwidth}
+				\textbf{A)} a posição $\overline{r}$ em $t=0$ (desenhe)? \\
+				\textbf{B)} a posição e velocidade depois de dois segundos? (desenhe)? \\
+				\textbf{C)} $\overline{v}_m$ no intervalo de tempo do ponto B)
+			\end{column}
+		\end{columns}
+		
+
+		\textcolor{blue}{Sol.} \quad \textbf{A)} \quad $\overline{r}(0) = (1, 2 \cdot 0)m = (1\,m, 0\,m)$ \quad
+		\begin{tikzpicture}[scale=0.6, baseline=-0.5ex]
+			\draw[->] (-0.8,0) -- (1.5,0) node[right] {\tiny $x$};
+			\draw[->] (0,-0.8) -- (0,1.2) node[above] {\tiny $y$};
+			\draw[red, thick, ->] (0,0) -- (1,0) node[below] {\tiny $\overline{r}(0)$};
+			\filldraw[red] (1,0) circle (1.5pt);
+		\end{tikzpicture}
+		
+
+		\begin{columns}[T]
+			\begin{column}{0.85\textwidth}
+				\textbf{B)} $\overline{r}(t=2s) = (1, 2 \cdot 2)m = (1\,m, 4\,m)$
+				
+				\vspace{0.1cm}
+				$\displaystyle \overline{v}(t=2s) = \frac{d\overline{r}}{dt} \bigg|_{t=2s} = \frac{d}{dt} \left[ 1\overline{i} + (2t)\overline{j} \right] \bigg|_{t=2s} = \left[ \frac{d(1)}{dt}\overline{i} + \frac{d(2t)}{dt}\overline{j} \right]_{t=2s} = [0\overline{i} + 2\overline{j}]_{t=2s} = 0\overline{i} + 2\overline{j}$
+				
+				\vspace{0.1cm}
+				$\leadsto \overline{v} = \begin{pmatrix} 0 \\ 2 \end{pmatrix} \quad \begin{array}{l} \text{\scriptsize // ao eixo y,} \\ \text{\scriptsize $\leadsto$ o deslocamento não muda no 'x'} \\ \text{\scriptsize \quad e aumenta só no 'y'} \end{array}$
+				
+				\vspace{0.1cm}
+				\textbf{C)} $\displaystyle \overline{v}_m = \frac{\Delta \overline{r}}{\Delta t} = \frac{\overline{r}(t=2s) - \overline{r}(t=0)}{(2-0)s}=\frac{(1m - 1m)\overline{i}}{2s} + \frac{(4m - 0m)\overline{j}}{2s} = \left(0\frac{m}{s}\right)\overline{i} + \underbrace{\left(2\frac{m}{s}\right)\overline{j}}_{\text{\tiny O desloc. foi só em y}}$
+			\end{column}
+			\begin{column}{0.15\textwidth}
+				\vspace{-0.5cm} % Puxa o gráfico um pouco para cima para alinhar com a alínea B
+				\begin{center}
+					\begin{tikzpicture}[scale=0.65]
+						\draw[->] (-0.5,0) -- (2.5,0) node[below] {\tiny $x$};
+						\draw[->] (0,-0.5) -- (0,5.5) node[left] {\tiny $y$};
+						
+						\draw[red, dashed] (1,0) node[below, font=\tiny] {$1$} -- (1,4);
+						\draw[red, dashed] (0,4) node[left, font=\tiny] {$4$} -- (1,4);
+						
+						\draw[red, thick, ->] (0,0) -- (1,4) node[right] {\tiny $\overline{r}(2s)$};
+						\draw[purple, thick, ->] (1,4) -- (1,5.5) node[right] {\tiny $\overline{v}$};
+					\end{tikzpicture}
+				\end{center}
+			\end{column}
+		\end{columns}
+		
+		\vspace{0.1cm}
+		\textcolor{red}{\scriptsize Obs: $\overline{v}(t) = \begin{pmatrix} 0 \\ 2 \end{pmatrix} \forall t$: durante toda a trajetória a velocidade é constante! Nesse caso $v(t) = \overline{v}_m$}
+	\end{frame}
+	
+	% PAGE 6
+	\begin{frame}{Movimento retilíneo uniforme}
+		\small
+		Diz-se \underline{Movimento retilíneo uniforme} quando a velocidade é constante $\forall t$, ou seja $\overline{v}(t) = \overline{v}$ (sempre a mesma) para cada instante da trajetória. Nesse caso $\overline{v}(t) = \overline{v}_{m\acute{e}dia}$.
+		
+		\vspace{0.4cm}
+		De \quad $\displaystyle \overline{v}(t) = \overline{v} = \overline{v}_m = \frac{\Delta \overline{r}}{\Delta t}$ , \quad temos que:
+		
+		\vspace{0.4cm}
+		$\displaystyle \overline{v} = \frac{\Delta \overline{r}}{\Delta t} \quad \leadsto \quad \overline{v} \Delta t = \Delta \overline{r} \quad \leadsto \quad \overline{v}(t_B - t_A) = \overline{r}_B - \overline{r}_A$
+		
+		\vspace{0.5cm}
+		$\displaystyle \leadsto \quad$ \fcolorbox{red}{white}{\,$\displaystyle \overline{r}_B = \overline{r}_A + \overline{v}(t_B - t_A)$\,} \quad \textcolor{red}{: Lei do movimento ret. unif.}
+		
+		\vspace{0.6cm}
+		\textcolor{red}{\textbf{A)} Definidos os dados iniciais em 'A', o movimento é completamente determinado por $\overline{v}$.}
+		
+
+		\begin{columns}[c]
+			\begin{column}{0.65\textwidth}
+				\textcolor{red}{\textbf{B)} O Movimento é numa reta de 'A' a 'B' (não curvo) na direção e sentido de $\overline{v}$.}
+			\end{column}
+			\begin{column}{0.35\textwidth}
+				\vspace{-0.5cm}
+				\begin{center}
+					\begin{tikzpicture}[scale=0.5]
+						% Eixos Cartesianos
+						\draw[->] (-2.5,0) -- (2.5,0);
+						\draw[->] (0,-1) -- (0,2.2);
+						
+						% Reta (Trajetória) em Roxo/Magenta
+						\draw[purple!60, thick] (-1.2,-0.8) -- (1.2,1.6);
+						
+						% Vetor velocidade em Vermelho
+						\draw[->, red, thick] (-0.8,-0.4) -- (-0.1,0.3) node[above left=-2pt] {\tiny $\overline{v}$};
+					\end{tikzpicture}
+				\end{center}
+			\end{column}
+		\end{columns}
+	\end{frame}
+	
+	% PAGE 7
+	\begin{frame}{}
+		\footnotesize
+		\textcolor{red}{Exemplo} \quad Considere um corpo que está em movimento ret. uniforme com velocidade $\overline{v} = \left(5 \frac{m}{s}\right)\overline{i} + \left(-1 \frac{m}{s}\right)\overline{j}$, e na posição inicial $\overline{r}_A = (50, 0) cm$.
+		
+		\vspace{0.2cm}
+		\textbf{A)} Calcule a posição depois de $3s$, a velocidade média e a rapidez; \\
+		\textbf{B)} Desenhe a direção e sentido do movimento e a posição 'B' do vetor $\overline{r}_B$; \\
+		\textbf{C)} Se num intervalo de tempo $\Delta t = 3s$ o corpo se deslocasse de $\overline{r}_A$ a $\overline{r}_B = (1000, 0)m$, com mov. ret. unif., qual seria a sua velocidade?
+		
+		\vspace{0.2cm}
+		\textcolor{blue}{Sol.}
+		
+		\vspace{0.1cm}
+		\textbf{A)} \quad $\displaystyle \overline{r}_B(3s) = \overline{r}_A + \overline{v}(t_B - t_A) \overset{\overset{50cm = 0,5m}{\downarrow}}{=} \left[(0,5m)\overline{i} + 0\overline{j}\right] + \left[\left(5\frac{m}{s}\right)\overline{i} + \left(-1\frac{m}{s}\right)\overline{j}\right](3s) =$
+		
+		\vspace{0.1cm}
+		$\hspace{1.5cm} = \left[(0,5m)\overline{i} + 0\overline{j}\right] + \left[(15m)\overline{i} + (-3m)\overline{j}\right] = \underbrace{15,5m}_{r_{B,x}}\overline{i} + \underbrace{(-3m)}_{r_{B,y}}\overline{j}.$
+		
+		\vspace{0.2cm}
+		$\hspace{1cm} \overline{v}_m = \overline{v} \quad , \quad |\overline{v}| = \sqrt{(5)^2 + (-1)^2} = \sqrt{26} \quad m/s$
+		
+		\vspace{0.1cm}
+		\begin{columns}[T]
+			% COLUNA ES: B) Gráfico
+			\begin{column}{0.3\textwidth}
+				\textbf{B)}
+				\begin{center}
+					\vspace{-0.6cm}
+					\begin{tikzpicture}[scale=0.4]
+						% Eixos
+						\draw[->] (-1.5,0) -- (4,0);
+						\draw[->] (0,-2) -- (0,2);
+						
+						% Trajetória (linha verde)
+						\draw[green!60!black] (-2,0.66) -- (5,-1.66);
+						
+						% Vetor velocidade (vermelho)
+						\draw[->, red, thick] (0,0) -- (3,-1) node[midway, below left=-2pt] {\scriptsize $\overline{v}$};
+						
+						% Ponto r_B e projeções
+						\filldraw[red] (5,-1.66) circle (2pt);
+						\draw[dashed, red] (5,0) node[above right=-2pt, black] {\tiny $r_{B,x}$} -- (5,-1.66);
+						\draw[dashed, red] (0,-1.66) node[left=-1pt, black] {\tiny $r_{B,y}$} -- (5,-1.66);
+						
+						% Anotações
+						\node[font=\tiny, text width=3.5cm, align=left] at (3.5, 1.2) {o movimento está na direção e sentido de $\overline{v}$};
+						
+						\node[font=\tiny, text width=2cm, align=right, red] (rbtexto) at (3.5, -2.5) {$\overline{r}_B$ está pra cá na reta};
+					\end{tikzpicture}
+				\end{center}
+			\end{column}
+			
+			% COLUNA Dir: C)
+			\begin{column}{0.7\textwidth}
+				\textbf{C)} \quad $\displaystyle \underset{\forall t}{\left. \overline{v} = \frac{\Delta \overline{r}}{\Delta t} \right|} = \frac{\overline{r}_B - \overline{r}_A}{t_B - t_A} =$
+				
+				\vspace{0.2cm}
+				$\displaystyle \hspace{1cm} = \frac{(1000 - 0,5)m}{3s}\overline{i} + \frac{(0 - 0)}{3s}\overline{j} = \left( \underset{\approx 333}{\frac{999,5}{3}} \frac{m}{s} \right)\overline{i}$ 
+				
+				\vspace{-0.3cm}
+				\begin{flushright}
+					\scriptsize $\leadsto$ o movimento é \\ só na direção '$\overline{i}$'.
+				\end{flushright}
+			\end{column}
+			
+			
+		\end{columns}
+	\end{frame}
+	
+	% PAGE 8
+	\begin{frame}{Movimento Uniformemente acelerado (variado)}
+		\scriptsize
+		Durante o movimento em geral a velocidade não é constante: o corpo trava ou acelera, ou mais em geral podemos dizer que a velocidade muda.
+		
+		\vspace{-0.1cm}
+		% Tabela/Grelha de vetores reduzida
+		\begin{center}
+			\begin{tabular}{lccc}
+				A mudança pode ser em & módulo & ou \quad sentido & ou \quad direção \\[0.5ex]
+				
+				& \textcolor{red}{\scriptsize travo} & & \\[-1.5ex] 
+				& 
+				$\overline{v}$ \tikz[baseline=-0.5ex]{\draw[->, red, thick] (0,0) -- (0.8,0);} & 
+				$\overline{v}$ \tikz[baseline=-0.5ex]{\draw[->, red, thick] (0,0) -- (0.8,0);} & 
+				$\overline{v}$ \tikz[baseline=-0.5ex]{\draw[->, red, thick] (0,0) -- (0.5,0.3);} \\[0.5ex]
+				
+				& 
+				$\overline{v}_{new}$ \tikz[baseline=-0.5ex]{\draw[->, red, thick] (0,0) -- (0.4,0);} & 
+				$\overline{v}_{new}$ \tikz[baseline=-0.5ex]{\draw[<-, red, thick] (0,0) -- (0.8,0);} & 
+				$\overline{v}_{new}$ \tikz[baseline=-0.5ex]{\draw[->, red, thick] (0,0) -- (0.6,0);} \\[1.5ex] 
+				
+				& \textcolor{red}{\scriptsize acelero} & & \\[-1.5ex] 
+				& 
+				$\overline{v}$ \tikz[baseline=-0.5ex]{\draw[->, red, thick] (0,0) -- (0.4,0);} & 
+				$\overline{v}$ \tikz[baseline=-0.5ex]{\draw[<-, red, thick] (0,0) -- (0.8,0);} & 
+				\tikz[baseline=-0.5ex]{\draw[->, red, thick] (0.1,0) -- (-0.2,0.3) node[right, black] {\scriptsize $\overline{v}$};} \\[0.5ex]
+				
+				& 
+				$\overline{v}_{new}$ \tikz[baseline=-0.5ex]{\draw[->, red, thick] (0,0) -- (0.8,0);} & 
+				$\overline{v}_{new}$ \tikz[baseline=-0.5ex]{\draw[->, red, thick] (0,0) -- (0.8,0);} & 
+				\tikz[baseline=-0.5ex]{\draw[->, red, thick] (0.3,0.3) -- (0,0) node[pos=0, right, black] {\scriptsize $\overline{v}_{new}$};} \\
+			\end{tabular}
+		\end{center}
+		
+		\vspace{-0.1cm}
+		\textcolor{red}{\underline{Obs}} O terceiro caso implica que o movimento não é retilíneo, isto é, curvilíneo.
+		Hoje estudamos só os primeiros dois casos retilíneos. Analogamente a velocidade, a aceleração \underline{instantânea} é:
+		
+		\vspace{0.1cm}
+		\begin{columns}[c]
+			\begin{column}{0.45\textwidth}
+				\scriptsize $\displaystyle \overline{a}(t) = \frac{\Delta \overline{v}}{\Delta t} \quad \text{com } \Delta t \approx 0 \text{, se } \Delta t \approx 0$ \\
+				também $\Delta v \approx 0$, rigorosamente $\leadsto $
+			\end{column}
+			\begin{column}{0.55\textwidth}
+				\fcolorbox{red}{white}{
+					$\displaystyle \overline{a}(t) = \lim_{\Delta t \to 0} \frac{\Delta \overline{v}}{\Delta t} = \lim_{t_B \to t_A} \frac{\overline{v}(t_B) - \overline{v}(t_A)}{t_B - t_A} = \frac{d\overline{v}}{dt}$
+				}
+			\end{column}
+		\end{columns}
+		
+
+		\begin{columns}[c]
+			\begin{column}{0.7\textwidth}
+				\scriptsize $\leadsto \overline{a}(t)$ é a fração entre a variação de velocidade no intervalo $\Delta t$ e o mesmo intervalo $\Delta t$, com $\Delta t$ muito pequeno ($\Delta t \approx 0$). \\
+				\vspace{0.1cm}
+				$\overline{a}(t)$ é a derivada $\overline{v}'= \frac{d\overline{v}}{dt} $ de $\overline{v}$ em relação a $t$.
+			\end{column}
+			
+			\begin{column}{0.3\textwidth}
+				\begin{center}
+					\begin{tikzpicture}[scale=0.4] % Escala reduzida para garantir que cabe
+						% Curva
+						\draw[red, thick] (0,0) .. controls (0.5,2.5) and (2.5,2.5) .. (3,0) .. controls (3.3,-1.5) and (4,-1.5) .. (4.5,-1.5);
+						
+						\coordinate (P) at (2.4, 1.4);
+						
+						% Vetores na curva
+						\draw[->, thin, black] (P) -- (3.2, 1.1) node[above] {\tiny $\overline{v}_A$};
+						\draw[->, thin, black] (P) -- (3.0, 0.2) node[right=-2pt] {\tiny $\overline{v}_B$};
+						
+						% Delta V
+						\draw[->, thin, black] (3.2, 1.1) -- (3.0, 0.2) node[midway, right=-1pt] {\tiny $\Delta \overline{v}$};
+						
+						% Vetor a
+						\draw[->, thin, black] (P) -- (1.9, -0.1) node[left=-1pt] {\tiny $\overline{a}$};
+						
+						% Texto Explicativo
+						\node[font=\tiny, text width=2cm, align=left] at (-0.5, 0.8) {$\overline{a}$ é na direção \\ e sentido de $\Delta \overline{v}$};
+					\end{tikzpicture}
+				\end{center}
+			\end{column}
+		\end{columns}
+		
+	\end{frame}
+	
+	% PAGE 9
+	\begin{frame}{}
+		\scriptsize
+		
+		\begin{columns}[c]
+			\begin{column}{0.8\textwidth}
+				$\displaystyle \overline{a}(t) = a_x(t)\overline{i} + a_y(t)\overline{j} = \frac{dv_x}{dt}\overline{i} + \frac{dv_y}{dt}\overline{j}  \leadsto \fcolorbox{red}{white}{$a_x(t) = \frac{dv_x}{dt} \quad \text{e} \quad a_y(t) = \frac{dv_y}{dt}$}$
+			\end{column}
+			\begin{column}{0.2\textwidth}
+				\vspace{-0.2cm}
+				\begin{center}
+					\begin{tikzpicture}[scale=0.7]
+						% Eixos
+						\draw[->] (-0.2,0) -- (1.5,0) node[below] {\tiny $x$};
+						\draw[->] (0,-0.2) -- (0,1.5) node[left] {\tiny $y$};
+						
+						% Vetores Unitários
+						\draw[->, thin] (0.5, 0.3) -- (1.0, 0.3) node[below] {\tiny $\overline{i}$};
+						\draw[->, thin] (0.5, 0.3) -- (0.5, 0.8) node[left] {\tiny $\overline{j}$};
+						
+						% Curva da trajetória
+						\draw[red, thick] (0.2, 0.1) .. controls (0.5, 2.5) and (1.5, 1.8) .. (2.5, 0.2);
+						
+						% Ponto e vetor aceleração
+						\coordinate (P) at (1.40, 1.56);
+						\draw[->, thin] (P) -- (1, 0.9) node[below left=-3pt] {\tiny $\overline{a}$};
+						
+						% Componentes tracejadas
+						\draw[->, dashed] (P) -- (0.9, 1.55) node[left=-1pt] {\tiny $a_x$};
+						\draw[->, dashed] (P) -- (1.4, 0.875) node[right=-1pt] {\tiny $a_y$};
+					\end{tikzpicture}
+				\end{center}
+			\end{column}
+		\end{columns}
+		\textcolor{red}{Exemplo} \quad $\displaystyle \overline{v}(t) = (5t)\overline{i} \quad \leadsto \quad \overline{a} = \frac{d\overline{v}}{dt} = \frac{d}{dt}(5t)\overline{i} = 5\overline{i}.$
+		
+		\vspace{0.4cm}
+		A aceleração média em $\Delta t = t_B - t_A$ é \quad \fcolorbox{red}{white}{$\displaystyle \overline{a}_m = \frac{\overline{v}_B - \overline{v}_A}{t_B - t_A}$}
+		
+		\vspace{0.4cm}
+		Em geral $\overline{a}(t)$ depende do instante, isto é, não é constante. Nós estudamos só o caso onde $\overline{a}$ é constante $\leadsto$ falamos de \textcolor{red}{Movimento uniformemente variado} :  \textcolor{red}{$\displaystyle \frac{d\overline{v}}{dt} = \overline{a} = \overline{a}_m, \,\forall t$.}
+		
+		\vspace{0.2cm}
+		$\displaystyle \leadsto {\overline{a}} \underset{\forall t}{=} \overline{a}_m = \frac{\overline{v}_B - \overline{v}_A}{t_B - t_A} \quad \leadsto \quad \overline{v}_B - \overline{v}_A = \overline{a}(t_B - t_A) \quad \leadsto \quad \overline{v}_B = \overline{v}_A + \overline{a}(t_B - t_A) \quad . $ 
+	
+		\hspace{0.5cm} Como vetor: \quad $\displaystyle \begin{pmatrix} v_{B,x} \\ v_{B,y} \end{pmatrix} = \begin{pmatrix} v_{A,x} \\ v_{A,y} \end{pmatrix} + \begin{pmatrix} a_x \\ a_y \end{pmatrix} (t_B - t_A)$
+	
+		\vspace{0.2cm}
+		\begin{columns}[c]
+			\begin{column}{0.75\textwidth}
+				\textcolor{red}{O Movimento é retilíneo uniformemente variado quando a trajetória ``vive'' numa reta:} nesse caso estudamos o problema como se fosse 1-d, independentemente de ser no plano (caso de hoje).
+				
+				\vspace{0.2cm}
+				$\displaystyle [v] = \frac{L}{T} \quad , \quad [a] = \frac{L}{T^2}$
+			\end{column}
+			\begin{column}{0.25\textwidth}
+				\begin{center}
+					\begin{tikzpicture}[scale=0.4]
+						% Reta preta
+						\draw[thick] (0,0) -- (2.5, 2.5);
+						
+						% Vetores ao longo da reta
+						\draw[->, red, thick] (0.4, 0.4) -- (1.2, 1.2) node[below right=-2pt] {\tiny $\overline{v}(t)$};
+						\filldraw[red] (0.4, 0.4) circle (1.5pt);
+						
+						\draw[->, red, thick] (1.6, 1.6) -- (2.4, 2.4) node[below right=-2pt] {\tiny $\overline{v}(t')$};
+						\filldraw[red] (1.6, 1.6) circle (1.5pt);
+					\end{tikzpicture}
+				\end{center}
+			\end{column}
+		\end{columns}
+
+	\end{frame}
+	
+	% PAGE 10
+	\begin{frame}{Movimento Retilíneo Uniformemente variado (ou acelerado)}
+		\scriptsize
+		$\overline{v} = v\overline{i}  ,  \overline{a} = a\overline{i} , \overline{r} = r\overline{i}$. As equações do movimento tornam-se:
+		
+		\vspace{0.1cm}
+		\begin{columns}[T]
+			\begin{column}{0.45\textwidth}
+				$\displaystyle \underbrace{v_B}_{\substack{\text{\tiny velocidade} \\ \text{\tiny final } v(t)}} = \underbrace{v_A}_{\substack{\text{\tiny vel. inicial} \\ \text{\tiny } v(0) \equiv v_0}} + a( \underbrace{t_B}_{\substack{\text{\tiny inst.} \\ \text{\tiny final}}} - \underbrace{t_A}_{\substack{\text{\tiny inst.} \\ \text{\tiny inicial}}} )$
+			\end{column}
+			\begin{column}{0.55\textwidth}
+				\text{(usando integrais) $r_B=$ é} 
+				$\displaystyle \underbrace{r_B}_{\substack{\text{\tiny posição final} \\ \text{\tiny } r(t)}} = \underbrace{r_A}_{\substack{\text{\tiny posição inicial} \\ \text{\tiny } r(0) \equiv r_0}} + v_A(t_B - t_A) + \frac{a(t_B - t_A)^2}{2}$
+			\end{column}
+		\end{columns}
+		onde $v_B=v(t_B), v_A=v(t_A), r_B=r(t_B), r_A=r(t_A)$ .
+		\vspace{0.2cm}
+		Assumindo $t_A = 0$ e $ t_B = t$ temos \hspace{1cm}
+		\fcolorbox{red}{white}{
+			\begin{minipage}{0.35\textwidth}
+				1) $r(t) = r(0) + v_0 t + \frac{1}{2} a t^2$ \\
+				2) $v(t) = v_0 + a t$
+			\end{minipage}
+		}
+		\quad $\overset{(r(0)=0)}{=} v_0 t + \frac{1}{2} a t^2$
+		
+		\vspace{0.2cm}
+		Podemos eliminar o tempo: de 2) $t = (v(t) - v_0)/a$, substituindo-o em 1):
+		
+		\vspace{0.1cm}
+		$\displaystyle \begin{aligned}
+			r(t) &= r(0) + v_0 \frac{(v(t) - v_0)}{a} + \frac{1}{2} a \frac{(v(t) - v_0)^2}{a^2} = r(0) + \frac{v_0 v}{a} - \frac{v_0^2}{a} + \frac{1}{2a}(v^2 - 2v_0 v + v_0^2) \\
+			&= r(0) + \frac{v_0 v}{a} - \frac{v_0^2}{a} + \frac{v^2}{2a} - \frac{v_0 v}{a} + \frac{v_0^2}{2a} = r(0) + \frac{1}{2a}(v^2 - v_0^2)
+		\end{aligned}$
+		
+		\vspace{0.1cm}
+		$\leadsto r(t) = r(0) + \frac{v^2(t) - v_0^2}{2a} \quad \leadsto \quad r(t) - r(0) = \frac{v^2 - v_0^2}{2a}$ $\leadsto$ \fcolorbox{red}{white}{\,3) $\displaystyle v^2(t) = v_0^2 + 2a(r(t) - r(0))$\,} \quad \text{\tiny $(\Delta r = r(t) - r(0) \text{ deslocamento})$}
+		
+
+		
+		
+		\vspace{0.1cm}
+		Da 2) $v(t) - v_0 = at$, substituindo '$at$' em 1) $\displaystyle \leadsto \quad r(t) = r(0) + v_0 t + \frac{1}{2} t(v - v_0) = r_0 + \frac{(v + v_0)}{2} t$
+		$\leadsto$ \fcolorbox{red}{white}{\,4) $\displaystyle \frac{r(t) - r_0}{t} = \frac{v(t) + v_0}{2} = v_m$\,}
+		
+
+	
+	\end{frame}
+	
+	
+	% PAGE 11
+	\begin{frame}{Resumo: Movimento Retilíneo Uniformemente Variado}
+		\small
+		
+		\vspace{0.2cm}
+		\begin{center}
+			\textcolor{red}{\large No Mov. Ret. Un. Var. 1) + 2) + 3) + 4) é tudo que precisamos}
+		\end{center}
+		
+		\vspace{0.3cm}
+		% Aumentar o espaçamento entre linhas da tabela para as equações caberem bem
+		\renewcommand{\arraystretch}{2.2} 
+		\begin{center}
+			\resizebox{\textwidth}{!}{% Ajusta a tabela à largura do slide
+				\begin{tabular}{|c|c|c|}
+					\hline
+					\textbf{Eq.} & \textbf{Forma assumindo $t_A = 0$ e $t_B = t$} & \textbf{Forma geral com $t_A$ e $t_B$} \\
+					\hline
+					\textbf{1)} & $\displaystyle r(t) = r_0 + v_0 t + \frac{1}{2} a t^2$ & $\displaystyle r_B = r_A + v_A(t_B - t_A) + \frac{1}{2} a(t_B - t_A)^2$ \\
+					\hline
+					\textbf{2)} & $\displaystyle v(t) = v_0 + a t$ & $\displaystyle v_B = v_A + a(t_B - t_A)$ \\
+					\hline
+					\textbf{3)} & $\displaystyle v^2(t) = v_0^2 + 2a(r(t) - r_0)$ & $\displaystyle v_B^2 = v_A^2 + 2a(r_B - r_A)$ \\
+					\hline
+					\textbf{4)} & $\displaystyle \frac{r(t) - r_0}{t} = \frac{v(t) + v_0}{2} = v_m$ & $\displaystyle \frac{r_B - r_A}{t_B - t_A} = \frac{v_B + v_A}{2} = v_m$ \\
+					\hline
+				\end{tabular}
+			}
+		\end{center}
+		
+	\end{frame}
+	
+	
+	% PAGE 12
+	\begin{frame}{}
+		\scriptsize
+		\textcolor{red}{\large Exemplo} (Queda de um corpo)  Se uma bola de ténis, que no instante inicial está em repouso, cai de $h = 10\,m$. Considerando a bola a fazer um mov. ret. unif. var. onde a aceleração é a gravidade $g = 10\,m/s^2$: A) Quanto tempo demora a bola a chegar ao chão? B) Qual é a velocidade média na queda?
+		
+		\vspace{0.1cm}
+		\textcolor{blue}{Sol.}
+		\begin{columns}[c]
+			\begin{column}{0.2\textwidth}
+				\begin{center}
+					\begin{tikzpicture}[scale=0.6]
+						% Eixo Y
+						\draw[->, thick] (0.5,0) -- (0.5,2.5) node[left] {$y$};
+						\draw (0.4,0) -- (0.6,0) node[left=2pt] {$0$};
+						\draw (0.4,2) -- (0.6,2) node[left=2pt] {$h$};
+						
+						% Vetor unitário j
+						\draw[->, thick] (-0.2, 0) -- (-0.2, 0.8) node[left] {$\overline{j}$};
+						
+						% Bola e vetor gravidade
+						\filldraw (1,2) circle (2pt);
+						\draw[->, thick] (1,2) -- (1, 1.2) node[right] {$\overline{g}$};
+						
+						% Linha tracejada do deslocamento
+						\draw[dashed, ->] (1,1.9) -- (1,0.1);
+						\node[right] at (1, 0.4) {$y(t)$};
+						\node[right] at (1, 0) {chão};
+					\end{tikzpicture}
+				\end{center}
+			\end{column}
+			\begin{column}{0.8\textwidth}
+				$\leftarrow$ temos de considerar o sentido positivo do eixo e o sentido de $\overline{g}$
+			\end{column}
+		\end{columns}
+		
+
+		\textbf{A)}  $\displaystyle y(t) = \underset{\substack{\uparrow \\ \text{\tiny estamos no} \\ \text{\tiny chão no inst. final}}}{0} = y(0) + v_0 t \underset{\substack{\uparrow \\ \text{\tiny menos porque } \uparrow \overline{j} \\ \text{\tiny e } \overline{g} \text{ é para baixo}}}{- g \frac{t^2}{2}} \overset{(v_0=0)}{=} h - g \frac{t^2}{2} = 10\,m - \frac{1}{2}\left(10\frac{m}{s^2}\right)t^2$
+		
+		\vspace{0.1cm}
+		Temos $0 = 10\,m - 5\frac{m}{s^2}t^2  \leadsto  t^2 = \frac{10\,m}{(5\,m/s^2)} = 2\,s^2$, 
+		$t = \pm\sqrt{2}\,s$ , a solução física é $+\sqrt{2}$ que é no futuro. \quad $\left( \begin{array}{l} \text{\tiny + indica tempo no futuro} \\ \text{\tiny - indica tempo no passado} \end{array} \right)$
+		
+		\vspace{0.1cm}
+		\textbf{B)} $\displaystyle v(t) = v_0 - g t = 0 - 10\frac{m}{s^2}\sqrt{2}\,s \leadsto v_m = \frac{v_0 + v}{2} = \frac{-(\sqrt{2})10}{2}\frac{m}{s} = -\sqrt{2} \cdot 5\frac{m}{s}$  (para baixo)
+	\end{frame}
+	
+% PAGE 13
+\begin{frame}{}
+	\scriptsize
+	\textcolor{red}{Exercício} \quad Um lançador arremessa uma bola de beisebol para cima ao longo do eixo y, com velocidade inicial $12\,m/s$ ($g = 10\,m/s^2$). \quad (Mov. Ret. Un. Var.)
+	
+	\vspace{0.1cm}
+	\textbf{A)} Quanto tempo a bola leva para chegar ao ponto mais alto da trajetória? \\
+	\textbf{B)} Qual é a altura máxima alcançada pela bola em relação ao ponto de lançamento? \\
+	\textbf{C)} Quanto tempo a bola leva para atingir um ponto $5,0\,m$ acima do ponto inicial?
+	
+	\vspace{0.1cm}
+	\textcolor{blue}{Sol.}
+	\begin{columns}[T]
+		% COLUNA DO DIAGRAMA
+		\begin{column}{0.15\textwidth}
+			\vspace{0.1cm}
+			\begin{tikzpicture}[scale=0.7]
+				\draw[->] (0,-0.2) -- (0,2.5) node[left] {$y$};
+				\draw (-0.1,0) -- (0.1,0) node[right=-1pt] {\tiny $0(t=0)$};
+				\draw (-0.1,1.35) -- (0.1,1.35) node[left=-1pt] {\tiny $5m$};
+				\draw (-0.1,2) -- (0.1,2) node[left=-1pt] {\tiny $h_{m\acute{a}x}$};
+				
+				\draw[->,red, thick] (0,0) -- (0,0.6) node[right] {\tiny $\overline{v}_0$};
+				\draw[->, thick] (0.5,2.2) -- (0.5,1.5) node[right] {\tiny $\overline{g}$};
+				\draw[->] (-0.5,0) -- (-0.5,0.5) node[left] {\tiny $\overline{j}$};
+				
+				\draw[dashed] (0,0) -- (0,2);
+			\end{tikzpicture}
+		\end{column}
+		
+		% COLUNA DAS RESOLUÇÕES
+		\begin{column}{0.90\textwidth}
+			\textbf{A)} \quad no ponto $h_{m\acute{a}x} = r(t_{m\acute{a}x})$ temos $v(t_{m\acute{a}x}) = 0$
+			
+			\vspace{0.1cm}
+			$\displaystyle \underset{a=-g}{2) \leadsto}  0 = v(t_{m\acute{a}x}) = v_0 - g t_{m\acute{a}x} = 12\frac{m}{s} - 10\frac{m}{s^2} t_{m\acute{a}x} \leadsto  0 = 12\frac{m}{s} - 10\frac{m}{s^2} t_{m\acute{a}x}  \leadsto  t_{m\acute{a}x} = \frac{12\,m/s}{10\,m/s^2} = 1,2\,s$
+			
+			\vspace{0.1cm}
+			\textbf{B)} $ h_{m\acute{a}x} = r(t_{m\acute{a}x}) \underset{1)}{=} r(0) + v_0 t_{m\acute{a}x} + \frac{1}{2} a t_{m\acute{a}x}^2 \overset{(a=-g)}{=} 0 + 12\frac{m}{s} \cdot 1,2s + \frac{1}{2}\left(-10\frac{m}{s^2}\right)(1,2s)^2$
+			$\displaystyle \hspace{1cm} = 14,4\,m + \left(-5\frac{m}{s^2}\right) 1,44\,s^2 = 14,4\,m - 7,2\,m = 7,2\,m$
+			
+			\vspace{0.1cm}
+			\textbf{C)} \quad $\displaystyle r(t) = 5\,m \underset{1)}{=} r_0 + v_0 t + \frac{1}{2} a t^2 = 0 + 12t - \frac{10}{2}t^2$
+			$\displaystyle \leadsto  5 = 12t - 5t^2  \leadsto  5t^2 - 12t + 5 = 0  \leadsto  t_{1,2} = \frac{12 \pm \sqrt{144 - 4 \cdot 5 \cdot 5}}{2 \cdot 5} = \frac{12 \pm \sqrt{44}}{10}$
+		\end{column}
+	\end{columns}
+	
+	\vspace{0.2cm}
+	\begin{columns}[c]
+		\begin{column}{0.4\textwidth}
+			\tiny $at^2+bt+c=0 \leadsto t_{1,2}=\frac{-b \pm \sqrt{b^2-4ac}}{2a}$
+		\end{column}
+		\begin{column}{0.5\textwidth}
+			\tiny $\begin{array}{l} t_1 \approx 0,53\,s \\ t_2 \approx 1,86\,s \end{array}$ \quad
+			$\begin{array}{l} t_1 = 0,53s < t_{m\acute{a}x} = 1,2s \\ t_2 = 1,86s > t_{m\acute{a}x} = 1,2s \end{array}$
+			
+			\vspace{0.1cm}
+			$\leadsto t_1$ é a resposta certa porque $1,86s$ é na queda.
+		\end{column}
+	\end{columns}
+\end{frame}
+
+% PAGE 14 (Problema 29)
+\begin{frame}{}
+	\scriptsize
+	
+	% Enunciado do Problema
+	\begin{block}{}
+		\textbf{Problema 29} \\
+		Um veículo elétrico parte do repouso (\textcolor{red}{$v_0=0$}) e acelera (\textcolor{red}{$a_1$}) em linha reta a $2,0\,\text{m/s}^2$ até atingir uma rapidez de $20\,\text{m/s}$ (\textcolor{red}{$v(t_{final})$}). Em seguida, trava (\textcolor{red}{$a_2$}) a $1,0\,\text{m/s}^2$ até parar. \textbf{a)} Quanto tempo decorre entre a partida e a paragem? \textbf{b)} Qual a distância percorrida nesse movimento?
+	\end{block}
+
+	
+	\begin{columns}[T]
+		% COLUNA ESQUERDA: Texto da Alínea A
+		\begin{column}{0.5\textwidth}
+			\textbf{A)} Uso 2) na parte de $t_0$ a $t_1$ com $a_1 = 2,0\,\text{m/s}^2$ e com $a_2 = -1\,\text{m/s}^2$ de $t_1$ a $t_2= t_{final}$.
+			
+			\vspace{0.2cm}
+			2) é \quad $v(t_B) = v(t_A) + a(t_B - t_A)$
+		\end{column}
+		
+		% COLUNA DIREITA: Diagrama e Anotações
+		\begin{column}{0.5\textwidth}
+			\begin{center}
+				\begin{tikzpicture}[scale=0.8]
+					% Eixo x
+					\draw[->] (0,0) -- (6.5,0) node[right] {\tiny $x$};
+					
+					% Marcações
+					\draw (0.2,-0.1) -- (0.2,0.1);
+					\draw (2.5,-0.1) -- (2.5,0.1);
+					\draw (5.5,-0.1) -- (5.5,0.1);
+					
+					% Textos debaixo das marcações
+					\node[below, align=center, font=\tiny] at (0.2, -0.1) {$t_0=0$ \\ $v(t_0)=0$};
+					\node[below, align=center, font=\tiny] at (2.5, -0.1) {$x_1=x(t_1)$ \\ $v(t_1)=20\,\frac{\text{m}}{\text{s}}$};
+					\node[below, align=center, font=\tiny] at (5.5, -0.1) {$x_2=x(t_2)$ \\ $v(t_2)=0$};
+					
+					% Chaves das acelerações
+					\draw[decorate, decoration={brace, amplitude=3pt}] (0.2,0.2) -- (2.4,0.2) node[midway, above=2pt, font=\tiny] {$a_1 > 0$};
+					\draw[decorate, decoration={brace, amplitude=3pt}] (2.6,0.2) -- (5.5,0.2) node[midway, above=2pt, font=\tiny] {$a_2 < 0$};
+					
+					% Vetor unitário i
+					\draw[->, thick] (5.8, 0.6) -- (6.3, 0.6) node[above=-2pt, font=\tiny] {$\overline{i}$};
+				\end{tikzpicture}
+			\end{center}
+			\vspace{-0.2cm}
+			\begin{flushright}
+				\tiny $a_2$ é negativa ($-1,0\,\text{m/s}^2$ porque trava) \\
+				$\leftarrow \overline{a}_2 = (-1,0)\overline{i} = 1(-\overline{i})$
+			\end{flushright}
+		\end{column}
+	\end{columns}
+	
+	% DESENVOLVIMENTO ALÍNEA A
+	\textcolor{blue}{Sol.} \textbf{A)} \quad $v(t_1) = v(t_0) + a_1(t_1 - t_0)$
+	$\leadsto 20 = 0 + 2 t_1  \leadsto  t_1 = 10\,\text{s}$.
+	
+	\vspace{0.1cm}
+	$\hspace{1.5cm} v(t_2) = v(t_1) + a_2(t_2 - t_1)  \leadsto  0 = 20 - 1(t_2 - 10)  \leadsto  0 = 20 - t_2 + 10  \leadsto  t_2 = 30\,\text{s}$
+	
+	\vspace{0.1cm}
+	$\hspace{1.5cm} t_{\text{total}}$ entre partida em 0 e paragem em $x_2$ é $t_2$, que é $30\,\text{s}$
+	
+	\vspace{0.1cm}
+	% DESENVOLVIMENTO ALÍNEA B
+	\textbf{B)} \quad $\displaystyle x_1 = x(t_1) = x(0) + v(0)t_1 + \frac{1}{2}a_1 t_1^2 = 0 + 0 \cdot 10 + \frac{2}{2}(10)^2 = 100\,\text{m}$
+	
+	\vspace{0.1cm}
+	$\displaystyle \hspace{0.6cm} x_2 = x(t_2) = x_1 + v(t_1)(t_2 - t_1) + \frac{1}{2}a_2(t_2 - t_1)^2  \leadsto x_2 = 100\,\text{m} + 20(30 - 10) - \frac{1}{2}(30 - 10)^2 \leadsto x_2 = 100\,\text{m} + 400\,\text{m} - 200\,\text{m} = 300\,\text{m} \quad \leftarrow \text{deslocamento total de 0 a } x_2$
+	
+\end{frame}
+
+
+\end{document}

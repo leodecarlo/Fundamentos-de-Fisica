@@ -1,0 +1,152 @@
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[portuguese]{babel}
+\usepackage{amsmath}
+\usepackage{siunitx}
+\usepackage{graphicx}
+\usepackage{geometry}
+\usepackage{multicol}
+\usepackage{circuitikz}
+\usepackage{parskip}
+\usepackage{enumitem}
+
+\geometry{a4paper, left=1.5cm, right=1.5cm, top=1cm, bottom=2cm}
+
+\newcommand{\cabecalho}{
+	\hfill
+	\begin{minipage}[t]{0.7\textwidth}
+		\raggedleft
+		Teste Modelo 1, Fundamentos de Física
+	\end{minipage}
+	
+}
+
+\newcommand{\pontos}[1]{\hfill\textbf{(#1 valores)}}
+
+\title{Teste Modelo 1}
+\author{}
+\date{20 de março de 2026}
+
+\setlength{\parindent}{0pt}
+\setlist[enumerate]{itemsep=4pt, topsep=4pt}
+
+\begin{document}
+	
+	\cabecalho
+	
+	\textbf{Exercício 1}. Temos uma piscina de largura 5 m, altura 4 m e comprimento 0,5 km. A piscina está cheia de um líquido até 30 cm da borda.
+	\begin{enumerate}[label=\alph*)]
+		\item Calcule o volume da piscina. \pontos{0,5}
+		\item Sabendo que a piscina está cheia de um líquido de densidade $\rho = 0.6\,\text{kg/m}^3$, qual é a massa do líquido na piscina? \pontos{1,0}
+	\end{enumerate}
+	
+	\vspace{0.4cm}
+	Resolução:
+	\begin{enumerate}[label=\alph*), itemsep=12pt]
+		\item As dimensões da piscina são $l = 5\,\text{m}$, $h = 4\,\text{m}$ e $c = 0,5\,\text{km} = 500\,\text{m}$. \\
+		O volume total da piscina é $V_{\text{piscina}} = 5 \times 4 \times 500 = 10000\,\text{m}^3$.
+		
+		\item A piscina está cheia até $30\,\text{cm} = 0,3\,\text{m}$ da borda. \\
+		A altura do líquido é $h_L = 4 - 0,3 = 3,7\,\text{m}$. \\
+		O volume do líquido é $V_L = 5 \times 3,7 \times 500 = 9250\,\text{m}^3$. \\
+		A massa é $m = \rho V_L = 0,6 \times 9250 = 5550\,\text{kg}$.
+	\end{enumerate}
+	
+	\vspace{1.5cm}
+	
+	\textbf{Exercício 2}. Dado o vetor $\overline{v} = (v_x, v_y)$ de módulo 2 e orientação definida pelo ângulo $\theta = 120^\circ$.
+	\begin{enumerate}[label=\alph*)]
+		\item Desenhe o vetor no plano cartesiano. \pontos{0,5}
+		\item Calcule as suas componentes e escreva $\overline{v}$ com os vetores unitários $\overline{i}$ e $\overline{j}$. \pontos{1,5}
+		\item Calcule o vetor unitário, com a mesma orientação de $-\overline{v}$. \pontos{1,0}
+		\item Se $\overline{w} = (-1,-1)$, quais são $|\overline{w}|$ e $\phi$, tais que $w_x = |\overline{w}| \cos \phi$ e $w_y = |\overline{w}| \sin \phi$? \pontos{1,5}
+	\end{enumerate}
+	
+	\vspace{0.4cm}
+	Resolução:
+	\begin{enumerate}[label=\alph*), itemsep=12pt]
+		\item \quad \\ % Para forçar o desenho na linha de baixo
+		\begin{tikzpicture}[scale=0.8, baseline=(current bounding box.north)]
+			\draw[->] (-2.5,0) -- (1,0) node[right] {$x$};
+			\draw[->] (0,-0.5) -- (0,2.5) node[above] {$y$};
+			\draw[->, thick, blue] (0,0) -- (-1, 1.732) node[above left] {$\overline{v}$};
+			\draw[dashed] (-1,0) node[below] {-1} -- (-1,1.732) -- (0,1.732) node[right] {$\sqrt{3}$};
+			\draw (0.5,0) arc (0:120:0.5);
+			\node at (0.2, 0.7) {$120^\circ$};
+		\end{tikzpicture}
+		
+		\item As componentes são $v_x = |\overline{v}| \cos(120^\circ) = 2 \left(-\frac{1}{2}\right) = -1$ e $v_y = |\overline{v}| \sin(120^\circ) = 2 \left(\frac{\sqrt{3}}{2}\right) = \sqrt{3}$. \\
+		Escrito na base: $\overline{v} = -1\overline{i} + \sqrt{3}\overline{j}$.
+		
+		\item O vetor $-\overline{v} = (1, -\sqrt{3})$ tem o mesmo módulo ($|-\overline{v}| = 2$). \\
+		O vetor unitário associado é $\hat{u} = \frac{-\overline{v}}{|-\overline{v}|} = \left(\frac{1}{2}, -\frac{\sqrt{3}}{2}\right)$.
+		
+		\item O módulo de $\overline{w}$ é $|\overline{w}| = \sqrt{(-1)^2 + (-1)^2} = \sqrt{2}$. \\
+		Temos $\cos \phi = -\frac{1}{\sqrt{2}}$ e $\sin \phi = -\frac{1}{\sqrt{2}}$, o que indica que está no 3º quadrante. \\
+		Logo, $\phi = 225^\circ$ (ou $\frac{5\pi}{4}\,\text{rad}$).
+	\end{enumerate}
+	
+	\vspace{1.5cm}
+	
+	\textbf{Exercício 3}. Uma partícula no plano descreve um movimento acelerado (não necessariamente uniformemente acelerado), passando de um ponto na posição $\overline{r}_A = (1,1)\,\text{m}$ à posição $\overline{r}_B = (2,1)\,\text{m}$, percorrendo uma distância $d = 1,2\,\text{m}$.
+	\begin{enumerate}[label=\alph*)]
+		\item O movimento é retilíneo ou curvilíneo? Desenhe uma possível trajetória que passe por A e B. \pontos{1,0}
+		\item Devido a um mecanismo, no ponto B a velocidade da partícula passa de $\overline{v}_1 = (1,-1)\,\text{m/s}$ para uma velocidade $\overline{v}_2 = (0,-1)\,\text{m/s}$ num intervalo de tempo de $\Delta t = 500\,\text{ms}$. Calcule a aceleração média da partícula durante $\Delta t$. \pontos{2,5}
+		\item Depois do intervalo $\Delta t$, o corpo continua em movimento retilíneo uniformemente variado, sem mudar a orientação, e para após um intervalo $\Delta T = 10\,\text{s}$. Qual é a aceleração durante esse intervalo? \pontos{1,5}
+		\item Desenhe a trajetória durante $\Delta T$ e calcule a distância percorrida. \pontos{1,5}
+	\end{enumerate}
+	
+	\vspace{0.4cm}
+	Resolução:
+	\begin{enumerate}[label=\alph*), itemsep=12pt]
+		\item A distância em linha reta entre A(1,1) e B(2,1) é o módulo do vetor deslocamento: $\Delta r = \sqrt{(2-1)^2 + (1-1)^2} = 1\,\text{m}$. \\
+		Como a distância percorrida pela partícula ($d = 1,2\,\text{m}$) é superior à distância em linha reta, o movimento é necessariamente curvilíneo.
+		
+		\item O intervalo de tempo é $\Delta t = 500\,\text{ms} = 0,5\,\text{s}$. \\
+		A aceleração média é $\overline{a}_m = \frac{\overline{v}_2 - \overline{v}_1}{\Delta t} = \frac{(0, -1) - (1, -1)}{0,5} = \frac{(-1, 0)}{0,5} = (-2, 0)\,\text{m/s}^2$.
+		
+		\item Se o corpo para ao fim de $10\,\text{s}$, a sua velocidade final é $\overline{v}_f = (0,0)$. \\
+		Sendo o movimento retilíneo, a aceleração constante ao longo do trajeto é $\overline{a} = \frac{\overline{v}_f - \overline{v}_2}{\Delta T} = \frac{(0,0) - (0,-1)}{10} = (0; 0,1)\,\text{m/s}^2$.
+		
+		\item A trajetória após B ocorre numa linha paralela ao eixo y (com coordenada fixa $x=2$), no sentido negativo. \\
+		A distância percorrida até parar é calculada pela equação escalar de Torricelli ($v_f^2 = v_i^2 + 2a\Delta s$). O módulo da velocidade inicial é $v_i = 1\,\text{m/s}$ e a aceleração escalar que contraria o movimento é $a = -0,1\,\text{m/s}^2$: \\
+		$0 = 1^2 + 2(-0,1)d \implies 0,2d = 1 \implies d = 5\,\text{m}$.
+	\end{enumerate}
+	
+	\vspace{1.5cm}
+	
+	\textbf{Exercício 4}. Um projétil descreve um movimento balístico com uma velocidade inicial $\overline{v}_0 = (10, 0)\,\text{m/s}$ a partir de uma altura $h = 50\,\text{m}$. A aterragem ocorre numa plataforma a uma altura de $50\,\text{cm}$ do solo.
+	\begin{enumerate}[label=\alph*)]
+		\item Desenhe a trajetória do projétil, explicitando numericamente o ângulo de lançamento. \pontos{0,5}
+		\item Qual é a altura máxima atingida durante a trajetória? \pontos{1,0}
+		\item Calcule o alcance até ao ponto de aterragem na plataforma. \pontos{2,0}
+		\item Calcule a velocidade no ponto de impacto, desenhando o seu sentido e orientação. \pontos{2,0}
+		\item Qual é o ângulo de impacto? \pontos{1,0}
+		\item Quanto tempo demorou o projétil a chegar à plataforma? \pontos{1,0}
+	\end{enumerate}
+	
+	\vspace{0.4cm}
+	Resolução:
+	(Considerando a aceleração da gravidade $g = 9,8\,\text{m/s}^2$)
+	\begin{enumerate}[label=\alph*), itemsep=12pt]
+		\item Como a velocidade inicial é inteiramente ao longo do eixo x ($\overline{v}_0 = (10,0)\,\text{m/s}$), trata-se de um lançamento horizontal. \\
+		O ângulo de lançamento é numericamente $\theta_0 = 0^\circ$. A trajetória é um arco de parábola com concavidade voltada para baixo.
+		
+		\item Estando num lançamento puramente horizontal, o projétil nunca sobe acima do seu ponto de partida. \\
+		A altura máxima é a própria altura inicial $h = 50\,\text{m}$.
+		
+		\item As equações do movimento são $x(t) = v_0 t = 10t$ e $y(t) = h - \frac{1}{2}gt^2 = 50 - 4,9t^2$. \\
+		O projétil atinge a plataforma em $y_f = 50\,\text{cm} = 0,5\,\text{m}$. \\
+		Substituindo em $y(t)$: $0,5 = 50 - 4,9t^2 \implies 4,9t^2 = 49,5 \implies t \approx 3,18\,\text{s}$. \\
+		O alcance horizontal é $x(3,18) = 10 \times 3,18 = 31,8\,\text{m}$.
+		
+		\item A velocidade no instante de impacto tem componentes $v_{fx} = v_0 = 10\,\text{m/s}$ e $v_{fy} = -gt = -9,8 \times 3,18 = -31,16\,\text{m/s}$. \\
+		O vetor é $\overline{v}_f = (10; -31,16)\,\text{m/s}$.
+		
+		\item O ângulo de impacto $\alpha$ em relação à horizontal obtém-se através da tangente: \\
+		$\tan \alpha = \frac{v_{fy}}{v_{fx}} = \frac{-31,16}{10} = -3,116$. Logo, $\alpha \approx -72,2^\circ$.
+		
+		\item Conforme deduzido na alínea c), ao resolver em ordem à posição final, o tempo de voo até à plataforma é de $t = 3,18\,\text{s}$.
+	\end{enumerate}
+	
+\end{document}
