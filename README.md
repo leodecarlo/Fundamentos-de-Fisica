@@ -4,8 +4,6 @@ Este repositório contém apontamentos das aulas, exercícios e testes da discip
 
 ## Como descarregar os materiais sem clonar o repositório
 
-Não é necessário utilizar Git nem clonar este repositório para descarregar os materiais.
-
 Para descarregar todo o conteúdo de uma só vez:
 
 1. clique no botão verde **Code**, no topo desta página;
