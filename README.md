@@ -2,6 +2,22 @@
 
 Este repositório contém apontamentos das aulas, exercícios e testes da disciplina **Fundamentos de Física**, integrada na **Licenciatura em Engenharia Informática do DEISI** e lecionada por mim na **Universidade Lusófona**, no **II semestre de 2026**.
 
+## Como descarregar os materiais sem clonar o repositório
+
+Não é necessário utilizar Git nem clonar este repositório para descarregar os materiais.
+
+Para descarregar todo o conteúdo de uma só vez:
+
+1. clique no botão verde **Code**, no topo desta página;
+2. selecione **Download ZIP**;
+3. depois de terminar o download, extraia o ficheiro `.zip` no seu computador.
+
+Também pode descarregar diretamente a versão mais recente do repositório através deste link:
+
+**[Descarregar todos os materiais em formato ZIP](https://github.com/leodecarlo/Fundamentos-de-Fisica/archive/refs/heads/main.zip)**
+
+Desta forma obtém uma cópia dos ficheiros disponíveis no repositório, sem instalar Git e sem efetuar qualquer `git clone`.
+
 ## Conteúdo
 
 - slides e apontamentos teóricos;
