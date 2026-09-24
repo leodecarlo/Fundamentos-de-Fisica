@@ -12,9 +12,9 @@
 \usecolortheme{default}
 
 % Informações do Título
-\title{Aula 3: Teoria e Prática}
-\subtitle{Vetores em duas dimensoes}
-\date{28 Fevereiro 2026}
+\title{Aula 2B: Vetores em duas dimensoes}
+\subtitle{}
+\date{}
 
 \begin{document}
 	
@@ -120,7 +120,7 @@
 					\draw[thick, red, ->] (0,0) -- (0,0.8) node[left] {$\overline{j}$};
 					% Ângulos (raios diferentes para as setas não colidirem no vetor v)
 					\draw[->] (0.6,0) arc (0:36.8:0.6) node[midway, right] {$\theta$};
-					\draw[->] (0,0.7) arc (90:36.8:0.7) node[midway, above] {$\varphi$};
+					\draw[<-] (0,0.7) arc (90:36.8:0.7) node[midway, above] {$\varphi$};
 				\end{tikzpicture}
 			\end{column}
 			\begin{column}{0.45\textwidth}
@@ -215,7 +215,7 @@
 				\draw[thick, ->] (0,-1.5) -- (0,2) node[left] {$y$};
 				
 				% Vetor e linhas do triângulo
-				\draw[thick, ->] (0,0) -- (-2,1.5) node[midway, above right] {$v$};
+				\draw[thick, ->] (0,0) -- (-2,1.5) node[midway, above right] {$\overline{v}$};
 				\draw[thick] (-2,0) -- (-2,1.5);
 				\draw[thick] (-2,0) -- (0,0);
 				
@@ -225,13 +225,13 @@
 				
 				% Ângulos
 				\draw[->] (0.5,0) arc (0:143.1:0.5) node[near end, above right] {$\theta$};
-				\draw[->] (-0.8,0) arc (180:143.1:0.8) node[midway, right] {$\varphi$};
+				\draw[<-] (-0.8,0) arc (180:143.1:0.8) node[midway, right] {$\varphi$};
 				
 				% Textos e setas a vermelho
 				\node[text width=3.5cm, align=left, font=\scriptsize] (t1) at (2.5, -0.6) {$\theta$ é o angulo \\ antihorario a partir \\ do eixo 'x'.};
 				\draw[red, ->] (t1.west) to[out=180,in=0] (0.6, 0.4);
 				
-				\node[text width=3.5cm, align=left, font=\scriptsize] (t2) at (2.5, -2) {$\varphi$ é o angulo horario \\ a partir do eixo 'x'.};
+				\node[text width=3.5cm, align=left, font=\scriptsize] (t2) at (2.5, -2) {$\varphi$ é o angulo antihorario \\ a partir do vetor'$\overline{v}$'.};
 				\draw[red, ->] (t2.west) to[out=180,in=270] (-0.5,-1) to[out=90,in=290] (-0.8,0.1);
 			\end{tikzpicture}
 		\end{column}
@@ -382,7 +382,7 @@
 				
 				% Ângulos
 				\draw[->] (0.5,0) arc (0:143.1:0.5) node[near end, above right] {$\quad\theta$};
-				\draw[->] (-0.8,0) arc (180:143.1:0.8) node[midway, left] {$\varphi$};
+				\draw[<-] (-0.8,0) arc (180:143.1:0.8) node[midway, left] {$\varphi$};
 			\end{tikzpicture}
 		\end{column}
 		
@@ -478,7 +478,7 @@
 					
 					% Ângulos
 					\draw[->] (1.5,0) arc (0:-53.1:1.5) node[midway, right] {$\varphi$};
-					\draw[->] (0,-2) arc (-90:-53.1:2) node[midway, below left] {$\theta$};
+					\draw[<-] (0,-2) arc (-90:-53.1:2) node[midway, below left] {$\theta$};
 				\end{tikzpicture}
 			\end{center}
 		\end{column}
